@@ -720,7 +720,7 @@ function Card:highlight(is_highlighted)
 				text = "INVEST",
 				button = "crv_invest",
 				func = "crv_can_invest",
-				text_align = "cm",
+				align_text = "cm",
 			}),
 			config = {
 				align = "cr",
@@ -809,6 +809,29 @@ function Card:highlight(is_highlighted)
 				parent = self,
 			},
 		})
+	elseif self.highlighted and self.area and self.area == G.deathcard_chose and RevoConfig["experimental_enabled"] then
+		if self.children.use_button then
+			self.children.use_button:remove()
+			self.children.use_button = nil
+		end
+
+		self.children.use_button = UIBox({
+			definition = RevosVault.button_func(self, {
+				sell = false,
+				use = true,
+				button = "crv_death_ability",
+				text = "SELECT",
+				align_text = "cm"
+			}),
+			config = {
+				align = "cm",
+				offset = {
+					x = 0,
+					y = -1.5,
+				},
+				parent = self,
+			},
+		})
 	else
 		cardhighold(self, is_highlighted)	
 	end
@@ -827,8 +850,8 @@ if RevoConfig["gems_enabled"] then
 		local voucher_areas = {}
 		local voucher_tables = {}
 		local voucher_table_rows = {}
-		for k, v in ipairs(G.GAME.used_gems or {}) do
-			keys_used[#keys_used + 1] = G.P_CENTERS[v]
+		for k, v in ipairs(G.crv_gem_area.cards or {}) do
+			keys_used[#keys_used + 1] = v
 		end
 		for k, v in ipairs(keys_used) do
 			if next(v) then
@@ -852,7 +875,7 @@ if RevoConfig["gems_enabled"] then
 					{ card_limit = 2, type = "voucher", highlight_limit = 0 }
 				)
 
-				local center = v
+				local center = v.config.center
 				local card = Card(
 					voucher_areas[#voucher_areas].T.x + voucher_areas[#voucher_areas].T.w / 2,
 					voucher_areas[#voucher_areas].T.y,
@@ -863,11 +886,11 @@ if RevoConfig["gems_enabled"] then
 					{ bypass_discovery_center = true, bypass_discovery_ui = true, bypass_lock = true }
 				)
 				-- RevosVault.create_gem_timer(card)
+				card.ability = v.ability
+				card.ability.order = v.ability.order -- no need
 				card:start_materialize(nil, silent)
 				silent = true
 				voucher_areas[#voucher_areas]:emplace(card)
-
-				card.ability.order = v.order
 
 				table.insert(voucher_tables, {
 					n = G.UIT.C,

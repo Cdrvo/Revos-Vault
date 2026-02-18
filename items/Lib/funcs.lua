@@ -888,7 +888,7 @@ function RevosVault.modify_rarity(card, by, ext, no_set_cost, ret) -- idk what i
 				else
 					if not ext then
 						sendWarnMessage("No next or previous rarity found", "RevosVault")
-						shouldgo = nil
+						shouldgo = false
 					end
 				end
 			end
@@ -1089,7 +1089,7 @@ end
 function RevosVault.remove_gem(key)
 	local index = RevosVault.index(G.GAME.used_gems, key)
 	table.remove(G.GAME.used_gems, index)
-	for k, v in pairs(G.vouchers.cards) do
+	for k, v in pairs(G.crv_gem_area.cards) do
 		if v.config.center.key == key then
 			v:start_dissolve(nil, true)
 		end
@@ -1117,20 +1117,29 @@ function RevosVault.add_gem(key, set)
 end
 
 --I tried some stuff don't question this part. Is this efficent? probably not.
-function RevosVault.values(operator, card, num, extra, only_extra, orig)
+function RevosVault.values(operator, card, num, extra, specific, only_extra, orig, ret)
 	local orig = {
 		name = {},
 		val = {},
 	}
+
 	if num == 0 then
 		num = 0.1
 	end
 	if not only_extra then
 		for k, v in pairs(card.ability) do
-			if k ~= "x_mult" and k ~= "x_chips" and k ~= "order" and v ~= 0 then
+			if
+				k ~= "x_mult"
+				and k ~= "x_chips"
+				and k ~= "order"
+				and v ~= 0
+				and (not specific or specific and k == specific)
+			then
 				if type(v) == "number" then
 					if operator == "/" then
 						card.ability[k] = card.ability[k] / num
+					elseif operator == "-" then
+						card.ability[k] = card.ability[k] - num
 					else
 						card.ability[k] = card.ability[k] * num
 					end
@@ -1141,9 +1150,11 @@ function RevosVault.values(operator, card, num, extra, only_extra, orig)
 	if extra and card.ability.extra then
 		if type(card.ability.extra) == "table" then
 			for l, m in pairs(card.ability.extra) do
-				if type(m) == "number" then
+				if type(m) == "number" and (not specific or specific and l == specific) then
 					if operator == "/" then
-						card.ability.extra[l] = card.ability.extra[l] * num
+						card.ability.extra[l] = card.ability.extra[l] / num
+					elseif operator == "-" then
+						card.ability.extra[l] = card.ability.extra[l] - num
 					else
 						card.ability.extra[l] = card.ability.extra[l] * num
 					end
@@ -2382,7 +2393,7 @@ RevosVault.pseudorandom_printer = function(args)
 					rarity = args.rarity,
 				})
 			end
-		elseif args.area and args.area.cards and #args.area.cards < args.area.config.card_limit then
+		elseif args.area and ((args.area.cards and #args.area.cards < args.area.config.card_limit) or args.no_space ) then
 			if
 				(args.odds and SMODS.pseudorandom_probability(args.card, args.seed, 1, args.odds, args.no_odd_mod))
 				or not args.odds
@@ -2412,8 +2423,11 @@ end
 
 function RevosVault.set_ability(args)
 	args = args or {}
+	args.timer = args.timer or 4
+	if args.timer <= 1 then args.timer = 2 end
+	args.timer_secondary = args.timer_secondary or math.max(1, args.timer-2)
 	args.effect_table = args.effect_table or {}
-	args.lock = args.lock or pseudoseed("lockingitsogood") -- ideal?
+	-- args.lock = args.lock or "revolock"
 	if not args.card then
 		return nil
 	end
@@ -2424,14 +2438,19 @@ function RevosVault.set_ability(args)
 		trigger = "immediate",
 		func = function()
 			acard:flip()
-            G.CONTROLLER.locks[args.lock] = true
+            -- G.CONTROLLER.locks[args.lock] = true
 			return true
 		end,
 	}))
 	local function triple_juice(timer)
-		if timer >= 4 then
+		if timer >= args.timer then
+			if args.sound_secondary then
+				play_sound(args.sound_secondary, 2, 0.5)
+			end
 			acard:flip()
-			G.CONTROLLER.locks[args.lock] = false
+			if args.second_func then
+				args.second_func()
+			end
 			return nil
 		else
 			trig = trig + 1
@@ -2440,7 +2459,7 @@ function RevosVault.set_ability(args)
 				delay = args.delay or 2.5,
 				func = function()
 					acard:juice_up()
-					if timer <= 2 then
+					if timer <= (args.timer_secondary) then
 						play_sound(args.sound or "explosion_release1", 2+(timer/2), 0.5)
 					end
 					if not trig2 then
@@ -2479,6 +2498,7 @@ function RevosVault.set_ability(args)
 	end
 	if trig == 0 then
 		triple_juice(trig)
+		-- G.CONTROLLER.locks[args.lock] = false
 	end
 end
 
@@ -2490,4 +2510,15 @@ function RevosVault.balance_blacklist(area_name)
 		end
 	end
 	return false
+end
+
+function RevosVault.get_suits(area)
+	local suits = {}
+	for k, v in pairs(area) do
+		if not suits[v.base.suit] then
+			suits[v.base.suit] = true
+		end
+	end
+
+	return suits
 end

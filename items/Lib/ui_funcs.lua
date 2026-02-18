@@ -224,6 +224,95 @@ end
 
 -- First time check for the ifno menu thingy
 function RevosVault.ui_disbled(menu_type)
-	if G.PROFILES[G.SETTINGS.profile].first_time_disable[menu_type] then return true end
+	if G.PROFILES[G.SETTINGS.profile] and G.PROFILES[G.SETTINGS.profile].first_time_disable and G.PROFILES[G.SETTINGS.profile].first_time_disable[menu_type] then return true end
 	return false
+end
+
+-- Deathcard 
+
+if RevoConfig["experimental_enabled"] then
+
+	G.FUNCS.crv_death_ability = function(e)
+
+		local card, PDCARD = e.config.ref_table, G.PROFILES[G.SETTINGS.profile].crv_deathcards
+
+		if G.GAME.crv_deathcard_state == "ability" then
+			RevosVault.set_ability({card = G.deathcard.cards[1], sound = "gong", custom_func = function() 
+				-- RevosVault.death_card_seed = pseudorandom("wo")*pseudorandom("wo2")
+				RevosVault.death_card_seed = (PDCARD and RevosVault.len(PDCARD)+1) or 1
+				if not PDCARD then
+					PDCARD = {}
+				end
+
+				PDCARD[RevosVault.death_card_seed] = {}
+				
+				PDCARD[RevosVault.death_card_seed].function_from = card.config.center.key
+				PDCARD[RevosVault.death_card_seed].name = card.config.center.name
+				PDCARD[RevosVault.death_card_seed].ability_table = card.ability
+
+				local tt = 0
+				for k, v in pairs(PDCARD) do
+					tt = tt + 1
+				end
+
+				PDCARD[RevosVault.death_card_seed].sprite_x = pseudorandom_element{0,1,2,3,4,5,6,7,8,9, pseudoseed("j_crv_deathcard" .. tt)}
+
+				G.deathcard.cards[1].config.center.pos.x = tt
+
+				SMODS.destroy_cards(G.deathcard_chose.cards) 
+
+				G.GAME.crv_deathcard_state = "rarity"
+				RevosVault.deathcarded = false
+			end})
+
+		elseif G.GAME.crv_deathcard_state == "rarity" then
+			RevosVault.set_ability({card = G.deathcard.cards[1], sound = "gong", custom_func = function() 
+				
+				PDCARD[RevosVault.death_card_seed].rarity = card.config.center.rarity
+
+				G.deathcard.cards[1].rarity = card.config.center.rarity --not needed since no ui
+
+				SMODS.destroy_cards(G.deathcard_chose.cards) 
+
+				G.GAME.crv_deathcard_state = "modif"
+				RevosVault.deathcarded = false
+			end})
+		elseif G.GAME.crv_deathcard_state == "modif" then
+			RevosVault.set_ability({card = G.deathcard.cards[1], sound = "gong", custom_func = function() 
+				
+				-- PDCARD[RevosVault.death_card_seed]["modif"] = {}
+				PDCARD[RevosVault.death_card_seed].timer = 3
+
+				if card.edition then
+					PDCARD[RevosVault.death_card_seed].edition = card.edition.key
+
+					G.deathcard.cards[1]:set_edition(card.edition.key, true, true)
+				end
+
+				SMODS.destroy_cards(G.deathcard_chose.cards)
+
+				PDCARD[RevosVault.death_card_seed].occupied_card = RevosVault.random_deathcard()
+			end,
+			second_func = function()
+				G.E_MANAGER:add_event(Event({
+
+					trigger = "after",
+					delay = 7.5,
+					func = function()
+						RevosVault.deathcarded = false
+						G.GAME.crv_deathcard_state = nil
+						G.STATE = G.STATES.GAME_OVER
+						if not G.GAME.won and not G.GAME.seeded and not G.GAME.challenge then 
+							G.PROFILES[G.SETTINGS.profile].high_scores.current_streak.amt = 0
+						end
+						G:save_settings()
+						G.FILE_HANDLER.force = true
+						G.STATE_COMPLETE = false
+						return true
+					end
+				}))
+			end
+		})
+		end
+	end
 end

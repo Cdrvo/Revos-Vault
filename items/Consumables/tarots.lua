@@ -276,3 +276,27 @@ SMODS.Consumable({
 		delay(0.6)
 	end,
 })
+
+SMODS.Consumable({
+	key = "camera",
+	set = "Tarot",
+	config = { extra = {} },
+	pos = { x = 3, y = 1 },
+	atlas = "tarots",
+	cost = 4,
+	unlocked = true,
+	discovered = true,
+	loc_vars = function(self,info_queue,card)
+		info_queue[#info_queue+1] = {set = "Other", key = "crv_weak"}
+	end,
+	can_use = function(self, card)
+		return G.jokers and ((RevosVault.check("highlight", G.jokers)==1) and RevosVault.check("space", G.jokers))
+	end,
+	use = function(self, card)
+		a = copy_card(G.jokers.highlighted[1])
+		a:add_to_deck()
+		a:add_sticker("crv_weak", true)
+		G.jokers:emplace(a)
+
+	end,
+})

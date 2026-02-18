@@ -297,6 +297,11 @@ function Game:start_run(args)
 	if G.jokers and G.jokers.config then
 		G.jokers.config.highlighted_limit = G.jokers.config.highlighted_limit + 1
 	end
+	if G.GAME then
+		if G.GAME.crv_death then
+			RevosVault.back_to_death()
+		end
+	end
 end
 
 
@@ -651,6 +656,32 @@ function Game:start_run(args)
 
 	start_run_old(self, args)
 
+	if RevoConfig["experimental_enabled"] then
+		local PDCARD = G.PROFILES[G.SETTINGS.profile].crv_deathcards
+
+		if PDCARD then
+			for k, v in pairs(PDCARD) do
+				local card = G.P_CENTERS[PDCARD[k].occupied_card]
+				local fcard = G.P_CENTERS[PDCARD[k].function_from]
+				if card then
+					card.name = PDCARD[k].name
+					card.ability = PDCARD[k].ability_table
+					card.rarity = PDCARD[k].rarity
+					if PDCARD[k].function_from then
+						for k2, v2 in pairs(G.P_CENTERS[PDCARD[k].function_from]) do
+							if type(v2) == "function" then
+								card[k2] = v2
+							end
+						end
+						G.localization.descriptions.Joker[PDCARD[k].occupied_card] = G.localization.descriptions.Joker[PDCARD[k].function_from] --ok don't judge me this is the only way i could think of
+						G.localization.descriptions.Joker[PDCARD[k].occupied_card].name = PDCARD[k].given_name or "Deathcard"
+						G.localization.descriptions.Joker[PDCARD[k].occupied_card].name_parsed = {{strings = {(PDCARD[k].given_name or "Deathcard")}, control = {}}}
+					end
+				end
+			end
+		end
+	end
+
 	-- taken from JoyousSpring (N' my goat)
 
 	if RevoConfig["8_curses_enabled"] then
@@ -741,6 +772,12 @@ function Card:get_chip_x_mult(context)
 	else
 		return get_chip_x_mult_old(self, context)
 	end
+end
+
+local get_chip_bonus_old = Card.get_chip_bonus
+function Card:get_chip_bonus()
+    if self.debuff or G.GAME.modifiers.crv_no_score_chips then return 0 end
+    return get_chip_bonus_old(self)
 end
 
 

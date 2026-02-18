@@ -514,6 +514,7 @@ SMODS.Joker({
 	blueprint_compat = false,
 	cost = 0,
 	loc_vars = function(self, info_queue, card)
+		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"rat"}}
 		info_queue[#info_queue+1] = {set = "Other", key = "crv_curse_desc"}
 	end,
 	add_to_deck = function(self,card,from_debuff)

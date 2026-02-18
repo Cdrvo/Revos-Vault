@@ -184,6 +184,8 @@ SMODS.Consumable({
 	set = "EnchancedDocuments",
 	discovered = true,
 	atlas = "documents",
+	display_size = { w = 90, h = 120 },
+	pixel_size = { w = 71, h = 95 },
 	pos = { x = 2, y = 2 },
 	config = {
 		extra = {

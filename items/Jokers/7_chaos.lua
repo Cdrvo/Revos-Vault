@@ -60,7 +60,7 @@ SMODS.Joker({
 			and SMODS.pseudorandom_probability(card, "j_crv_chaoticprintersmhasjhd", 1, card.ability.extra.odds, nil, true)
 		then
 			for i = 1, #G.P_JOKER_RARITY_POOLS.crv_p do
-				RevosVault.pseudorandom_printer({card = card,seed = "j_crv_chaoticprintersomething",area = G.jokers, rarity = "crv_p"})
+				RevosVault.pseudorandom_printer({card = card,seed = "j_crv_chaoticprintersomething",area = G.jokers, rarity = "crv_p", no_space = true})
 			end
 		end
 	end,

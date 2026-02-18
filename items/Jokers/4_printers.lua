@@ -545,7 +545,6 @@ SMODS.Joker({
 	},
 	loc_vars = function(self, info_queue, card)
 		info_queue[#info_queue + 1] = G.P_CENTERS.m_crv_mugged
-		info_queue[#info_queue + 1] = G.P_CENTERS.m_crv_aflame
 		info_queue[#info_queue + 1] = G.P_CENTERS.m_crv_soulcard
 		local cae = card.ability.extra
 		local num, den = SMODS.get_probability_vars(card, 1, cae.odds, "general_printer_seed_cause_im_lazy")
@@ -555,12 +554,7 @@ SMODS.Joker({
 	end,
 	calculate = function(self, card, context)
 		if context.first_hand_drawn then
-			local imsobored = pseudorandom_element({ 1, 2 })
-			if imsobored == 1 then
-				RevosVault.printer_apply("m_crv_mugged", "m_crv_soulcard", nil)
-			else
-				RevosVault.printer_apply("m_crv_aflame", "m_crv_soulcard", nil)
-			end
+			RevosVault.printer_apply("m_crv_mugged", "m_crv_soulcard", nil)
 		end
 	end,
 	in_pool = function(self, wawa, wawa2)
@@ -1537,6 +1531,7 @@ SMODS.Joker({
 		},
 	},
 	loc_vars = function(self, info_queue, card)
+		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"Chainsawmert"}}
 		info_queue[#info_queue+1] = G.P_CENTERS.j_egg
 	end,
 	calculate = function(self, card, context)

@@ -134,14 +134,17 @@ SMODS.Enhancement({
 	any_suit = false,
 	always_scores = false,
 	weight = 0,
-	config = { extra = { xmult = 2 } },
+	config = { extra = { one = 1, two = 2 } },
 	loc_vars = function(self, info_queue, card)
-		return { vars = { card.ability.extra.xmult } }
+		local cae = card.ability.extra
+		return { vars = { cae.one,cae.two,cae.threet } }
 	end,
 	calculate = function(self, card, context, effect)
-		if context.main_scoring and context.cardarea == G.play and next(context.poker_hands["Full House"]) then
-			return {
-				x_mult = card.ability.extra.xmult,
+		local cae = card.ability.extra
+		if context.repetition and context.cardarea == G.play then
+			local a = pseudorandom_element({cae.one,cae.two})
+			return{
+				repetitions = a
 			}
 		end
 	end,
@@ -154,6 +157,8 @@ SMODS.Enhancement({
 	key = "mega",
 	atlas = "enh",
 	pos = { x = 2, y = 3},
+	display_size = { w = 90, h = 120 },
+	pixel_size = { w = 71, h = 95 },
 	discovered = true,
 	unlocked = true,
 	replace_base_card = false,

@@ -38,6 +38,7 @@ SMODS.Sticker({
 		x = 5,
 		y = 1,
 	},
+	config = {card_limit = 1},
 	sets = {
 		Joker = true,
 	},
@@ -427,4 +428,31 @@ SMODS.Sticker({
 	update = function(self, card, context)
 		if card.debuff then card.debuff = nil end
 	end
+})
+
+SMODS.Sticker({
+	key = "weak",
+	pos = {
+		x = 7,
+		y = 4,
+	},
+	badge_colour = HEX("690000"),
+	atlas = "enh",
+	sets = {
+		Joker = true,
+	},
+	config = {},
+	rate = 0.001,
+	needs_enable_flag = true,
+	loc_vars = function(self, info_queue, card)
+	return {
+		vars = {},
+	}
+	end,
+	applied = function(self,card)
+		RevosVault.values("/", card, 2, true)
+	end,
+	removed = function(self,card)
+		RevosVault.values("*", card, 2, true)
+	end,
 })

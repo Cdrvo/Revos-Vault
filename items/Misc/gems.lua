@@ -51,7 +51,7 @@ G.FUNCS.redeem_gem = function(e)
 
 	SMODS.add_card{
 		key = card.config.center.key,
-		area = G.vouchers
+		area = G.crv_gem_area
 	}
 
 	check_for_unlock({type = "gemming_it"})
@@ -151,6 +151,11 @@ RevosVault.Gem({
 			destroy_time_max = 5,
 		},
 	},
+	loc_vars = function(self,info_queue,card)
+		local cae = card.ability.extra
+		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"mr.cr33ps"}}
+		return{vars={cae.destroy_time, cae.destroy_time_max}}
+	end,
 	calculate = function(self, card, context)
 		if context.end_of_round and context.main_eval then
 			if card.ability.extra.destroy_time >= card.ability.extra.destroy_time_max then
@@ -183,6 +188,11 @@ RevosVault.Gem({
 			destroy_time_max = 2,
 		},
 	},
+	loc_vars = function(self,info_queue,card)
+		local cae = card.ability.extra
+		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"mr.cr33ps"}}
+		return{vars={cae.destroy_time, cae.destroy_time_max}}
+	end,
 	calculate = function(self, card, context)
 		local crv = card.ability.extra
 		if context.end_of_round and context.main_eval then
@@ -223,9 +233,14 @@ RevosVault.Gem({
 	config = {
 		extra = {
 			destroy_time = 0,
-			destroy_time_max = 0,
+			destroy_time_max = 1,
 		},
 	},
+	loc_vars = function(self,info_queue,card)
+		local cae = card.ability.extra
+		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"mr.cr33ps"}}
+		return{vars={cae.destroy_time, cae.destroy_time_max}}
+	end,
 	calculate = function(self, card, context)
 		local crv = card.ability.extra
 		if context.end_of_round and context.main_eval then
@@ -253,6 +268,11 @@ RevosVault.Gem({
 			destroy_time_max = 5,
 		},
 	},
+	loc_vars = function(self,info_queue,card)
+		local cae = card.ability.extra
+		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"mr.cr33ps"}}
+		return{vars={cae.destroy_time, cae.destroy_time_max}}
+	end,
 	calculate = function(self, card, context)
 		if context.end_of_round and context.main_eval then
 			if card.ability.extra.destroy_time >= card.ability.extra.destroy_time_max then
@@ -282,9 +302,14 @@ RevosVault.Gem({
 	config = {
 		extra = {
 			destroy_time = 0,
-			destroy_time_max = 0,
+			destroy_time_max = 1,
 		},
 	},
+	loc_vars = function(self,info_queue,card)
+		local cae = card.ability.extra
+		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"mr.cr33ps"}}
+		return{vars={cae.destroy_time, cae.destroy_time_max}}
+	end,
 	calculate = function(self, card, context)
 		local crv = card.ability.extra
 		if context.end_of_round and context.main_eval then
@@ -313,6 +338,11 @@ RevosVault.Gem({
             old_odds = 0
 		},
 	},
+	loc_vars = function(self,info_queue,card)
+		local cae = card.ability.extra
+		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"mr.cr33ps"}}
+		return{vars={cae.destroy_time, cae.destroy_time_max, cae.old_odds}}
+	end,
     calculate = function(self, card, context)
 		local crv = card.ability.extra
 		if context.end_of_round and context.main_eval then
@@ -323,6 +353,9 @@ RevosVault.Gem({
 			end
 		end
 	end,
+	in_pool = function(self)
+		return RevosVault.check_enhancement(G.playing_cards, "m_glass")>0
+	end
 })
 
 
@@ -339,6 +372,9 @@ RevosVault.Gem({
 	},
 	loc_vars = function(self,info_queue,card)
 		info_queue[#info_queue+1] = {set = "Other", key = "crv_fixed_chances"}
+		local cae = card.ability.extra
+		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"mr.cr33ps"}}
+		return{vars={cae.destroy_time, cae.destroy_time_max, cae.old_odds}}
 	end,
     calculate = function(self, card, context)
 		local crv = card.ability.extra
@@ -369,8 +405,13 @@ RevosVault.Gem({
 			destroy_time_max = 2,
 		},
 	},
+	loc_vars = function(self,info_queue,card)
+		local cae = card.ability.extra
+		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"mr.cr33ps"}}
+		return{vars={cae.destroy_time, cae.destroy_time_max}}
+	end,
 	update = function(self, card, context) 
-	if G.shop_jokers and G.shop_jokers.cards and card.area == G.vouchers then
+	if G.shop_jokers and G.shop_jokers.cards and card.area == G.crv_gem_area then
 		for _, v in pairs(G.shop_jokers.cards) do
 			if not v.edition then
 				v:juice_up()

@@ -147,6 +147,7 @@ SMODS.Joker({
 		},
 	},
 	loc_vars = function(self, info_queue, card)
+		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"Astro"}}
 		local crv = card.ability.extra
 		return {
 			vars = { crv.mult },
@@ -186,6 +187,7 @@ SMODS.Joker({
 		},
 	},
 	loc_vars = function(self, info_queue, card)
+		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"Astro"}}
 		local crv = card.ability.extra
 		return {
 			vars = { crv.mult, G.GAME.henchmans },
@@ -219,6 +221,7 @@ SMODS.Joker({
 		},
 	},
 	loc_vars = function(self, info_queue, card)
+		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"mr.cr33ps"}}
 		local crv = card.ability.extra
 		return {
 			vars = { crv.chips },
@@ -291,6 +294,7 @@ SMODS.Joker({
 		},
 	},
 	loc_vars = function(self, info_queue, card)
+		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"Nyxel"}}
 		info_queue[#info_queue + 1] = G.P_CENTERS.m_crv_honey
 		return {
 			vars = { card.ability.extra.dollars },
@@ -331,6 +335,7 @@ SMODS.Joker({
 		extra = {},
 	},
 	loc_vars = function(self, info_queue, card)
+		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"WombatCountry"}}
 		return {
 			vars = {},
 		}
@@ -489,6 +494,7 @@ SMODS.Joker({
 		},
 	},
 	loc_vars = function(self, info_queue, card)
+		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"Chainsawmert"}}
 		local crv = card.ability.extra
 		return {
 			vars = { crv.mone,crv.suit },
@@ -504,6 +510,84 @@ SMODS.Joker({
 				return {
 					dollars = crv.mone,
 				}
+			end
+		end
+	end,
+})
+
+SMODS.Joker({
+	key = "evil_joker",
+	atlas = "Jokers2",
+	rarity = 1,
+	cost = 5,
+	unlocked = true,
+	discovered = false,
+	blueprint_compat = true,
+	pos = {
+		x = 1,
+		y = 16,
+	},
+	config = {
+		extra = {
+			mult = 0,
+			mult_gain = 1
+		},
+	},
+	loc_vars = function(self, info_queue, card)
+		local cae = card.ability.extra
+		return {
+			vars = { cae.mult, cae.mult_gain},
+		}
+	end,
+
+	calculate = function(self, card, context)
+		local cae = card.ability.extra
+		if context.joker_main and cae.mult>0 then
+			return{
+				mult = cae.mult
+			}
+		end
+		if context.crv_joker_destroyed and context.crv_destroyedj ~= card then
+			SMODS.scale_card(card,{
+				ref_table = cae,
+				ref_value = "mult",
+				scalar_value = "mult_gain"
+			})
+		end
+	end,
+})
+
+SMODS.Joker({
+	key = "rainbow",
+	rarity = 1,
+	cost = 5,
+	unlocked = true,
+	discovered = false,
+	blueprint_compat = false,
+	atlas = "Jokers2",
+	pos = {
+		x = 10,
+		y = 5,
+	},
+	config = {
+		extra = {
+			mult = 0,
+			mult_gain = 1
+		},
+	},
+	loc_vars = function(self, info_queue, card)
+		local cae = card.ability.extra
+		return {
+			vars = { cae.mult, cae.mult_gain},
+		}
+	end,
+
+	calculate = function(self, card, context)
+		local cae = card.ability.extra
+		if context.first_hand_drawn and not context.blueprint then
+			local TRUTHH111, suit = pseudorandom_element(RevosVault.get_suits(G.hand.cards))
+			for k, v in pairs(G.hand.cards) do
+				RevosVault.set_ability({card = v, sound = "card1", timer = 2, delay = 0.1, sound_secondary = "card3", custom_func=function() SMODS.change_base(v, suit, nil) end})
 			end
 		end
 	end,

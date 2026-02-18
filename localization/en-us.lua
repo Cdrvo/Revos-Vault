@@ -316,6 +316,13 @@ return {
 					"until the end of the round"
 				},
 			},
+			bl_crv_hole = {
+				name = "The Hole",
+				text = {
+					"Scored cards",
+					"don't give chips"
+				},
+			},
 		},
 		Partner = {
 			pnr_crv_pprinter = {
@@ -499,7 +506,7 @@ return {
 			},
 			m_crv_aflame = {
 				name = "Aflame",
-				text = { "{X:mult,C:white}X#1#{} Mult", "if played hand", "contains a {C:attention}Full House" },
+				text = { "When scored,", "Retrigger {C:attention}#1#{} or {C:attention}#2#{} times" },
 			},
 			m_crv_mega = {
 				name = "Mega",
@@ -963,8 +970,7 @@ return {
 				name = "Devilish Printer",
 				text = {
 					"When first hand is drawn,",
-					"Enhances a random card in hand to {C:attention}Aflame{}",
-					"or {C:attention}Stained.",
+					"Enhances a random card in hand to {C:attention}Stained{}",
 					"{C:green}#1# in 4{} Chance for it to be a {C:attention}Soul Card{}",
 				},
 			},
@@ -1305,7 +1311,7 @@ return {
 				},
 			},
 			j_crv_goldenshark = {
-				name = "Golden Shark",
+				name = "Goldfish",
 				text = {
 					'After {C:attention}#2#{C:inactive} (#1#){} rounds{},', 
 					'trigger a {C:gold}"Gold Rush"',
@@ -1777,7 +1783,6 @@ return {
 			j_crv_safe = {
 				name = "Safe",
 				text = {
-					"{C:inactive,s:0.75}(Art by kusanehexaku and icyethics)",
 					"Sets a {C:attention}4{} Digit password",
 					"between {C:attention}2-9{} everytime",
 					"a {C:attention}Boss Blind{} is defeated.",
@@ -1791,8 +1796,6 @@ return {
 			j_crv_banker = {
 				name = "Banker",
 				text = {
-					"{C:inactive,s:0.75}(Art by kusanehexaku)",
-					"{C:inactive,s:0.75}(Main Code by bakshotmaxx)",
 					"Gain {C:money}+#1#{} When added to deck.",
 					"Lose {C:red}-$#2#{} after every round.",
 					"{C:red}Self-destructs{} when dept is fully paid",
@@ -2205,7 +2208,6 @@ return {
 			j_crv_those = {
 				name = "Those who Joke",
 				text = {
-					"{C:inactive,s:0.75}(art by Crazy Dave (aka Crazy Dave)™)",
 					"When {C:attention}Blind{} is selected,",
 					"{C:green}#1# in #2#{} Chance to create",
 					"a negative {C:attention}Mr. Bones",
@@ -2661,6 +2663,43 @@ return {
 				text = {
 					"When a {C:attention}Blind{} is selected",
 					"print an {C:attention}Egg{}"
+
+				}
+			},
+			j_crv_evil_joker = {
+				name = "Evil Joker",
+				text = {
+					"{C:mult}+#2#{} Mult for",
+					"each joker sold or destroyed",
+					"{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult)"
+
+				}
+			},
+			j_crv_charcoal = {
+				name = "Charcoal Joker",
+				text = {
+					"Apply {C:attention}Aflame{} to",
+					"scored cards"
+
+				}
+			},
+			j_crv_rainbow = {
+				name = "Rainbow",
+				text = {
+					"When first hand is drawn",
+					"{C:green}All{} cards in hand",
+					"{C:attention}transform{} into a random",
+					"card in hand's suit"
+
+				}
+			},
+			j_crv_birthday_cake = {
+				name = "Birthday Cake",
+				text = {
+					"Gives {C:mult}mult{} depending",
+					"on the current day",
+					"of the month",
+					"{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult)"
 
 				}
 			},
@@ -3226,6 +3265,14 @@ return {
 					"{C:green}#1# in #2#{} Chance to",
 					"make all jokers",
 					"{C:crv_polychrome}Polychrome{}"
+				}
+			},
+			c_crv_camera = {
+				name = "Camera",
+				text = {
+					"Creates a {C:red}Weak{}",
+					"copy of the",
+					"highlighted {C:attention}Joker"
 				}
 			},
 		},
@@ -4119,6 +4166,14 @@ return {
 					"debuffed"
 				}
 			},
+			crv_weak = {
+				name = "Weak",
+				text = {
+					"All values on",
+					"this card are",
+					"halved"
+				}
+			},
 
 			crv_gold_rush_desc = {
 				name = "Gold Rush",
@@ -4195,6 +4250,23 @@ return {
 					"{C:green,E:1,S:1.1}probability {C:red}cannot{}",
 					"be changed"
 				}
+			},
+
+			crv_idea_credits = {
+				name = "Idea",
+				text = {"#1#"}
+			},
+			crv_art_credits = { --hardcodin go rr
+				name = "Artist",
+				text = {"#1#"}
+			},
+			crv_art_credits_2 = {
+				name = "Artists",
+				text = {"#1#","#2#"}
+			},
+			crv_code_credits = {
+				name = "Code",
+				text = {"#1#"}
 			},
 
 			-- Starspace Cross-Mod
@@ -4405,6 +4477,10 @@ return {
 						  "of {C:crv_sup}Superior{} Cards",
 						"appearing" },
 			},
+			v_crv_deathcard_making = {
+				name = "Deathcards",
+				text = { "After losing,","allows you to make","a {C:attention}custom{} card","from owned jokers.","{C:inactive}(Must have atleast 2 jokers)" },
+			},
 		},
 		Gem = {
 			gem_crv_exp = {
@@ -4412,14 +4488,14 @@ return {
 				text = {
 					"{C:spades}Spade{} and {C:clubs}Club{} cards",
 					"cannot be {C:red}debuffed{}",
-					"for 6 rounds",
+					"for {C:attention}#2#{C:inactive} (#1#){} rounds",
 				},
 			},
 			gem_crv_expe = {
 				name = "Emerald",
 				text = {
 					"Double all earned",
-					"{C:money}Money{} for 3 rounds",
+					"for {C:attention}#2#{C:inactive} (#1#){} rounds",
 				},
 			},
 			gem_crv_ruby = {
@@ -4427,7 +4503,7 @@ return {
 				text = {
 					"Gives {X:mult,C:white}XMult{}",
 					"equal to the amount of {C:attention}Jokers{}",
-					"for 1 round",
+					"for {C:attention}#2#{C:inactive} (#1#){} round",
 				},
 			},
 			gem_crv_diamond = {
@@ -4435,21 +4511,21 @@ return {
 				text = {
 					"{C:hearts}Heart{} and {C:diamonds}Diamond{} cards",
 					"cannot be {C:red}debuffed{}",
-					"for 6 rounds",
+					"for {C:attention}#2#{C:inactive} (#1#){} rounds",
 				},
 			},
 			gem_crv_star_sapphire = {
 				name = "Star Sapphire",
 				text = {
 					"Played hands are {C:green}Upgraded{}",
-					"for 1 round",
+					"for {C:attention}#2#{C:inactive} (#1#){} round"
 				},
 			},
 			gem_crv_obsidian = {
 				name = "Obsidian",
 				text = {
 					"{C:attention}Glass Cards{} {C:red}Cannot{} be",
-					"{C:red}Destroyed{} for 3 rounds",
+					"{C:red}Destroyed{} for {C:attention}#2#{C:inactive} (#1#){} rounds",
 				},
 			},
 			gem_crv_angelite = {
@@ -4457,7 +4533,7 @@ return {
 				text = {
 					"{C:green}1 in 4{} Chance to",
 					"give back any destroyed {C:attention}Joker",
-					"for 3 rounds",
+					"for {C:attention}#2#{C:inactive} (#1#){} rounds",
 				},
 			},
 			gem_crv_amethyst = {
@@ -4465,7 +4541,7 @@ return {
 				text = {
 					"All {C:attention}Cards{} in shop spawns",
 					"with a {C:dark_edition}Random Edition",
-					"for 3 rounds",
+					"for {C:attention}#2#{C:inactive} (#1#){} rounds",
 				},
 			},
 		},
@@ -4527,6 +4603,7 @@ return {
 			crv_fan = "Fan",
 			crv_heavy = "Heavy",
 			crv_wet = "Wet",
+			crv_weak = "Weak",
 			crv_sunbleached = "Sun Bleached",
 			crv_pastel = "Pastel",
 			crv_bloom_edition = "Bloom",

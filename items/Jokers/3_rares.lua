@@ -12,7 +12,7 @@ SMODS.Joker({
 	},
 	config = {
 		extra = {
-			xmult = 1,
+			xmult = 0.5,
 			allcards = 0,
 		},
 	},
@@ -24,14 +24,9 @@ SMODS.Joker({
 
 	calculate = function(self, card, context)
 		if context.joker_main then
-			local all_cards = 0
-			for k, v in ipairs(G.hand.cards) do
-				all_cards = all_cards + 1
-				card.ability.extra.allcards = all_cards
-			end
-			if all_cards > 1 then
+			if #G.hand.cards > 0 then
 				return {
-					xmult = card.ability.extra.xmult * card.ability.extra.allcards,
+					xmult = (card.ability.extra.xmult * (#G.hand.cards)),
 				}
 			end
 		end
@@ -558,6 +553,7 @@ SMODS.Joker({
 		},
 	},
 	loc_vars = function(self, info_queue, card)
+		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"Chainsawmert"}}
 		return {
 			vars = { card.ability.extra.xmult },
 		}
@@ -1113,6 +1109,7 @@ SMODS.Joker({
 		extra = {},
 	},
 	loc_vars = function(self, info_queue, card)
+		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"mr.cr33ps"}}
 		return {
 			vars = {},
 		}
@@ -1178,6 +1175,7 @@ SMODS.Joker({
 	},
 	cost = 7,
 	loc_vars = function(self, info_queue, card)
+		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"Chainsawmert"}}
 		return {
 			vars = { card.ability.extra.chips },
 		}
@@ -1722,7 +1720,7 @@ SMODS.Joker({
 		extra = {
 			clicks = 0,
 			chips = 0,
-			chipgain = 0.1,
+			chipgain = 0.5,
 		},
 	},
 	rarity = 3,
@@ -1818,7 +1816,7 @@ SMODS.Joker({
 			odds = 101,
 		},
 	},
-	add_to_dck = function(self,card,from_debuff)
+	add_to_deck = function(self,card,from_debuff)
 		if RevoConfig["9_secretjokers_enabled"] then
 			if context.end_of_round and context.main_eval and not context.blueprint then
 				if SMODS.pseudorandom_probability(card,"kq_secret",1,card.ability.extra.odds) then
@@ -1829,6 +1827,7 @@ SMODS.Joker({
 		end
 	end,
 	loc_vars = function(self, info_queue, card)
+		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"Chainsawmert"}}
 				local area = self.area
 		if G.jokers and G.jokers.cards then area = G.jokers.cards end
 
@@ -2090,6 +2089,7 @@ SMODS.Joker({
 		},
 	},
 	loc_vars = function(self, info_queue, card)
+		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"WombatCountry"}}
 		return {
 			vars = { card.ability.extra.stored },
 		}
@@ -2147,6 +2147,7 @@ SMODS.Joker({
 		},
 	},
 	loc_vars = function(self, info_queue, card)
+		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"mr.cr33ps"}}
 		return {
 			vars = { card.ability.extra.xmult, card.ability.extra.xmultg },
 		}
@@ -2551,6 +2552,7 @@ SMODS.Joker({
 		},
 	},
 	loc_vars = function(self, info_queue, card)
+		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"Crazy Dave"}}
 		local cae = card.ability.extra
 		local num, den = SMODS.get_probability_vars(card, 1, cae.odds,"j_thoose" )
 		return{
@@ -2592,6 +2594,7 @@ SMODS.Joker({
 		},
 	},
 	loc_vars = function(self, info_queue, card)
+		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"Heaven"}}
 		return {
 			vars = { card.ability.extra.rep },
 		}

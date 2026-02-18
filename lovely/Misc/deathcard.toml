@@ -1,0 +1,73 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+
+## Deathcard timer checks and gamestates
+
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = '''-- context.end_of_round calculations'''
+position = "before"
+payload = '''
+local deathcard
+if G.GAME.crv_deathcard_allowed and RevoConfig and RevoConfig["experimental_enabled"] then 
+    deathcard = true
+end
+    '''
+match_indent = true
+[[patches]]
+[patches.pattern]
+target = "functions/state_events.lua"
+pattern = '''if game_over then'''
+position = "at"
+payload = '''
+if (game_over or game_won) and RevoConfig and RevoConfig["experimental_enabled"] then 
+    print("Reducing timers for deathcards")
+    if G.PROFILES[G.SETTINGS.profile].crv_deathcards then
+	local a = G.PROFILES[G.SETTINGS.profile].crv_deathcards
+	for k, v in pairs(a) do
+		if v.timer then
+			if v.timer > 1 then
+				v.timer = v.timer - 1
+				-- print("Reduced timer, new timer: " .. v.timer)
+			else
+				v.timer = 0
+				-- print("Remove the " .. k .." num. card" )
+				table.remove(a, k)
+			end
+		end
+	end
+end
+end
+if deathcard and game_over and not game_won and RevoConfig and RevoConfig["experimental_enabled"] then 
+    RevosVault.back_to_death(nil, true)
+elseif game_over then
+    '''
+match_indent = true
+
+
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = '''
+if self.STATE == self.STATES.SHOP then'''
+position = "before"
+payload = '''
+if self.STATE == self.STATES.CRV_DEATHCARD and RevoConfig and RevoConfig["experimental_enabled"] then 
+     RevosVault.back_to_death(true)
+end
+    '''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "globals.lua"
+pattern = '''
+self.STATES = { '''
+position = "after"
+payload = '''
+    CRV_DEATHCARD = 998182635641,'''
+match_indent = true

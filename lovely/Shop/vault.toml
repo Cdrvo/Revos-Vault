@@ -7,17 +7,6 @@ priority = -9
 
 [[patches]]
 [patches.pattern]
-target = 'game.lua'
-pattern = "if self.STATE == self.STATES.SHOP then"
-position = 'after'
-payload = '''
--- AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-'''
-match_indent = false
-
-
-[[patches]]
-[patches.pattern]
 target = "functions/UI_definitions.lua"
 pattern = "local t = {n=G.UIT.ROOT, config = {align = 'cl', colour = G.C.CLEAR}, nodes={"
 position = "before"

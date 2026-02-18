@@ -247,6 +247,7 @@ G.FUNCS.crv_vault_vault = function(e)
 		delay = 0,
 		func = function()
 			TheVault.vault_lock = true
+			G.CONTROLLER.locks["vault_lock"] = true
 			return true
 		end
 	}))
@@ -264,6 +265,7 @@ G.FUNCS.crv_vault_vault = function(e)
 			delay = 0,
 			func = function()
 				TheVault.vault_lock = true
+				G.CONTROLLER.locks["vault_lock"] = false
 				return true
 			end
 		}))
@@ -278,6 +280,7 @@ G.FUNCS.crv_vault_vault = function(e)
 			delay = 0,
             func = function()
 				TheVault.vault_lock = false
+				G.CONTROLLER.locks["vault_lock"] = false
                 save_run()
                 return true
             end,
@@ -374,6 +377,7 @@ G.FUNCS.crv_vault_upgrade = function(e)
 		delay = 0,
 		func = function()
 			TheVault.vault_lock = true
+			G.CONTROLLER.locks["vault_lock"] = true
 			return true
 		end
 	}))
@@ -388,6 +392,7 @@ G.FUNCS.crv_vault_upgrade = function(e)
 		delay = 0,
 		func = function()
 			TheVault.vault_lock = false
+			G.CONTROLLER.locks["vault_lock"] = false
 			save_run()
 			return true
 		end,

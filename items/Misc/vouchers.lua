@@ -88,3 +88,22 @@ SMODS.Voucher({
 	end
 	
 })
+
+
+if RevoConfig["experimental_enabled"] then
+	SMODS.Voucher({
+		key = "deathcard_making",
+		atlas = "vouch",
+		pos = {
+			x = 2,
+			y = 0,
+		},
+		cost = 15,
+		redeem = function(self,card)
+			local cae = card.ability.extra
+			G.GAME.crv_deathcard_allowed = true
+		end
+	})
+end
+
+

@@ -322,3 +322,29 @@ SMODS.Blind({
 		end
 	end,
 })
+
+
+SMODS.Blind({
+	key = "hole",
+	boss = {
+		min = 3,
+		max = 10,
+		showdown = true,
+	},
+	config = {
+		current_suit = nil
+	},
+	atlas = "blinds",
+	pos = { x = 0, y = 10 },
+	boss_colour = HEX("3c4b4e"),
+	set_blind = function(self)
+		G.GAME.modifiers.crv_no_score_chips = true
+	end,
+	defeat = function(self, silent)
+		self.disabled = false
+		G.GAME.modifiers.crv_no_score_chips = false
+	end,
+	disable = function(self, silent)
+		G.GAME.modifiers.crv_no_score_chips = false
+	end,
+})
