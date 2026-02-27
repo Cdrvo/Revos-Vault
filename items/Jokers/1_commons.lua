@@ -588,6 +588,9 @@ SMODS.Joker({
 			mult_gain = 1
 		},
 	},
+	crv_credits = {
+		art = {"Chainsawmert"}
+	},
 	loc_vars = function(self, info_queue, card)
 		local cae = card.ability.extra
 		return {
