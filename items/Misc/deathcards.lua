@@ -176,13 +176,10 @@ function RevosVault.len(table)
 end
 
 function RevosVault.random_deathcard()
-	local tab = {
-		["j_crv_deathcard1"] = true,
-		["j_crv_deathcard2"] = true,
-		["j_crv_deathcard3"] = true,
-		["j_crv_deathcard4"] = true,
-		["j_crv_deathcard5"] = true,
-	}
+	tab = {}
+	for i = 1, 10 do
+		tab["j_crv_deathcard" .. i] = true
+	end
 	local rtab = {} --aafgsdhfasgbas
 	local PDCARD = G.PROFILES[G.SETTINGS.profile].crv_deathcards
 	for k, v in pairs(PDCARD) do
