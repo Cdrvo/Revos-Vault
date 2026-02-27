@@ -159,3 +159,63 @@ function loc_colour(_c, _default)
 	return loc_old(_c, _default)
 end
 
+-- SCORING
+
+SMODS.Scoring_Parameter({
+	key = "dollars_mult",
+	default_value = 0,
+	colour = G.C.MONEY,
+	crv_set = function(self, amount)
+		self.current = amount
+	end,
+})
+
+SMODS.Scoring_Calculation({
+  key = "dollars_mult_scoring",
+	func = function(self, chips, mult, flames)
+	    return (chips * mult) * G.GAME.dollars
+	end,
+  parameters = {'chips', 'mult', "crv_dollars_mult"},
+  replace_ui = function(self)
+    local scale = 0.3
+		return
+		{n=G.UIT.R, config={align = "cm", minh = 1, padding = 0.1}, nodes={
+			{n=G.UIT.C, config={align = "cm", id = 'hand_operator_container'}, nodes={
+                {n=G.UIT.T, config={text = "(", scale = scale * 2 * 0.75, colour = G.C.CHIPS, shadow = true}},
+            }},
+			{n=G.UIT.C, config={align = 'cm', id = 'hand_chips'}, nodes = {
+				SMODS.GUI.score_container({
+					type = 'chips',
+					text = 'chip_text',
+					align = 'cm',
+					w = 1.1,
+					scale = scale
+				})
+			}},
+			SMODS.GUI.operator(scale*0.75),
+			{n=G.UIT.C, config={align = 'cm', id = 'hand_mult'}, nodes = {
+				SMODS.GUI.score_container({
+					type = 'mult',
+					align = 'cm',
+					w = 1.1,
+					scale = scale
+				})
+			}},
+			{n=G.UIT.C, config={align = "cm", id = 'hand_operator_container'}, nodes={
+                {n=G.UIT.T, config={text = ")", scale = scale * 2 * 0.75, colour = G.C.MULT, shadow = true}},
+            }},
+			{n=G.UIT.C, config={align = "cm", id = 'hand_operator_container'}, nodes={
+                {n=G.UIT.T, config={text = "X", scale = scale * 2 * 0.75, colour = G.C.MONEY, shadow = true}},
+            }},
+			{n=G.UIT.C, config={align = 'cm', id = 'hand_crv_dollars_mult'}, nodes = {
+				SMODS.GUI.score_container({
+					type = 'crv_dollars_mult',
+					text = "crv_dollars_mult_text",
+					align = 'cm',
+					w = 1.1,
+					scale = scale
+				})
+			}},
+		}}
+	end
+})

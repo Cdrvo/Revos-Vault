@@ -1,0 +1,40 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+
+[[patches]]
+[patches.pattern]
+target = 'cardarea.lua'
+pattern = '''update_hand_text({immediate = true, nopulse = true, delay = 0}, {[name] = parameter.default_value})'''
+position = 'at'
+payload = '''
+    if name ~= "crv_dollars_mult" then
+        update_hand_text({immediate = true, nopulse = true, delay = 0}, {[name] = parameter.default_value})
+    end
+'''
+match_indent = true
+[[patches]]
+[patches.pattern]
+target = 'cardarea.lua'
+pattern = '''update_hand_text({immediate = true, nopulse = nil, delay = 0}, {[name] = '?'})'''
+position = 'at'
+payload = '''
+    if name ~= "crv_dollars_mult" then
+        update_hand_text({immediate = true, nopulse = nil, delay = 0}, {[name] = '?'})
+    end
+'''
+match_indent = true
+[[patches]]
+[patches.pattern]
+target = 'cardarea.lua'
+pattern = '''update_hand_text({immediate = true, nopulse = nil, delay = 0}, {[name] = parameter.current})'''
+position = 'at'
+payload = '''
+    if name ~= "crv_dollars_mult" then
+        update_hand_text({immediate = true, nopulse = nil, delay = 0}, {[name] = parameter.current})
+    end
+'''
+match_indent = true
+

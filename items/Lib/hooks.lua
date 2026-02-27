@@ -380,6 +380,10 @@ function Game:update(dt)
 			RevosVault.placeholder_name = G.PROFILES[G.SETTINGS.profile].crv_deathcards[G.GAME.deathcard_seed_crv].given_name or ""
 		end
 	end
+	if G and G.GAME and G.GAME.current_round and G.GAME.current_round.current_hand and G.GAME.current_round.current_hand.crv_dollars_mult_text then
+		SMODS.Scoring_Parameters.crv_dollars_mult:crv_set(G.GAME.dollars or 0)
+		G.GAME.current_round.current_hand.crv_dollars_mult = SMODS.Scoring_Parameters.crv_dollars_mult.current
+	end
 	if SMODS then
 		for _, area in ipairs(SMODS.get_card_areas("jokers")) do
 			if area and area.cards then
