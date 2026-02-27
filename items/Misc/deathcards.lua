@@ -374,13 +374,14 @@ G.FUNCS.crv_death_ability = function(e)
 				PDCARD[G.GAME.deathcard_seed_crv].given_name = ""
 				PDCARD[G.GAME.deathcard_seed_crv].incomplete = true
 
-				if string.find(card.config.center.key, "crv_deathcard") then
+				if string.find(card.config.center.key, "j_crv_deathcard") then
+					print("fuck?")
 					PDCARD[G.GAME.deathcard_seed_crv].function_from = PDCARD[RevosVault.find_deathcard_profile(card.config.center.key)].function_from
 				else
+					print("uh")
 					PDCARD[G.GAME.deathcard_seed_crv].function_from = card.config.center.key
 				end
 
-				PDCARD[G.GAME.deathcard_seed_crv].function_from = card.config.center.key
 				PDCARD[G.GAME.deathcard_seed_crv].name = card.config.center.name
 				PDCARD[G.GAME.deathcard_seed_crv].ability_table = copy_table(card.ability)
 
