@@ -151,9 +151,11 @@ RevosVault.Gem({
 			destroy_time_max = 5,
 		},
 	},
+	crv_credits = {
+		art = {"mr.cr33ps"}
+	},
 	loc_vars = function(self,info_queue,card)
 		local cae = card.ability.extra
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"mr.cr33ps"}}
 		return{vars={cae.destroy_time, cae.destroy_time_max}}
 	end,
 	calculate = function(self, card, context)
@@ -188,9 +190,11 @@ RevosVault.Gem({
 			destroy_time_max = 2,
 		},
 	},
+	crv_credits = {
+		art = {"mr.cr33ps"}
+	},
 	loc_vars = function(self,info_queue,card)
 		local cae = card.ability.extra
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"mr.cr33ps"}}
 		return{vars={cae.destroy_time, cae.destroy_time_max}}
 	end,
 	calculate = function(self, card, context)
@@ -236,9 +240,11 @@ RevosVault.Gem({
 			destroy_time_max = 1,
 		},
 	},
+	crv_credits = {
+		art = {"mr.cr33ps"}
+	},
 	loc_vars = function(self,info_queue,card)
 		local cae = card.ability.extra
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"mr.cr33ps"}}
 		return{vars={cae.destroy_time, cae.destroy_time_max}}
 	end,
 	calculate = function(self, card, context)
@@ -268,9 +274,11 @@ RevosVault.Gem({
 			destroy_time_max = 5,
 		},
 	},
+	crv_credits = {
+		art = {"mr.cr33ps"}
+	},
 	loc_vars = function(self,info_queue,card)
 		local cae = card.ability.extra
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"mr.cr33ps"}}
 		return{vars={cae.destroy_time, cae.destroy_time_max}}
 	end,
 	calculate = function(self, card, context)
@@ -305,9 +313,11 @@ RevosVault.Gem({
 			destroy_time_max = 1,
 		},
 	},
+	crv_credits = {
+		art = {"mr.cr33ps"}
+	},
 	loc_vars = function(self,info_queue,card)
 		local cae = card.ability.extra
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"mr.cr33ps"}}
 		return{vars={cae.destroy_time, cae.destroy_time_max}}
 	end,
 	calculate = function(self, card, context)
@@ -338,9 +348,11 @@ RevosVault.Gem({
             old_odds = 0
 		},
 	},
+	crv_credits = {
+		art = {"mr.cr33ps"}
+	},
 	loc_vars = function(self,info_queue,card)
 		local cae = card.ability.extra
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"mr.cr33ps"}}
 		return{vars={cae.destroy_time, cae.destroy_time_max, cae.old_odds}}
 	end,
     calculate = function(self, card, context)
@@ -370,10 +382,12 @@ RevosVault.Gem({
             old_odds = 0
 		},
 	},
+	crv_credits = {
+		art = {"mr.cr33ps"}
+	},
 	loc_vars = function(self,info_queue,card)
 		info_queue[#info_queue+1] = {set = "Other", key = "crv_fixed_chances"}
 		local cae = card.ability.extra
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"mr.cr33ps"}}
 		return{vars={cae.destroy_time, cae.destroy_time_max, cae.old_odds}}
 	end,
     calculate = function(self, card, context)
@@ -405,9 +419,11 @@ RevosVault.Gem({
 			destroy_time_max = 2,
 		},
 	},
+	crv_credits = {
+		art = {"mr.cr33ps"}
+	},
 	loc_vars = function(self,info_queue,card)
 		local cae = card.ability.extra
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"mr.cr33ps"}}
 		return{vars={cae.destroy_time, cae.destroy_time_max}}
 	end,
 	update = function(self, card, context) 

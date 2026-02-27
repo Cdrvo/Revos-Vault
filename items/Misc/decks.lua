@@ -56,7 +56,7 @@ SMODS.Back {
     },
     apply = function()
 
-        G.E_MANAGER:add_event(Event({
+            G.E_MANAGER:add_event(Event({
 
             func = function()
 

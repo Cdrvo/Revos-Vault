@@ -4656,6 +4656,11 @@ return {
 			crv_stable_patch = "Stable",
 			crv_purified_patch = "Purified",
 		},
+		v_dictionary = {
+			crv_art = {"Art: #1#"},
+			crv_code = {"Code: #1#"},
+			crv_idea = {"Idea: #1#"},
+		},
 		dictionary = {
 			crv_revosvault = "Revo's Vault",
 			k_crv_pbstg = "Printer Pack",

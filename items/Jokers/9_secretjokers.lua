@@ -94,8 +94,10 @@ SMODS.Joker({
 			save = true
 		},
 	},
+	crv_credits = {
+		art = {"Chainsawmert"}
+	},
 	loc_vars = function(self, info_queue, card)
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"Chainsawmert"}}
 		info_queue[1] = {set = "Other", key = "crv_incomplete_joker"}
 		return {
 			vars = { card.ability.extra.xmult *  RevosVault.stickercheck(G.jokers.cards, {"perishable"}) + 1, card.ability.extra.xmult },

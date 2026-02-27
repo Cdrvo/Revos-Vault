@@ -552,8 +552,10 @@ SMODS.Joker({
 			xmult = 3.3,
 		},
 	},
+	crv_credits = {
+		art = {"Chainsawmert"}
+	},
 	loc_vars = function(self, info_queue, card)
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"Chainsawmert"}}
 		return {
 			vars = { card.ability.extra.xmult },
 		}
@@ -1108,8 +1110,10 @@ SMODS.Joker({
 	config = {
 		extra = {},
 	},
+	crv_credits = {
+		art = {"mr.cr33ps"}
+	},
 	loc_vars = function(self, info_queue, card)
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"mr.cr33ps"}}
 		return {
 			vars = {},
 		}
@@ -1173,9 +1177,11 @@ SMODS.Joker({
 		x = 7,
 		y = 2,
 	},
+	crv_credits = {
+		art = {"Chainsawmert"}
+	},
 	cost = 7,
 	loc_vars = function(self, info_queue, card)
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"Chainsawmert"}}
 		return {
 			vars = { card.ability.extra.chips },
 		}
@@ -1829,8 +1835,10 @@ SMODS.Joker({
 			end
 		end
 	end,
+	crv_credits = {
+		art = {"Chainsawmert"}
+	},
 	loc_vars = function(self, info_queue, card)
-		info_queue[#info_queue + 1] = { set = "Other", key = "crv_art_credits", vars = { "Chainsawmert" } }
 		local area = self.area
 		if G.jokers and G.jokers.cards then
 			area = G.jokers.cards
@@ -2091,8 +2099,10 @@ SMODS.Joker({
 			stored = 0,
 		},
 	},
+	crv_credits = {
+		art = {"WombatCountry"}
+	},
 	loc_vars = function(self, info_queue, card)
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"WombatCountry"}}
 		return {
 			vars = { card.ability.extra.stored },
 		}
@@ -2149,8 +2159,10 @@ SMODS.Joker({
 			xmultg = 1.5,
 		},
 	},
+	crv_credits = {
+		art = {"mr.cr33ps"}
+	},
 	loc_vars = function(self, info_queue, card)
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"mr.cr33ps"}}
 		return {
 			vars = { card.ability.extra.xmult, card.ability.extra.xmultg },
 		}
@@ -2554,8 +2566,10 @@ SMODS.Joker({
 			odds = 4,
 		},
 	},
+	crv_credits = {
+		art = {"Crazy Dave"}
+	},
 	loc_vars = function(self, info_queue, card)
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"Crazy Dave"}}
 		local cae = card.ability.extra
 		local num, den = SMODS.get_probability_vars(card, 1, cae.odds,"j_thoose" )
 		return{
@@ -2596,8 +2610,10 @@ SMODS.Joker({
 			rep = 2,
 		},
 	},
+	crv_credits = {
+		art = {"Heaven"}
+	},
 	loc_vars = function(self, info_queue, card)
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"Heaven"}}
 		return {
 			vars = { card.ability.extra.rep },
 		}

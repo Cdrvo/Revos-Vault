@@ -944,8 +944,10 @@ SMODS.Joker({
 		y = 3,
 	},
 	cost = 6,
+	crv_credits = {
+		art = {"mr.cr33ps"}
+	},
 	loc_vars = function(self, info_queue, card)
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"mr.cr33ps"}}
 		info_queue[#info_queue + 1] = G.P_CENTERS.m_crv_mugged
 		return {
 			vars = {
@@ -1373,8 +1375,10 @@ SMODS.Joker({
 			setsuit = "Spades",
 		},
 	},
+	crv_credits = {
+		art = {"mr.cr33ps"}
+	},
 	loc_vars = function(self, info_queue, card)
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"mr.cr33ps"}}
 		return {
 			vars = { card.ability.extra.randomsuit, card.ability.extra.xmult, card.ability.extra.setsuit },
 		}
@@ -1473,8 +1477,10 @@ SMODS.Joker({
 	config = {
 		extra = {},
 	},
+	crv_credits = {
+		art = {"Chainsawmert"}
+	},
 	loc_vars = function(self,info_queue,card)
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"Chainsawmert"}}
 	end,
 	calculate = function(self, card, context)
 		if context.selling_self and not context.blueprint then
@@ -1508,8 +1514,10 @@ SMODS.Joker({
 			unshook = true,
 		},
 	},
+	crv_credits = {
+		art = {"Chainsawmert"}
+	},
 	loc_vars = function(self, info_queue, card)
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"Chainsawmert"}}
 		info_queue[#info_queue + 1] = { set = "Other", key = "crv_gold_rush_desc" }
 		info_queue[#info_queue + 1] = G.P_CENTERS.m_gold
 		return {
@@ -1673,8 +1681,10 @@ SMODS.Joker({
 			odds = 8,
 		},
 	},
+	crv_credits = {
+		art = {"Nyxel"}
+	},
 	loc_vars = function(self, info_queue, card)
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"Nyxel"}}
 		info_queue[#info_queue + 1] = { set = "Other", key = "crv_fixed_chances" }
 		return { vars = { card.ability.extra.odds } }
 	end,
@@ -2100,8 +2110,10 @@ SMODS.Joker({
 			plus = 1,
 		},
 	},
+	crv_credits = {
+		art = {"rat"}
+	},
 	loc_vars = function(self, info_queue, card)
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"rat"}}
 		local crv = card.ability.extra
 		return {
 			vars = { crv.plus },
@@ -2146,8 +2158,10 @@ SMODS.Joker({
 			uu = "Locked",
 		},
 	},
+	crv_credits = {
+		art = {"kusanehexaku, ice"}
+	},
 	loc_vars = function(self, info_queue, card)
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits_2", vars = {"kusanehexaku", "ice"}}
 		local crv = card.ability.extra
 		return {
 			vars = { crv.uu, crv.d1, crv.d2, crv.d3, crv.d4, crv.unlocked },
@@ -2228,8 +2242,10 @@ SMODS.Joker({
 			current_dept = 0,
 		},
 	},
+	crv_credits = {
+		art = {"kusanehexaku"}
+	},
 	loc_vars = function(self, info_queue, card)
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"kusanehexaku"}}
 		local crv = card.ability.extra
 		return {
 			vars = { crv.owe_limit, crv.owe, crv.current_dept },
@@ -2407,8 +2423,10 @@ SMODS.Joker({
 			invested = 0,
 		},
 	},
+	crv_credits = {
+		art = {"WombatCountry"}
+	},
 	loc_vars = function(self, info_queue, card)
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"WombatCountry"}}
 		local crv = card.ability.extra
 		return {
 			vars = { crv.card, crv.check, crv.timer, crv.invested },
@@ -2734,8 +2752,10 @@ SMODS.Joker({
 			stored = 0,
 		},
 	},
+	crv_credits = {
+		art = {"mr.cr33ps"}
+	},
 	loc_vars = function(self, info_queue, card)
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"mr.cr33ps"}}
 		info_queue[#info_queue + 1] = { key = "crv_radioactive", set = "Other" }
 		return {
 			vars = { card.ability.extra.gain, card.ability.extra.stored },
@@ -2805,8 +2825,10 @@ SMODS.Joker({
 	pools = {
 		Food = true,
 	},
+	crv_credits = {
+		art = {"Chainsawmert"}
+	},
 	loc_vars = function(self, info_queue, card)
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"Chainsawmert"}}
 		return {
 			vars = { card.ability.extra.mult, card.ability.extra.xmult },
 		}
@@ -2845,8 +2867,10 @@ SMODS.Joker({
 	pools = {
 		Food = true,
 	},
+	crv_credits = {
+		art = {"Chainsawmert"}
+	},
 	loc_vars = function(self, info_queue, card)
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"Chainsawmert"}}
 		return {
 			vars = { card.ability.extra.chips, card.ability.extra.xchips },
 		}
@@ -2930,8 +2954,10 @@ SMODS.Joker({
 	config = {
 		extra = {},
 	},
+	crv_credits = {
+		art = {"mr.cr33ps"}
+	},
 	loc_vars = function(self, info_queue, card)
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"mr.cr33ps"}}
 		return {
 			vars = {},
 		}
@@ -2992,8 +3018,11 @@ SMODS.Joker({
 			mult = 0,
 		},
 	},
+	crv_credits = {
+		art = {"mr.cr33ps"}
+	},
 	loc_vars = function(self, info_queue, card)
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"mr.cr33ps"}}
+
 		if G.GAME.consumeable_usage_total and G.GAME.consumeable_usage_total.spectral > 0 then
 			return {
 				vars = {
@@ -3337,8 +3366,11 @@ SMODS.Joker({
 			chipx = 3,
 		},
 	},
+	crv_credits = {
+		art = {"Heaven"}
+	},
 	loc_vars = function(self, info_queue, card)
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"Heaven"}}
+
 		local crv = card.ability.extra
 		return {
 			vars = { crv.chipx },
@@ -3378,8 +3410,10 @@ SMODS.Joker({
 	soul_pos = { x = 4, y = 13 },
 	discovered = true,
 	blueprint_compat = true,
+	crv_credits = {
+		art = {"Heaven"}
+	},
 	loc_vars = function(self, info_queue, card)
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"Heaven"}}
 	end,
 	add_to_deck = function(self, card, from_debuff)
 		G.GAME.glassodds = G.GAME.glassodds / 2
@@ -3854,8 +3888,10 @@ SMODS.Joker({
 			mult = (os.date("*t").day),
 		},
 	},
+	crv_credits = {
+		art = {"snayn3"}
+	},
 	loc_vars = function(self, info_queue, card)
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"snayn3"}}
 		local crv = card.ability.extra
 		return{vars={crv.mult}}
 	end,
