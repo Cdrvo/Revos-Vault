@@ -220,6 +220,7 @@ function RevosVault.get_deathcards()
 end
 
 function RevosVault.dcard_in_pool(dcard)
+	G.PROFILES[G.SETTINGS.profile].crv_deathcards = G.PROFILES[G.SETTINGS.profile].crv_deathcards or {}
 	for k, v in pairs(G.PROFILES[G.SETTINGS.profile].crv_deathcards) do
 		if dcard == v.occupied_card then
 			return true

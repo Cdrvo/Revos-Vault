@@ -72,7 +72,6 @@ payload = '''
     CRV_DEATHCARD = 998182635641,'''
 match_indent = true
 
-
 ## attention text removal
 
 [[patches]]
