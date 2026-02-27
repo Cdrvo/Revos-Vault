@@ -1,3 +1,10 @@
+SMODS.Atlas({
+	key = "sleeves",
+	path = "Cross-Mod/sleeves.png",
+	px = 73,
+	py = 95,
+})
+
 CardSleeves.Sleeve {
     key = "psleeve",
     atlas = "sleeves",

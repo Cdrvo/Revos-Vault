@@ -1,5 +1,36 @@
 return {
 		Menus = {
+		crv_deathcards_help = {
+            name = "{C:crv_deathcard}Deathcards",
+            text = {
+                {
+                    name = "Overview",
+                    text = {
+					{
+					  "{C:crv_deathcard}Deathcards{} are a {C:green}new{} kind",
+					  "of {C:attention}Joker{} that is made from your existing ones"
+					},
+					{
+					  "You will be able to {C:green}name{} your Joker and select it's",
+					  "{C:attention}Ability{}, {C:attention}Rarity{} and {C:attention}Edition"
+					},
+					{
+					  "Created {C:crv_deathcard}Deathcards{} are {C:green}saved{} to your profile",
+					  "and can appear for {C:attention}3{} runs.",
+					  "Card's remaining runs will be shown on it.",
+					},
+					{
+					  "{C:red}Keep in mind{} that this feature is still in {C:green}testing",
+					  "and can cause some unwanted issues"
+					},
+					{
+					  "Credits to {C:attention}LasagnaFelidae{} for providing",
+					  "the template art for Deathcards"
+					},
+                    }
+                },
+            },
+        },
 		crv_thevault = {
             name = "The Vault",
             text = {
@@ -2240,7 +2271,7 @@ return {
 			j_crv_asc = {
 				name = "Ascended One",
 				text = {
-					"Gains {C:mult}#1#{} Mult",
+					"Gains {C:mult}+#1#{} Mult",
 					"for each {C:attention}Spectral{} Card",
 					"used this run",
 					"{C:inactive}(Currently {C:mult}+#2#{C:inactive} Mult)",
@@ -4478,8 +4509,12 @@ return {
 						"appearing" },
 			},
 			v_crv_deathcard_making = {
-				name = "Deathcards",
-				text = { "After losing,","allows you to make","a {C:attention}custom{} card","from owned jokers.","{C:inactive}(Must have atleast 2 jokers)" },
+				name = "Jimbo's Photograph",
+				text = { "After losing,","allows you to create","a {C:crv_deathcard}Deathcard{}","{C:inactive}(Must have atleast 2 jokers)" },
+			},
+			v_crv_timer_up = {
+				name = "Timer Up",
+				text = { "Created {C:crv_deathcard}Deathcard{}", "lasts {C:attention}5{} rounds" },
 			},
 		},
 		Gem = {
@@ -4688,10 +4723,19 @@ return {
 			crv_enable_secret = "Enable Secret Jokers",
 			crv_enable_blinds = "Enable Blinds",
 			crv_enable_curses = "Enable Curses",
+
+
 			ph_active_gems = "Active Gems",
 			no_gems = "No active gems",
 			b_gems = "Gems",
 			b_gem = "Gem",
+
+			ph_available_deathcards = "Available Deathcards",
+			no_deathcards = "No Deathcards available",
+			b_deathcards = "Deathcards",
+			b_deathcard = "Deathcard",
+
+			
 			b_gem_act = "Activated!",
 			crv_enable_gems = "Enable Gems",
 			vars_not_active_yet = "Not Active Yet",

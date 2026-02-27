@@ -1,64 +1,49 @@
-SMODS.Sound({ key = "facmult", path = "facmult.ogg" })
+SMODS.Font({
+	key = "dcard_text",
+	path = "Feli5x8Mono-Regular.ttf",
+})
+SMODS.Font({
+	key = "dcard_num",
+	path = "Feli6x12Numbers-Regular.ttf",
+})
 
-if SMODS and SMODS.calculate_individual_effect then
-	local calcinvold = SMODS.calculate_individual_effect
-	function SMODS.calculate_individual_effect(effect, scored_card, key, amount, from_edition)
-		local ret = calcinvold(effect, scored_card, key, amount, from_edition)
-		if ret then
-			return ret
-		end
-
-
-		-- Factorial Mult! 
-
-		if
-			(key == "f_mult" or key == "F_mult" or key == "Factorial_mult" or key == "factorial_mult")
-			and amount ~= 0
-		then
-			if effect.card then
-				juice_card(effect.card)
-			end
-			mult = mod_chips(RevosVault.factorial(mult) * amount)
-			update_hand_text({ delay = 0 }, { chips = hand_chips, mult = mult })
-			card_eval_status_text(scored_card, "extra", nil, nil, nil, { message = "Mult! * " .. amount })
-			return true
-		end
-
-		-- Precentage Mult
-
-
-		if (key == "p_mult" or key == "P_mult" or key == "perc_mult" or key == "Perc_mult") and amount ~= 0 then
-			if effect.card then
-				juice_card(effect.card)
-			end
-			mult = mod_chips(mult + RevosVault.perc(mult,amount))
-			update_hand_text({ delay = 0 }, { chips = hand_chips, mult = mult })
-			card_eval_status_text(scored_card, "extra", nil, nil, nil, { message = "+%"..amount})
-			return true
-		end
-
-		-- Precentage Chips
-		
-		if (key == "p_chips") and amount ~= 0 then
-			if effect.card then
-				juice_card(effect.card)
-			end
-			hand_chips = mod_chips(mult + RevosVault.perc(hand_chips,amount))
-			update_hand_text({ delay = 0 }, { chips = hand_chips, mult = mult })
-			card_eval_status_text(scored_card, "extra", nil, nil, nil, { message = "+%"..amount})
-			return true
-		end
-		
-		-- Yes i don't need these
-
-
+SMODS.Sound ({
+	volume = 5,
+	key = "flicker_music",
+	path = "crv_flicker.ogg",
+	select_music_track = function(self)
+		return G.STATE == G.STATES.CRV_DEATHCARD
 	end
-	for _, v in ipairs({ "p_mult", "P_mult", "perc_mult", "Perc_mult", "f_mult", "F_mult", "Factorial_mult", "factorial_mult","p_chips"  }) do
-		table.insert(SMODS.calculation_keys, v)
+})
+
+SMODS.Sound ({
+	volume = 3,
+	key = "flicker_music",
+	path = "crv_flicker.ogg",
+	select_music_track = function(self)
+		return G.STATE == G.STATES.CRV_DEATHCARD
 	end
-end
+})
 
+SMODS.Sound ({
+	volume = 1,
+	key = "lights_on",
+	path = "crv_lights2.ogg",
+})
 
+SMODS.Sound ({
+	volume = 1,
+	key = "lights_off",
+	path = "crv_lights1.ogg",
+})
+
+SMODS.ScreenShader {
+    key = "pitchblack",
+    path = "pitchblack.fs",
+    should_apply = function()
+        return G.GAME.screen_off_crv == true
+    end
+}
 
 RevosVault.C = {
 	SUP = HEX("f7baff"),
@@ -145,12 +130,22 @@ SMODS.Gradient({
 	}
 })
 
+SMODS.Gradient({
+	key = "crv_deathcard",
+	colours = {
+		HEX("f0c590"),
+		HEX("ddb482"),
+	},
+	cycle = 5,
+})
+
 
 local loc_old = loc_colour
 function loc_colour(_c, _default)
 	if not G.ARGS.LOC_COLOURS then
 		loc_old()
 	end
+	local loc = G.ARGS.LOC_COLOURS
 	G.ARGS.LOC_COLOURS.crv_sup = RevosVault.C.SUP
 	G.ARGS.LOC_COLOURS.crv_continuity = RevosVault.C.Continuity
 	G.ARGS.LOC_COLOURS.crv_polychrome = SMODS.Gradients["crv_polychrome"]
@@ -159,6 +154,7 @@ function loc_colour(_c, _default)
 	G.ARGS.LOC_COLOURS.crv_temp = SMODS.Gradients["crv_temp"]
 	G.ARGS.LOC_COLOURS.crv_banana = SMODS.Gradients["crv_banana"]
 	G.ARGS.LOC_COLOURS.crv_mystery = RevosVault.C.Mystery
+	loc.crv_deathcard = SMODS.Gradients["crv_deathcard"]
 
 	return loc_old(_c, _default)
 end

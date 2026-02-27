@@ -4,18 +4,6 @@ dump_lua = true
 priority = 0
 
 # Gems Tab
-[[patches]]
-[patches.pattern]
-target = 'functions/UI_definitions.lua'
-pattern = "G.GAME.stake > 1 and {"
-position = "before"
-payload = '''
-        {
-            label = localize('b_gems'),
-            tab_definition_function = G.UIDEF.used_gems,
-        },
-'''
-match_indent = true
 
 [[patches]]
 [patches.pattern]
