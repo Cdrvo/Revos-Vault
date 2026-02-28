@@ -329,7 +329,7 @@ SMODS.Blind({
 	boss = {
 		min = 3,
 		max = 10,
-		showdown = true,
+		showdown = false,
 	},
 	config = {
 		current_suit = nil
