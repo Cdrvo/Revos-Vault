@@ -2554,3 +2554,10 @@ function RevosVault.get_unvaulted_vaultables()
 	end
 	return tab
 end
+
+function RevosVault.easy_overlay(pause, definition)
+  G.SETTINGS.paused = pause
+  G.FUNCS.overlay_menu{
+    definition = definition,
+  }
+end

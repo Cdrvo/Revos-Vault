@@ -31,6 +31,178 @@ local function should_restart()
 	SMODS.full_restart = 0
 end
 
+G.UIDEF.crv_joker_config = function()
+	local t = create_UIBox_generic_options({
+		back_func = "openModUI_RevosVault",
+		colour = RevosVault.ui_config.colour,
+		back_colour = RevosVault.ui_config.back_colour,
+		contents = {
+			{
+				n = G.UIT.R,
+				config = { align = "cm", r = 0.1, colour = G.C.BLACK },
+				nodes = {
+					{
+						n = G.UIT.C,
+						nodes = {
+							create_toggle({
+								label = localize("crv_enable_chaoscards"),
+								ref_table = RevosVault.config,
+								ref_value = "7_chaos_enabled",
+								--callback = should_restart,
+							}),
+							create_toggle({
+								label = localize("crv_enable_vaulteds"),
+								ref_table = RevosVault.config,
+								ref_value = "6_vault_enabled",
+								--callback = should_restart,
+							}),
+							create_toggle({
+								label = localize("crv_enable_secret"),
+								ref_table = RevosVault.config,
+								ref_value = "9_secretjokers_enabled",
+								--callback = should_restart,
+							}),
+							{
+								n = G.UIT.R,
+								config = { align = "cm", minh = 0.6 },
+								nodes = {
+									{
+										n = G.UIT.T,
+										config = { text = "Requires restart!", colour = G.C.RED, scale = 0.4 },
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+	})
+	return t
+end
+
+G.UIDEF.crv_mechanic_config = function()
+	local t = create_UIBox_generic_options({
+		back_func = "openModUI_RevosVault",
+		colour = RevosVault.ui_config.colour,
+		back_colour = RevosVault.ui_config.back_colour,
+		contents = {
+			{
+				n = G.UIT.R,
+				config = { align = "cm", r = 0.1, colour = G.C.BLACK },
+				nodes = {
+					{
+						n = G.UIT.C,
+						nodes = {
+							create_toggle({
+								label = localize("crv_enable_curses"),
+								ref_table = RevosVault.config,
+								ref_value = "8_curses_enabled",
+								--callback = should_restart,
+							}),
+							create_toggle({
+								label = localize("crv_enable_deathcards"),
+								ref_table = RevosVault.config,
+								ref_value = "deathcards_enabled",
+								--callback = should_restart,
+							}),
+							{
+								n = G.UIT.R,
+								config = { align = "cm", minh = 0.6 },
+								nodes = {
+									{
+										n = G.UIT.T,
+										config = { text = "Requires restart!", colour = G.C.RED, scale = 0.4 },
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+	})
+	return t
+end
+
+G.UIDEF.crv_other_config = function()
+	local t = create_UIBox_generic_options({
+		back_func = "openModUI_RevosVault",
+		colour = RevosVault.ui_config.colour,
+		back_colour = RevosVault.ui_config.back_colour,
+		contents = {
+			{
+				n = G.UIT.R,
+				config = { align = "cm", r = 0.1, colour = G.C.BLACK },
+				nodes = {
+					{
+						n = G.UIT.C,
+						nodes = {
+							create_toggle({
+								label = localize("crv_enable_blinds"),
+								ref_table = RevosVault.config,
+								ref_value = "blinds_enabled",
+								--callback = should_restart,
+							}),
+
+							create_toggle({
+								label = localize("crv_enable_superior"),
+								ref_table = RevosVault.config,
+								ref_value = "superior_enabled",
+								--callback = should_restart,
+							}),
+							create_toggle({
+								label = localize("crv_enable_wip") .. "*",
+								ref_table = RevosVault.config,
+								ref_value = "experimental_enabled",
+								--callback = should_restart,
+							}),
+
+							create_toggle({
+								label = localize("crv_enable_gems"),
+								ref_table = RevosVault.config,
+								ref_value = "gems_enabled",
+								--callback = should_restart,
+							}),
+							{
+								n = G.UIT.R,
+								config = { align = "cm", minh = 0.6 },
+								nodes = {
+									{
+										n = G.UIT.T,
+										config = { text = "Requires restart!", colour = G.C.RED, scale = 0.4 },
+									},
+								},
+							},
+							{
+								n = G.UIT.R,
+								config = { align = "cm", minh = 0.6 },
+								nodes = {
+									{
+										n = G.UIT.T,
+										config = { text = "*Not recommended!", colour = G.C.WHITE, scale = 0.4 },
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+	})
+	return t
+end
+
+G.FUNCS.crv_open_jconfig = function()
+	RevosVault.easy_overlay(false, G.UIDEF.crv_joker_config())
+end
+G.FUNCS.crv_open_mconfig = function()
+	RevosVault.easy_overlay(false, G.UIDEF.crv_mechanic_config())
+end
+G.FUNCS.crv_open_oconfig = function()
+	RevosVault.easy_overlay(false, G.UIDEF.crv_other_config())
+end
+
 RevosVault.config_tab = function()
 	return {
 		n = G.UIT.ROOT,
@@ -42,75 +214,32 @@ RevosVault.config_tab = function()
 					{
 						n = G.UIT.C,
 						nodes = {
-							create_toggle({
-								label = localize("crv_enable_blinds"),
-								ref_table = RevosVault.config,
-								ref_value = "blinds_enabled",
-								callback = should_restart,
+
+							UIBox_button({
+								colour = RevosVault.ui_config.tab_button_colour,
+								button = "crv_open_jconfig",
+								label = { "Jokers" },
+								minw = 4.5,
+								focus_args = { snap_to = true },
 							}),
-							create_toggle({
-								label = localize("crv_enable_chaoscards"),
-								ref_table = RevosVault.config,
-								ref_value = "7_chaos_enabled",
-								callback = should_restart,
+							{n = G.UIT.R, config = {colour = G.C.CLEAR, scale = 0.1, padding = 0.1 },},
+							UIBox_button({
+								colour = RevosVault.ui_config.tab_button_colour,
+								button = "crv_open_mconfig",
+								label = { "Mechanics" },
+								minw = 4.5,
+								focus_args = { snap_to = true },
 							}),
-							create_toggle({
-								label = localize("crv_enable_vaulteds"),
-								ref_table = RevosVault.config,
-								ref_value = "6_vault_enabled",
-								callback = should_restart,
-							}),
-							create_toggle({
-								label = localize("crv_enable_superior"),
-								ref_table = RevosVault.config,
-								ref_value = "superior_enabled",
-								callback = should_restart,
-							}),
-						},
-					},
-					{
-						n = G.UIT.C,
-						nodes = {
-							create_toggle({
-								label = localize("crv_enable_wip") .. "*",
-								ref_table = RevosVault.config,
-								ref_value = "experimental_enabled",
-								callback = should_restart,
-							}),
-							create_toggle({
-								label = localize("crv_enable_secret"),
-								ref_table = RevosVault.config,
-								ref_value = "9_secretjokers_enabled",
-								callback = should_restart,
-							}),
-							create_toggle({
-								label = localize("crv_enable_gems"),
-								ref_table = RevosVault.config,
-								ref_value = "gems_enabled",
-								callback = should_restart,
-							}),
-							create_toggle({
-								label = localize("crv_enable_curses"),
-								ref_table = RevosVault.config,
-								ref_value = "8_curses_enabled",
-								callback = should_restart,
+							{n = G.UIT.R, config = {colour = G.C.CLEAR, scale = 0.1, padding = 0.1 },},
+							UIBox_button({
+								colour = RevosVault.ui_config.tab_button_colour,
+								button = "crv_open_oconfig",
+								label = { "Other" },
+								minw = 4.5,
+								focus_args = { snap_to = true },
 							}),
 						},
 					},
-				},
-			},
-			{
-				n = G.UIT.R,
-				config = { align = "cm", minh = 0.6 },
-				nodes = {
-					{ n = G.UIT.T, config = { text = "Requires restart!", colour = G.C.RED, scale = 0.4 } },
-				},
-			},
-			{
-				n = G.UIT.R,
-				config = { align = "cm", minh = 0.6 },
-				nodes = {
-					{ n = G.UIT.T, config = { text = "*" .. "Not Recommended!", colour = G.C.WHITE, scale = 0.4 } }
 				},
 			},
 		},
