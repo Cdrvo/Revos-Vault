@@ -385,7 +385,7 @@ SMODS.Atlas({
 	key = "gemss",
 	path = "gems.png",
 	px = 50,
-	py = 50,
+	py = 52,
 })
 
 SMODS.Atlas({

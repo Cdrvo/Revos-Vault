@@ -268,7 +268,7 @@ end
 
 --Adds Gross Printer to the main menu. Code from Cryptid
 
-local oldfunc = Game.main_menu --ily cryptid x2
+--[[local oldfunc = Game.main_menu --ily cryptid x2
 Game.main_menu = function(change_context)
 	local ret = oldfunc(change_context)
 
@@ -291,6 +291,14 @@ Game.main_menu = function(change_context)
 	newcard.no_ui = true
 	newcard.states.visible = true
 	return ret
+end]]
+
+SMODS.current_mod.menu_cards = function()
+	return {
+		{key = 'j_crv_printer'}, 
+		{key = 'j_crv_grossprinter'}, 
+		remove_original = true
+	}
 end
 
 SMODS.current_mod.reset_game_globals = function(run_start)

@@ -4584,6 +4584,15 @@ return {
 					"for {C:attention}#2#{C:inactive} (#1#){} rounds",
 				},
 			},
+			gem_crv_lapislazuli = {
+				name = "Lapis Lazuli",
+				text = {
+					"Next {C:attention}#2#{C:inactive} (#1#){} {C:green}activated{} gems",
+					"lasts for {C:attention}+#3#{}",
+					"extra rounds",
+					-- "{s:0.8}Lapis Lazuli excluded"
+				},
+			},
 		},
 		BakeryCharm = {
 			BakeryCharm_crv_prcharm = {
