@@ -687,9 +687,22 @@ function Game:start_run(args)
 
 		if PDCARD then
 			for k, v in pairs(PDCARD) do
+
+				if not PDCARD[k].given_name then PDCARD[k].given_name = "ERROR" end
+
+				local NAME = PDCARD[k].given_name
 				
+				if PDCARD[k].mod ~= nil then
+					print(PDCARD[k].mod)
+				end
+
 				if PDCARD[k].incomplete then PDCARD[k] = nil G:save_settings() return end
-				if PDCARD[k].mod and SMODS.Mods and not SMODS.Mods[PDCARD[k].mod.id].can_load then PDCARD[k] = nil G:save_settings() sendWarnMessage("Required mod's for " .. PDCARD[k].given_name .. " doesn't exist. Removing it from profile", "RevosVault")return end -- make this save instead of perma removal
+				if PDCARD[k].mod 
+				and SMODS.Mods and 
+				SMODS.Mods[PDCARD[k].mod]
+				 and not SMODS.Mods[PDCARD[k].mod].can_load
+				then PDCARD[k] = nil G:save_settings() 
+				sendWarnMessage("Required mod's for " .. (NAME or "ERROR") .. " doesn't exist. Removing it from profile", "RevosVault") return end -- make this save instead of perma removal
 
 				local card = G.P_CENTERS[PDCARD[k].occupied_card]
 				local fcard = G.P_CENTERS[PDCARD[k].function_from]
