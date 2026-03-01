@@ -135,7 +135,7 @@ SMODS.Consumable({
 })
 
 SMODS.Consumable({
-	key = "suppriestess",
+	key = "suphigh_priestess",
 	set = "Superior",
 	atlas = "Superior",
 	hidden = true,

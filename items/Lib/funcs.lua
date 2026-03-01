@@ -2107,7 +2107,7 @@ function Card:has_potential()
 		local mod_prefix = G.P_CENTERS[v].mod.prefix
 		local _string = string.gsub(v, "sup", "")
 		_string = string.gsub(_string, mod_prefix .. "_", "")
-		_string = string.gsub(_string, "c_", "")
+		--_string = string.gsub(_string, "c_", "")
 
 		if string.find(self.config.center.key, _string) then
 			return true
@@ -2128,7 +2128,7 @@ function RevosVault.unleash_potential(card)
 		local mod_prefix = G.P_CENTERS[v].mod.prefix
 		local _string = string.gsub(v, "sup", "")
 		_string = string.gsub(_string, mod_prefix .. "_", "")
-		_string = string.gsub(_string, "c_", "")
+		--_string = string.gsub(_string, "c_", "")
 
 		if string.find(card.config.center.key, _string) then
 			card:juice_up()
