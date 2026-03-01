@@ -10,11 +10,11 @@ target = 'functions/UI_definitions.lua'
 pattern = "G.GAME.stake > 1 and {"
 position = "before"
 payload = '''
-        {
+        RevoConfig and RevoConfig["deathcards_enabled"] and {
             label = localize('b_deathcards'),
             tab_definition_function = G.UIDEF.available_deathcards_crv,
         },
-        RevoConfig and RevoConfig["deathcards_enabled"] and {
+        {
             label = localize('b_gems'),
             tab_definition_function = G.UIDEF.used_gems,
         },
