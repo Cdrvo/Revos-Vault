@@ -689,7 +689,7 @@ function Game:start_run(args)
 			for k, v in pairs(PDCARD) do
 				
 				if PDCARD[k].incomplete then PDCARD[k] = nil G:save_settings() return end
-				if PDCARD[k].mod and SMODS.Mods and not SMODS.Mods[PDCARD[k].mod].can_load then PDCARD[k] = nil G:save_settings() sendWarnMessage("Required mod's for " .. PDCARD[k].given_name .. " doesn't exist. Removing it from profile", "RevosVault")return end -- make this save instead of perma removal
+				if PDCARD[k].mod and SMODS.Mods and not SMODS.Mods[PDCARD[k].mod.id].can_load then PDCARD[k] = nil G:save_settings() sendWarnMessage("Required mod's for " .. PDCARD[k].given_name .. " doesn't exist. Removing it from profile", "RevosVault")return end -- make this save instead of perma removal
 
 				local card = G.P_CENTERS[PDCARD[k].occupied_card]
 				local fcard = G.P_CENTERS[PDCARD[k].function_from]
