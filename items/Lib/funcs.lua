@@ -915,10 +915,13 @@ function RevosVault.modify_rarity(card, by, ext, no_set_cost, ret) -- idk what i
 	end
 end
 
-function RevosVault.printer_apply(enhancement, upgraded_enhancement, edition, area, odds)
+function RevosVault.printer_apply(enhancement, upgraded_enhancement, edition, area, odds, secret_enhancement, odds2)
 	if not odds then
 		odds = 4
 	end --Default odds
+	if not odds2 then
+		odds2 = 16
+	end
 	if not area then
 		area = G.hand
 	end --Default area
@@ -940,18 +943,23 @@ function RevosVault.printer_apply(enhancement, upgraded_enhancement, edition, ar
 	end
 	if not edition then
 		if #emcards > 0 then
-			if pseudorandom("enh_printers") < G.GAME.probabilities.normal / odds then
-				if upgraded_enhancement then
-					card:set_ability(upgraded_enhancement)
-					return upgraded_enhancement
-				else
-					card:set_ability(enhancement)
-					return enhancement
-				end
+			if pseudorandom("enh_printers") < G.GAME.probabilities.normal / odds2 and secret_enhancement then
+				card:set_ability(secret_enhancement)
+				return secret_enhancement
 			else
-				if enhancement then
-					card:set_ability(enhancement)
-					return enhancement
+				if pseudorandom("enh_printers") < G.GAME.probabilities.normal / odds then
+					if upgraded_enhancement then
+						card:set_ability(upgraded_enhancement)
+						return upgraded_enhancement
+					else
+						card:set_ability(enhancement)
+						return enhancement
+					end
+				else
+					if enhancement then
+						card:set_ability(enhancement)
+						return enhancement
+					end
 				end
 			end
 		end
@@ -2560,4 +2568,26 @@ function RevosVault.easy_overlay(pause, definition)
   G.FUNCS.overlay_menu{
     definition = definition,
   }
+end
+
+function RevosVault.reset_whiteboard()
+    local ancient_suits = {}
+    for k, v in pairs(SMODS.Suits) do
+        if k ~= G.GAME.current_round.whiteboard_suit then ancient_suits[#ancient_suits + 1] = k end
+    end
+    local ancient_card = pseudorandom_element(ancient_suits, pseudoseed('anc'..G.GAME.round_resets.ante))
+    G.GAME.current_round.whiteboard_suit = ancient_card
+end
+
+function RevosVault.very_safe(var, var2)
+	if var2 then
+		if G and G.GAME and G.GAME[var] and G.GAME[var][var2] then
+			return true
+		end
+	else
+		if G and G.GAME and G.GAME[var] then
+			return true
+		end
+	end
+	return false
 end

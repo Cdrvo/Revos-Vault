@@ -10,7 +10,7 @@ for i = 1, 10 do
 		},
 		pools = {
 			["Inscryption"] = true,
-			["Beast"] = false,
+			["Beast"] = true,
 			["Human"] = true, 
 			["Deathcard"] = true
 		},

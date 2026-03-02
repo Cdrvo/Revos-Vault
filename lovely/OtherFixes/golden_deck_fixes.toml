@@ -47,5 +47,10 @@ if G.GAME.selected_back and G.GAME.selected_back.effect.center.crv_apply and not
     G.GAME.applied_crv = true
     G.GAME.selected_back.effect.center:crv_apply()
 end
+-- Sleeve
+if G.GAME.selected_sleeve and G.P_CENTERS[G.GAME.selected_sleeve] and G.P_CENTERS[G.GAME.selected_sleeve].crv_apply and not G.GAME.applied_crv_sleeve then
+    G.GAME.applied_crv_sleeve = true
+    G.P_CENTERS[G.GAME.selected_sleeve]:crv_apply()
+end
 '''
 match_indent = true

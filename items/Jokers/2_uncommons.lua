@@ -1355,7 +1355,7 @@ SMODS.Joker({
 	end,
 })
 
-local suits = { 1, 2, 3, 4 }
+local suits = { 1, 2, 3, 4 } -- fuck this (again)
 SMODS.Joker({
 	key = "smbj",
 	atlas = "Jokers2",
@@ -1371,8 +1371,8 @@ SMODS.Joker({
 	config = {
 		extra = {
 			xmult = 3,
-			randomsuit = 2,
-			setsuit = "Spades",
+			randomsuit = "Spades",
+			-- setsuit = ((RevosVault.very_safe("current_round") and G.GAME.current_round.whiteboard_suit) or "Spades"),
 		},
 	},
 	crv_credits = {
@@ -1380,82 +1380,24 @@ SMODS.Joker({
 	},
 	loc_vars = function(self, info_queue, card)
 		return {
-			vars = { card.ability.extra.randomsuit, card.ability.extra.xmult, card.ability.extra.setsuit },
+			vars = { card.ability.extra.randomsuit, card.ability.extra.xmult, ((RevosVault.very_safe("current_round") and G.GAME.current_round.whiteboard_suit) or "Spades"), colours = {G.C.SUITS[(RevosVault.very_safe("current_round") and G.GAME.current_round.whiteboard_suit) or "IMPORTANT"]} },
 		}
 	end,
 
 	calculate = function(self, card, context)
-		if context.end_of_round and not context.blueprint then
-			card.ability.extra.randomsuit = (pseudorandom_element(suits, pseudoseed("ptm")))
-			if card.ability.extra.randomsuit == 1 then
-				card.ability.extra.setsuit = "Clubs"
-			elseif card.ability.extra.randomsuit == 2 then
-				card.ability.extra.setsuit = "Spades"
-			elseif card.ability.extra.randomsuit == 3 then
-				card.ability.extra.setsuit = "Diamonds"
-			elseif card.ability.extra.randomsuit == 4 then
-				card.ability.extra.setsuit = "Hearts"
-			end
-		end
-		-- all cards calc
+		local cae = card.ability.extra
 		if context.joker_main then
-			local all_cards = 0
-			for k, v in ipairs(G.hand.cards) do
-				all_cards = all_cards + 1
-				card.ability.extra.allcards = all_cards
+			cae.randomsuit = G.GAME.current_round.whiteboard_suit or "Spades"
+			local notrig = false
+			for k, v in pairs(G.hand.cards) do
+				if not v:is_suit(cae.randomsuit, true) then
+					notrig = true
+				end
 			end
-		end
 
-		-- checks for clubs
-		if context.joker_main and card.ability.extra.randomsuit == 1 then
-			local blackc_suits = 0
-			for k, v in ipairs(G.hand.cards) do
-				if v:is_suit("Clubs", nil, true) then
-					blackc_suits = blackc_suits + 1
-				end
-			end
-			if blackc_suits == card.ability.extra.allcards then
-				return {
-					x_mult = card.ability.extra.xmult,
-				}
-			end
-			-- checks for spades
-		elseif context.joker_main and card.ability.extra.randomsuit == 2 then
-			local blacks_suits = 0
-			for k, v in ipairs(G.hand.cards) do
-				if v:is_suit("Spades", nil, true) then
-					blacks_suits = blacks_suits + 1
-				end
-			end
-			if blacks_suits == card.ability.extra.allcards then
-				return {
-					x_mult = card.ability.extra.xmult,
-				}
-			end
-			-- checks for diamonds
-		elseif context.joker_main and card.ability.extra.randomsuit == 3 then
-			local redd_suits = 0
-			for k, v in ipairs(G.hand.cards) do
-				if v:is_suit("Diamonds", nil, true) then
-					redd_suits = redd_suits + 1
-				end
-			end
-			if redd_suits == card.ability.extra.allcards then
-				return {
-					x_mult = card.ability.extra.xmult,
-				}
-			end
-			-- check for hearts
-		elseif context.joker_main and card.ability.extra.randomsuit == 4 then
-			local redh_suits = 0
-			for k, v in ipairs(G.hand.cards) do
-				if v:is_suit("Hearts", nil, true) then
-					redh_suits = redh_suits + 1
-				end
-			end
-			if redh_suits == card.ability.extra.allcards then
-				return {
-					x_mult = card.ability.extra.xmult,
+			if not notrig then
+				return{
+					xmult = cae.xmult
 				}
 			end
 		end

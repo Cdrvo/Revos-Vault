@@ -389,6 +389,18 @@ return {
 				}
 			},
 
+			sleeve_crv_goldensleeve = {
+				name = "Golden Sleeve",
+				text = { "Total score is now","{C:red}Multiplied{} by current {C:money}Dollars{}" },
+			},
+			sleeve_crv_goldensleeve_alt = {
+				name = "Golden Sleeve",
+				text = {
+					"Starting {C:money}${}",
+					"is doubled"
+				}
+			},
+
 
 
 			-- Old
@@ -1331,7 +1343,7 @@ return {
 				text = {
 					"{X:red,C:white} X#2# {} Mult if all",
 					"cards held in hand are",
-					"{C:attention}#3#{}",
+					"{V:1}#3#{}",
 					"{s:0.8}suit changes at end of round",
 				},
 			},
@@ -3089,6 +3101,16 @@ return {
 					"{C:inactive}(Must have room)",
 				}
 			},
+			-- Feli's Jokeria
+			j_crv_peltprinter = {
+				name = "Pelt Printer",
+				text = {
+					"When first hand is drawn,",
+					"Turns a random card in hand to",
+					"{C:attention}Bunny Pelt{} or {C:attention}Wolf Pelt",
+					"{C:green}#1# in #2#{} Chance for it to be a {C:money}Gold Pelt{}",
+				},
+			},
 			--ends here
 		},
 		Blessing = {
@@ -3984,6 +4006,13 @@ return {
 					"until the end of the round",
 				},
 			},
+			-- Hyperfixation (first ever crosmmod superior :fire::fire:)
+			c_crv_suphpfx_iji_deceit = {
+				name = "Superior Deceit",
+				text = {
+					"The selected {C:attention}Joker", "becomes one with the {C:hpfx_IjiGray,E:1}Ijiraq"
+				}
+			}
 		},
 
 		-- MF colour
