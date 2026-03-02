@@ -335,9 +335,9 @@ SMODS.Joker({
 			vars = { card.ability.extra.mult, card.ability.extra.mult_r },
 		}
 	end,
-	crv_credits = {
+--[[	crv_credits = {
 		art = {"Nyxel"}
-	},
+	},]]
 	calculate = function(self, card, context)
 		if context.joker_main then
 			return {
