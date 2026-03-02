@@ -196,13 +196,6 @@ SMODS.Atlas({ -- MARKED
 })]]
 
 SMODS.Atlas({
-	key = "sleeves",
-	path = "Cross-Mod/sleeves.png",
-	px = 73,
-	py = 95,
-})
-
-SMODS.Atlas({
 	key = "stakes",
 	path = "stakes.png",
 	px = 29,
@@ -392,7 +385,7 @@ SMODS.Atlas({
 	key = "gemss",
 	path = "gems.png",
 	px = 50,
-	py = 50,
+	py = 52,
 })
 
 SMODS.Atlas({
@@ -491,4 +484,11 @@ SMODS.Atlas({
 	path = "Cross-Mod/giga.png",
 	px = 71,
 	py = 95,
+})
+
+SMODS.Atlas({
+	key = "dcards",
+	path = "deathcards.png",
+	px = 71,
+	py = 95
 })

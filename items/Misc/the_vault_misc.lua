@@ -257,7 +257,10 @@ G.FUNCS.crv_vault_vault = function(e)
         G.GAME.souls = G.GAME.souls - TheVault.vault_cost
 
         local vault_ver = RevosVault.vaultify(G.vault_card.cards[1], true, true)
-		RevosVault.set_ability({card = G.vault_card.cards[1], sound = "gong", effect_table = {center = vault_ver}})
+		RevosVault.set_ability({card = G.vault_card.cards[1], sound = "gong", effect_table = {center = vault_ver}, second_func = function()
+			TheVault.vault_lock = false
+			G.CONTROLLER.locks["vault_lock"] = false
+		end})
         play_sound("coin1")
     else
 		G.E_MANAGER:add_event(Event({
@@ -274,17 +277,6 @@ G.FUNCS.crv_vault_vault = function(e)
 
         RevosVault.replacecards(G.vault_card.cards, nil, true, true)
     end
-
-	    G.E_MANAGER:add_event(Event({
-			trigger = "after",
-			delay = 0,
-            func = function()
-				TheVault.vault_lock = false
-				G.CONTROLLER.locks["vault_lock"] = false
-                save_run()
-                return true
-            end,
-        }))
 end
 
 G.FUNCS.crv_vault_enhance_can = function(e)
@@ -384,19 +376,12 @@ G.FUNCS.crv_vault_upgrade = function(e)
 	G.GAME.souls = G.GAME.souls - TheVault.upgrade_cost
 
 	local new_key = RevosVault.modify_rarity(G.vault_card.cards[1], 1, nil, nil, true)
-	RevosVault.set_ability({card = G.vault_card.cards[1], sound = nil, effect_table = {center = new_key}})
-	play_sound("coin1")
-
-	G.E_MANAGER:add_event(Event({
-		trigger = "after",
-		delay = 0,
-		func = function()
+	RevosVault.set_ability({card = G.vault_card.cards[1], sound = nil, effect_table = {center = new_key}, second_func = function()
 			TheVault.vault_lock = false
 			G.CONTROLLER.locks["vault_lock"] = false
 			save_run()
-			return true
-		end,
-	}))
+		end})
+	play_sound("coin1")
 end
 
 G.FUNCS.crv_vault_harvest_can = function(e)
@@ -493,4 +478,89 @@ function RevosVault.resetv()
 			definition = G.UIDEF.vault(),
 			config = { align = "tmi", offset = { x = 0, y = G.ROOM.T.y + 11 }, major = G.hand, bond = "Weak" },
 		})
+end
+
+G.FUNCS.get_vaultable_list = function(e)
+	G.FUNCS.overlay_menu({
+		definition = G.UIDEF.vaultable_jokers(),
+	})
+end
+
+G.UIDEF.vaultable_jokers = function(e)
+
+  local deck_tables = {}
+  local jokas = {}
+
+  for k, v in pairs(RevosVault.get_unvaulted_vaultables()) do
+	jokas[#jokas+1] = G.P_CENTERS[v]
+  end
+
+  G.your_collection = {}
+  for j = 1, 3 do
+    G.your_collection[j] = CardArea(
+      G.ROOM.T.x + 0.2*G.ROOM.T.w/2,G.ROOM.T.h,
+      5*G.CARD_W,
+      0.95*G.CARD_H, 
+      {card_limit = 5, type = 'title', highlight_limit = 0, collection = true})
+    table.insert(deck_tables, 
+    {n=G.UIT.R, config={align = "cm", padding = 0.07, no_fill = true}, nodes={
+      {n=G.UIT.O, config={object = G.your_collection[j]}}
+    }}
+    )
+  end
+
+  local joker_options = {}
+  for i = 1, math.ceil(#jokas/(5*#G.your_collection)) do
+    table.insert(joker_options, localize('k_page')..' '..tostring(i)..'/'..tostring(math.ceil(#jokas/(5*#G.your_collection))))
+  end
+
+  for i = 1, 5 do
+    for j = 1, #G.your_collection do
+      local center = jokas[i+(j-1)*5]
+      local card = Card(G.your_collection[j].T.x + G.your_collection[j].T.w/2, G.your_collection[j].T.y, G.CARD_W, G.CARD_H, nil, center)
+	  if RevosVault.negative_pdeck then
+		-- yes
+	  end
+      G.your_collection[j]:emplace(card)
+    end
+  end
+
+  INIT_COLLECTION_CARD_ALERTS()
+  
+  local t =  create_UIBox_generic_options({ back_func = 'leave_deck_menu', contents = {
+        {n=G.UIT.R, config={align = "cm", r = 0.1, colour = G.C.BLACK, emboss = 0.05}, nodes=deck_tables}, 
+        {n=G.UIT.R, config={align = "cm"}, nodes={
+          create_option_cycle({options = joker_options, w = 4.5, cycle_shoulders = true, opt_callback = 'your_collecion_vaultable_list', current_option = 1, colour = G.C.RED, no_pips = true, focus_args = {snap_to = true, nav = 'wide'}})
+        }},
+    }})
+  return t
+end
+
+G.FUNCS.your_collecion_vaultable_list = function(args)
+  local jokas = {}
+
+  for k, v in pairs(RevosVault.get_unvaulted_vaultables()) do
+	jokas[#jokas+1] = G.P_CENTERS[v]
+  end
+
+
+
+  if not args or not args.cycle_config then return end
+  for j = 1, #G.your_collection do
+    for i = #G.your_collection[j].cards,1, -1 do
+      local c = G.your_collection[j]:remove_card(G.your_collection[j].cards[i])
+      c:remove()
+      c = nil
+    end
+  end
+  for i = 1, 5 do
+    for j = 1, #G.your_collection do
+      local center = jokas[i+(j-1)*5 + (5*#G.your_collection*(args.cycle_config.current_option - 1))]
+      if not center then break end
+      local card = Card(G.your_collection[j].T.x + G.your_collection[j].T.w/2, G.your_collection[j].T.y, G.CARD_W, G.CARD_H, G.P_CARDS.empty, center)
+      
+      G.your_collection[j]:emplace(card)
+
+    end
+  end
 end

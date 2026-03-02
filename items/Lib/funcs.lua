@@ -1,4 +1,5 @@
 RevosFunctions = {} -- mostly unused
+RevosVault.GUI = RevosVault.GUI or {} -- mostly unused
 
 function RevosVault.check_enhancement(area, enhancement)
 	local blss = 0
@@ -915,10 +916,13 @@ function RevosVault.modify_rarity(card, by, ext, no_set_cost, ret) -- idk what i
 	end
 end
 
-function RevosVault.printer_apply(enhancement, upgraded_enhancement, edition, area, odds)
+function RevosVault.printer_apply(enhancement, upgraded_enhancement, edition, area, odds, secret_enhancement, odds2)
 	if not odds then
 		odds = 4
 	end --Default odds
+	if not odds2 then
+		odds2 = 16
+	end
 	if not area then
 		area = G.hand
 	end --Default area
@@ -940,18 +944,23 @@ function RevosVault.printer_apply(enhancement, upgraded_enhancement, edition, ar
 	end
 	if not edition then
 		if #emcards > 0 then
-			if pseudorandom("enh_printers") < G.GAME.probabilities.normal / odds then
-				if upgraded_enhancement then
-					card:set_ability(upgraded_enhancement)
-					return upgraded_enhancement
-				else
-					card:set_ability(enhancement)
-					return enhancement
-				end
+			if pseudorandom("enh_printers") < G.GAME.probabilities.normal / odds2 and secret_enhancement then
+				card:set_ability(secret_enhancement)
+				return secret_enhancement
 			else
-				if enhancement then
-					card:set_ability(enhancement)
-					return enhancement
+				if pseudorandom("enh_printers") < G.GAME.probabilities.normal / odds then
+					if upgraded_enhancement then
+						card:set_ability(upgraded_enhancement)
+						return upgraded_enhancement
+					else
+						card:set_ability(enhancement)
+						return enhancement
+					end
+				else
+					if enhancement then
+						card:set_ability(enhancement)
+						return enhancement
+					end
 				end
 			end
 		end
@@ -2107,7 +2116,7 @@ function Card:has_potential()
 		local mod_prefix = G.P_CENTERS[v].mod.prefix
 		local _string = string.gsub(v, "sup", "")
 		_string = string.gsub(_string, mod_prefix .. "_", "")
-		_string = string.gsub(_string, "c_", "")
+		--_string = string.gsub(_string, "c_", "")
 
 		if string.find(self.config.center.key, _string) then
 			return true
@@ -2128,7 +2137,7 @@ function RevosVault.unleash_potential(card)
 		local mod_prefix = G.P_CENTERS[v].mod.prefix
 		local _string = string.gsub(v, "sup", "")
 		_string = string.gsub(_string, mod_prefix .. "_", "")
-		_string = string.gsub(_string, "c_", "")
+		--_string = string.gsub(_string, "c_", "")
 
 		if string.find(card.config.center.key, _string) then
 			card:juice_up()
@@ -2521,4 +2530,74 @@ function RevosVault.get_suits(area)
 	end
 
 	return suits
+end
+
+function RevosVault.get_gem_count()
+	local a = 0
+	for k, v in pairs(G.P_CENTER_POOLS.Gem) do
+		if v.discovered and not v.no_collection then
+			a = a + 1
+		end
+	end
+	return a
+end
+
+function RevosVault.get_total_gems() 
+	local a = 0
+	for k, v in pairs(G.P_CENTER_POOLS.Gem) do
+		if not v.no_collection then
+			a = a + 1
+		end
+	end
+	return a
+end
+
+function RevosVault.get_unvaulted_vaultables()
+	local tab = {}
+	for k, v in pairs(G.P_CENTER_POOLS.Joker) do
+		for kk, vv in pairs(G.P_JOKER_RARITY_POOLS.crv_va) do
+			if v.key == vv.from then
+				tab[#tab+1] = v.key
+			end
+		end
+	end
+	return tab
+end
+
+function RevosVault.easy_overlay(pause, definition)
+  G.SETTINGS.paused = pause
+  G.FUNCS.overlay_menu{
+    definition = definition,
+  }
+end
+
+function RevosVault.reset_whiteboard()
+    local ancient_suits = {}
+    for k, v in pairs(SMODS.Suits) do
+        if k ~= G.GAME.current_round.whiteboard_suit then ancient_suits[#ancient_suits + 1] = k end
+    end
+    local ancient_card = pseudorandom_element(ancient_suits, pseudoseed('anc'..G.GAME.round_resets.ante))
+    G.GAME.current_round.whiteboard_suit = ancient_card
+end
+
+function RevosVault.very_safe(var, var2)
+	if var2 then
+		if G and G.GAME and G.GAME[var] and G.GAME[var][var2] then
+			return true
+		end
+	else
+		if G and G.GAME and G.GAME[var] then
+			return true
+		end
+	end
+	return false
+end
+
+function RevosVault.GUI.operator(scale, args)
+	args.text = args.text or "X"
+	args.colour = args.colour or G.C.UI_MULT
+    return
+    {n=G.UIT.C, config={align = "cm", id = 'hand_operator_container'}, nodes={
+        {n=G.UIT.T, config={text = args.text, lang = G.LANGUAGES['en-us'], scale = scale*2, colour = args.colour, shadow = true}},
+    }}
 end

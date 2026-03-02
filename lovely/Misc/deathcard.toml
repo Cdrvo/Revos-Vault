@@ -13,7 +13,7 @@ pattern = '''-- context.end_of_round calculations'''
 position = "before"
 payload = '''
 local deathcard
-if G.GAME.crv_deathcard_allowed and RevoConfig and RevoConfig["experimental_enabled"] then 
+if G.GAME.crv_deathcard_allowed and RevoConfig and RevoConfig["deathcards_enabled"] then 
     deathcard = true
 end
     '''
@@ -24,8 +24,8 @@ target = "functions/state_events.lua"
 pattern = '''if game_over then'''
 position = "at"
 payload = '''
-if (game_over or game_won) and RevoConfig and RevoConfig["experimental_enabled"] then 
-    print("Reducing timers for deathcards")
+if (game_over or game_won) and RevoConfig and RevoConfig["deathcards_enabled"] then  
+    -- print("Reducing timers for deathcards")
     if G.PROFILES[G.SETTINGS.profile].crv_deathcards then
 	local a = G.PROFILES[G.SETTINGS.profile].crv_deathcards
 	for k, v in pairs(a) do
@@ -36,14 +36,14 @@ if (game_over or game_won) and RevoConfig and RevoConfig["experimental_enabled"]
 			else
 				v.timer = 0
 				-- print("Remove the " .. k .." num. card" )
-				table.remove(a, k)
+				G.PROFILES[G.SETTINGS.profile].crv_deathcards[k] = nil
 			end
 		end
 	end
 end
 end
-if deathcard and game_over and not game_won and RevoConfig and RevoConfig["experimental_enabled"] then 
-    RevosVault.back_to_death(nil, true)
+if deathcard and game_over and not game_won and RevoConfig and RevoConfig["deathcards_enabled"] and (G.jokers and #G.jokers.cards>=2) then 
+    RevosVault.deathscreen()
 elseif game_over then
     '''
 match_indent = true
@@ -56,7 +56,7 @@ pattern = '''
 if self.STATE == self.STATES.SHOP then'''
 position = "before"
 payload = '''
-if self.STATE == self.STATES.CRV_DEATHCARD and RevoConfig and RevoConfig["experimental_enabled"] then 
+if self.STATE == self.STATES.CRV_DEATHCARD and RevoConfig and RevoConfig["deathcards_enabled"] then 
      RevosVault.back_to_death(true)
 end
     '''
@@ -70,4 +70,16 @@ self.STATES = { '''
 position = "after"
 payload = '''
     CRV_DEATHCARD = 998182635641,'''
+match_indent = true
+
+## attention text removal
+
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = '''args.AT.attention_text = true'''
+position = "after"
+payload = '''
+G.GAME.crv_current_attention_text = args.AT
+    '''
 match_indent = true

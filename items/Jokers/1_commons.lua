@@ -146,8 +146,10 @@ SMODS.Joker({
 			mult = 6,
 		},
 	},
+	crv_credits = {
+		art = {"Astro"}
+	},
 	loc_vars = function(self, info_queue, card)
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"Astro"}}
 		local crv = card.ability.extra
 		return {
 			vars = { crv.mult },
@@ -186,8 +188,10 @@ SMODS.Joker({
 			mult = 2,
 		},
 	},
+	crv_credits = {
+		art = {"Astro"},
+	},
 	loc_vars = function(self, info_queue, card)
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"Astro"}}
 		local crv = card.ability.extra
 		return {
 			vars = { crv.mult, G.GAME.henchmans },
@@ -220,8 +224,10 @@ SMODS.Joker({
 			chips = 40,
 		},
 	},
+	crv_credits = {
+		art = {"mr.cr33ps"}
+	},
 	loc_vars = function(self, info_queue, card)
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"mr.cr33ps"}}
 		local crv = card.ability.extra
 		return {
 			vars = { crv.chips },
@@ -293,8 +299,10 @@ SMODS.Joker({
 			dollars = 5,
 		},
 	},
+	crv_credits = {
+		art = {"Nyxel"}
+	},
 	loc_vars = function(self, info_queue, card)
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"Nyxel"}}
 		info_queue[#info_queue + 1] = G.P_CENTERS.m_crv_honey
 		return {
 			vars = { card.ability.extra.dollars },
@@ -334,8 +342,11 @@ SMODS.Joker({
 	config = {
 		extra = {},
 	},
+	crv_credits = {
+		art = {"WombatCountry"}
+	},
 	loc_vars = function(self, info_queue, card)
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"WombatCountry"}}
+
 		return {
 			vars = {},
 		}
@@ -493,8 +504,10 @@ SMODS.Joker({
 			suit = "Spades",
 		},
 	},
+	crv_credits = {
+		art = {"Chainsawmert"}
+	},
 	loc_vars = function(self, info_queue, card)
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"Chainsawmert"}}
 		local crv = card.ability.extra
 		return {
 			vars = { crv.mone,crv.suit },
@@ -574,6 +587,9 @@ SMODS.Joker({
 			mult = 0,
 			mult_gain = 1
 		},
+	},
+	crv_credits = {
+		art = {"Chainsawmert"}
 	},
 	loc_vars = function(self, info_queue, card)
 		local cae = card.ability.extra

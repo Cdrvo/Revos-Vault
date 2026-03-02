@@ -27,7 +27,8 @@ function Game:update_shop(dt)
                                     
                                     
 								end
-                                if not nosave_vault then G.E_MANAGER:add_event(Event({ func = function() save_run(); return true end})) end
+                                if not nosave_vault then G.E_MANAGER:add_event(Event({ func = function() save_run()
+return true end})) end
                                 return true
                             end
                         end}))
@@ -69,6 +70,20 @@ end
                                 }},
                                 {n=G.UIT.R, config={align = "cm", maxw = 1.5}, nodes={
                                 {n=G.UIT.T, config={text = "Shop", scale = 0.4, colour = G.C.WHITE, shadow = false}},
+                                }},
+                            }},        
+                            }},
+                    
+                }},
+
+                {n=G.UIT.C, config={align = "cm", padding = 0.14, emboss = 0.05, r = 1, colour = G.C.DYN_UI.BOSS_MAIN}, nodes={
+                        {n=G.UIT.C,config={id = 'crv_take_to_shop', align = "cm", minw = 0.9, minh = 0.9, r=0.15,colour = G.C.PURPLE, button = 'get_vaultable_list', hover = true,shadow = false}, nodes = {
+                            {n=G.UIT.R, config={align = "cm", padding = 0.1, focus_args = {button = 'y', orientation = 'cr'}, func = 'set_button_pip'}, nodes={
+                                {n=G.UIT.R, config={align = "cm", maxw = 1.5}, nodes={
+                                {n=G.UIT.T, config={text = "Vaultable", scale = 0.4, colour = G.C.WHITE, shadow = false}},
+                                }},
+                                {n=G.UIT.R, config={align = "cm", maxw = 1.5}, nodes={
+                                {n=G.UIT.T, config={text = "Jokers", scale = 0.4, colour = G.C.WHITE, shadow = false}},
                                 }},
                             }},        
                             }},

@@ -1530,8 +1530,10 @@ SMODS.Joker({
 		extra = {
 		},
 	},
+	crv_credits = {
+		art = {"Chainsawmert"}
+	},
 	loc_vars = function(self, info_queue, card)
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"Chainsawmert"}}
 		info_queue[#info_queue+1] = G.P_CENTERS.j_egg
 	end,
 	calculate = function(self, card, context)

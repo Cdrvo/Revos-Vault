@@ -31,6 +31,179 @@ local function should_restart()
 	SMODS.full_restart = 0
 end
 
+G.UIDEF.crv_joker_config = function()
+	local t = create_UIBox_generic_options({
+		back_func = "openModUI_RevosVault",
+		colour = RevosVault.ui_config.colour,
+		back_colour = RevosVault.ui_config.back_colour,
+		contents = {
+			{
+				n = G.UIT.R,
+				config = { align = "cm", r = 0.1, colour = G.C.BLACK },
+				nodes = {
+					{
+						n = G.UIT.C,
+						nodes = {
+							create_toggle({
+								label = localize("crv_enable_chaoscards"),
+								ref_table = RevosVault.config,
+								ref_value = "7_chaos_enabled",
+								--callback = should_restart,
+							}),
+							create_toggle({
+								label = localize("crv_enable_vaulteds"),
+								ref_table = RevosVault.config,
+								ref_value = "6_vault_enabled",
+								--callback = should_restart,
+							}),
+							create_toggle({
+								label = localize("crv_enable_secret"),
+								ref_table = RevosVault.config,
+								ref_value = "9_secretjokers_enabled",
+								--callback = should_restart,
+							}),
+							{
+								n = G.UIT.R,
+								config = { align = "cm", minh = 0.6 },
+								nodes = {
+									{
+										n = G.UIT.T,
+										config = { text = "Requires restart!", colour = G.C.RED, scale = 0.4 },
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+	})
+	return t
+end
+
+G.UIDEF.crv_mechanic_config = function()
+	local t = create_UIBox_generic_options({
+		back_func = "openModUI_RevosVault",
+		colour = RevosVault.ui_config.colour,
+		back_colour = RevosVault.ui_config.back_colour,
+		contents = {
+			{
+				n = G.UIT.R,
+				config = { align = "cm", r = 0.1, colour = G.C.BLACK },
+				nodes = {
+					{
+						n = G.UIT.C,
+						nodes = {
+							create_toggle({
+								label = localize("crv_enable_curses"),
+								ref_table = RevosVault.config,
+								ref_value = "8_curses_enabled",
+								--callback = should_restart,
+							}),
+							create_toggle({
+								label = --[[localize("crv_enable_deathcards")]] "Enable Deathcards",
+								ref_table = RevosVault.config,
+								ref_value = "deathcards_enabled",
+								--callback = should_restart,
+							}),
+							{
+								n = G.UIT.R,
+								config = { align = "cm", minh = 0.6 },
+								nodes = {
+									{
+										n = G.UIT.T,
+										config = { text = "Requires restart!", colour = G.C.RED, scale = 0.4 },
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+	})
+	return t
+end
+
+G.UIDEF.crv_other_config = function()
+	local t = create_UIBox_generic_options({
+		back_func = "openModUI_RevosVault",
+		colour = RevosVault.ui_config.colour,
+		back_colour = RevosVault.ui_config.back_colour,
+		contents = {
+			{
+				n = G.UIT.R,
+				config = { align = "cm", r = 0.1, colour = G.C.BLACK },
+				nodes = {
+					{
+						n = G.UIT.C,
+						nodes = {
+
+							create_toggle({
+								label = localize("crv_enable_blinds"),
+								ref_table = RevosVault.config,
+								ref_value = "blinds_enabled",
+								--callback = should_restart,
+							}),
+
+							create_toggle({
+								label = localize("crv_enable_superior"),
+								ref_table = RevosVault.config,
+								ref_value = "superior_enabled",
+								--callback = should_restart,
+							}),
+							create_toggle({
+								label = localize("crv_enable_wip") .. "*",
+								ref_table = RevosVault.config,
+								ref_value = "experimental_enabled",
+								--callback = should_restart,
+							}),
+
+							create_toggle({
+								label = localize("crv_enable_gems"),
+								ref_table = RevosVault.config,
+								ref_value = "gems_enabled",
+								--callback = should_restart,
+							}),
+							{
+								n = G.UIT.R,
+								config = { align = "cm", minh = 0.6 },
+								nodes = {
+									{
+										n = G.UIT.T,
+										config = { text = "Requires restart!", colour = G.C.RED, scale = 0.4 },
+									},
+								},
+							},
+							{
+								n = G.UIT.R,
+								config = { align = "cm", minh = 0.6 },
+								nodes = {
+									{
+										n = G.UIT.T,
+										config = { text = "*Not recommended!", colour = G.C.WHITE, scale = 0.4 },
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+	})
+	return t
+end
+
+G.FUNCS.crv_open_jconfig = function()
+	RevosVault.easy_overlay(false, G.UIDEF.crv_joker_config())
+end
+G.FUNCS.crv_open_mconfig = function()
+	RevosVault.easy_overlay(false, G.UIDEF.crv_mechanic_config())
+end
+G.FUNCS.crv_open_oconfig = function()
+	RevosVault.easy_overlay(false, G.UIDEF.crv_other_config())
+end
+
 RevosVault.config_tab = function()
 	return {
 		n = G.UIT.ROOT,
@@ -42,285 +215,132 @@ RevosVault.config_tab = function()
 					{
 						n = G.UIT.C,
 						nodes = {
-							create_toggle({
-								label = localize("crv_enable_blinds"),
-								ref_table = RevosVault.config,
-								ref_value = "blinds_enabled",
-								callback = should_restart,
+
+							UIBox_button({
+								colour = RevosVault.ui_config.tab_button_colour,
+								button = "crv_open_jconfig",
+								label = { "Jokers" },
+								minw = 4.5,
+								focus_args = { snap_to = true },
 							}),
-							create_toggle({
-								label = localize("crv_enable_chaoscards"),
-								ref_table = RevosVault.config,
-								ref_value = "7_chaos_enabled",
-								callback = should_restart,
+							{n = G.UIT.R, config = {colour = G.C.CLEAR, scale = 0.1, padding = 0.1 },},
+							UIBox_button({
+								colour = RevosVault.ui_config.tab_button_colour,
+								button = "crv_open_mconfig",
+								label = { "Mechanics" },
+								minw = 4.5,
+								focus_args = { snap_to = true },
 							}),
-							create_toggle({
-								label = localize("crv_enable_vaulteds"),
-								ref_table = RevosVault.config,
-								ref_value = "6_vault_enabled",
-								callback = should_restart,
-							}),
-							create_toggle({
-								label = localize("crv_enable_superior"),
-								ref_table = RevosVault.config,
-								ref_value = "superior_enabled",
-								callback = should_restart,
-							}),
-						},
-					},
-					{
-						n = G.UIT.C,
-						nodes = {
-							create_toggle({
-								label = localize("crv_enable_wip") .. "*",
-								ref_table = RevosVault.config,
-								ref_value = "experimental_enabled",
-								callback = should_restart,
-							}),
-							create_toggle({
-								label = localize("crv_enable_secret"),
-								ref_table = RevosVault.config,
-								ref_value = "9_secretjokers_enabled",
-								callback = should_restart,
-							}),
-							create_toggle({
-								label = localize("crv_enable_gems"),
-								ref_table = RevosVault.config,
-								ref_value = "gems_enabled",
-								callback = should_restart,
-							}),
-							create_toggle({
-								label = localize("crv_enable_curses"),
-								ref_table = RevosVault.config,
-								ref_value = "8_curses_enabled",
-								callback = should_restart,
+							{n = G.UIT.R, config = {colour = G.C.CLEAR, scale = 0.1, padding = 0.1 },},
+							UIBox_button({
+								colour = RevosVault.ui_config.tab_button_colour,
+								button = "crv_open_oconfig",
+								label = { "Other" },
+								minw = 4.5,
+								focus_args = { snap_to = true },
 							}),
 						},
 					},
-				},
-			},
-			{
-				n = G.UIT.R,
-				config = { align = "cm", minh = 0.6 },
-				nodes = {
-					{ n = G.UIT.T, config = { text = "Requires restart!", colour = G.C.RED, scale = 0.4 } },
-				},
-			},
-			{
-				n = G.UIT.R,
-				config = { align = "cm", minh = 0.6 },
-				nodes = {
-					{ n = G.UIT.T, config = { text = "*" .. "Not Recommended!", colour = G.C.WHITE, scale = 0.4 } }
 				},
 			},
 		},
 	}
 end
 
---[[RevosVault.configs = {}
 
-RevosVault.Config = SMODS.GameObject:extend({ -- the arrow thingy
-	rarity = 1,
-	unlocked = true,
-	discovered = true,
-	no_collection = true,
-	pos = { x = 0, y = 0 },
-	cost = 0,
-	obj_table = RevosVault.configs,
-	obj_buffer = {},
-	config = {},
-	set = "RVCONF",
-	atlas = "Jokers2",
-	conf = "blinds_enabled",
-	required_params = {
-		"key",
-	},
-    inject = function(self)
-
-	if not G.P_CENTER_POOLS[self.set] then
-		G.P_CENTER_POOLS[self.set] = {}
+-- Credits system from Hot Potato
+local smcmb = SMODS.create_mod_badges
+function SMODS.create_mod_badges(obj, badges)
+	smcmb(obj, badges)
+	if not SMODS.config.no_mod_badges and obj and obj.crv_credits then
+		local function calc_scale_fac(text)
+			local size = 0.9
+			local font = G.LANG.font
+			local max_text_width = 2 - 2 * 0.05 - 4 * 0.03 * size - 2 * 0.03
+			local calced_text_width = 0
+			-- Math reproduced from DynaText:update_text
+			for _, c in utf8.chars(text) do
+				local tx = font.FONT:getWidth(c) * (0.33 * size) * G.TILESCALE * font.FONTSCALE
+					+ 2.7 * 1 * G.TILESCALE * font.FONTSCALE
+				calced_text_width = calced_text_width + tx / (G.TILESIZE * G.TILESCALE)
+			end
+			local scale_fac = calced_text_width > max_text_width and max_text_width / calced_text_width or 1
+			return scale_fac
+		end
+		if obj.crv_credits.art or obj.crv_credits.code or obj.crv_credits.idea or obj.crv_credits.custom then
+			local scale_fac = {}
+			local min_scale_fac = 1
+			local strings = { RevosVault.display_name }
+			for _, v in ipairs({ "idea", "art", "code" }) do
+				if obj.crv_credits[v] then
+					if type(obj.crv_credits[v]) == "string" then obj.crv_credits[v] = { obj.crv_credits[v] } end
+					for i = 1, #obj.crv_credits[v] do
+						strings[#strings + 1] =
+							localize({ type = "variable", key = "crv_" .. v, vars = { obj.crv_credits[v][i] } })
+							[1]
+					end
+				end
+			end
+			if obj.crv_credits.custom then
+				strings[#strings + 1] = localize({ type = "variable", key = obj.crv_credits.custom.key, vars = { obj.crv_credits.custom.text } })
+			end
+			for i = 1, #strings do
+				scale_fac[i] = calc_scale_fac(strings[i])
+				min_scale_fac = math.min(min_scale_fac, scale_fac[i])
+			end
+			local ct = {}
+			for i = 1, #strings do
+				ct[i] = {
+					string = strings[i],
+				}
+			end
+			for i = 1, #badges do
+				if badges[i].nodes[1].nodes[2].config.object.string == RevosVault.display_name then --this was meant to be a hex code but it just doesnt work for like no reason so its hardcoded
+					badges[i].nodes[1].nodes[2].config.object:remove()
+					badges[i] = {
+                        n = G.UIT.R,
+                        config = { align = "cm" },
+                        nodes = {
+                            {
+                                n = G.UIT.R,
+                                config = {
+                                    align = "cm",
+                                    colour = RevosVault.badge_colour,
+                                    r = 0.1,
+                                    minw = 2 / min_scale_fac,
+                                    minh = 0.36,
+                                    emboss = 0.05,
+                                    padding = 0.03 * 0.9,
+                                },
+                                nodes = {
+                                    { n = G.UIT.B, config = { h = 0.1, w = 0.03 } },
+                                    {
+                                        n = G.UIT.O,
+                                        config = {
+                                            object = DynaText({
+                                                string = ct or "ERROR",
+                                                colours = { obj.crv_credits and obj.crv_credits.text_colour or HEX("40093A") },
+                                                silent = true,
+                                                float = true,
+                                                shadow = true,
+                                                offset_y = -0.03,
+                                                spacing = 1,
+                                                scale = 0.33 * 0.9,
+                                            }),
+                                        },
+                                    },
+                                    { n = G.UIT.B, config = { h = 0.1, w = 0.03 } },
+                                },
+                            },
+                        },
+                    }
+					break
+				end
+			end
+		end
 	end
-
-    SMODS.Center.inject(self)
-
-  	end,
-	set_card_type_badge = function(self, card, badges) end,
-})
-RevosVault.Config({ --used for the title screen
-	key = "blinds_enabled",
-		atlas = "Jokers2",
-	rarity = "crv_p",
-	pos = {
-		x = 0,
-		y = 1,
-	},
-	conf = "blinds_enabled",
-})
-RevosVault.Config({ --used for the title screen
-	key = "chaos_enabled",
-		atlas = "Jokers2",
-	rarity = "crv_p",
-	pos = {
-		x = 0,
-		y = 1,
-	},
-	conf = "chaos_enabled",
-})
-RevosVault.Config({ --used for the title screen
-	key = "vault_enabled",
-		atlas = "Jokers2",
-	rarity = "crv_p",
-	pos = {
-		x = 0,
-		y = 1,
-	},
-	conf = "vault_enabled",
-})
-RevosVault.Config({ --used for the title screen
-	key = "superior_enabled",
-		atlas = "Jokers2",
-	rarity = "crv_p",
-	pos = {
-		x = 0,
-		y = 1,
-	},
-	conf = "superior_enabled",
-})
-RevosVault.Config({ --used for the title screen
-	key = "experimental_enabled",
-		atlas = "Jokers2",
-	rarity = "crv_p",
-	pos = {
-		x = 0,
-		y = 1,
-	},
-	conf = "experimental_enabled",
-})
-RevosVault.Config({ --used for the title screen
-	key = "secretjokers_enabled",
-		atlas = "Jokers2",
-	rarity = "crv_p",
-	pos = {
-		x = 0,
-		y = 1,
-	},
-	conf = "secretjokers_enabled",
-})
-RevosVault.Config({ --used for the title screen
-	key = "gems_enabled",
-		atlas = "Jokers2",
-	rarity = "crv_p",
-	pos = {
-		x = 0,
-		y = 1,
-	},
-	conf = "gems_enabled",
-})
-
-
-local old_config = copy_table(RevosVault.config) -- unused
-
-local click_old = Card.click
-function Card:click()
-	local ret = click_old(self)
-	if (self.area == G.printer_info2) or (self.area == G.printer_info3)then
-			self.debuff = RevosVault.config[self.config.center.conf]
-			self:juice_up()
-			play_sound("tarot1")
-			RevosVault.config[self.config.center.conf] = not RevosVault.config[self.config.center.conf]
-	else
-	end
-	return ret
 end
-
-RevosVault.config_tab = function()
-		G.printer_info2 = CardArea(
-		G.ROOM.T.x + 0.2 * G.ROOM.T.w / 2,
-		G.ROOM.T.h,
-		4.25 * G.CARD_W,
-		0.95 * G.CARD_H,
-		{ card_limit = 4, type = "shop", highlight_limit = 0, collection = true }
-	)
-		G.printer_info3 = CardArea(
-		G.ROOM.T.x + 0.2 * G.ROOM.T.w / 2,
-		G.ROOM.T.h,
-		4.25 * G.CARD_W,
-		0.95 * G.CARD_H,
-		{ card_limit = 4, type = "shop", highlight_limit = 0, collection = true }
-	)
-	modNodes = {
-		{
-			n = G.UIT.R,
-			config = { align = "cm" },
-			nodes = {
-				{
-					n = G.UIT.O,
-					config = {
-						object = DynaText({
-							string = "Click to disable/enable",
-							colours = { G.C.WHITE },
-							shadow = true,
-							scale = 0.4,
-						}),
-					},
-				},
-			},
-		},
-		{
-		n = G.UIT.R,
-			config = { align = "cm", padding = 0.07, no_fill = true },
-			nodes = {
-				{ n = G.UIT.O, config = { object = G.printer_info2 } },
-			},
-		},
-		first_row = { n = G.UIT.R, config = { align = "tm", padding = 0.05 }, nodes = {} },
-		{
-		n = G.UIT.R,
-		config = { align = "cm", padding = 0.07, no_fill = true },
-		nodes = {
-			{ n = G.UIT.O, config = { object = G.printer_info3 } },
-		},
-	}
-	}
-
-
-	for i, key in ipairs({"crv_chaos_enabled","crv_vault_enabled","crv_blinds_enabled","crv_secretjokers_enabled"}) do
-		local card = Card(
-			G.printer_info2.T.x + G.printer_info2.T.w / 2,
-			G.printer_info2.T.y,
-			G.CARD_W,
-			G.CARD_H,
-			G.P_CARDS.empty,
-			G.P_CENTERS[key]
-		)
-		G.printer_info2:emplace(card)
-	end
-	for i, key in ipairs({"crv_gems_enabled","crv_superior_enabled","crv_experimental_enabled"}) do
-	local card2 = Card(
-			G.printer_info2.T.x + G.printer_info2.T.w / 2,
-			G.printer_info2.T.y,
-			G.CARD_W,
-			G.CARD_H,
-			G.P_CARDS.empty,
-			G.P_CENTERS[key]
-		)
-		G.printer_info3:emplace(card2)
-	end
-
-	return {
-		n = G.UIT.ROOT,
-		config = {
-			emboss = 0.05,
-			minh = 6,
-			r = 0.1,
-			minw = 10,
-			align = "cm",
-			padding = 0.2,
-			colour = G.C.BLACK,
-		},
-		nodes = modNodes,
-	}
-end]]
+	
 
 RevosVault.Lib = NFS.getDirectoryItems(RevosPath .. "items/Lib")
 RevosVault.Misc = NFS.getDirectoryItems(RevosPath .. "items/Misc")
@@ -378,7 +398,7 @@ end
 
 --Adds Gross Printer to the main menu. Code from Cryptid
 
-local oldfunc = Game.main_menu --ily cryptid x2
+--[[local oldfunc = Game.main_menu --ily cryptid x2
 Game.main_menu = function(change_context)
 	local ret = oldfunc(change_context)
 
@@ -401,10 +421,19 @@ Game.main_menu = function(change_context)
 	newcard.no_ui = true
 	newcard.states.visible = true
 	return ret
+end]]
+
+SMODS.current_mod.menu_cards = function()
+	return {
+		{key = 'j_crv_printer'}, 
+		{key = 'j_crv_grossprinter'}, 
+		remove_original = true
+	}
 end
 
 SMODS.current_mod.reset_game_globals = function(run_start)
 	if run_start then
+		RevosVault.reset_whiteboard()
 		calculate_modded_printer()
 		G.GAME.current_round.crv_drawn_hands = 0
 
@@ -439,6 +468,7 @@ SMODS.current_mod.reset_game_globals = function(run_start)
 
 	G.GAME.current_round.crv_drawn_hands = 0
 	calculate_modded_printer()
+	RevosVault.reset_whiteboard()
 
 end
 

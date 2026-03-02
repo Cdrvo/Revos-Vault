@@ -1,3 +1,10 @@
+SMODS.Atlas({
+	key = "sleeves",
+	path = "Cross-Mod/sleeves.png",
+	px = 73,
+	py = 95,
+})
+
 CardSleeves.Sleeve {
     key = "psleeve",
     atlas = "sleeves",
@@ -39,6 +46,35 @@ CardSleeves.Sleeve {
                     G.FUNCS.get_printer_box()
                 end
             end
+        end
+    end
+}
+
+CardSleeves.Sleeve {
+    key = "goldensleeve",
+    atlas = "sleeves",
+    unlocked = false,
+    config = {},
+    unlock_condition = {deck = "b_crv_goldendeck", stake = "stake_gold"},
+    pos = { x = 1, y = 0 },
+    loc_vars = function(self)
+        local dkey 
+        if not dkey then dkey = self.key end
+        local key, vars = dkey, {}
+        if self.get_current_deck_key() == "b_crv_goldendeck" then
+            key = self.key .. "_alt"
+        else
+            self.config = {}
+            key = dkey
+        end
+        return { key = key, vars = vars }
+    end,
+    crv_apply = function(self)
+        CardSleeves.Sleeve.apply(self)
+        if self.get_current_deck_key() == "b_crv_goldendeck" then
+            G.GAME.dollars = G.GAME.dollars * 2
+        else
+            SMODS.set_scoring_calculation("crv_dollars_mult_scoring")
         end
     end
 }

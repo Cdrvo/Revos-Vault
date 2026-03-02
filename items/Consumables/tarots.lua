@@ -296,6 +296,7 @@ SMODS.Consumable({
 		a = copy_card(G.jokers.highlighted[1])
 		a:add_to_deck()
 		a:add_sticker("crv_weak", true)
+		a:add_sticker("crv_temp", true)
 		G.jokers:emplace(a)
 
 	end,

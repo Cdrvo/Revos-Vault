@@ -335,6 +335,9 @@ SMODS.Joker({
 			vars = { card.ability.extra.mult, card.ability.extra.mult_r },
 		}
 	end,
+--[[	crv_credits = {
+		art = {"Nyxel"}
+	},]]
 	calculate = function(self, card, context)
 		if context.joker_main then
 			return {
@@ -944,8 +947,10 @@ SMODS.Joker({
 		y = 3,
 	},
 	cost = 6,
+	crv_credits = {
+		art = {"mr.cr33ps"}
+	},
 	loc_vars = function(self, info_queue, card)
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"mr.cr33ps"}}
 		info_queue[#info_queue + 1] = G.P_CENTERS.m_crv_mugged
 		return {
 			vars = {
@@ -1353,7 +1358,7 @@ SMODS.Joker({
 	end,
 })
 
-local suits = { 1, 2, 3, 4 }
+local suits = { 1, 2, 3, 4 } -- fuck this (again)
 SMODS.Joker({
 	key = "smbj",
 	atlas = "Jokers2",
@@ -1369,89 +1374,33 @@ SMODS.Joker({
 	config = {
 		extra = {
 			xmult = 3,
-			randomsuit = 2,
-			setsuit = "Spades",
+			randomsuit = "Spades",
+			-- setsuit = ((RevosVault.very_safe("current_round") and G.GAME.current_round.whiteboard_suit) or "Spades"),
 		},
 	},
+	crv_credits = {
+		art = {"mr.cr33ps"}
+	},
 	loc_vars = function(self, info_queue, card)
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"mr.cr33ps"}}
 		return {
-			vars = { card.ability.extra.randomsuit, card.ability.extra.xmult, card.ability.extra.setsuit },
+			vars = { card.ability.extra.randomsuit, card.ability.extra.xmult, ((RevosVault.very_safe("current_round") and G.GAME.current_round.whiteboard_suit) or "Spades"), colours = {G.C.SUITS[(RevosVault.very_safe("current_round") and G.GAME.current_round.whiteboard_suit) or "IMPORTANT"]} },
 		}
 	end,
 
 	calculate = function(self, card, context)
-		if context.end_of_round and not context.blueprint then
-			card.ability.extra.randomsuit = (pseudorandom_element(suits, pseudoseed("ptm")))
-			if card.ability.extra.randomsuit == 1 then
-				card.ability.extra.setsuit = "Clubs"
-			elseif card.ability.extra.randomsuit == 2 then
-				card.ability.extra.setsuit = "Spades"
-			elseif card.ability.extra.randomsuit == 3 then
-				card.ability.extra.setsuit = "Diamonds"
-			elseif card.ability.extra.randomsuit == 4 then
-				card.ability.extra.setsuit = "Hearts"
-			end
-		end
-		-- all cards calc
+		local cae = card.ability.extra
 		if context.joker_main then
-			local all_cards = 0
-			for k, v in ipairs(G.hand.cards) do
-				all_cards = all_cards + 1
-				card.ability.extra.allcards = all_cards
+			cae.randomsuit = G.GAME.current_round.whiteboard_suit or "Spades"
+			local notrig = false
+			for k, v in pairs(G.hand.cards) do
+				if not v:is_suit(cae.randomsuit, true) then
+					notrig = true
+				end
 			end
-		end
 
-		-- checks for clubs
-		if context.joker_main and card.ability.extra.randomsuit == 1 then
-			local blackc_suits = 0
-			for k, v in ipairs(G.hand.cards) do
-				if v:is_suit("Clubs", nil, true) then
-					blackc_suits = blackc_suits + 1
-				end
-			end
-			if blackc_suits == card.ability.extra.allcards then
-				return {
-					x_mult = card.ability.extra.xmult,
-				}
-			end
-			-- checks for spades
-		elseif context.joker_main and card.ability.extra.randomsuit == 2 then
-			local blacks_suits = 0
-			for k, v in ipairs(G.hand.cards) do
-				if v:is_suit("Spades", nil, true) then
-					blacks_suits = blacks_suits + 1
-				end
-			end
-			if blacks_suits == card.ability.extra.allcards then
-				return {
-					x_mult = card.ability.extra.xmult,
-				}
-			end
-			-- checks for diamonds
-		elseif context.joker_main and card.ability.extra.randomsuit == 3 then
-			local redd_suits = 0
-			for k, v in ipairs(G.hand.cards) do
-				if v:is_suit("Diamonds", nil, true) then
-					redd_suits = redd_suits + 1
-				end
-			end
-			if redd_suits == card.ability.extra.allcards then
-				return {
-					x_mult = card.ability.extra.xmult,
-				}
-			end
-			-- check for hearts
-		elseif context.joker_main and card.ability.extra.randomsuit == 4 then
-			local redh_suits = 0
-			for k, v in ipairs(G.hand.cards) do
-				if v:is_suit("Hearts", nil, true) then
-					redh_suits = redh_suits + 1
-				end
-			end
-			if redh_suits == card.ability.extra.allcards then
-				return {
-					x_mult = card.ability.extra.xmult,
+			if not notrig then
+				return{
+					xmult = cae.xmult
 				}
 			end
 		end
@@ -1473,8 +1422,10 @@ SMODS.Joker({
 	config = {
 		extra = {},
 	},
+	crv_credits = {
+		art = {"Chainsawmert"}
+	},
 	loc_vars = function(self,info_queue,card)
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"Chainsawmert"}}
 	end,
 	calculate = function(self, card, context)
 		if context.selling_self and not context.blueprint then
@@ -1508,8 +1459,10 @@ SMODS.Joker({
 			unshook = true,
 		},
 	},
+	crv_credits = {
+		art = {"Chainsawmert"}
+	},
 	loc_vars = function(self, info_queue, card)
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"Chainsawmert"}}
 		info_queue[#info_queue + 1] = { set = "Other", key = "crv_gold_rush_desc" }
 		info_queue[#info_queue + 1] = G.P_CENTERS.m_gold
 		return {
@@ -1673,8 +1626,10 @@ SMODS.Joker({
 			odds = 8,
 		},
 	},
+	crv_credits = {
+		art = {"Nyxel"}
+	},
 	loc_vars = function(self, info_queue, card)
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"Nyxel"}}
 		info_queue[#info_queue + 1] = { set = "Other", key = "crv_fixed_chances" }
 		return { vars = { card.ability.extra.odds } }
 	end,
@@ -2100,8 +2055,10 @@ SMODS.Joker({
 			plus = 1,
 		},
 	},
+	crv_credits = {
+		art = {"rat"}
+	},
 	loc_vars = function(self, info_queue, card)
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"rat"}}
 		local crv = card.ability.extra
 		return {
 			vars = { crv.plus },
@@ -2146,8 +2103,10 @@ SMODS.Joker({
 			uu = "Locked",
 		},
 	},
+	crv_credits = {
+		art = {"kusanehexaku, ice"}
+	},
 	loc_vars = function(self, info_queue, card)
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits_2", vars = {"kusanehexaku", "ice"}}
 		local crv = card.ability.extra
 		return {
 			vars = { crv.uu, crv.d1, crv.d2, crv.d3, crv.d4, crv.unlocked },
@@ -2228,8 +2187,10 @@ SMODS.Joker({
 			current_dept = 0,
 		},
 	},
+	crv_credits = {
+		art = {"kusanehexaku"}
+	},
 	loc_vars = function(self, info_queue, card)
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"kusanehexaku"}}
 		local crv = card.ability.extra
 		return {
 			vars = { crv.owe_limit, crv.owe, crv.current_dept },
@@ -2407,8 +2368,10 @@ SMODS.Joker({
 			invested = 0,
 		},
 	},
+	crv_credits = {
+		art = {"WombatCountry"}
+	},
 	loc_vars = function(self, info_queue, card)
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"WombatCountry"}}
 		local crv = card.ability.extra
 		return {
 			vars = { crv.card, crv.check, crv.timer, crv.invested },
@@ -2734,8 +2697,10 @@ SMODS.Joker({
 			stored = 0,
 		},
 	},
+	crv_credits = {
+		art = {"mr.cr33ps"}
+	},
 	loc_vars = function(self, info_queue, card)
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"mr.cr33ps"}}
 		info_queue[#info_queue + 1] = { key = "crv_radioactive", set = "Other" }
 		return {
 			vars = { card.ability.extra.gain, card.ability.extra.stored },
@@ -2805,8 +2770,10 @@ SMODS.Joker({
 	pools = {
 		Food = true,
 	},
+	crv_credits = {
+		art = {"Chainsawmert"}
+	},
 	loc_vars = function(self, info_queue, card)
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"Chainsawmert"}}
 		return {
 			vars = { card.ability.extra.mult, card.ability.extra.xmult },
 		}
@@ -2845,8 +2812,10 @@ SMODS.Joker({
 	pools = {
 		Food = true,
 	},
+	crv_credits = {
+		art = {"Chainsawmert"}
+	},
 	loc_vars = function(self, info_queue, card)
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"Chainsawmert"}}
 		return {
 			vars = { card.ability.extra.chips, card.ability.extra.xchips },
 		}
@@ -2921,7 +2890,7 @@ SMODS.Joker({
 	cost = 6,
 	unlocked = true,
 	discovered = false,
-	blueprint_compat = true,
+	blueprint_compat = false,
 
 	pos = {
 		x = 8,
@@ -2930,8 +2899,10 @@ SMODS.Joker({
 	config = {
 		extra = {},
 	},
+	crv_credits = {
+		art = {"mr.cr33ps"}
+	},
 	loc_vars = function(self, info_queue, card)
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"mr.cr33ps"}}
 		return {
 			vars = {},
 		}
@@ -2992,8 +2963,11 @@ SMODS.Joker({
 			mult = 0,
 		},
 	},
+	crv_credits = {
+		art = {"mr.cr33ps"}
+	},
 	loc_vars = function(self, info_queue, card)
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"mr.cr33ps"}}
+
 		if G.GAME.consumeable_usage_total and G.GAME.consumeable_usage_total.spectral > 0 then
 			return {
 				vars = {
@@ -3012,10 +2986,6 @@ SMODS.Joker({
 			if G.GAME.consumeable_usage_total and G.GAME.consumeable_usage_total.spectral > 0 then
 				return {
 					mult = (G.GAME.consumeable_usage_total.spectral * card.ability.extra.multg),
-				}
-			else
-				return {
-					mult = card.ability.extra.mult,
 				}
 			end
 		end
@@ -3341,8 +3311,11 @@ SMODS.Joker({
 			chipx = 3,
 		},
 	},
+	crv_credits = {
+		art = {"Heaven"}
+	},
 	loc_vars = function(self, info_queue, card)
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"Heaven"}}
+
 		local crv = card.ability.extra
 		return {
 			vars = { crv.chipx },
@@ -3382,8 +3355,10 @@ SMODS.Joker({
 	soul_pos = { x = 4, y = 13 },
 	discovered = true,
 	blueprint_compat = true,
+	crv_credits = {
+		art = {"Heaven"}
+	},
 	loc_vars = function(self, info_queue, card)
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"Heaven"}}
 	end,
 	add_to_deck = function(self, card, from_debuff)
 		G.GAME.glassodds = G.GAME.glassodds / 2
@@ -3783,10 +3758,11 @@ SMODS.Joker({
 	},
 	loc_vars = function(self, info_queue, card)
 		local crv = card.ability.extra
+		return{vars={crv.souls}}
 	end,
 	calculate = function(self, card, context)
 		local crv = card.ability.extra
-		if context.destroy_card and SMODS.get_enhancements(context.destroy_card)["m_crv_soulcard"] then
+		if context.destroy_card and SMODS.get_enhancements(context.destroy_card)["m_crv_soulcard"] and not context.destroy_card.getting_sliced then
 			G.GAME.souls = G.GAME.souls + crv.souls
 			return {
 				message = "+" .. crv.souls .. " Souls",
@@ -3857,8 +3833,10 @@ SMODS.Joker({
 			mult = (os.date("*t").day),
 		},
 	},
+	crv_credits = {
+		art = {"snayn3"}
+	},
 	loc_vars = function(self, info_queue, card)
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"snayn3"}}
 		local crv = card.ability.extra
 		return{vars={crv.mult}}
 	end,

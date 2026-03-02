@@ -127,8 +127,10 @@ local not_kitty_printer = {
 	config = {
 		extra = {},
 	},
+	crv_credits = {
+		idea = {"tech_wizard72"}
+	},
 	loc_vars = function(self, info_queue, card, center)
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_idea_credits", vars = {"tech_wizard72"}}
         local key, vars = self.key, {}
 	end,
 

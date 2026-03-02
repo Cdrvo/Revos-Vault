@@ -809,7 +809,7 @@ function Card:highlight(is_highlighted)
 				parent = self,
 			},
 		})
-	elseif self.highlighted and self.area and self.area == G.deathcard_chose and RevoConfig["experimental_enabled"] then
+	elseif self.highlighted and self.area and self.area == G.deathcard_chose then
 		if self.children.use_button then
 			self.children.use_button:remove()
 			self.children.use_button = nil
@@ -820,6 +820,8 @@ function Card:highlight(is_highlighted)
 				sell = false,
 				use = true,
 				button = "crv_death_ability",
+				bw = -0.1,
+				bh = 0.8,
 				text = "SELECT",
 				align_text = "cm"
 			}),
@@ -966,6 +968,10 @@ if RevoConfig["gems_enabled"] then
 				label = { localize("b_gems") },
 				minw = 5,
 				minh = 1,
+				count = {
+					tally = RevosVault.get_gem_count(),
+					of = RevosVault.get_total_gems() 
+				}
 			})
 			--[[local t2 = 
 				UIBox_button({
@@ -1469,6 +1475,8 @@ end
 
 G.FUNCS.RevosVault_info = function(args)   
     if not args or not args.menu_type or not G.localization.Menus[args.menu_type] then return end
+	args.pause = args.pause or false
+	G.SETTINGS.paused = args.pause
     G.FUNCS.overlay_menu{
         definition = RevosVault_create_info(args),
     }

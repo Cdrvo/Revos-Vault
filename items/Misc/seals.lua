@@ -9,7 +9,7 @@ SMODS.Seal({
 
 	calculate = function(self, card, context)
 		if context.main_scoring and context.cardarea == G.play then
-			local card = copy_card(card, nil, nil, G.playing_card)
+			local card = copy_card(card)
 			G.deck.config.card_limit = G.deck.config.card_limit + 1
 			table.insert(G.playing_cards, card)
 			card:set_seal()

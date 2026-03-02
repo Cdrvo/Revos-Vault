@@ -1,5 +1,36 @@
 return {
 		Menus = {
+		crv_deathcards_help = {
+            name = "{C:crv_deathcard}Deathcards",
+            text = {
+                {
+                    name = "Overview",
+                    text = {
+					{
+					  "{C:crv_deathcard}Deathcards{} are a {C:green}new{} kind",
+					  "of {C:attention}Joker{} that is made from your existing ones"
+					},
+					{
+					  "You will be able to {C:green}name{} your Joker and select it's",
+					  "{C:attention}Ability{}, {C:attention}Rarity{} and {C:attention}Edition"
+					},
+					{
+					  "Created {C:crv_deathcard}Deathcards{} are {C:green}saved{} to your profile",
+					  "and can appear for {C:attention}3{} runs.",
+					  "Card's remaining runs will be shown on it.",
+					},
+					{
+					  "{C:red}Keep in mind{} that this feature is still in {C:green}testing",
+					  "and can cause some unwanted issues"
+					},
+					{
+					  "Credits to {C:attention}LasagnaFelidae{} for providing",
+					  "the template art for Deathcards"
+					},
+                    }
+                },
+            },
+        },
 		crv_thevault = {
             name = "The Vault",
             text = {
@@ -128,6 +159,10 @@ return {
 				name = "Banana Deck",
 				text = { "Enable {C:crv_banana}Banana {C:dark_edition,T:crv_banana_mayhem_desc}Mayhem",
 			"{C:inactive,s:0.8}(Only banana jokers and packs can be created)" },
+			},
+			b_crv_goldendeck = {
+				name = "Golden Deck",
+				text = { "Score is now also","{C:red}Multiplied{} by current {C:money}Dollars{}" },
 			},
 
 
@@ -351,6 +386,18 @@ return {
 					"becomes {C:dark_edition}Negative{}.",
 					"Start the run with",
 					"{C:red}Extra Ink{}"
+				}
+			},
+
+			sleeve_crv_goldensleeve = {
+				name = "Golden Sleeve",
+				text = { "Score is now also","{C:red}Multiplied{} by current {C:money}Dollars{}" },
+			},
+			sleeve_crv_goldensleeve_alt = {
+				name = "Golden Sleeve",
+				text = {
+					"Starting {C:money}${}",
+					"is doubled"
 				}
 			},
 
@@ -1296,7 +1343,7 @@ return {
 				text = {
 					"{X:red,C:white} X#2# {} Mult if all",
 					"cards held in hand are",
-					"{C:attention}#3#{}",
+					"{V:1}#3#{}",
 					"{s:0.8}suit changes at end of round",
 				},
 			},
@@ -2240,7 +2287,7 @@ return {
 			j_crv_asc = {
 				name = "Ascended One",
 				text = {
-					"Gains {C:mult}#1#{} Mult",
+					"Gains {C:mult}+#1#{} Mult",
 					"for each {C:attention}Spectral{} Card",
 					"used this run",
 					"{C:inactive}(Currently {C:mult}+#2#{C:inactive} Mult)",
@@ -2281,7 +2328,7 @@ return {
 				name = "Everyone",
 				text = {
 					"Each scored {C:attention}Non-Face{} card",
-					"gives {C:chips}+#2#{}",
+					"gives {C:chips}+#2#{} Chips",
 					"Each scored {C:attention}Face{} card",
 					"gives {C:mult}+#1#{} Mult",
 				},
@@ -3054,6 +3101,26 @@ return {
 					"{C:inactive}(Must have room)",
 				}
 			},
+			-- Feli's Jokeria below
+			j_crv_peltprinter = {
+				name = "Pelt Printer",
+				text = {
+					"When first hand is drawn,",
+					"Turns a random card in hand to",
+					"{C:attention}Bunny Pelt{} or {C:attention}Wolf Pelt",
+					"{C:green}#1# in #2#{} Chance for it to be a {C:money}Gold Pelt{}",
+				},
+			},
+			-- Hyperfixation below
+			j_crv_overgrown_printer = {
+				name = "Overgrown Printer",
+				text = {
+					"When {C:attention}Blind{} is selected",
+					"print a random",
+					"{C:hpfx_LeshyOrange}Leshy's Cabin{} Card",
+					"{C:inactive}(Must have room)",
+				}
+			},
 			--ends here
 		},
 		Blessing = {
@@ -3271,6 +3338,7 @@ return {
 				name = "Camera",
 				text = {
 					"Creates a {C:red}Weak{}",
+					"and {C:crv_temp}Temporary",
 					"copy of the",
 					"highlighted {C:attention}Joker"
 				}
@@ -3948,6 +4016,13 @@ return {
 					"until the end of the round",
 				},
 			},
+			-- Hyperfixation (first ever crosmmod superior :fire::fire:)
+			c_crv_suphpfx_iji_deceit = {
+				name = "Superior Deceit",
+				text = {
+					"The selected {C:attention}Joker", "becomes one with the {C:hpfx_IjiGray,E:1}Ijiraq"
+				}
+			}
 		},
 
 		-- MF colour
@@ -4478,8 +4553,12 @@ return {
 						"appearing" },
 			},
 			v_crv_deathcard_making = {
-				name = "Deathcards",
-				text = { "After losing,","allows you to make","a {C:attention}custom{} card","from owned jokers.","{C:inactive}(Must have atleast 2 jokers)" },
+				name = "Jimbo's Photograph",
+				text = { "After losing,","allows you to create","a {C:crv_deathcard}Deathcard{}","{C:inactive}(Must have atleast 2 jokers)" },
+			},
+			v_crv_timer_up = {
+				name = "Timer Up",
+				text = { "Created {C:crv_deathcard}Deathcard{}", "lasts {C:attention}5{} rounds" },
 			},
 		},
 		Gem = {
@@ -4494,7 +4573,7 @@ return {
 			gem_crv_expe = {
 				name = "Emerald",
 				text = {
-					"Double all earned",
+					"Double all earned money",
 					"for {C:attention}#2#{C:inactive} (#1#){} rounds",
 				},
 			},
@@ -4542,6 +4621,15 @@ return {
 					"All {C:attention}Cards{} in shop spawns",
 					"with a {C:dark_edition}Random Edition",
 					"for {C:attention}#2#{C:inactive} (#1#){} rounds",
+				},
+			},
+			gem_crv_lapislazuli = {
+				name = "Lapis Lazuli",
+				text = {
+					"Next {C:attention}#2#{C:inactive} (#1#){} {C:green}activated{} gems",
+					"lasts for {C:attention}+#3#{}",
+					"extra rounds",
+					-- "{s:0.8}Lapis Lazuli excluded"
 				},
 			},
 		},
@@ -4616,7 +4704,17 @@ return {
 			crv_stable_patch = "Stable",
 			crv_purified_patch = "Purified",
 		},
+		v_dictionary = {
+			crv_art = {"Art: #1#"},
+			crv_code = {"Code: #1#"},
+			crv_idea = {"Idea: #1#"},
+		},
 		dictionary = {
+
+			crv_Tarot = "Tarot",
+			crv_Spectral = "Spectral",
+			crv_Planet = "Planet", 
+			
 			crv_revosvault = "Revo's Vault",
 			k_crv_pbstg = "Printer Pack",
 			k_crv_cbstg = "Contract Pack",
@@ -4688,10 +4786,19 @@ return {
 			crv_enable_secret = "Enable Secret Jokers",
 			crv_enable_blinds = "Enable Blinds",
 			crv_enable_curses = "Enable Curses",
+
+
 			ph_active_gems = "Active Gems",
 			no_gems = "No active gems",
 			b_gems = "Gems",
 			b_gem = "Gem",
+
+			ph_available_deathcards = "Available Deathcards",
+			no_deathcards = "No Deathcards available",
+			b_deathcards = "Deathcards",
+			b_deathcard = "Deathcard",
+
+			
 			b_gem_act = "Activated!",
 			crv_enable_gems = "Enable Gems",
 			vars_not_active_yet = "Not Active Yet",

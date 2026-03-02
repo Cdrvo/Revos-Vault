@@ -49,10 +49,12 @@ G.FUNCS.redeem_gem = function(e)
 
 	
 
-	SMODS.add_card{
+	local rgem = SMODS.add_card{
 		key = card.config.center.key,
 		area = G.crv_gem_area
 	}
+
+	SMODS.calculate_context({gem_redeemed = true, gem = rgem})
 
 	check_for_unlock({type = "gemming_it"})
 
@@ -151,9 +153,11 @@ RevosVault.Gem({
 			destroy_time_max = 5,
 		},
 	},
+	crv_credits = {
+		art = {"mr.cr33ps"}
+	},
 	loc_vars = function(self,info_queue,card)
 		local cae = card.ability.extra
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"mr.cr33ps"}}
 		return{vars={cae.destroy_time, cae.destroy_time_max}}
 	end,
 	calculate = function(self, card, context)
@@ -188,9 +192,11 @@ RevosVault.Gem({
 			destroy_time_max = 2,
 		},
 	},
+	crv_credits = {
+		art = {"mr.cr33ps"}
+	},
 	loc_vars = function(self,info_queue,card)
 		local cae = card.ability.extra
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"mr.cr33ps"}}
 		return{vars={cae.destroy_time, cae.destroy_time_max}}
 	end,
 	calculate = function(self, card, context)
@@ -236,9 +242,11 @@ RevosVault.Gem({
 			destroy_time_max = 1,
 		},
 	},
+	crv_credits = {
+		art = {"mr.cr33ps"}
+	},
 	loc_vars = function(self,info_queue,card)
 		local cae = card.ability.extra
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"mr.cr33ps"}}
 		return{vars={cae.destroy_time, cae.destroy_time_max}}
 	end,
 	calculate = function(self, card, context)
@@ -268,9 +276,11 @@ RevosVault.Gem({
 			destroy_time_max = 5,
 		},
 	},
+	crv_credits = {
+		art = {"mr.cr33ps"}
+	},
 	loc_vars = function(self,info_queue,card)
 		local cae = card.ability.extra
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"mr.cr33ps"}}
 		return{vars={cae.destroy_time, cae.destroy_time_max}}
 	end,
 	calculate = function(self, card, context)
@@ -305,9 +315,11 @@ RevosVault.Gem({
 			destroy_time_max = 1,
 		},
 	},
+	crv_credits = {
+		art = {"mr.cr33ps"}
+	},
 	loc_vars = function(self,info_queue,card)
 		local cae = card.ability.extra
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"mr.cr33ps"}}
 		return{vars={cae.destroy_time, cae.destroy_time_max}}
 	end,
 	calculate = function(self, card, context)
@@ -338,9 +350,11 @@ RevosVault.Gem({
             old_odds = 0
 		},
 	},
+	crv_credits = {
+		art = {"mr.cr33ps"}
+	},
 	loc_vars = function(self,info_queue,card)
 		local cae = card.ability.extra
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"mr.cr33ps"}}
 		return{vars={cae.destroy_time, cae.destroy_time_max, cae.old_odds}}
 	end,
     calculate = function(self, card, context)
@@ -370,10 +384,12 @@ RevosVault.Gem({
             old_odds = 0
 		},
 	},
+	crv_credits = {
+		art = {"mr.cr33ps"}
+	},
 	loc_vars = function(self,info_queue,card)
 		info_queue[#info_queue+1] = {set = "Other", key = "crv_fixed_chances"}
 		local cae = card.ability.extra
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"mr.cr33ps"}}
 		return{vars={cae.destroy_time, cae.destroy_time_max, cae.old_odds}}
 	end,
     calculate = function(self, card, context)
@@ -405,9 +421,11 @@ RevosVault.Gem({
 			destroy_time_max = 2,
 		},
 	},
+	crv_credits = {
+		art = {"mr.cr33ps"}
+	},
 	loc_vars = function(self,info_queue,card)
 		local cae = card.ability.extra
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_art_credits", vars = {"mr.cr33ps"}}
 		return{vars={cae.destroy_time, cae.destroy_time_max}}
 	end,
 	update = function(self, card, context) 
@@ -427,6 +445,42 @@ RevosVault.Gem({
 			else
 				card.ability.extra.destroy_time = card.ability.extra.destroy_time + 1
 			end
+		end
+	end
+})
+
+RevosVault.Gem({
+	key = "lapislazuli",
+	atlas = "gemss",
+	pos = { x = 0, y = 1 },
+	config = {
+		extra = {
+			destroy_time = 0,
+			destroy_time_max = 2,
+			timer_increase = 2
+		},
+	},
+	crv_credits = {
+		art = {"Nyxel"}
+	},
+	loc_vars = function(self,info_queue,card)
+		local cae = card.ability.extra
+		return{vars={cae.destroy_time, cae.destroy_time_max, cae.timer_increase}}
+	end,
+	calculate = function(self,card,context)
+		if context.gem_redeemed and context.gem and context.gem.config.center.key ~= "gem_crv_lapislazuli" then
+
+			if context.gem.ability and context.gem.ability.extra.destroy_time_max then
+				context.gem.ability.extra.destroy_time_max = context.gem.ability.extra.destroy_time_max + card.ability.extra.timer_increase
+			end
+
+			if card.ability.extra.destroy_time < card.ability.extra.destroy_time_max-1 then
+				card.ability.extra.destroy_time = card.ability.extra.destroy_time + 1
+			else
+				card.ability.extra.destroy_time = card.ability.extra.destroy_time + 1
+				RevosVault.remove_gem(card.config.center.key)
+			end
+
 		end
 	end
 })

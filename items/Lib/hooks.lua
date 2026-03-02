@@ -155,10 +155,10 @@ end
 	local shopcreateold = create_card_for_shop
 	function create_card_for_shop(area)
 		if RevosVault.config.gems_enabled then
-			if ((pseudorandom("gem_rate") > G.GAME.gem_rate) and not RevosVault.gem_skip) or RevosVault.guarantee_gem then
+			if ((pseudorandom("gem_rate") > G.GAME.gem_rate) and not G.GAME.gem_skip) or G.GAME.guarantee_gem then
 				RevosVault.add_gem()
 			end
-			RevosVault.gem_skip = true
+			G.GAME.gem_skip = true
 		end
 
 		--[[if pseudorandom("get_boon") < 1 / 4 then
@@ -308,6 +308,7 @@ end
 local add_to_deck_old = Card.add_to_deck
 function Card:add_to_deck(from_debuff)
 local ret = add_to_deck_old(self, from_debuff)
+
 	if self.config.center.rarity == "crv_p" then
 		check_for_unlock({type = "obtain_printer"})
 	end
@@ -329,10 +330,10 @@ local click_old = Card.click
 function Card:click()
 	local ret = click_old(self)
 
-		if self.config.center.key == "j_crv_clicker" then
-			self.ability.extra["clicks"] = self.ability.extra["clicks"] + 1
-			self.ability.extra["chips"] = self.ability.extra["chips"] + self.ability.extra["chipgain"]
+		if self.config.center.crv_clicker then
+			self.config.center:crv_clicker(self)
 		end
+
 		if self.config.center.key == "j_crv_modicon" and (RevosVault.clicker_fix) then
 			local cae = G.real_modicon_area.cards[RevosVault.get_key_pos("j_crv_clicker")].ability.extra
 			cae.clicks = cae.clicks + 1
@@ -374,6 +375,17 @@ end
 local update_old = Game.update
 function Game:update(dt)
 	update_old(self, dt)
+	if RevoConfig and RevoConfig["deathcards_enabled"] then
+		if G and G.GAME and G.GAME.deathcard_seed_crv then
+			if G.PROFILES[G.SETTINGS.profile].crv_deathcards and G.PROFILES[G.SETTINGS.profile].crv_deathcards[G.GAME.deathcard_seed_crv] then
+				RevosVault.placeholder_name = G.PROFILES[G.SETTINGS.profile].crv_deathcards[G.GAME.deathcard_seed_crv].given_name or ""
+			end
+		end
+	end
+	if G and G.GAME and G.GAME.current_round and G.GAME.current_round.current_hand and G.GAME.current_round.current_hand.crv_dollars_mult_text then
+		SMODS.Scoring_Parameters.crv_dollars_mult:crv_set(G.GAME.dollars or 0)
+		G.GAME.current_round.current_hand.crv_dollars_mult = SMODS.Scoring_Parameters.crv_dollars_mult.current
+	end
 	if SMODS then
 		for _, area in ipairs(SMODS.get_card_areas("jokers")) do
 			if area and area.cards then
@@ -546,6 +558,11 @@ end
 local emplace_old = CardArea.emplace
 function CardArea:emplace(card, location, stay_flipped)
 	emplace_old(self, card, location, stay_flipped)
+	
+	if card and card.config and card.config.center and card.config.center.crv_forced_edition then
+		card:set_edition(card.config.center.crv_forced_edition, true, true)
+	end
+
 	if card and card.config and card.config.center and card.config.center.key and not card.crv_fake then
 		if card.config.center.crv_special then
 			for _, area in pairs(SMODS.get_card_areas("jokers")) do
@@ -571,6 +588,15 @@ function CardArea:emplace(card, location, stay_flipped)
 		if RevosVault.config.superior_enabled and card.ability.set ~= "Joker" then
 			if pseudorandom("supcreate") < 1 / (1000/G.GAME.superior_mod) and card:has_potential() then
 				RevosVault.unleash_potential(card)
+				play_sound("holo1")
+				G.E_MANAGER:add_event(Event({
+					trigger = "immediate",
+					func = function()
+						card:juice_up()
+						return true
+					end
+				}))
+				
 			end
 		end
 	
@@ -655,27 +681,112 @@ function Game:start_run(args)
 	end
 
 	start_run_old(self, args)
-
-	if RevoConfig["experimental_enabled"] then
+	if RevoConfig and RevoConfig["deathcards_enabled"] then
+		RevosVault.reset_dcard_states()
 		local PDCARD = G.PROFILES[G.SETTINGS.profile].crv_deathcards
 
 		if PDCARD then
 			for k, v in pairs(PDCARD) do
+
+				local NAME = PDCARD[k].given_name
+				
+				if PDCARD[k].mod ~= nil then
+					print(PDCARD[k].mod)
+				end
+
+				if PDCARD[k].incomplete then PDCARD[k] = nil G:save_settings() return end
+				if PDCARD[k].mod 
+				and SMODS.Mods and 
+				SMODS.Mods[PDCARD[k].mod]
+				and not SMODS.Mods[PDCARD[k].mod].can_load
+				then PDCARD[k] = nil G:save_settings() 
+				sendWarnMessage("Required mod's for " .. (NAME or "ERROR") .. " doesn't exist. Removing it from profile", "RevosVault") return end -- make this save instead of perma removal
+
 				local card = G.P_CENTERS[PDCARD[k].occupied_card]
 				local fcard = G.P_CENTERS[PDCARD[k].function_from]
+
+
 				if card then
+
+					card.crv_forced_edition = PDCARD[k].edition
 					card.name = PDCARD[k].name
-					card.ability = PDCARD[k].ability_table
+					card.config = PDCARD[k].ability_table
+
+					SMODS.remove_pool(G.P_JOKER_RARITY_POOLS[card.rarity], card)
+
 					card.rarity = PDCARD[k].rarity
+
+					
+        			SMODS.insert_pool(G.P_JOKER_RARITY_POOLS[PDCARD[k].rarity], card)
+
+					card.pos.x = PDCARD[k].sprite_x
+					card.pos.y = PDCARD[k].sprite_y
+
 					if PDCARD[k].function_from then
 						for k2, v2 in pairs(G.P_CENTERS[PDCARD[k].function_from]) do
 							if type(v2) == "function" then
 								card[k2] = v2
 							end
 						end
-						G.localization.descriptions.Joker[PDCARD[k].occupied_card] = G.localization.descriptions.Joker[PDCARD[k].function_from] --ok don't judge me this is the only way i could think of
-						G.localization.descriptions.Joker[PDCARD[k].occupied_card].name = PDCARD[k].given_name or "Deathcard"
-						G.localization.descriptions.Joker[PDCARD[k].occupied_card].name_parsed = {{strings = {(PDCARD[k].given_name or "Deathcard")}, control = {}}}
+						if G.localization.descriptions.Joker[PDCARD[k].function_from] then 
+							local loc = copy_table(G.localization.descriptions.Joker[PDCARD[k].function_from])
+							G.localization.descriptions.Joker[PDCARD[k].occupied_card] = loc --ok don't judge me this is the only way i could think of
+						else
+							local loc = copy_table(G.localization.descriptions.Joker["j_joker"])
+							G.localization.descriptions.Joker[PDCARD[k].occupied_card] = loc
+						end
+						G.localization.descriptions.Joker[PDCARD[k].occupied_card].name = PDCARD[k].given_name or ""
+						G.localization.descriptions.Joker[PDCARD[k].occupied_card].name_parsed = {{{strings = {PDCARD[k].given_name or ""}, control = {}}}}
+					end
+
+					if not card.set_sprites then
+						card.set_sprites = function(self,card,front)
+							card.crv_canvas_text_2 = SMODS.CanvasSprite({
+								canvasW = 71,
+								canvasH = 95,
+								text_offset = { x = 36, y = 78 },
+								text_width = 45,
+								text_height = 18,
+								ref_table = PDCARD[k],
+								ref_value = "timer",
+								text_colour = HEX("351a09")
+							})
+							card.crv_canvas_text_1 = SMODS.CanvasSprite({
+								canvasW = 71,
+								canvasH = 95,
+								text_offset = { x = 36, y = 11 },
+								text_width = 45,
+								text_height = 11,
+								ref_table = PDCARD[k],
+								ref_value = "given_name",
+								text_colour = HEX("351a09")
+							})
+						end
+					else
+						local set_sprites_old = card.set_sprites
+						card.set_sprites = function(self,card,front)
+							card.crv_canvas_text_2 = SMODS.CanvasSprite({
+								canvasW = 71,
+								canvasH = 95,
+								text_offset = { x = 36, y = 78 },
+								text_width = 45,
+								text_height = 18,
+								ref_table = PDCARD[k],
+								ref_value = "timer",
+								text_colour = HEX("351a09")
+							})
+							card.crv_canvas_text_1 = SMODS.CanvasSprite({
+								canvasW = 71,
+								canvasH = 95,
+								text_offset = { x = 36, y = 11 },
+								text_width = 45,
+								text_height = 11,
+								ref_table = PDCARD[k],
+								ref_value = "given_name",
+								text_colour = HEX("351a09")
+							})
+							set_sprites_old(self, card, front)
+						end
 					end
 				end
 			end
@@ -794,8 +905,8 @@ end
 
 local toggle_shop_old = G.FUNCS.toggle_shop
 function G.FUNCS.toggle_shop(e)
-	if G.shop and RevosVault.gem_skip then
-		RevosVault.gem_skip = false
+	if G.shop and G.GAME.gem_skip then
+		G.GAME.gem_skip = false
 	end
     toggle_shop_old(e)
 end
