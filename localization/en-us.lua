@@ -3101,7 +3101,7 @@ return {
 					"{C:inactive}(Must have room)",
 				}
 			},
-			-- Feli's Jokeria
+			-- Feli's Jokeria below
 			j_crv_peltprinter = {
 				name = "Pelt Printer",
 				text = {
@@ -3110,6 +3110,16 @@ return {
 					"{C:attention}Bunny Pelt{} or {C:attention}Wolf Pelt",
 					"{C:green}#1# in #2#{} Chance for it to be a {C:money}Gold Pelt{}",
 				},
+			},
+			-- Hyperfixation below
+			j_crv_overgrown_printer = {
+				name = "Overgrown Printer",
+				text = {
+					"When {C:attention}Blind{} is selected",
+					"print a random",
+					"{C:hpfx_LeshyOrange}Leshy's Cabin{} Card",
+					"{C:inactive}(Must have room)",
+				}
 			},
 			--ends here
 		},
