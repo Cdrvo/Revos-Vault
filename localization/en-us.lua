@@ -4710,6 +4710,11 @@ return {
 			crv_idea = {"Idea: #1#"},
 		},
 		dictionary = {
+
+			crv_Tarot = "Tarot",
+			crv_Spectral = "Spectral",
+			crv_Planet = "Planet", 
+			
 			crv_revosvault = "Revo's Vault",
 			k_crv_pbstg = "Printer Pack",
 			k_crv_cbstg = "Contract Pack",

@@ -1,0 +1,29 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = -9
+
+# sticker functions
+
+[[patches]]
+[patches.pattern]
+target = '=[SMODS _ "src/game_object.lua"]'
+pattern = '''SMODS.insert_pool(G.P_CENTER_POOLS['Consumeables'], self)'''
+position = 'after'
+payload = '''
+if self and self.set and self.set == "Superior" then
+    if self.soul_set or self.crv_in_set then
+        G.unique_superiors = G.unique_superiors or {}
+        if self.crv_in_set then
+
+            G.unique_superiors[self.crv_in_set] = G.unique_superiors[self.crv_in_set] or true
+
+        else
+
+            G.unique_superiors[self.soul_set] = G.unique_superiors[self.soul_set] or true
+
+        end
+    end
+end
+'''
+match_indent = true
