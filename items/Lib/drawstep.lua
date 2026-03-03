@@ -62,7 +62,7 @@ SMODS.DrawStep({
 					canvasH = 95,
 					text_offset = { x = 36, y = 78 },
 					text_width = 45,
-                    text_height = 11,
+                    text_height = 18,
 					ref_table = pdd[pd],
 					ref_value = "timer",
 					text_colour = HEX("351a09"),
