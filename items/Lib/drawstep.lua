@@ -36,6 +36,40 @@ SMODS.DrawStep({
 	conditions = { vortex = false, facing = "front" },
 })
 
+SMODS.DrawStep({
+	key = "force_canvas",
+	order = 11,
+	func = function(self)
+		if string.find(self.config.center.soul_set, "j_crv_deathcard") then
+			if not self.crv_canvas_text_1 then
+				self.crv_canvas_text_1 = SMODS.CanvasSprite({
+					canvasW = 71,
+					canvasH = 95,
+					text_offset = { x = 36, y = 11 },
+					text_width = 45,
+					text_height = 11,
+					ref_table = RevosVault,
+					ref_value = "placeholder_name",
+					text_colour = HEX("351a09"),
+				})
+			end
+			-- print(RevosVault.placeholder_name)
+			if not self.crv_canvas_text_2 then
+				self.crv_canvas_text_2 = SMODS.CanvasSprite({
+					canvasW = 71,
+					canvasH = 95,
+					text_offset = { x = 36, y = 78 },
+					text_width = 45,
+					text_height = 18,
+					text = (G.GAME.crv_upgraded_timers and 5) or 3,
+					text_colour = HEX("351a09"),
+				})
+			end
+		end
+	end,
+	conditions = { vortex = false, facing = "front" },
+})
+
 SMODS.DrawStep {
     key = 'crv_canvas_text_1',
     order = 45,
