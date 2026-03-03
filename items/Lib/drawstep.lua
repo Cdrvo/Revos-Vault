@@ -40,7 +40,7 @@ SMODS.DrawStep({
 	key = "force_canvas",
 	order = 11,
 	func = function(self)
-		if string.find(self.config.center.soul_set, "j_crv_deathcard") then
+		if string.find(self.config.center.key, "j_crv_deathcard") then
 			if not self.crv_canvas_text_1 then
 				self.crv_canvas_text_1 = SMODS.CanvasSprite({
 					canvasW = 71,
