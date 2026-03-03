@@ -249,55 +249,8 @@ end
 
 -- collection ui for superiors
 
---TODO: steal smods consumable ui and allow this to have shit like pages / add tallies
-G.FUNCS.general_superior_ui = function()
-	RevosVault.av = {}
-	G.FUNCS.crv_superior_custom_collection()
 
-local t = create_UIBox_generic_options({
-		back_func = "your_collection_consumables",
-		colour = RevosVault.ui_config.colour,
-		back_colour = RevosVault.ui_config.back_colour,
-		contents = {
-			{
-				n = G.UIT.R,
-				config = { align = "cm", r = 0.1, colour = G.C.BLACK },
-				nodes = {
-					{
-						n = G.UIT.C,
-						nodes = {
-							
-						},
-					},
-				},
-			},
-		},
-	})
-	local tablins = (t.nodes[1].nodes[1].nodes[1].nodes[1].nodes)
-
-	for i = 1, #RevosVault.av do
-		local lab = string.gsub(tostring(RevosVault.av[i]), "collection_button_", "")
-		table.insert(
-			tablins,
-			UIBox_button({
-				colour = RevosVault.C.SUP,
-				button = RevosVault.av[i],
-				label = { lab },
-				minw = 4.5,
-				focus_args = { snap_to = true },
-			})
-		)
-		table.insert(
-			tablins,
-			{ n = G.UIT.R, config = { colour = G.C.CLEAR, scale = 0.1, padding = 0.1 } }
-		)
-	end
-	return t
-end
-
-G.FUNCS.superior_crv_menu = function(e)
-	RevosVault.easy_overlay(true, G.FUNCS.general_superior_ui())
-end
+-- idk if everything here is needed or not :(
 
 G.FUNCS.crv_superior_custom_collection = function(e)
 	for k, v in pairs(G.unique_superiors) do
@@ -356,13 +309,18 @@ G.FUNCS.crv_superior_custom_collection = function(e)
 						if RevosVault.negative_pdeck then
 							-- yes
 						end
+						card.dissolve = 1
 						G.your_collection[j]:emplace(card)
+						card:start_materialize()
 					end
 				end
 			end
 
 			local t = create_UIBox_generic_options({
-				back_func = "superior_crv_menu",
+				back_func = "your_collection_SUPERIORSCRV",
+				colour = RevosVault.ui_config.colour,
+				bg_colour = RevosVault.ui_config.bg_colour,
+				back_colour = RevosVault.ui_config.back_colour,
 				contents = {
 					{
 						n = G.UIT.R,
@@ -379,7 +337,7 @@ G.FUNCS.crv_superior_custom_collection = function(e)
 								cycle_shoulders = true,
 								opt_callback = "page_ui_" .. k,
 								current_option = 1,
-								colour = G.C.RED,
+								colour = RevosVault.ui_config.collection_option_cycle_colour,
 								no_pips = true,
 								focus_args = { snap_to = true, nav = "wide" },
 							}),
@@ -427,7 +385,9 @@ G.FUNCS.crv_superior_custom_collection = function(e)
 					)
 
 
-					G.your_collection[j]:emplace(card)
+					card.dissolve = 1
+						G.your_collection[j]:emplace(card)
+						card:start_materialize()
 				end
 			end
 		end
@@ -440,4 +400,118 @@ G.FUNCS.crv_superior_custom_collection = function(e)
 
 		RevosVault.av[#RevosVault.av+1] = "collection_button_" .. k
 	end
+end
+
+G.FUNCS.your_collection_SUPERIORSCRV = function(e)
+    G.SETTINGS.paused = true
+    G.FUNCS.overlay_menu{
+      definition = create_UIBox_your_collection_SUPERIORSCRV(),
+    }
+end
+
+
+function create_UIBox_your_collection_SUPERIORSCRV()
+    local t = create_UIBox_generic_options({
+        colour = RevosVault.ui_config.colour,
+        bg_colour = RevosVault.ui_config.bg_colour,
+        back_colour = RevosVault.ui_config.back_colour,
+        --outline_colour = darken(G.C.WHITE, 0.2),
+        back_func = 'your_collection_consumables', 
+        contents = {
+        { n = G.UIT.C, config = { align = 'cm', minw = 11.5, minh = 6 }, nodes = {
+            { n = G.UIT.O, config = { id = 'SUPERIORCRV_collection', object = Moveable() },}
+        }},
+    }})
+    G.E_MANAGER:add_event(Event({func = function()
+        G.FUNCS.your_collection_SUPERIORSCRV_page({ cycle_config = { current_option = 1 }})
+        return true
+    end}))
+    return t
+end
+
+G.FUNCS.your_collection_SUPERIORSCRV_page = function(args)
+    if not args or not args.cycle_config then return end
+  if G.OVERLAY_MENU then
+    local uie = G.OVERLAY_MENU:get_UIE_by_ID('SUPERIORCRV_collection')
+    if uie then
+      if uie.config.object then
+        uie.config.object:remove()
+      end
+      uie.config.object = UIBox{
+        definition =  G.UIDEF.SUPERIORCRV_collection_page(args.cycle_config.current_option),
+        config = { align = 'cm', parent = uie}
+      }
+    end
+  end
+end
+
+G.UIDEF.SUPERIORCRV_collection_page = function(page)
+    G.FUNCS.crv_superior_custom_collection()
+    local nodes_per_page = 10
+    local page_offset = nodes_per_page * ((page or 1) - 1)
+    local type_buf = {}
+    if G.ACTIVE_MOD_UI then
+        for _, v in pairs(G.unique_superiors) do
+            if modsCollectionTally(G.P_CENTER_POOLS["Superior" .. _]).of > 0 then type_buf[#type_buf + 1] = "Superior" .. _ end
+        end
+    else
+		for _, v in pairs(G.unique_superiors) do
+			type_buf[#type_buf + 1] = "Superior" .. _
+		end
+	end
+    local center_options = {}
+    for i = 1, math.ceil(#type_buf / nodes_per_page) do
+        table.insert(center_options,
+            localize('k_page') ..
+            ' ' .. tostring(i) .. '/' .. tostring(math.ceil(#type_buf / nodes_per_page)))
+    end
+    local option_nodes = { create_option_cycle({
+        options = center_options,
+        w = 4.5,
+        cycle_shoulders = true,
+        opt_callback = 'your_collection_SUPERIORSCRV_page',
+        focus_args = { snap_to = true, nav = 'wide' },
+        current_option = page or 1,
+        colour = RevosVault.ui_config.collection_option_cycle_colour,
+        no_pips = true
+    }) }
+    local function create_SUPERIORCRV_nodes(_start, _end)
+        local t = {}
+        for i = _start, _end do
+            local key = type_buf[i]
+            if not key then
+                if i == _start then break end
+                t[#t+1] = { n = G.UIT.R, config = { align ='cm', minh = 0.81 }, nodes = {}}
+            else
+                local id = 'collection_button_'.. string.gsub(key, "Superior", "")
+                t[#t+1] = UIBox_button({button = id, label = {localize('b_'..key:lower()..'_cards')}, count = G.ACTIVE_MOD_UI and modsCollectionTally(G.P_CENTER_POOLS[key]) or RevosVault.get_discover_tally(key), minw = 4, id = id, colour = RevosVault.C.SUP, text_colour = G.C.WHITE})
+            end
+        end
+        return t
+    end
+
+    local t = { n = G.UIT.C, config = { align = 'cm' }, nodes = {
+        {n=G.UIT.R, config = {align="cm"}, nodes = {
+            {n=G.UIT.C, config={align = "tm", padding = 0.15}, nodes= create_SUPERIORCRV_nodes(page_offset + 1, page_offset + math.ceil(nodes_per_page/2))},
+            {n=G.UIT.C, config={align = "tm", padding = 0.15}, nodes= create_SUPERIORCRV_nodes(page_offset+1+math.ceil(nodes_per_page/2), page_offset + nodes_per_page)},
+        }},
+        {n=G.UIT.R, config = {align="cm"}, nodes = option_nodes},
+    }}
+    return t
+end
+
+function RevosVault.get_discover_tally(pool)
+	local count = {
+		of = 0,
+		tally = 0
+	}
+	for k, v in pairs(G.P_CENTER_POOLS[pool]) do
+		if not v.no_collection then
+			count.of = count.of + 1
+			if v.discovered then
+				count.tally = count.tally + 1
+			end
+		end
+	end
+	return count
 end

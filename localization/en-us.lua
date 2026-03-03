@@ -4711,6 +4711,10 @@ return {
 		},
 		dictionary = {
 
+			b_superiorspectral_cards = "Superior Spectrals",
+			b_superiortarot_cards = "Superior Tarots",
+			b_superiorplanet_cards = "Superior Planets",
+
 			crv_Tarot = "Tarot",
 			crv_Spectral = "Spectral",
 			crv_Planet = "Planet", 

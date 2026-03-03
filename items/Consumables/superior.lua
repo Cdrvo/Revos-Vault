@@ -14,7 +14,7 @@ SMODS.ConsumableType({
 		G.C.SECONDARY_SET[self.key] = self.secondary_colour
 		G.C.UI[self.key] = self.text_colour or G.C.UI.TEXT_LIGHT
 		G.FUNCS["your_collection_" .. string.lower(self.key) .. "s"] = function(e)
-			RevosVault.easy_overlay(true, G.FUNCS.general_superior_ui())
+			G.FUNCS.your_collection_SUPERIORSCRV()
 		end
     end,
 })
