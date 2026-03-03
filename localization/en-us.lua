@@ -3591,7 +3591,7 @@ return {
 					"Played lucky cards a retrigger",
 				},
 			},
-			c_crv_suppriestess = {
+			c_crv_suphigh_priestess = {
 				name = "Superior Priestess",
 				text = {
 					"Creates {C:attention}#1# {C:dark_edition}Negative {C:planet}Planet{}",
