@@ -386,6 +386,8 @@ G.FUNCS.crv_death_ability = function(e)
 				PDCARD[G.GAME.deathcard_seed_crv].name = card.config.center.name
 				PDCARD[G.GAME.deathcard_seed_crv].ability_table = copy_table(card.ability)
 
+				RevosVault.internal_sticker_removal(PDCARD[G.GAME.deathcard_seed_crv].ability_table)
+
 				if card.config.center.mod then
 					PDCARD[G.GAME.deathcard_seed_crv].mod = card.config.center.mod.id
 				end

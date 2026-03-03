@@ -2648,3 +2648,11 @@ function RevosVault.get_rarity(card)
 	end
 	return "Common"
 end
+
+function RevosVault.internal_sticker_removal(table)
+	for k, v in pairs(table) do
+		if SMODS.Stickers[k] then
+			table[k] = nil
+		end
+	end
+end
