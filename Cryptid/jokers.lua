@@ -142,7 +142,7 @@ local not_kitty_printer = {
                 local v = v2.key
                 if not no_tab and G.P_CENTERS[v] and (string.find(string.lower(localize({ type = "name_text", key = v, set = "Joker" })), "cat") or string.find(string.lower(localize({ type = "name_text", key = v, set = "Joker" })), "kitty")) then 
                     tab2[#tab2 + 1] = v
-                    print(v)
+                    --print(v)
                 end
             end
             if #tab2 >= 1 then

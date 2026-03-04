@@ -691,7 +691,7 @@ function Game:start_run(args)
 				local NAME = PDCARD[k].given_name
 				
 				if PDCARD[k].mod ~= nil then
-					print(PDCARD[k].mod)
+					--print(PDCARD[k].mod)
 				end
 
 				if PDCARD[k].incomplete then PDCARD[k] = nil G:save_settings() return end
