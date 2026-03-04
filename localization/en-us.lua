@@ -3591,7 +3591,7 @@ return {
 					"Played lucky cards a retrigger",
 				},
 			},
-			c_crv_suppriestess = {
+			c_crv_suphigh_priestess = {
 				name = "Superior Priestess",
 				text = {
 					"Creates {C:attention}#1# {C:dark_edition}Negative {C:planet}Planet{}",
@@ -4710,6 +4710,10 @@ return {
 			crv_idea = {"Idea: #1#"},
 		},
 		dictionary = {
+
+			b_superiorspectral_cards = "Superior Spectrals",
+			b_superiortarot_cards = "Superior Tarots",
+			b_superiorplanet_cards = "Superior Planets",
 
 			crv_Tarot = "Tarot",
 			crv_Spectral = "Spectral",

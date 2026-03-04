@@ -553,21 +553,12 @@ function RevosVault.replacecards(area, replace, bypass_eternal, keep, keeporigin
 								b = k
 							end
 						end
-						if rarity == 1 then
-							rarity = "Common"
-						elseif rarity == 2 then
-							rarity = "Uncommon"
-						elseif rarity == 3 then
-							rarity = "Rare"
-						elseif rarity == 4 then
-							rarity = "Legendary"
-						end
 						local set = area[i].ability.set
 						local tab = {}
-						for i = 1, #RevosVault.get_eligible_cards(nil, "Joker", true) do
-							if RevosVault.get_eligible_cards(nil, "Booster", true)[i] then
-								if RevosVault.get_eligible_cards(nil, "Joker", true)[i].rarity == b then
-									tab[#tab + 1] = RevosVault.get_eligible_cards(nil, "Joker", true)[i].key
+						for k, v in pairs(RevosVault.get_eligible_cards(nil, "Joker", nil)) do
+							if G.P_CENTERS[v] then
+								if b and G.P_CENTERS[v].rarity and  G.P_CENTERS[v].rarity == b then
+									tab[#tab + 1] = v.key
 								end
 							end
 						end
@@ -594,7 +585,8 @@ function RevosVault.replacecards(area, replace, bypass_eternal, keep, keeporigin
 								}))
 							else
 								area[i]:juice_up()
-								area[i]:set_ability(pseudorandom_element(tab))
+								--area[i]:set_ability(pseudorandom_element(tab))
+								print(pseudorandom_element(tab))
 								tab = {}
 							end
 						end
@@ -612,10 +604,12 @@ function RevosVault.replacecards(area, replace, bypass_eternal, keep, keeporigin
 							rarity = "Legendary"
 						end
 						local tab = {}
-						for i = 1, #RevosVault.get_eligible_cards(nil, "Joker", true) do
-							if RevosVault.get_eligible_cards(nil, "Booster", true)[i] then
-								if RevosVault.get_eligible_cards(nil, "Joker", true)[i].rarity == b then
-									tab[#tab + 1] = RevosVault.get_eligible_cards(nil, "Joker", true)[i].key
+						for k, v in pairs(RevosVault.get_eligible_cards(nil, "Joker", true)) do
+							if v then
+								if b and v.rarity and v.rarity == b then
+									if v.key then
+										tab[#tab + 1] = v.key
+									end
 								end
 							end
 						end
@@ -782,6 +776,44 @@ function RevosVault.replacecards(area, replace, bypass_eternal, keep, keeporigin
 		end
 	end
 end
+
+-- uh
+
+function RevosVault.replace_joker(area, _flip, rarity) -- FUCK,
+	local function random_joker()
+		local a = {}
+		a = SMODS.get_clean_pool("Joker", rarity)
+		local b = pseudorandom_element(a)
+		return b
+	end
+	for i = 1, #area do
+			if _flip then
+				area[i]:flip()
+				G.E_MANAGER:add_event(Event({
+					trigger = "before",
+					delay = 1,
+					func = function()
+						area[i]:set_ability(random_joker())
+						return true
+					end,
+				}))
+				G.E_MANAGER:add_event(Event({
+					trigger = "after",
+					delay = 1,
+					func = function()
+						
+						area[i]:juice_up()
+						area[i]:flip()
+						return true
+					end,
+				}))
+			else
+				area[i]:juice_up()
+				local a = random_joker()
+				area[i]:set_ability(random_joker())
+			end
+		end
+	end
 
 function RevosVault.replace_playing_cards(area, _flip) -- FUCK
 	for i = 1, #area do
@@ -1429,7 +1461,7 @@ function RevosVault.get_eligible_cards(mod, type, ret_center)
 				tab_centers[#tab_centers + 1] = G.P_CENTERS[v]
 			end
 		else
-			if G.P_CENTERS[v] then
+			if G.P_CENTERS[v] and G.P_CENTERS[v].key and G.P_CENTERS[v].rarity then
 				tab[#tab + 1] = v
 				tab_centers[#tab_centers + 1] = G.P_CENTERS[v]
 			end
@@ -2600,4 +2632,27 @@ function RevosVault.GUI.operator(scale, args)
     {n=G.UIT.C, config={align = "cm", id = 'hand_operator_container'}, nodes={
         {n=G.UIT.T, config={text = args.text, lang = G.LANGUAGES['en-us'], scale = scale*2, colour = args.colour, shadow = true}},
     }}
+end
+
+function RevosVault.get_rarity(card)
+	if card.config.center.rarity == 1 then
+		return "Common"
+	elseif card.config.center.rarity == 2 then
+		return "Uncommon"
+	elseif card.config.center.rarity == 3 then
+		return "Rare"
+	elseif card.config.center.rarity == 4 then
+		return "Legendary"
+	else
+		return card.config.center.rarity
+	end
+	return "Common"
+end
+
+function RevosVault.internal_sticker_removal(table)
+	for k, v in pairs(table) do
+		if SMODS.Stickers[k] then
+			table[k] = nil
+		end
+	end
 end
