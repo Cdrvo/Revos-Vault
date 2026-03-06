@@ -2235,6 +2235,7 @@ return {
 					"Retrigger every joker {C:attention}#1#{} times.",
 					"When setting blind, has a {C:green}#3# in #2#{} Chance",
 					"to turn into {C:attention}2{} Cavendish Bananas",
+					"{C:inactive}(Must have room)"
 				},
 			},
 			j_crv_jimban = {
@@ -2726,7 +2727,8 @@ return {
 				name = "Charcoal Joker",
 				text = {
 					"Apply {C:attention}Aflame{} to",
-					"scored cards"
+					"scored cards",
+					"{C:inactive}(Doesn't override)"
 
 				}
 			},
@@ -4174,6 +4176,7 @@ return {
 					"{C:green}#1# in 4{} chance to",
 					"clone self in base form",
 					"{C:inactive,s:0.8}(No editions etc.)",
+					"{C:inactive}(Must have room)"
 				},
 			},
 			crv_continuity = {

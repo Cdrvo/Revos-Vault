@@ -426,7 +426,7 @@ SMODS.Enhancement({
 	always_scores = false,
 	weight = 0,
 	config = {
-		extra = { dollars = 5 },
+		extra = { dollars = 3 },
 	},
 	loc_vars = function(self, info_queue, card)
 		return {

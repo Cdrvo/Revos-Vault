@@ -26,7 +26,7 @@ SMODS.Joker({
 		if context.joker_main then
 			if #G.hand.cards > 0 then
 				return {
-					xmult = (card.ability.extra.xmult * (#G.hand.cards)),
+					xmult = (card.ability.extra.xmult * #G.hand.cards),
 				}
 			end
 		end
@@ -104,7 +104,7 @@ SMODS.Joker({
 		},
 	},
 	loc_vars = function(self, info_queue, card)
-		local num, den = SMODS.get_probability_vars(card, 1,card.ability.extra.odds, "gban_seed")
+		local num, den = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, "gban_seed")
 		return {
 			vars = { card.ability.extra.extra_value, num, den },
 		}
@@ -112,7 +112,7 @@ SMODS.Joker({
 	calculate = function(self, card, context)
 		if context.setting_blind then
 			if
-				SMODS.pseudorandom_probability(card, "gban_seed", 1,card.ability.extra.odds)
+				SMODS.pseudorandom_probability(card, "gban_seed", 1, card.ability.extra.odds)
 				and not context.blueprint
 			then
 				G.E_MANAGER:add_event(Event({
@@ -199,13 +199,15 @@ SMODS.Joker({
 		then
 			card:start_dissolve({ HEX("57ecab") }, nil, 0.1)
 			G.GAME.pool_flags.dbex = true
-			for i = 1, 2 do
-				local acard = SMODS.add_card({
-					key = "j_cavendish",
-					area = G.jokers,
-				})
-				if card.edition then
-					acard:set_edition(card.edition)
+			if #G.GAME.jokers < G.GAME.jokers.config.card_limit then
+				for i = 1, 2 do
+					local acard = SMODS.add_card({
+						key = "j_cavendish",
+						area = G.jokers,
+					})
+					if card.edition then
+						acard:set_edition(card.edition)
+					end
 				end
 			end
 		end
@@ -368,9 +370,9 @@ SMODS.Joker({
 		},
 	},
 	loc_vars = function(self, info_queue, card)
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_fixed_chances"}
+		info_queue[#info_queue + 1] = { set = "Other", key = "crv_fixed_chances" }
 		local cae = card.ability.extra
-		local num,den = SMODS.get_probability_vars(card,1,cae.odds,"vrev_seed", nil, true)
+		local num, den = SMODS.get_probability_vars(card, 1, cae.odds, "vrev_seed", nil, true)
 		return {
 			vars = { num, den, card.ability.extra.mult },
 		}
@@ -553,7 +555,7 @@ SMODS.Joker({
 		},
 	},
 	crv_credits = {
-		art = {"Chainsawmert"}
+		art = { "Chainsawmert" },
 	},
 	loc_vars = function(self, info_queue, card)
 		return {
@@ -680,7 +682,13 @@ SMODS.Joker({
 	end,
 
 	in_pool = function(self, wawa, wawa2)
-		return not ((#SMODS.find_card("j_crv_jcbt") >= 1) or (#SMODS.find_card("j_crv_jad") >= 1) or (#SMODS.find_card("j_crv_jma") >= 1) or (#SMODS.find_card("j_crv_jbe") >= 1) or (#SMODS.find_card("j_crv_jhv") >= 1))
+		return not (
+			(#SMODS.find_card("j_crv_jcbt") >= 1)
+			or (#SMODS.find_card("j_crv_jad") >= 1)
+			or (#SMODS.find_card("j_crv_jma") >= 1)
+			or (#SMODS.find_card("j_crv_jbe") >= 1)
+			or (#SMODS.find_card("j_crv_jhv") >= 1)
+		)
 	end,
 })
 
@@ -946,7 +954,7 @@ SMODS.Joker({
 	cost = 7,
 	loc_vars = function(self, info_queue, card)
 		local cae = card.ability.extra
-		local num, den = SMODS.get_probability_vars(card,1,cae.odds,"seed_jcbt")
+		local num, den = SMODS.get_probability_vars(card, 1, cae.odds, "seed_jcbt")
 		return {
 			vars = {
 				card.ability.extra.stages,
@@ -958,7 +966,7 @@ SMODS.Joker({
 		}
 	end,
 	calculate = function(self, card, context)
-		if SMODS.pseudorandom_probability(card,"jcbt_seed",1,card.ability.extra.odds) then
+		if SMODS.pseudorandom_probability(card, "jcbt_seed", 1, card.ability.extra.odds) then
 			if context.individual then
 				if context.cardarea == G.play then
 					for k, v in ipairs(context.scoring_hand) do
@@ -1111,7 +1119,7 @@ SMODS.Joker({
 		extra = {},
 	},
 	crv_credits = {
-		art = {"mr.cr33ps"}
+		art = { "mr.cr33ps" },
 	},
 	loc_vars = function(self, info_queue, card)
 		return {
@@ -1178,7 +1186,7 @@ SMODS.Joker({
 		y = 2,
 	},
 	crv_credits = {
-		art = {"Chainsawmert"}
+		art = { "Chainsawmert" },
 	},
 	cost = 7,
 	loc_vars = function(self, info_queue, card)
@@ -1511,7 +1519,7 @@ SMODS.Joker({
 	},
 	cost = 10,
 	loc_vars = function(self, info_queue, card)
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_fixed_chances"}
+		info_queue[#info_queue + 1] = { set = "Other", key = "crv_fixed_chances" }
 		local crv = card.ability.extra
 		return {
 			vars = { crv.cardhp, crv.playerhp, crv.mode, crv.turn, crv.odds2 },
@@ -1649,7 +1657,7 @@ SMODS.Joker({
 					G.jokers:remove_card(card)
 					card:start_dissolve({ HEX("57ecab") }, nil, 1.6)
 					card = nil
-					check_for_unlock({type = "buckshotify"})
+					check_for_unlock({ type = "buckshotify" })
 					SMODS.add_card({
 						set = "Joker",
 						area = G.jokers,
@@ -1692,10 +1700,10 @@ SMODS.Joker({
 		},
 	},
 	loc_vars = function(self, info_queue, card)
-		info_queue[#info_queue+1] = {set = "Other", key = "crv_fixed_chances"}
+		info_queue[#info_queue + 1] = { set = "Other", key = "crv_fixed_chances" }
 		local crv = card.ability.extra
 		return {
-			vars = { crv.xmult * G.GAME.reincarnation, G.GAME.reincarnation, crv.odds,1 },
+			vars = { crv.xmult * G.GAME.reincarnation, G.GAME.reincarnation, crv.odds, 1 },
 		}
 	end,
 	remove_from_deck = function(self, card, from_debuff)
@@ -1705,9 +1713,8 @@ SMODS.Joker({
 		local crv = card.ability.extra
 		if context.crv_joker_destroyed and context.crv_destroyedj == card then
 			if not card.crv_harvested then
-				
 				G.GAME.reincarnation = G.GAME.reincarnation + 1
-				if SMODS.pseudorandom_probability(card,"rein_seed",1,crv.odds,nil,true) then
+				if SMODS.pseudorandom_probability(card, "rein_seed", 1, crv.odds, nil, true) then
 					add_tag(Tag("tag_crv_reintag"))
 				end
 			end
@@ -1745,7 +1752,7 @@ SMODS.Joker({
 			vars = { crv.clicks, crv.chips, crv.chipgain },
 		}
 	end,
-	crv_clicker = function(self,card)
+	crv_clicker = function(self, card)
 		local crv = card.ability.extra
 		crv.clicks = crv.clicks + 1
 		crv.chips = crv.chips + crv.chipgain
@@ -1836,7 +1843,7 @@ SMODS.Joker({
 		end
 	end,
 	crv_credits = {
-		art = {"Chainsawmert"}
+		art = { "Chainsawmert" },
 	},
 	loc_vars = function(self, info_queue, card)
 		local area = self.area
@@ -2026,8 +2033,6 @@ SMODS.Joker({
 	end,
 })
 
-
-
 SMODS.Joker({
 	key = "fuj",
 	config = {
@@ -2080,8 +2085,6 @@ SMODS.Joker({
 	end,
 })
 
-
-
 SMODS.Joker({
 	key = "mon",
 	atlas = "Jokers2",
@@ -2100,7 +2103,7 @@ SMODS.Joker({
 		},
 	},
 	crv_credits = {
-		art = {"WombatCountry"}
+		art = { "WombatCountry" },
 	},
 	loc_vars = function(self, info_queue, card)
 		return {
@@ -2160,7 +2163,7 @@ SMODS.Joker({
 		},
 	},
 	crv_credits = {
-		art = {"mr.cr33ps"}
+		art = { "mr.cr33ps" },
 	},
 	loc_vars = function(self, info_queue, card)
 		return {
@@ -2199,8 +2202,6 @@ SMODS.Joker({
 	end,
 })
 
-
-
 -- find a way to localize this
 local bets = { "Black", "Green", "Red" }
 SMODS.Joker({
@@ -2225,7 +2226,7 @@ SMODS.Joker({
 	cost = 10,
 	loc_vars = function(self, info_queue, card)
 		local crv = card.ability.extra
-		local num,den = SMODS.get_probability_vars(card, 1, crv.odds, "fuckthiscard")
+		local num, den = SMODS.get_probability_vars(card, 1, crv.odds, "fuckthiscard")
 		return {
 			vars = { crv.bet, num, den, crv.green, crv.max },
 		}
@@ -2234,7 +2235,7 @@ SMODS.Joker({
 		local crv = card.ability.extra
 		if context.end_of_round and context.main_eval and not context.blueprint then
 			if crv.bet == "Green" then
-				if SMODS.pseudorandom_probability(card,"fuckthiscardtimestwo",1,crv.odds) then
+				if SMODS.pseudorandom_probability(card, "fuckthiscardtimestwo", 1, crv.odds) then
 					G.E_MANAGER:add_event(Event({
 						trigger = "after",
 						delay = 0.4,
@@ -2360,13 +2361,12 @@ SMODS.Joker({
 		},
 	},
 	loc_vars = function(self, info_queue, card)
-		local num,den = SMODS.get_probability_vars(card,1,card.ability.extra.odds,"mathness_seed")
+		local num, den = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, "mathness_seed")
 		local crv = card.ability.extra
-		info_queue[#info_queue + 1] =
-			{ key = "crv_absolute", set = "Other", vars = { num, 4 } }
+		info_queue[#info_queue + 1] = { key = "crv_absolute", set = "Other", vars = { num, 4 } }
 
 		return {
-			vars = {num, den, crv.xmultg, crv.xmult },
+			vars = { num, den, crv.xmultg, crv.xmult },
 		}
 	end,
 	calculate = function(self, card, context)
@@ -2381,7 +2381,7 @@ SMODS.Joker({
 			if #jokers > 0 then
 				if not context.blueprint then
 					local chosen_joker = pseudorandom_element(jokers, pseudoseed("mathness"))
-					if SMODS.pseudorandom_probability(card,"mathness_seed",1,crv.odds) then
+					if SMODS.pseudorandom_probability(card, "mathness_seed", 1, crv.odds) then
 						chosen_joker:add_sticker("crv_absolute", true)
 					else
 						chosen_joker:start_dissolve({ HEX("57ecab") }, nil, 1.6)
@@ -2479,8 +2479,6 @@ SMODS.Joker({
 	end,
 })]]
 
-
-
 SMODS.Joker({
 	key = "kitf",
 	atlas = "Jokers2",
@@ -2545,9 +2543,6 @@ SMODS.Joker({
 	end,
 })
 
-
-
-
 SMODS.Joker({
 	key = "those",
 	atlas = "Jokers2",
@@ -2567,23 +2562,23 @@ SMODS.Joker({
 		},
 	},
 	crv_credits = {
-		art = {"Crazy Dave"}
+		art = { "Crazy Dave" },
 	},
 	loc_vars = function(self, info_queue, card)
 		local cae = card.ability.extra
-		local num, den = SMODS.get_probability_vars(card, 1, cae.odds,"j_thoose" )
-		return{
-			vars = {num,den}
+		local num, den = SMODS.get_probability_vars(card, 1, cae.odds, "j_thoose")
+		return {
+			vars = { num, den },
 		}
 	end,
 
 	calculate = function(self, card, context)
 		local crv = card.ability.extra
-		if context.setting_blind and SMODS.pseudorandom_probability(card,"j_thoose",1,crv.odds)  then
+		if context.setting_blind and SMODS.pseudorandom_probability(card, "j_thoose", 1, crv.odds) then
 			SMODS.add_card({
 				key = "j_mr_bones",
 				area = G.jokers,
-				edition = "e_negative"
+				edition = "e_negative",
 			})
 		end
 	end,
@@ -2611,7 +2606,7 @@ SMODS.Joker({
 		},
 	},
 	crv_credits = {
-		art = {"Heaven"}
+		art = { "Heaven" },
 	},
 	loc_vars = function(self, info_queue, card)
 		return {
@@ -2710,7 +2705,6 @@ SMODS.Joker({
 	end,
 })
 
-
 SMODS.Joker({
 	key = "thed6",
 	rarity = 3,
@@ -2735,7 +2729,7 @@ SMODS.Joker({
 	},
 	discovered = true,
 	blueprint_compat = false,
-	can_reroll = function(self,card,area)
+	can_reroll = function(self, card, area)
 		local c = false
 		if card.ability.extra.rerolls > 0 and G.shop then
 			if G and G.jokers and G.jokers.highlighted then
@@ -2762,7 +2756,7 @@ SMODS.Joker({
 			local ab = {}
 			for k, v in pairs(G.jokers.highlighted) do
 				if v ~= card then
-					ab[#ab+1] = v
+					ab[#ab + 1] = v
 				end
 			end
 			RevosVault.replace_joker(ab, nil, RevosVault.get_rarity(ab[1]))
@@ -2778,7 +2772,6 @@ SMODS.Joker({
 		end
 	end,
 })
-
 
 SMODS.Joker({
 	key = "pay2win",
@@ -2806,19 +2799,19 @@ SMODS.Joker({
 	config = {
 		extra = {
 			rounds = 3,
-			rounds_left = 3
-		}
+			rounds_left = 3,
+		},
 	},
 	rarity = 3,
 	cost = 6,
 	loc_vars = function(self, info_queue, card)
-		info_queue[#info_queue+1] = G.P_CENTERS.j_crv_chicken_printer
+		info_queue[#info_queue + 1] = G.P_CENTERS.j_crv_chicken_printer
 		local cae = card.ability.extra
 		return {
 			vars = { cae.rounds, cae.rounds_left },
 		}
 	end,
-	add_to_deck = function(self,card,context)
+	add_to_deck = function(self, card, context)
 		card.ability.extra_value = card.ability.extra_value or 0
 		card.ability.extra_value = card.ability.extra_value + (30 - card.sell_cost)
 		card:set_cost()

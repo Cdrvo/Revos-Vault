@@ -105,7 +105,7 @@ SMODS.Sticker({
 		}
 	end,
 	calculate = function(self, card, context)
-		if context.end_of_round and context.main_eval and not context.blueprint then
+		if context.end_of_round and context.main_eval and not context.blueprint and #G.jokers.cards < G.GAME.jokers.config.card_limit then
 			if pseudorandom("absolute") < G.GAME.probabilities.normal / 4 then
 				local rr = nil
 				for i = 1, #G.jokers.cards do

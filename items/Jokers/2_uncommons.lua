@@ -779,7 +779,7 @@ SMODS.Joker({
 	},
 	config = {
 		extra = {
-			xchips = 6,
+			xchips = 3,
 			odds = 1000,
 		},
 	},
