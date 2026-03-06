@@ -179,7 +179,7 @@ function Card:get_id()
 	if #SMODS.find_card("j_crv_revoo_") > 0 then
 		return 14
 	else
-		return self.base.id
+		return getidold(self)
 	end
 end
 
