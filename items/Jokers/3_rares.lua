@@ -1638,7 +1638,7 @@ SMODS.Joker({
 				message = "Hit!",
 			}
 		end
-		if crv.playerhp == 0 then
+		if crv.playerhp == 0 and G.STATE ~= G.STATES.GAME_OVER then
 			G.STATE = G.STATES.GAME_OVER
 			G.STATE_COMPLETE = false
 		end

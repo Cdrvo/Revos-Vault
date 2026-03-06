@@ -95,6 +95,9 @@ SMODS.Edition({
 			}
 		end
 	end,
+	crv_credits = {
+		shader = {"superb_thing"}
+	}
 })
 
 SMODS.Shader({
@@ -151,6 +154,9 @@ SMODS.Edition({
 			}
 		end
 	end,
+	crv_credits = {
+		shader = {"superb_thing"}
+	}
 })
 
 SMODS.Shader({
@@ -194,6 +200,9 @@ SMODS.Edition({
 			}
 		end
 	end,
+	crv_credits = {
+		shader = {"superb_thing"},
+	}
 })
 
 SMODS.Shader({

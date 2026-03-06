@@ -267,11 +267,11 @@ function SMODS.create_mod_badges(obj, badges)
 			local scale_fac = calced_text_width > max_text_width and max_text_width / calced_text_width or 1
 			return scale_fac
 		end
-		if obj.crv_credits.art or obj.crv_credits.code or obj.crv_credits.idea or obj.crv_credits.custom then
+		if obj.crv_credits.art or obj.crv_credits.code or obj.crv_credits.idea or obj.crv_credits.shader then
 			local scale_fac = {}
 			local min_scale_fac = 1
 			local strings = { RevosVault.display_name }
-			for _, v in ipairs({ "idea", "art", "code" }) do
+			for _, v in ipairs({ "idea", "art", "code", "shader" }) do
 				if obj.crv_credits[v] then
 					if type(obj.crv_credits[v]) == "string" then obj.crv_credits[v] = { obj.crv_credits[v] } end
 					for i = 1, #obj.crv_credits[v] do

@@ -4713,6 +4713,7 @@ return {
 			crv_art = {"Art: #1#"},
 			crv_code = {"Code: #1#"},
 			crv_idea = {"Idea: #1#"},
+			crv_shader = {"Shader: #1#"}
 		},
 		dictionary = {
 
