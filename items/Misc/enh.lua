@@ -90,6 +90,9 @@ SMODS.Enhancement({
 	in_pool = function(self, wawa, wawa2)
 		return false
 	end,
+	crv_credits = {
+		art = {"WombatCountry"},
+	}
 })
 
 SMODS.Enhancement({
@@ -119,6 +122,9 @@ SMODS.Enhancement({
 	in_pool = function(self)
 		return false
 	end,
+	crv_credits = {
+		art = {"mr.cr33ps"}
+	}
 })
 
 SMODS.Enhancement({
@@ -442,6 +448,9 @@ SMODS.Enhancement({
 			}
 		end
 	end,
+	crv_credits = {
+		art = "mr.cr33ps"
+	}
 })
 
 SMODS.Enhancement({
@@ -469,7 +478,11 @@ SMODS.Enhancement({
 	in_pool = function(self)
 		return false
 	end,
+	crv_credits = {
+		art = {"Heaven"}
+	}
 })
+
 
 SMODS.Enhancement({
 	key = "xmultcard",
