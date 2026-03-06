@@ -2385,6 +2385,7 @@ return {
 			j_crv_rebel = {
 				name = "Rebel",
 				text = {
+					"Upon obtainment,",
 					"Will {C:red}destroy{} any face card.",
 					"{X:mult,C:white}X#1#{} Mult",
 				},
