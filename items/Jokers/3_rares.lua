@@ -1501,8 +1501,8 @@ SMODS.Joker({
 	key = "brj",
 	config = {
 		extra = {
-			cardhp = 6,
-			playerhp = 6,
+			cardhp = 4,
+			playerhp = 4,
 			mode = "Joker",
 			turn = "Player",
 			odds2 = 3,

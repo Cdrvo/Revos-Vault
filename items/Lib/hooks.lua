@@ -188,7 +188,7 @@ function Card:get_original_rank()
 	if #SMODS.find_card("j_crv_revoo_") > 0 then
 		return "Ace"
 	else
-		return getoriginalrankold
+		return getoriginalrankold(self)
 	end
 end
 
