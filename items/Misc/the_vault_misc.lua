@@ -275,7 +275,7 @@ G.FUNCS.crv_vault_vault = function(e)
         G.GAME.souls = G.GAME.souls - TheVault.vault_cost
         play_sound("coin1")
 
-        RevosVault.replacecards(G.vault_card.cards, nil, true, true)
+        RevosVault.replace_joker(G.vault_card.cards[1].area["cards"], nil, G.vault_card.cards[1].config.center.rarity, G.vault_card.cards[1].ability.set, nil)
     end
 end
 

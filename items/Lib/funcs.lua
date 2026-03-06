@@ -779,38 +779,51 @@ end
 
 -- uh
 
-function RevosVault.replace_joker(area, _flip, rarity) -- FUCK,
+function RevosVault.replace_joker(area, _flip, rarity, set, specific, exclude) -- FUCK, (dont mind the name joker its not only jokers)
 	local function random_joker()
 		local a = {}
-		a = SMODS.get_clean_pool("Joker", rarity)
+		if rarity then
+			a = SMODS.get_clean_pool(set, rarity)
+		else
+			a = SMODS.get_clean_pool(set)
+		end
 		local b = pseudorandom_element(a)
 		return b
 	end
-	for i = 1, #area do
-			if _flip then
-				area[i]:flip()
-				G.E_MANAGER:add_event(Event({
-					trigger = "before",
-					delay = 1,
-					func = function()
-						area[i]:set_ability(random_joker())
-						return true
-					end,
-				}))
-				G.E_MANAGER:add_event(Event({
-					trigger = "after",
-					delay = 1,
-					func = function()
-						
-						area[i]:juice_up()
-						area[i]:flip()
-						return true
-					end,
-				}))
-			else
-				area[i]:juice_up()
-				local a = random_joker()
-				area[i]:set_ability(random_joker())
+		for i = 1, #area do
+			if ((area[i].ability.set == set)) then
+				print("set match")
+				if (specific and area[i] == specific) or not specific then
+					print("specif match")
+					if (exclude and area[i] ~= exclude) or not exclude then
+						print("exclude match")
+						if _flip then
+							area[i]:flip()
+							G.E_MANAGER:add_event(Event({
+								trigger = "before",
+								delay = 1,
+								func = function()
+									area[i]:set_ability(random_joker())
+									return true
+								end,
+							}))
+							G.E_MANAGER:add_event(Event({
+								trigger = "after",
+								delay = 1,
+								func = function()
+									
+									area[i]:juice_up()
+									area[i]:flip()
+									return true
+								end,
+							}))
+						else
+							area[i]:juice_up()
+							local a = random_joker()
+							area[i]:set_ability(random_joker())
+						end
+					end
+				end
 			end
 		end
 	end

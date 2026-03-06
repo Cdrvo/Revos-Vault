@@ -518,6 +518,9 @@ SMODS.Joker({
 			end
 		end
 	end,
+	crv_credits = {
+		art = "mr.cr33ps"
+	}
 })
 local rkeys = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }
 local rkeyshalf = { "1", "2", "3", "4", "5" }
@@ -567,6 +570,9 @@ SMODS.Joker({
 	in_pool = function(self, wawa, wawa2)
 		return true
 	end,
+	crv_credits = {
+		art = "mr.cr33ps"
+	}
 })
 
 SMODS.Joker({
@@ -616,6 +622,9 @@ SMODS.Joker({
 			end
 		end
 	end,
+	crv_credits = {
+		art = "mr.cr33ps"
+	}
 })
 
 SMODS.Joker({

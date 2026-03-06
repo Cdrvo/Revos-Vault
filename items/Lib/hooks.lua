@@ -214,8 +214,8 @@ end
 local rerol_old = G.FUNCS.reroll_shop
 function G.FUNCS.reroll_shop(e)
 	if #SMODS.find_card("j_crv_shop_sign") > 0 then
-		RevosVault.replacecards(G.shop_vouchers.cards)
-		RevosVault.replacecards(G.shop_booster.cards)
+		RevosVault.replace_joker(G.shop_vouchers.cards, nil, nil, "Voucher")
+		RevosVault.replace_joker(G.shop_booster.cards, nil, nil, "Booster")
 	end
 	rerol_old(e)
 end
