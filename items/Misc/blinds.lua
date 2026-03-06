@@ -50,6 +50,9 @@ SMODS.Blind({
 	defeat = function(self)
 		self.disabled = false
 	end,
+	crv_credits = {
+		art = "Astro"
+	}
 })
 
 SMODS.Blind({
