@@ -586,7 +586,7 @@ function CardArea:emplace(card, location, stay_flipped)
 		end
 
 		if RevosVault.config.superior_enabled and card.ability.set ~= "Joker" then
-			if pseudorandom("supcreate") < 1 / (G.GAME.superior_mod/800) and card:has_potential() then
+			if pseudorandom("supcreate") < 1 / (800/G.GAME.superior_mod) and card:has_potential() then
 				RevosVault.unleash_potential(card)
 				play_sound("holo1")
 				G.E_MANAGER:add_event(Event({
