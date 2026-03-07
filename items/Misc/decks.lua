@@ -19,7 +19,7 @@ SMODS.Back {
     end
 }
 
-SMODS.Back {
+--[[SMODS.Back {
     key = 'banana_mayhem',
     atlas = 'Decks',
     pos = {
@@ -32,7 +32,7 @@ SMODS.Back {
         G.GAME.modifiers.banana_mayhem = true
 
     end
-}
+}]]
 
 SMODS.Back {
     key = 'goldendeck',

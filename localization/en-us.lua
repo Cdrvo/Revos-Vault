@@ -881,7 +881,14 @@ return {
 			},
 			j_crv_pedro = {
 				name = "Pedro",
-				text = { "{C:crv_banana}Banana {C:dark_edition}Mayhem!" },
+				text = {
+					{"Scored cards will",
+					"turn into either",
+					"{C:attention}Gros Michel{} or",
+					"{C:attention}Cavendish{}"},
+					{"Retrigger all {C:crv_banana}Banana{}",
+				"Jokers {C:attention}#1#{} times"}
+				}
 			},
 			j_crv_printer = {
 				name = "Blueprinter",
