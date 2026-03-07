@@ -79,7 +79,7 @@ if RevoConfig["8_curses_enabled"] then
         colour = HEX("55c6d9"),
         sticker_atlas = "stake_stickers",
         sticker_pos = {
-            x = 0,
+            x = 1,
             y = 0
         },
         applied_stakes = {"crv_revosstake"},
@@ -90,9 +90,17 @@ if RevoConfig["8_curses_enabled"] then
                 mod = false
             }
         },
-        modifiers = function()
-            G.GAME.modifiers.crv_curse_increase = true
+        calculate = function(self,context)
+            if context.using_consumeable and pseudorandom("cursed_stake") < 10/100 then
+                SMODS.add_card{
+                    set = "Joker",
+                    rarity = "crv_curse"
+                }
+            end
         end,
+        --[[modifiers = function()
+            G.GAME.modifiers.crv_curse_increase = true
+        end,]]
     }
 end
 

@@ -1,7 +1,7 @@
 SMODS.Challenge{
     key = "xmarksthejoker",
     loc_txt = {
-        name = "X marks the Joker?",
+        name = "X Marks The Joker?",
     },
     jokers = {{
         id = "j_crv_maz",
@@ -38,3 +38,4 @@ SMODS.Challenge{
 }
 
 }
+

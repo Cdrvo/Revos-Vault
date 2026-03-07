@@ -4527,9 +4527,9 @@ return {
 			stake_crv_cursed_stake = {
 				name = "Cursed Stake",
 				text = {
-					"Significantly {C:attention}increase",
-					"the chances of",
-					"Curses appearing"
+					"Using consumables",
+					"has a{C:green} chance{}",
+					"to create {C:red}Curses{}"
 				},
 			},
 		},
@@ -4669,7 +4669,8 @@ return {
 			ach_crv_pedro_mayhem = "Rise and shine, sleepyhead!",
 			ach_crv_cursed = "You've been cursed!",
 			ach_crv_purification = "Curses begone!",
-			ach_crv_appreciation = "Revo's Appreciation"
+			ach_crv_appreciation = "Revo's Appreciation",
+			ach_crv_twisted = "Twisted",
 		},
 		achievement_descriptions ={
 			ach_crv_get_all_stickers = "Apply all Revo's Vault stickers on one card",
@@ -4683,7 +4684,8 @@ return {
 			ach_crv_pedro_mayhem = "Obtain Pedro",
 			ach_crv_cursed = "Obtain a Curse",
 			ach_crv_purification = "Purify a Curse",
-			ach_crv_appreciation = "Win a game with only Revo's Vault jokers"
+			ach_crv_appreciation = "Win a game with only Revo's Vault jokers",
+			ach_crv_twisted = "Win a game with atleast 1 curse"
 		},
 		labels = {
 			crv_ps_seal = "Printer's Seal",

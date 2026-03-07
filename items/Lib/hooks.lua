@@ -946,6 +946,9 @@ function win_game()
 		if rw then
 			check_for_unlock({type = "crv_appreciation"})
 		end
+		if G.crv_curses and #G.crv_curses.cards>0 then
+			check_for_unlock({type = "crv_twisted"})
+		end
 	end
 	return win_game_old()
 end
