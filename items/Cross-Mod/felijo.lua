@@ -33,6 +33,9 @@ SMODS.Joker({
 			vars = { num, den },
 		}
 	end,
+	add_to_deck = function(self, card, from_debuff)
+		G.GAME.felijo_pelts_enabled = true
+	end,
 	calculate = function(self, card, context)
 		if context.first_hand_drawn then
             local selected_pelt = pseudorandom_element({"m_felijo_plt_wlf", "m_felijo_plt_bny"})
