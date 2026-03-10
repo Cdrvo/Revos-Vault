@@ -33,13 +33,13 @@ SMODS.Joker({
 			vars = { num, den },
 		}
 	end,
+	add_to_deck = function(self, card, from_debuff)
+		G.GAME.felijo_pelts_enabled = true
+	end,
 	calculate = function(self, card, context)
 		if context.first_hand_drawn then
             local selected_pelt = pseudorandom_element({"m_felijo_plt_wlf", "m_felijo_plt_bny"})
 			RevosVault.printer_apply(selected_pelt, "m_felijo_plt_gold", nil, nil, nil, "m_felijo_plt_olddata", nil)
 		end
-	end,
-	in_pool = function(self, wawa, wawa2)
-		return G.GAME.used_vouchers["v_felijo_beartrap"]
 	end,
 })
