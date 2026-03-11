@@ -1238,7 +1238,7 @@ SMODS.Consumable({
 		local cards = {}
 		if G and G.hand and #G.hand.cards > 0 then
 			for i = 1, #G.hand.cards do
-				if G.hand.cards[i]:get_id() == 14 then
+				if not (G.hand.cards[i]:get_id() == 14) then
 					cards[#cards + 1] = G.hand.cards[i]
 					if #cards > 0 then
 						return true
@@ -1251,7 +1251,7 @@ SMODS.Consumable({
 	use = function(self, card, area, copier)
 		local cards = {}
 		for i = 1, #G.hand.cards do
-			if G.hand.cards[i]:get_id() == 14 then
+			if not (G.hand.cards[i]:get_id() == 14) then
 				cards[#cards + 1] = G.hand.cards[i]
 			end
 		end
