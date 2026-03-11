@@ -24,9 +24,8 @@ SMODS.Consumable({
 	key = "supfool",
 	set = "Superior",
 	atlas = "Superior",
-	hidden = true,
-	soul_set = "Tarot",
-	sout_rate = 0.00125,
+	crv_in_set = "Tarot",
+	
 	pos = {
 		x = 0,
 		y = 0,
@@ -92,9 +91,8 @@ SMODS.Consumable({
 	key = "supmagician",
 	set = "Superior",
 	atlas = "Superior",
-	hidden = true,
-	soul_set = "Tarot",
-	sout_rate = 0.00125,
+	crv_in_set = "Tarot",
+	
 	pos = {
 		x = 1,
 		y = 0,
@@ -148,9 +146,8 @@ SMODS.Consumable({
 	key = "suphigh_priestess",
 	set = "Superior",
 	atlas = "Superior",
-	hidden = true,
-	soul_set = "Tarot",
-	sout_rate = 0.00125,
+	crv_in_set = "Tarot",
+	
 	pos = {
 		x = 2,
 		y = 0,
@@ -188,9 +185,8 @@ SMODS.Consumable({
 	key = "supempress",
 	set = "Superior",
 	atlas = "Superior",
-	hidden = true,
-	soul_set = "Tarot",
-	sout_rate = 0.00125,
+	crv_in_set = "Tarot",
+	
 	pos = {
 		x = 3,
 		y = 0,
@@ -235,9 +231,8 @@ SMODS.Consumable({
 	key = "supemperor",
 	set = "Superior",
 	atlas = "Superior",
-	hidden = true,
-	soul_set = "Tarot",
-	sout_rate = 0.00125,
+	crv_in_set = "Tarot",
+	
 	pos = {
 		x = 4,
 		y = 0,
@@ -281,9 +276,8 @@ SMODS.Consumable({
 	key = "supheirophant",
 	set = "Superior",
 	atlas = "Superior",
-	hidden = true,
-	soul_set = "Tarot",
-	sout_rate = 0.00125,
+	crv_in_set = "Tarot",
+	
 	pos = {
 		x = 5,
 		y = 0,
@@ -337,9 +331,8 @@ SMODS.Consumable({
 	key = "suplovers",
 	set = "Superior",
 	atlas = "Superior",
-	hidden = true,
-	soul_set = "Tarot",
-	sout_rate = 0.00125,
+	crv_in_set = "Tarot",
+	
 	pos = {
 		x = 6,
 		y = 0,
@@ -393,9 +386,8 @@ SMODS.Consumable({
 	key = "supchariot",
 	set = "Superior",
 	atlas = "Superior",
-	hidden = true,
-	soul_set = "Tarot",
-	sout_rate = 0.00125,
+	crv_in_set = "Tarot",
+	
 	pos = {
 		x = 7,
 		y = 0,
@@ -449,9 +441,8 @@ SMODS.Consumable({
 	key = "supjustice",
 	set = "Superior",
 	atlas = "Superior",
-	hidden = true,
-	soul_set = "Tarot",
-	sout_rate = 0.00125,
+	crv_in_set = "Tarot",
+	
 	pos = {
 		x = 8,
 		y = 0,
@@ -506,9 +497,8 @@ SMODS.Consumable({
 	key = "suphermit",
 	set = "Superior",
 	atlas = "Superior",
-	hidden = true,
-	soul_set = "Tarot",
-	sout_rate = 0.00125,
+	crv_in_set = "Tarot",
+	
 	pos = {
 		x = 9,
 		y = 0,
@@ -554,9 +544,8 @@ SMODS.Consumable({
 	key = "supwheel_of_fortune",
 	set = "Superior",
 	atlas = "Superior",
-	hidden = true,
-	soul_set = "Tarot",
-	sout_rate = 0.00125,
+	crv_in_set = "Tarot",
+	
 	pos = {
 		x = 0,
 		y = 1,
@@ -591,9 +580,8 @@ SMODS.Consumable({
 	key = "supstrength",
 	set = "Superior",
 	atlas = "Superior",
-	hidden = true,
-	soul_set = "Tarot",
-	sout_rate = 0.00125,
+	crv_in_set = "Tarot",
+	
 	pos = {
 		x = 1,
 		y = 1,
@@ -638,9 +626,8 @@ SMODS.Consumable({
 	key = "suphanged_man",
 	set = "Superior",
 	atlas = "Superior",
-	hidden = true,
-	soul_set = "Tarot",
-	sout_rate = 0.00125,
+	crv_in_set = "Tarot",
+	
 	pos = {
 		x = 2,
 		y = 1,
@@ -682,9 +669,8 @@ SMODS.Consumable({
 	key = "supdeath",
 	set = "Superior",
 	atlas = "Superior",
-	hidden = true,
-	soul_set = "Tarot",
-	sout_rate = 0.00125,
+	crv_in_set = "Tarot",
+	
 	pos = {
 		x = 3,
 		y = 1,
@@ -741,9 +727,8 @@ SMODS.Consumable({
 	key = "suptemp",
 	set = "Superior",
 	atlas = "Superior",
-	hidden = true,
-	soul_set = "Tarot",
-	sout_rate = 0.00125,
+	crv_in_set = "Tarot",
+	
 	pos = {
 		x = 4,
 		y = 1,
@@ -781,9 +766,8 @@ SMODS.Consumable({
 	key = "supdevil",
 	set = "Superior",
 	atlas = "Superior",
-	hidden = true,
-	soul_set = "Tarot",
-	sout_rate = 0.00125,
+	crv_in_set = "Tarot",
+	
 	pos = {
 		x = 5,
 		y = 1,
@@ -842,9 +826,8 @@ SMODS.Consumable({
 	key = "suptower",
 	set = "Superior",
 	atlas = "Superior",
-	hidden = true,
-	soul_set = "Tarot",
-	sout_rate = 0.00125,
+	crv_in_set = "Tarot",
+	
 	pos = {
 		x = 6,
 		y = 1,
@@ -901,9 +884,8 @@ SMODS.Consumable({
 	key = "supstar",
 	set = "Superior",
 	atlas = "Superior",
-	hidden = true,
-	soul_set = "Tarot",
-	sout_rate = 0.00125,
+	crv_in_set = "Tarot",
+	
 	pos = {
 		x = 7,
 		y = 1,
@@ -951,9 +933,8 @@ SMODS.Consumable({
 	key = "supmoon",
 	set = "Superior",
 	atlas = "Superior",
-	hidden = true,
-	soul_set = "Tarot",
-	sout_rate = 0.00125,
+	crv_in_set = "Tarot",
+	
 	pos = {
 		x = 8,
 		y = 1,
@@ -1001,9 +982,8 @@ SMODS.Consumable({
 	key = "supsun",
 	set = "Superior",
 	atlas = "Superior",
-	hidden = true,
-	soul_set = "Tarot",
-	sout_rate = 0.00125,
+	crv_in_set = "Tarot",
+	
 	pos = {
 		x = 9,
 		y = 1,
@@ -1051,9 +1031,8 @@ SMODS.Consumable({
 	key = "supworld",
 	set = "Superior",
 	atlas = "Superior",
-	hidden = true,
-	soul_set = "Tarot",
-	sout_rate = 0.00125,
+	crv_in_set = "Tarot",
+	
 	pos = {
 		x = 1,
 		y = 2,
@@ -1101,9 +1080,8 @@ SMODS.Consumable({
 	key = "supjudgement",
 	set = "Superior",
 	atlas = "Superior",
-	hidden = true,
-	soul_set = "Tarot",
-	sout_rate = 0.00125,
+	crv_in_set = "Tarot",
+	
 	pos = {
 		x = 0,
 		y = 2,
@@ -1160,9 +1138,8 @@ SMODS.Consumable({
 	key = "supfamiliar",
 	set = "Superior",
 	atlas = "Superior",
-	hidden = true,
-	soul_set = "Spectral",
-	sout_rate = 0.00125,
+	crv_in_set = "Spectral",
+	
 	pos = {
 		x = 10,
 		y = 0,
@@ -1217,9 +1194,8 @@ SMODS.Consumable({
 	key = "supgrim",
 	set = "Superior",
 	atlas = "Superior",
-	hidden = true,
-	soul_set = "Spectral",
-	sout_rate = 0.00125,
+	crv_in_set = "Spectral",
+	
 	pos = {
 		x = 11,
 		y = 0,
@@ -1274,9 +1250,8 @@ SMODS.Consumable({
 	key = "supincantation",
 	set = "Superior",
 	atlas = "Superior",
-	hidden = true,
-	soul_set = "Spectral",
-	sout_rate = 0.00125,
+	crv_in_set = "Spectral",
+	
 	pos = {
 		x = 12,
 		y = 0,
@@ -1327,9 +1302,8 @@ SMODS.Consumable({
 	key = "suptalisman",
 	set = "Superior",
 	atlas = "Superior",
-	hidden = true,
-	soul_set = "Spectral",
-	sout_rate = 0.00125,
+	crv_in_set = "Spectral",
+	
 	pos = {
 		x = 13,
 		y = 0,
@@ -1376,9 +1350,8 @@ SMODS.Consumable({
 	key = "supaura",
 	set = "Superior",
 	atlas = "Superior",
-	hidden = true,
-	soul_set = "Spectral",
-	sout_rate = 0.00125,
+	crv_in_set = "Spectral",
+	
 	pos = {
 		x = 14,
 		y = 0,
@@ -1430,9 +1403,8 @@ SMODS.Consumable({
 	key = "supwraith",
 	set = "Superior",
 	atlas = "Superior",
-	hidden = true,
-	soul_set = "Spectral",
-	sout_rate = 0.00125,
+	crv_in_set = "Spectral",
+	
 	pos = {
 		x = 15,
 		y = 0,
@@ -1478,9 +1450,8 @@ SMODS.Consumable({
 	key = "supsigil",
 	set = "Superior",
 	atlas = "Superior",
-	hidden = true,
-	soul_set = "Spectral",
-	sout_rate = 0.00125,
+	crv_in_set = "Spectral",
+	
 	pos = {
 		x = 16,
 		y = 0,
@@ -1530,9 +1501,8 @@ SMODS.Consumable({
 	key = "supouija",
 	set = "Superior",
 	atlas = "Superior",
-	hidden = true,
-	soul_set = "Spectral",
-	sout_rate = 0.00125,
+	crv_in_set = "Spectral",
+	
 	pos = {
 		x = 17,
 		y = 0,
@@ -1584,9 +1554,8 @@ SMODS.Consumable({
 	key = "supectoplasm",
 	set = "Superior",
 	atlas = "Superior",
-	hidden = true,
-	soul_set = "Spectral",
-	sout_rate = 0.00125,
+	crv_in_set = "Spectral",
+	
 	pos = {
 		x = 18,
 		y = 0,
@@ -1639,9 +1608,8 @@ SMODS.Consumable({
 	key = "supimmolate",
 	set = "Superior",
 	atlas = "Superior",
-	hidden = true,
-	soul_set = "Spectral",
-	sout_rate = 0.00125,
+	crv_in_set = "Spectral",
+	
 	pos = {
 		x = 19,
 		y = 0,
@@ -1677,9 +1645,8 @@ SMODS.Consumable({
 	key = "supankh",
 	set = "Superior",
 	atlas = "Superior",
-	hidden = true,
-	soul_set = "Spectral",
-	sout_rate = 0.00125,
+	crv_in_set = "Spectral",
+	
 	pos = {
 		x = 10,
 		y = 1,
@@ -1726,9 +1693,8 @@ SMODS.Consumable({
 	key = "supdeja_vu",
 	set = "Superior",
 	atlas = "Superior",
-	hidden = true,
-	soul_set = "Spectral",
-	sout_rate = 0.00125,
+	crv_in_set = "Spectral",
+	
 	pos = {
 		x = 11,
 		y = 1,
@@ -1776,9 +1742,8 @@ SMODS.Consumable({
 	key = "suphex",
 	set = "Superior",
 	atlas = "Superior",
-	hidden = true,
-	soul_set = "Spectral",
-	sout_rate = 0.00125,
+	crv_in_set = "Spectral",
+	
 	pos = {
 		x = 12,
 		y = 1,
@@ -1821,9 +1786,8 @@ SMODS.Consumable({
 	key = "suptrance",
 	set = "Superior",
 	atlas = "Superior",
-	hidden = true,
-	soul_set = "Spectral",
-	sout_rate = 0.00125,
+	crv_in_set = "Spectral",
+	
 	pos = {
 		x = 13,
 		y = 1,
@@ -1871,9 +1835,8 @@ SMODS.Consumable({
 	key = "supmedium",
 	set = "Superior",
 	atlas = "Superior",
-	hidden = true,
-	soul_set = "Spectral",
-	sout_rate = 0.00125,
+	crv_in_set = "Spectral",
+	
 	pos = {
 		x = 14,
 		y = 1,
@@ -1921,9 +1884,8 @@ SMODS.Consumable({
 	key = "supcryptid",
 	set = "Superior",
 	atlas = "Superior",
-	hidden = true,
-	soul_set = "Spectral",
-	sout_rate = 0.00125,
+	crv_in_set = "Spectral",
+	
 	pos = {
 		x = 15,
 		y = 1,
@@ -1959,15 +1921,49 @@ SMODS.Consumable({
 	end,
 })
 
+SMODS.Consumable({
+	key = "supsoul",
+	set = "Superior",
+	atlas = "Superior",
+	crv_in_set = "Spectral",
+	
+	pos = {
+		x = 17,
+		y = 1,
+	},
+	soul_pos = {
+		x = 18,
+		y = 1,
+	},
+	pools = {
+		SuperiorSpectral = true,
+	},
+	discovered = true,
+	config = {
+		extra = { },
+	},
+	loc_vars = function(self, info_queue, card)
+		return { 1,1,1,1,1,1,1,1,1,1,1,1 }
+	end,
+	use = function(self, card, area, copier)
+		print("no func")
+	end,
+	set_card_type_badge = function(self, card, badges)
+		badges[1] = create_badge(localize("k_superior_s"), get_type_colour(self or card.config, card), nil, 1.2)
+	end,
+	in_pool = function(self)
+		return false
+	end
+})
+
 --Superior planets
 
 SMODS.Consumable({
 	key = "suppluto",
 	set = "Superior",
 	atlas = "Superior",
-	hidden = true,
-	soul_set = "Planet",
-	sout_rate = 0.00125,
+	crv_in_set = "Planet",
+	
 	pos = {
 		x = 10,
 		y = 2,
@@ -2029,9 +2025,8 @@ SMODS.Consumable({
 	key = "supmercury",
 	set = "Superior",
 	atlas = "Superior",
-	hidden = true,
-	soul_set = "Planet",
-	sout_rate = 0.00125,
+	crv_in_set = "Planet",
+	
 	pos = {
 		x = 2,
 		y = 2,
@@ -2086,9 +2081,8 @@ SMODS.Consumable({
 	key = "supvenus",
 	set = "Superior",
 	atlas = "Superior",
-	hidden = true,
-	soul_set = "Planet",
-	sout_rate = 0.00125,
+	crv_in_set = "Planet",
+	
 	pos = {
 		x = 3,
 		y = 2,
@@ -2154,9 +2148,8 @@ SMODS.Consumable({
 	key = "supearth",
 	set = "Superior",
 	atlas = "Superior",
-	hidden = true,
-	soul_set = "Planet",
-	sout_rate = 0.00125,
+	crv_in_set = "Planet",
+	
 	pos = {
 		x = 4,
 		y = 2,
@@ -2218,9 +2211,8 @@ SMODS.Consumable({
 	key = "supmars",
 	set = "Superior",
 	atlas = "Superior",
-	hidden = true,
-	soul_set = "Planet",
-	sout_rate = 0.00125,
+	crv_in_set = "Planet",
+	
 	pos = {
 		x = 5,
 		y = 2,
@@ -2286,9 +2278,8 @@ SMODS.Consumable({
 	key = "supjupiter",
 	set = "Superior",
 	atlas = "Superior",
-	hidden = true,
-	soul_set = "Planet",
-	sout_rate = 0.00125,
+	crv_in_set = "Planet",
+	
 	pos = {
 		x = 6,
 		y = 2,
@@ -2345,9 +2336,8 @@ SMODS.Consumable({
 	key = "supsaturn",
 	set = "Superior",
 	atlas = "Superior",
-	hidden = true,
-	soul_set = "Planet",
-	sout_rate = 0.00125,
+	crv_in_set = "Planet",
+	
 	pos = {
 		x = 7,
 		y = 2,
@@ -2409,9 +2399,8 @@ SMODS.Consumable({
 	key = "supuranus",
 	set = "Superior",
 	atlas = "Superior",
-	hidden = true,
-	soul_set = "Planet",
-	sout_rate = 0.00125,
+	crv_in_set = "Planet",
+	
 	pos = {
 		x = 8,
 		y = 2,
@@ -2473,9 +2462,8 @@ SMODS.Consumable({
 	key = "supneptune",
 	set = "Superior",
 	atlas = "Superior",
-	hidden = true,
-	soul_set = "Planet",
-	sout_rate = 0.00125,
+	crv_in_set = "Planet",
+	
 	pos = {
 		x = 9,
 		y = 2,
@@ -2541,9 +2529,8 @@ SMODS.Consumable({
 	key = "superis",
 	set = "Superior",
 	atlas = "Superior",
-	hidden = true,
-	soul_set = "Planet",
-	sout_rate = 0.00125,
+	crv_in_set = "Planet",
+	
 	pos = {
 		x = 11,
 		y = 2,
@@ -2602,9 +2589,8 @@ SMODS.Consumable({
 	key = "supceres",
 	set = "Superior",
 	atlas = "Superior",
-	hidden = true,
-	soul_set = "Planet",
-	sout_rate = 0.00125,
+	crv_in_set = "Planet",
+	
 	pos = {
 		x = 12,
 		y = 2,
@@ -2667,9 +2653,8 @@ SMODS.Consumable({
 	key = "supplanet_x",
 	set = "Superior",
 	atlas = "Superior",
-	hidden = true,
-	soul_set = "Planet",
-	sout_rate = 0.00125,
+	crv_in_set = "Planet",
+	
 	pos = {
 		x = 13,
 		y = 2,

@@ -2,6 +2,7 @@
 RevosVault = SMODS.current_mod
 RevoConfig = SMODS.current_mod.config
 RevosPath = SMODS.current_mod.path
+crvps = pseudorandom_element
 
 SMDOS = SMODS
 
@@ -210,37 +211,32 @@ RevosVault.config_tab = function()
 		config = { align = "cm", padding = 0.07, emboss = 0.05, r = 0.1, colour = G.C.BLACK, minh = 4.5, minw = 7 },
 		nodes = {
 			{
-				n = G.UIT.R,
+				n = G.UIT.C,
 				nodes = {
-					{
-						n = G.UIT.C,
-						nodes = {
 
-							UIBox_button({
-								colour = RevosVault.ui_config.tab_button_colour,
-								button = "crv_open_jconfig",
-								label = { "Jokers" },
-								minw = 4.5,
-								focus_args = { snap_to = true },
-							}),
-							{n = G.UIT.R, config = {colour = G.C.CLEAR, scale = 0.1, padding = 0.1 },},
-							UIBox_button({
-								colour = RevosVault.ui_config.tab_button_colour,
-								button = "crv_open_mconfig",
-								label = { "Mechanics" },
-								minw = 4.5,
-								focus_args = { snap_to = true },
-							}),
-							{n = G.UIT.R, config = {colour = G.C.CLEAR, scale = 0.1, padding = 0.1 },},
-							UIBox_button({
-								colour = RevosVault.ui_config.tab_button_colour,
-								button = "crv_open_oconfig",
-								label = { "Other" },
-								minw = 4.5,
-								focus_args = { snap_to = true },
-							}),
-						},
-					},
+					UIBox_button({
+						colour = RevosVault.ui_config.tab_button_colour,
+						button = "crv_open_jconfig",
+						label = { "Jokers" },
+						minw = 4.5,
+						focus_args = { snap_to = true },
+					}),
+					{ n = G.UIT.R, config = { colour = G.C.CLEAR, scale = 0.1, padding = 0.1 } },
+					UIBox_button({
+						colour = RevosVault.ui_config.tab_button_colour,
+						button = "crv_open_mconfig",
+						label = { "Mechanics" },
+						minw = 4.5,
+						focus_args = { snap_to = true },
+					}),
+					{ n = G.UIT.R, config = { colour = G.C.CLEAR, scale = 0.1, padding = 0.1 } },
+					UIBox_button({
+						colour = RevosVault.ui_config.tab_button_colour,
+						button = "crv_open_oconfig",
+						label = { "Other" },
+						minw = 4.5,
+						focus_args = { snap_to = true },
+					}),
 				},
 			},
 		},

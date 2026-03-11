@@ -598,7 +598,7 @@ return {
 			},
 			m_crv_dirt = {
 				name = "Dirt",
-				text = { "{C:green}Contains the power", "of Mother Nature" },
+				text = { "{X:chips,C:white}X#1#{} Chips" },
 			},
 			m_crv_honey = {
 				name = "Honey",
@@ -1564,8 +1564,8 @@ return {
 				},
 			},
 			j_crv_thefaxprinter = {
-				name = "{C:money}THE Fax Printer",
-				text = { "When blind is selected,", "prints a{C:attention} Promotion" },
+				name = "{C:money}Golden Fax Printer",
+				text = { "When blind is selected,", "Print {C:attention}#1#{} {C:dark_edition}Negative{} copies","of a randon contract" },
 			},
 			j_crv_promotion = {
 				name = "Promotion",
@@ -1586,10 +1586,10 @@ return {
 			j_crv_hfj = {
 				name = "{C:green}Hacked File",
 				text = {
-					"Saves the {C:green}4{} times the amount of your first",
-					"scored chips and returns it as {X:mult,C:white}XMult{}.",
+					"Saves the {C:attention}quarter{} of your first",
+					"score and returns it as {X:mult,C:white}XMULT{}.",
 					"{C:red}resets{} at the end of a round",
-					"{C:inactive}({C:attention}#1# {C:inactive}Stored)",
+					"{C:inactive}({X:mult,C:white}X#1#{C:inactive} Stored)",
 				},
 			},
 			j_crv_jimp = {
@@ -1775,7 +1775,7 @@ return {
 			},
 			j_crv_masterofjokers = {
 				name = "Master of Jokers",
-				text = { "{C:attention}X#1#{} Joker Slots when triggered" },
+				text = { "When in possession","{C:attention}X#1#{} Joker slots" },
 			},
 			j_crv_vriffraff = {
 				name = "High-Class",
@@ -2760,6 +2760,14 @@ return {
 					"{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult)"
 
 				}
+			},
+			j_crv_man = {
+				name = "man",
+				text={
+                    "{C:crv_clear}Joker, Tarot, Planet,",
+                    "{C:crv_clear}and Spectral{} cards may",
+                    "appear {C:crv_clear}multiple times",
+                },
 			},
 			-- QUICK JOKER
 			--GARBSHIT below
@@ -3895,6 +3903,14 @@ return {
 					"of the selected card",
 				},
 			},
+			c_crv_supsoul = {
+				name = "The Superior Soul",
+				text={
+                    "Creates a",
+                    "{C:crv_mythical,E:2}Mythical{} Joker",
+                    "{C:inactive}(Must have room)",
+                },
+			},
 			c_crv_supceres = {
 				name = "Superior Ceres",
 				text = {
@@ -4764,7 +4780,7 @@ return {
 			k_crv_holy = "Holy Banana",
 			k_crv_pedro = "Pedro",
 			k_crv_titan = "Evolution",
-			k_crv_chaos = "Chaos",
+			k_crv_chaos = "Mythical",
 			k_crv_va = "Vaulted",
 			k_crv_secret = "Secret",
 			k_crv_rain = "Drowned!",
@@ -4798,7 +4814,7 @@ return {
 			k_evolve_crv = "Evolve!",
 			k_half_crv = "Half",
 			k_hblind_crv = "Blind",
-			crv_enable_chaoscards = "Enable Chaos Cards",
+			crv_enable_chaoscards = "Enable Mythical Jokers",
 			crv_enable_vaulteds = "Enable Vaulted Jokers",
 			crv_enable_wip = "Enable Experimental/Wip Features",
 			crv_enable_superior = "Enable Superior Cards",

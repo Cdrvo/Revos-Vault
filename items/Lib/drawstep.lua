@@ -26,7 +26,8 @@ SMODS.DrawStep({
 	order = 11,
 	func = function(self)
 		if
-			self.config.center.soul_set == "Spectral"
+        self.config.center.pools
+			and self.config.center.pools.SuperiorSpectral == true
 			and self.ability.set == "Superior"
 			and self:should_draw_base_shader()
 		then
