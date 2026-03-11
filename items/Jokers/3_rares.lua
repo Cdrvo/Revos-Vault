@@ -199,7 +199,7 @@ SMODS.Joker({
 		then
 			card:start_dissolve({ HEX("57ecab") }, nil, 0.1)
 			G.GAME.pool_flags.dbex = true
-			if #G.GAME.jokers.cards < G.GAME.jokers.config.card_limit then
+			if #G.jokers.cards < G.jokers.config.card_limit then
 				for i = 1, 2 do
 					local acard = SMODS.add_card({
 						key = "j_cavendish",
