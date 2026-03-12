@@ -498,7 +498,7 @@ SMODS.Joker({
 		info_queue[#info_queue+1] = {set = "Other", key = "crv_fixed_chances"}
 		local numerator, denominator = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, "crv_lpm", nil, true)
 		return {
-			vars = {numerator, denominator},
+			vars = {numerator, denominator, card.ability.extra.mult, card.ability.extra.mult_gain},
 		}
 	end,
 	calculate = function(self, card, context)

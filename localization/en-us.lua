@@ -1016,8 +1016,8 @@ return {
 				text = {
 					"When re-rolling, Has a",
 					"{C:green}#1# in #2#{} chance to spawn {C:attention}Scrap",
-					"Gains {C:mult}+#2# {}Mult for every {C:attention}Scrap used",
-					"{C:inactive}(Currently{C:mult} +#1#{C:inactive} Mult)",
+					"Gains {C:mult}+#4# {}Mult for every {C:attention}Scrap used",
+					"{C:inactive}(Currently{C:mult} +#3#{C:inactive} Mult)",
 				},
 			},
 			j_crv_devilishprinter = {
