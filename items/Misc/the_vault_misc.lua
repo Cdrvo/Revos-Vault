@@ -183,6 +183,7 @@ G.FUNCS.take_me_back = function(e)
 end
 
 G.FUNCS.crv_vault_help = function(e)
+	G.PROFILES[G.SETTINGS.profile].crv_no_vault_help = true
 	if TheVault.changed then
 		G.FUNCS.RevosVault_info{menu_type = "crv_thevault_alt", no_first_time = true}
 	else
@@ -195,7 +196,7 @@ G.FUNCS.crv_vault_help_can = function(e)
 		e.config.colour = G.C.UI.BACKGROUND_INACTIVE
 		e.config.button = nil
 	else
-		e.config.colour = G.C.L_BLACK
+		e.config.colour = ( not G.PROFILES[G.SETTINGS.profile].crv_no_vault_help and SMODS.Gradients["crv_important"] ) or G.C.L_BLACK
 		e.config.button = "crv_vault_help"
 	end
 end

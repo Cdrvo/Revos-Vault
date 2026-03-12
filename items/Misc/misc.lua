@@ -148,6 +148,15 @@ SMODS.Gradient({
 	cycle = 5,
 })
 
+SMODS.Gradient({
+	key = "crv_important",
+	colours = {
+		G.C.RED,
+		G.C.IMPORTANT,
+	},
+	cycle = 10,
+})
+
 local loc_old = loc_colour
 function loc_colour(_c, _default)
 	if not G.ARGS.LOC_COLOURS then
