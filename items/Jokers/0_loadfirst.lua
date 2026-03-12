@@ -256,7 +256,7 @@ SMODS.Joker({
 			xmult = 20,
 		},
 	},
-	rarity = "crv_titan",
+	rarity = 4,
 	atlas = "rev",
 	blueprint_compat = true,
 	discovered = false,
@@ -269,7 +269,7 @@ SMODS.Joker({
 		x = 0,
 		y = 5,
 	},
-	cost = 25,
+	cost = 25,	
 	loc_vars = function(self, info_queue, card)
 		return {
 			vars = { card.ability.extra.xmult },
