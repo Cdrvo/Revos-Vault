@@ -47,6 +47,9 @@ SMODS.Consumable({
 			joka = localize("k_none")
 			c = G.C.RED
 		end
+		if G.GAME.dont_question then
+			info_queue[#info_queue+1] = G.P_CENTERS[G.GAME.dont_question]
+		end
 		return {
 			main_end = {
 				{

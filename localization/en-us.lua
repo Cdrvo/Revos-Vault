@@ -2400,7 +2400,7 @@ return {
 			j_crv_glassgun = {
 				name = "Glass Gun",
 				text = {
-					"{C:red}Halves{} the {C:green}odds{} of glass cards breaking",
+					"{C:red}Doubles{} the {C:green}odds{} of glass cards breaking",
 					"Destroyed glass cards become {C:attention}Shattered{}",
 					"Scored glass cards become {C:crv_polychrome}Polychrome",
 					"{C:inactive}(eg. 4 -> 2)",
