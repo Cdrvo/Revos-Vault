@@ -445,6 +445,16 @@ end
 function RevosVault.replace_joker(area, _flip, rarity, set, specific, exclude) -- FUCK, (dont mind the name joker its not only jokers)
 	local function random_joker()
 		local a = {}
+		if rarity == 1 then
+			rarity = "Common"
+		elseif rarity == 2 then
+			rarity = "Uncommon"
+		elseif rarity == 3 then
+			rarity = "Rare"
+		elseif rarity == 4 then
+			rarity = "Legendary"
+		end
+
 		if rarity then
 			a = SMODS.get_clean_pool(set, rarity)
 		else
