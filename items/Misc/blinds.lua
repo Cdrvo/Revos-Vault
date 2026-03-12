@@ -92,7 +92,7 @@ SMODS.Blind({
 	boss_colour = HEX("f0b900"),
 	press_play = function(self)
 		local cards = {}
-		if to_big(G.GAME.dollars) > 10 and not self.disabled then
+		if to_big(G.GAME.dollars) > to_big(10) and not self.disabled then
 			ease_dollars(-3)
 		end
 	end,

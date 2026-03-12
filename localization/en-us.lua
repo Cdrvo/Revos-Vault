@@ -2480,7 +2480,7 @@ return {
 			j_crv_heartfive = {
 				name = "Rainbow Octopus",
 				text = {
-					"Played {C:attention}#2#{} Cards",
+					"Played {V:1}#2#{}",
 					"give {C:money}$#1#{} when scored",
 					"{s:0.8}Suit changes after every round"
 				},

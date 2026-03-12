@@ -18,9 +18,9 @@ SMODS.current_mod.custom_ui = function(modNodes)
 	if RevoConfig["8_curses_enabled"] then
 		random_random[#random_random+1] = "crv_curse"
 	end
-	if RevoConfig["7_chaos_enabled"] then
+	--[[if RevoConfig["7_chaos_enabled"] then -- until i get 5 mythicals	
 		random_random[#random_random+1] = "crv_chaos"
-	end
+	end]]
 	local random_rarity = pseudorandom_element(random_random)
 
 	local random_cards2 = {}

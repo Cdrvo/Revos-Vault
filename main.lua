@@ -440,6 +440,7 @@ end
 SMODS.current_mod.reset_game_globals = function(run_start)
 	if run_start then
 		RevosVault.reset_whiteboard()
+		RevosVault.reset_octopus()
 		calculate_modded_printer()
 		G.GAME.current_round.crv_drawn_hands = 0
 
@@ -475,6 +476,7 @@ SMODS.current_mod.reset_game_globals = function(run_start)
 	G.GAME.current_round.crv_drawn_hands = 0
 	calculate_modded_printer()
 	RevosVault.reset_whiteboard()
+	RevosVault.reset_octopus()
 
 end
 

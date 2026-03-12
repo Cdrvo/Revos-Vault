@@ -2625,6 +2625,15 @@ function RevosVault.reset_whiteboard()
     G.GAME.current_round.whiteboard_suit = ancient_card
 end
 
+function RevosVault.reset_octopus()
+    local ancient_suits = {}
+    for k, v in pairs(SMODS.Suits) do
+        if k ~= G.GAME.current_round.crv_octo_suit then ancient_suits[#ancient_suits + 1] = k end
+    end
+    local ancient_card = pseudorandom_element(ancient_suits, pseudoseed('anc'..G.GAME.round_resets.ante))
+    G.GAME.current_round.crv_octo_suit = ancient_card
+end
+
 function RevosVault.very_safe(var, var2)
 	if var2 then
 		if G and G.GAME and G.GAME[var] and G.GAME[var][var2] then

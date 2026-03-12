@@ -501,7 +501,6 @@ SMODS.Joker({
 	config = {
 		extra = {
 			mone = 3,
-			suit = "Spades",
 		},
 	},
 	crv_credits = {
@@ -510,14 +509,11 @@ SMODS.Joker({
 	loc_vars = function(self, info_queue, card)
 		local crv = card.ability.extra
 		return {
-			vars = { crv.mone,crv.suit },
-		}
+			vars = { crv.mone, (G.GAME.current_round.crv_octo_suit or "Spades"), colours = {G.C.SUITS[(RevosVault.very_safe("current_round") and G.GAME.current_round.crv_octo_suit) or "IMPORTANT"]} },
+		} 
 	end,
 	calculate = function(self, card, context)
 		local crv = card.ability.extra
-		if context.end_of_round and context.main_eval and not context.blueprint then
-			crv.suit = pseudorandom_element(SMODS.Suits).key
-		end
 		if context.individual and context.cardarea == G.play then
 			if context.other_card:is_suit(crv.suit) then
 				return {
