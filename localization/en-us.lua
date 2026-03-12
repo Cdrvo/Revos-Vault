@@ -4640,6 +4640,7 @@ return {
 				text = {
 					"{C:green}1 in 4{} Chance to",
 					"give back any destroyed {C:attention}Joker",
+					"with {C:attention}Perishable{} sticker",
 					"for {C:attention}#2#{C:inactive} (#1#){} rounds",
 				},
 			},
