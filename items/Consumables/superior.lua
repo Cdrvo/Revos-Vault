@@ -1921,7 +1921,7 @@ SMODS.Consumable({
 	end,
 })
 
---[[SMODS.Consumable({
+SMODS.Consumable({
 	key = "supsoul",
 	set = "Superior",
 	atlas = "Superior",
@@ -1954,7 +1954,7 @@ SMODS.Consumable({
 	in_pool = function(self)
 		return false
 	end
-})]]
+})
 
 --Superior planets
 

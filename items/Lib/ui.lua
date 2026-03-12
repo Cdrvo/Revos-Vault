@@ -169,6 +169,7 @@ end
 	  if RevosVault.negative_pdeck then
 		-- yes
 	  end
+	  card.bypass_discovery_center = true
       card.sticker = get_joker_win_sticker(center)
       G.your_collection[j]:emplace(card)
 	  card:add_sticker("eternal", true)
