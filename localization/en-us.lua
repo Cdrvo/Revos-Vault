@@ -598,7 +598,7 @@ return {
 			},
 			m_crv_dirt = {
 				name = "Dirt",
-				text = { "{C:green}Contains the power", "of Mother Nature" },
+				text = { "{X:chips,C:white}X#1#{} Chips" },
 			},
 			m_crv_honey = {
 				name = "Honey",
@@ -881,7 +881,14 @@ return {
 			},
 			j_crv_pedro = {
 				name = "Pedro",
-				text = { "{C:crv_banana}Banana {C:dark_edition}Mayhem!" },
+				text = {
+					{"Scored cards will",
+					"turn into either",
+					"{C:attention}Gros Michel{} or",
+					"{C:attention}Cavendish{}"},
+					{"Retrigger all {C:crv_banana}Banana{}",
+				"Jokers {C:attention}#1#{} times"}
+				}
 			},
 			j_crv_printer = {
 				name = "Blueprinter",
@@ -1557,8 +1564,8 @@ return {
 				},
 			},
 			j_crv_thefaxprinter = {
-				name = "{C:money}THE Fax Printer",
-				text = { "When blind is selected,", "prints a{C:attention} Promotion" },
+				name = "{C:money}Golden Fax Printer",
+				text = { "When blind is selected,", "Print {C:attention}#1#{} {C:dark_edition}Negative{} copies","of a randon contract" },
 			},
 			j_crv_promotion = {
 				name = "Promotion",
@@ -1579,10 +1586,10 @@ return {
 			j_crv_hfj = {
 				name = "{C:green}Hacked File",
 				text = {
-					"Saves the {C:green}4{} times the amount of your first",
-					"scored chips and returns it as {X:mult,C:white}XMult{}.",
+					"Saves the {C:attention}quarter{} of your first",
+					"score and returns it as {X:mult,C:white}XMULT{}.",
 					"{C:red}resets{} at the end of a round",
-					"{C:inactive}({C:attention}#1# {C:inactive}Stored)",
+					"{C:inactive}({X:mult,C:white}X#1#{C:inactive} Stored)",
 				},
 			},
 			j_crv_jimp = {
@@ -1768,7 +1775,7 @@ return {
 			},
 			j_crv_masterofjokers = {
 				name = "Master of Jokers",
-				text = { "{C:attention}X#1#{} Joker Slots when triggered" },
+				text = { "When in possession","{C:attention}X#1#{} Joker slots" },
 			},
 			j_crv_vriffraff = {
 				name = "High-Class",
@@ -2385,6 +2392,7 @@ return {
 			j_crv_rebel = {
 				name = "Rebel",
 				text = {
+					"Upon obtainment,",
 					"Will {C:red}destroy{} any face card.",
 					"{X:mult,C:white}X#1#{} Mult",
 				},
@@ -2752,6 +2760,14 @@ return {
 					"{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult)"
 
 				}
+			},
+			j_crv_man = {
+				name = "man",
+				text={
+                    "{C:crv_clear}Joker, Tarot, Planet,",
+                    "{C:crv_clear}and Spectral{} cards may",
+                    "appear {C:crv_clear}multiple times",
+                },
 			},
 			-- QUICK JOKER
 			--GARBSHIT below
@@ -3887,6 +3903,14 @@ return {
 					"of the selected card",
 				},
 			},
+			c_crv_supsoul = {
+				name = "The Superior Soul",
+				text={
+                    "Creates a",
+                    "{C:crv_mythical,E:2}Mythical{} Joker",
+                    "{C:inactive}(Must have room)",
+                },
+			},
 			c_crv_supceres = {
 				name = "Superior Ceres",
 				text = {
@@ -4519,9 +4543,9 @@ return {
 			stake_crv_cursed_stake = {
 				name = "Cursed Stake",
 				text = {
-					"Significantly {C:attention}increase",
-					"the chances of",
-					"Curses appearing"
+					"Using consumables",
+					"has a{C:green} chance{}",
+					"to create {C:red}Curses{}"
 				},
 			},
 		},
@@ -4661,7 +4685,8 @@ return {
 			ach_crv_pedro_mayhem = "Rise and shine, sleepyhead!",
 			ach_crv_cursed = "You've been cursed!",
 			ach_crv_purification = "Curses begone!",
-			ach_crv_appreciation = "Revo's Appreciation"
+			ach_crv_appreciation = "Revo's Appreciation",
+			ach_crv_twisted = "Twisted",
 		},
 		achievement_descriptions ={
 			ach_crv_get_all_stickers = "Apply all Revo's Vault stickers on one card",
@@ -4675,7 +4700,8 @@ return {
 			ach_crv_pedro_mayhem = "Obtain Pedro",
 			ach_crv_cursed = "Obtain a Curse",
 			ach_crv_purification = "Purify a Curse",
-			ach_crv_appreciation = "Win a game with only Revo's Vault jokers"
+			ach_crv_appreciation = "Win a game with only Revo's Vault jokers",
+			ach_crv_twisted = "Win a game with atleast 1 curse"
 		},
 		labels = {
 			crv_ps_seal = "Printer's Seal",
@@ -4712,6 +4738,7 @@ return {
 			crv_art = {"Art: #1#"},
 			crv_code = {"Code: #1#"},
 			crv_idea = {"Idea: #1#"},
+			crv_shader = {"Shader: #1#"}
 		},
 		dictionary = {
 
@@ -4753,7 +4780,7 @@ return {
 			k_crv_holy = "Holy Banana",
 			k_crv_pedro = "Pedro",
 			k_crv_titan = "Evolution",
-			k_crv_chaos = "Chaos",
+			k_crv_chaos = "Mythical",
 			k_crv_va = "Vaulted",
 			k_crv_secret = "Secret",
 			k_crv_rain = "Drowned!",
@@ -4787,7 +4814,7 @@ return {
 			k_evolve_crv = "Evolve!",
 			k_half_crv = "Half",
 			k_hblind_crv = "Blind",
-			crv_enable_chaoscards = "Enable Chaos Cards",
+			crv_enable_chaoscards = "Enable Mythical Jokers",
 			crv_enable_vaulteds = "Enable Vaulted Jokers",
 			crv_enable_wip = "Enable Experimental/Wip Features",
 			crv_enable_superior = "Enable Superior Cards",

@@ -105,7 +105,7 @@ SMODS.Sticker({
 		}
 	end,
 	calculate = function(self, card, context)
-		if context.end_of_round and context.main_eval and not context.blueprint and #G.jokers.cards < G.GAME.jokers.config.card_limit then
+		if context.end_of_round and context.main_eval and not context.blueprint and #G.jokers.cards < G.jokers.config.card_limit then
 			if pseudorandom("absolute") < G.GAME.probabilities.normal / 4 then
 				local rr = nil
 				for i = 1, #G.jokers.cards do
@@ -148,7 +148,7 @@ SMODS.Sticker({
 		if context.end_of_round and context.main_eval then
 			local table = {}
 			table[#table + 1] = card
-			RevosVault.replacecards(table, nil, nil, true, nil)
+			RevosVault.replace_joker(card.area["cards"], nil, nil, card.ability.set, card, nil)
 			card_eval_status_text(card, "extra", nil, nil, nil, { message = "Change!" })
 		end
 		if card.ability.set == "Enhanced" or card.ability.set == "Default" or card.ability.set == "Playing Card" then
@@ -159,7 +159,7 @@ SMODS.Sticker({
 					func = function()
 						local table = {}
 						table[#table + 1] = card
-						RevosVault.replacecards(table, nil, nil, true, nil)
+						RevosVault.replace_joker(card.area["cards"], nil, nil, card.ability.set, card, nil)
 						return true
 					end,
 				}))
@@ -201,7 +201,7 @@ SMODS.Sticker({
 					card.ability.over_tally = 0
 					local table = {}
 					table[#table + 1] = card
-					RevosVault.replacecards(table, nil, nil, true, nil)
+					evosVault.replace_joker(card.area["cards"], nil, card.config.center.rarity, card.ability.set, card, nil)
 					card_eval_status_text(card, "extra", nil, nil, nil, { message = "Change!" })
 					card.ability.crv_overtime = false
 				else

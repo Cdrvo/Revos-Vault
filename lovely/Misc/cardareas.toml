@@ -49,6 +49,16 @@ end
         G.discard.T.h,
         { type = "discard", card_limit = 1e308 }
     )
+
+    -- Chaotic Printer Machine area
+
+    self.crv_chaos_calc = CardArea(
+        G.discard.T.x, 
+        G.discard.T.y,
+        G.discard.T.w, 
+        G.discard.T.h,
+        { type = "discard", card_limit = 1e308 }
+    )
     '''
 match_indent = true
 
@@ -62,7 +72,10 @@ position = "before"
 payload = '''
 elseif card.area == G.real_modicon_area and (#SMODS.find_card("j_crv_modicon")>0) then
     y_off = 0.05*(SMODS.find_card("j_crv_modicon")[1]).T.h
-    card = G.jokers.cards[RevosVault.get_key_pos("j_crv_modicon")] or G.deck'''
+    card = G.jokers.cards[RevosVault.get_key_pos("j_crv_modicon")] or G.deck
+elseif card.area == G.crv_chaos_calc and (#SMODS.find_card("j_crv_chaoticprintermachine")>0) then
+    y_off = 0.05*(SMODS.find_card("j_crv_chaoticprintermachine")[1]).T.h
+    card = G.jokers.cards[RevosVault.get_key_pos("j_crv_chaoticprintermachine")] or G.deck'''
 match_indent = true
 
 # Calculating areas
@@ -75,9 +88,12 @@ position = "after"
 payload = '''
 if RevoConfig["8_curses_enabled"] then
     table.insert(t, 1, G.crv_curses)
-    table.insert(t, 1, G.real_modicon_area)
+end
+if RevoConfig["gems_enabled"] then
     table.insert(t, 1, G.crv_gem_area)
 end
+table.insert(t, 1, G.real_modicon_area)
+table.insert(t, 1, G.crv_chaos_calc)
 '''
 match_indent = true
 

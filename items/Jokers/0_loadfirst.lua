@@ -423,6 +423,8 @@ SMODS.Joker({
 		extra = {
 			xmult = 42831398,
 			chips = 42831398,
+
+			retriggers = 3,
 		},
 	},
 	rarity = "crv_pedro",
@@ -444,14 +446,14 @@ SMODS.Joker({
 		check_for_unlock({type = "pedro_go_brr"})
 
 
-		G.GAME.modifiers.banana_mayhem = true
+		--G.GAME.modifiers.banana_mayhem = true
 		ease_background_colour{new_colour = darken(G.C.RED, 0.5), special_colour = G.C.ORANGE, contrast = 5}
 		G.GAME.disable_background_colouring = true
 	end,
 	remove_from_deck = function(self,card,from_debuff)
-		if not G.GAME.modifiers.banana_mayhem_infinite then
+		--[[if not G.GAME.modifiers.banana_mayhem_infinite then
 			G.GAME.modifiers.banana_mayhem = nil
-		end
+		end]]
 		G.GAME.disable_background_colouring = nil
 		if RevosVault.colour_args then
 			ease_background_colour{new_colour = RevosVault.colour_args.new_colour, special_colour = RevosVault.colour_args.special_colour, contrast =  RevosVault.colour_args.contrast }
@@ -465,13 +467,18 @@ SMODS.Joker({
 	end,
 	loc_vars = function(self, info_queue, card)
 		info_queue[#info_queue + 1] = { key = "crv_special_joker", set = "Other"}
-		info_queue[#info_queue + 1] = { key = "crv_banana_mayhem_desc", set = "Other"}
-		info_queue[#info_queue + 1] = { key = "crv_banana_mayhem_desc_pedro", set = "Other"}
+		--info_queue[#info_queue + 1] = { key = "crv_banana_mayhem_desc", set = "Other"}
+		--info_queue[#info_queue + 1] = { key = "crv_banana_mayhem_desc_pedro", set = "Other"}
 		return {
-			vars = { card.ability.extra.xmult, card.ability.extra.chips },
+			vars = { card.ability.extra.retriggers },
 		}
 	end,
 	calculate = function(self, card, context)
+		if context.retrigger_joker_check and context.other_card ~= card and context.other_card:is_banana() and not context.other_card.getting_sliced then
+			return {
+				repetitions = card.ability.extra.retriggers,
+			}
+		end
 		if context.final_scoring_step and not context.blueprint then
 			G.E_MANAGER:add_event(Event({
 				trigger = "after",

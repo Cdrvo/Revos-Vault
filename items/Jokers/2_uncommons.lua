@@ -518,6 +518,9 @@ SMODS.Joker({
 			end
 		end
 	end,
+	crv_credits = {
+		art = "mr.cr33ps"
+	}
 })
 local rkeys = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }
 local rkeyshalf = { "1", "2", "3", "4", "5" }
@@ -567,6 +570,9 @@ SMODS.Joker({
 	in_pool = function(self, wawa, wawa2)
 		return true
 	end,
+	crv_credits = {
+		art = "mr.cr33ps"
+	}
 })
 
 SMODS.Joker({
@@ -616,6 +622,9 @@ SMODS.Joker({
 			end
 		end
 	end,
+	crv_credits = {
+		art = "mr.cr33ps"
+	}
 })
 
 SMODS.Joker({
@@ -2248,6 +2257,12 @@ SMODS.Joker({
 		ease_dollars(-crv.stored)
 	end,
 	calculate = function(self, card, context)
+		if context.starting_shop and not context.blueprint then
+			if G.GAME.current_round.free_rerolls==0 then
+				G.GAME.current_round.free_rerolls = G.GAME.current_round.free_rerolls + 1
+			end
+			calculate_reroll_cost(true)
+		end
 		local crv = card.ability.extra
 		if context.reroll_shop and not context.blueprint and not context.repetition then
 			G.GAME.current_round.free_rerolls = G.GAME.current_round.free_rerolls + 1
@@ -3849,3 +3864,20 @@ SMODS.Joker({
 		end
 	end,
 })
+
+
+--[[SMODS.Joker({
+	key = "man",
+	atlas = "Jokers2",
+	pos = {
+		x = 10,
+		y = 4,
+	},
+	rarity = 2,
+	cost = 4,
+	loc_vars = function(self, info_queue, card)
+	end,
+	calculate = function(self, card, context)
+	end,
+})
+]]

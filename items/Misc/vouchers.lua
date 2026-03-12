@@ -6,6 +6,9 @@ SMODS.Voucher({
 		y = 0,
 	},
 	cost = 10,
+	crv_credits = {
+		art = "mr.cr33ps"
+	}
 })
 
 SMODS.Voucher({
@@ -17,6 +20,9 @@ SMODS.Voucher({
 	},
 	cost = 10,
 	requires = { "v_crv_printerup" },
+	crv_credits = {
+		art = "mr.cr33ps"
+	}
 })
 
 SMODS.Voucher({

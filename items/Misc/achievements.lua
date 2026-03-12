@@ -98,6 +98,15 @@ SMODS.Achievement({
     end
 })
 
+SMODS.Achievement({
+    key = "twisted",
+    unlock_condition = function(self, args)
+        if args.type == "crv_twisted" then
+            return true
+        end
+    end
+})
+
 
 
 -- last
