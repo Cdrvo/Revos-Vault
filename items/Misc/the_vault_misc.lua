@@ -264,19 +264,21 @@ G.FUNCS.crv_vault_vault = function(e)
 		end})
         play_sound("coin1")
     else
-		G.E_MANAGER:add_event(Event({
-			trigger = "before",
-			delay = 0,
-			func = function()
-				TheVault.vault_lock = true
-				G.CONTROLLER.locks["vault_lock"] = false
-				return true
-			end
-		}))
+		
         G.GAME.souls = G.GAME.souls - TheVault.vault_cost
         play_sound("coin1")
 
         RevosVault.replace_joker(G.vault_card.cards[1].area["cards"], nil, G.vault_card.cards[1].config.center.rarity, G.vault_card.cards[1].ability.set, nil)
+
+		G.E_MANAGER:add_event(Event({
+			trigger = "before",
+			delay = 0,
+			func = function()
+				TheVault.vault_lock = false
+				G.CONTROLLER.locks["vault_lock"] = false
+				return true
+			end
+		}))
     end
 end
 
