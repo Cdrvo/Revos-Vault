@@ -154,7 +154,7 @@ SMODS.Gradient({
 		G.C.RED,
 		G.C.IMPORTANT,
 	},
-	cycle = 10,
+	cycle = 0.5,
 })
 
 local loc_old = loc_colour

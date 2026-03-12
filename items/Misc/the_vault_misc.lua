@@ -210,7 +210,7 @@ G.FUNCS.crv_vault_vault_can = function(e)
                 and G.vault_card.cards[1]
                 and G.vault_card.cards[1]:is_vaultable()
                 and G.GAME.souls
-                and (G.GAME.souls >= TheVault.vault_cost)
+                and (G.GAME.souls >= TheVault.vault_cost)	
     			and not TheVault.vault_lock
 				and not G.CONTROLLER.locked
 				and not G.vault_card.cards[1].crv_harvested
