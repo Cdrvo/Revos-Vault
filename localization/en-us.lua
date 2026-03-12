@@ -1639,6 +1639,10 @@ return {
 				name = "Blindprint",
 				text = { "Copies ability of","{C:attention}Joker{} to the left twice","{C:attention}Joker{} on the right","{C:red}Cannot{} trigger" },
 			},
+			j_crv_vbrainstorm = {
+				name = "Vaulted Brainstorm",
+				text = { "Copies ability of","the rightmost {C:attention}Joker{} twice","leftmost {C:attention}Joker{} {C:red}Cannot{} trigger" },
+			},
 			j_crv_rab = {
 				name = "Rain Rabbit",
 				text = {
@@ -3404,12 +3408,32 @@ return {
 					"{C:red}Self-Destructs{} at the end of the round",
 				},
 			},
+			--
 			c_crv_devilscontract = {
 				name = "Devil's Contract",
 				text = {
 					"When activated,",
 					"Playing cards act like {C:attention}Aflame and Stained{}",
 					"{C:red}Destroys{} any played aflame or stained card",
+					"{C:red}Self-Destructs{} at the end of the round",
+				},
+			},
+			--
+			c_crv_staineddoc = {
+				name = "Stained Contract",
+				text = {
+					"When activated,",
+					"Playing cards act like {C:attention}Stained{}",
+					"{C:red}Destroys{} any played stained card",
+					"{C:red}Self-Destructs{} at the end of the round",
+				},
+			},
+			c_crv_aflamedoc = {
+				name = "Aflame Contract",
+				text = {
+					"When activated,",
+					"Playing cards act like {C:attention}Aflame{}",
+					"{C:red}Destroys{} any played aflame card",
 					"{C:red}Self-Destructs{} at the end of the round",
 				},
 			},

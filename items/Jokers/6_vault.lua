@@ -329,13 +329,15 @@ SMODS.Joker({
 			end
 
 			for k, v in pairs(card.area.cards) do
-				if v.crv_no_trigger then
+				if v.crv_no_trigger and v.crv_no_trig_by_bp then
 					v.crv_no_trigger = nil
+					v.crv_no_trig_by_bp = nil
 				end
 			end
 
 			if card.area.cards[rr + 1] then
 				card.area.cards[rr + 1].crv_no_trigger = true
+				card.area.cards[rr + 1].crv_no_trig_by_bp = true
 			end
 		end
 	end,
@@ -1067,6 +1069,115 @@ SMODS.Joker({
 					colour = G.C.MULT,
 				},
 			})
+		end
+	end,
+})
+
+
+SMODS.Joker({
+	key = "vbrainstorm",
+	from = "j_brainstorm",
+	atlas = "Jokers2",
+	rarity = "crv_va",
+	cost = 10,
+	unlocked = true,
+	discovered = false,
+	blueprint_compat = true,
+	pos = {
+		x = 4,
+		y = 8,
+	},
+	config = {
+		extra = {},
+	},
+	loc_vars = function(self, info_queue, card)
+		if card.area and card.area == G.jokers then
+			local other_joker
+			for i = 1, #G.jokers.cards do
+				if G.jokers.cards[i] == card and G.jokers.cards[#G.jokers.cards] ~= card then
+					other_joker = G.jokers.cards[#G.jokers.cards]
+				end
+			end
+			local compatible = other_joker and other_joker ~= card and other_joker.config.center.blueprint_compat
+			return {
+				main_end = {
+					{
+						n = G.UIT.C,
+						config = { align = "bm", minh = 0.4 },
+						nodes = {
+							{
+								n = G.UIT.C,
+								config = {
+									ref_table = card,
+									align = "m",
+									colour = compatible and mix_colours(G.C.GREEN, G.C.JOKER_GREY, 0.8)
+										or mix_colours(G.C.RED, G.C.JOKER_GREY, 0.8),
+									r = 0.05,
+									padding = 0.06,
+								},
+								nodes = {
+									{
+										n = G.UIT.T,
+										config = {
+											text = " "
+												.. localize("k_" .. (compatible and "compatible" or "incompatible"))
+												.. " ",
+											colour = G.C.UI.TEXT_LIGHT,
+											scale = 0.32 * 0.8,
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+			}
+		end
+	end,
+	calculate = function(self, card, context)
+		if context.retrigger_joker_check and not context.retrigger_joker and context.other_card == card then
+			return {
+				message = localize("k_again_ex"),
+				repetitions = 1,
+				card = card,
+				colour = G.C.PURPLE,
+			}
+		end
+		local other_joker = nil
+		for i = 1, #G.jokers.cards do
+			if G.jokers.cards[#G.jokers.cards] ~= card then
+				other_joker = G.jokers.cards[#G.jokers.cards]
+			end
+		end
+		local ret = SMODS.blueprint_effect(card, other_joker, context)
+		if ret then
+			ret.colour = G.C.PURPLE
+		end
+		return ret
+	end,
+	in_pool = function(self, wawa, wawa2)
+		return true
+	end,
+	update = function(self, card, context)
+		if card.area and card.added_to_deck then
+			local rr = nil
+			for i = 1, #card.area.cards do
+				if card.area.cards[1] ~= card then
+					rr = card.area.cards[1]
+				end
+			end
+
+			for k, v in pairs(card.area.cards) do
+				if v.crv_no_trigger and v.crv_no_trig_by_bs then
+					v.crv_no_trigger = nil
+					v.crv_no_trig_by_bs = nil
+				end
+			end
+
+			if card.area.cards[1] and rr then
+				rr.crv_no_trigger = true
+				rr.crv_no_trig_by_bs = true
+			end
 		end
 	end,
 })

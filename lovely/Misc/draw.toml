@@ -1,0 +1,23 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = -1
+
+# sticker functions
+
+[[patches]]
+[patches.pattern]
+target = '=[SMODS _ "src/overrides.lua"]'
+pattern = '''if _center.soul_pos then'''
+position = 'before'
+payload = '''
+if _center.crv_soul_pos then
+    if self.children.crv_floating_sprite then self.children.crv_floating_sprite:remove() end
+    local atlas_key = _center[G.SETTINGS.colourblind_option and 'hc_atlas' or 'lc_atlas'] or _center.atlas or _center.set
+    self.children.crv_floating_sprite = SMODS.create_sprite(0, 0, 0, 0, atlas_key, self.config.center.crv_soul_pos)
+    self.children.crv_floating_sprite.role.draw_major = self
+    self.children.crv_floating_sprite.states.hover.can = false
+    self.children.crv_floating_sprite.states.click.can = false
+end
+'''
+match_indent = true

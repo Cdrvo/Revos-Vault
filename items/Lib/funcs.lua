@@ -2351,3 +2351,26 @@ function RevosVault.internal_sticker_removal(table)
 		end
 	end
 end
+
+function RevosVault.use_with_sound(card, args)
+	args.sound = args.sound or "timpani"
+	args.func = args.func or function() end
+	G.E_MANAGER:add_event(Event({
+		trigger = "after",
+		delay = 0.4,
+		func = function()
+			play_sound(args.sound, args.sound_speed, args.volume)
+			card:juice_up(0.3, 0.5)
+			return true
+		end,
+	}))
+	delay(0.2)	
+	G.E_MANAGER:add_event(Event({
+		trigger = "after",
+		delay = 0,
+		func = function()
+			args.func()
+			return true
+		end,
+	}))
+end

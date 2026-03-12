@@ -1934,7 +1934,7 @@ SMODS.Consumable({
 		x = 17,
 		y = 1,
 	},
-	soul_pos = {
+	crv_soul_pos = {
 		x = 18,
 		y = 1,
 	},
@@ -1948,8 +1948,11 @@ SMODS.Consumable({
 	loc_vars = function(self, info_queue, card)
 		return { 1,1,1,1,1,1,1,1,1,1,1,1 }
 	end,
+	can_use = function()
+		return RevosVault.check("space", G.jokers)
+	end,
 	use = function(self, card, area, copier)
-		print("no func")
+		RevosVault.use_with_sound(card, {sound_speed = 0.8, func = function() SMODS.add_card{set = "Joker", rarity = "crv_chaos"} end})
 	end,
 	set_card_type_badge = function(self, card, badges)
 		badges[1] = create_badge(localize("k_superior_s"), get_type_colour(self or card.config, card), nil, 1.2)

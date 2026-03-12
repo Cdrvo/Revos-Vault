@@ -119,7 +119,7 @@ SMODS.Consumable({
 	end,
 })
 
-SMODS.Consumable({
+--[[SMODS.Consumable({
 	key = "devilscontract",
 	set = "EnchancedDocuments",
 	discovered = true,
@@ -167,6 +167,120 @@ SMODS.Consumable({
 			and (
 				SMODS.has_enhancement(context.destroy_card, "m_crv_mugged")
 				or SMODS.has_enhancement(context.destroy_card, "m_crv_aflame")
+			)
+		then
+			return {
+				remove = true,
+			}
+		end
+		if context.end_of_round and card.ability.extra.active then
+			SMODS.destroy_cards(card)
+		end
+	end,
+})]]
+
+SMODS.Consumable({
+	key = "staineddoc",
+	set = "EnchancedDocuments",
+	discovered = true,
+	atlas = "documents",
+	pos = { x = 3, y = 2 },
+	config = {
+		extra = {
+			xmult = 2,
+			odds = 4,
+			active = false,
+		},
+	},
+	loc_vars = function(self, info_queue, card)
+		info_queue[#info_queue+1] = G.P_CENTERS["m_crv_mugged"]
+		return { vars = { card.ability.extra.xmult} }
+	end,
+	can_use = function(self, card)
+		return card.ability.extra.active == false
+	end,
+	keep_on_use = function(self, card)
+		return true
+	end,
+	use = function(self, card, area, copier)
+		card.ability.extra.active = true
+		local eval = function()
+			return card.ability.extra.active == true
+		end
+		juice_card_until(card, eval, true)
+	end,
+	calculate = function(self, card, context)
+		if card.ability.extra.active and context.individual then
+			if next(context.poker_hands["Flush"]) then
+				if context.cardarea == G.play then
+					return {
+						xmult = card.ability.extra.xmult,
+					}
+				end
+			end
+		end
+		if
+			context.destroy_card
+			and context.cardarea == G.play
+			and card.ability.extra.active
+			and (
+				SMODS.has_enhancement(context.destroy_card, "m_crv_mugged")
+			)
+		then
+			return {
+				remove = true,
+			}
+		end
+		if context.end_of_round and card.ability.extra.active then
+			SMODS.destroy_cards(card)
+		end
+	end,
+})
+
+SMODS.Consumable({
+	key = "aflamedoc",
+	set = "EnchancedDocuments",
+	discovered = true,
+	atlas = "documents",
+	pos = { x = 1, y = 0 },
+	config = {
+		extra = {
+			r1 = 1,
+			r2 = 2,
+			active = false
+		},
+	},
+	loc_vars = function(self, info_queue, card)
+		info_queue[#info_queue+1] = G.P_CENTERS["m_crv_aflame"]
+		return { vars = { card.ability.extra.r1, card.ability.extra.r2} }
+	end,
+	can_use = function(self, card)
+		return card.ability.extra.active == false
+	end,
+	keep_on_use = function(self, card)
+		return true
+	end,
+	use = function(self, card, area, copier)
+		card.ability.extra.active = true
+		local eval = function()
+			return card.ability.extra.active == true
+		end
+		juice_card_until(card, eval, true)
+	end,
+	calculate = function(self, card, context)
+		local cae = card.ability.extra
+		if  card.ability.extra.active and context.repetition and context.cardarea == G.play then
+			local a = pseudorandom_element({cae.r1,cae.r2})
+			return{
+				repetitions = a
+			}
+		end
+		if
+			context.destroy_card
+			and context.cardarea == G.play
+			and card.ability.extra.active
+			and (
+				SMODS.has_enhancement(context.destroy_card, "m_crv_aflame")
 			)
 		then
 			return {
