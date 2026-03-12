@@ -46,7 +46,7 @@ G.UIDEF.crv_joker_config = function()
 						n = G.UIT.C,
 						nodes = {
 							create_toggle({
-								label = localize("crv_enable_chaoscards"),
+								label = localize("crv_enable_chaoscards") .. "*",
 								ref_table = RevosVault.config,
 								ref_value = "7_chaos_enabled",
 								--callback = should_restart,
@@ -70,6 +70,16 @@ G.UIDEF.crv_joker_config = function()
 									{
 										n = G.UIT.T,
 										config = { text = "Requires restart!", colour = G.C.RED, scale = 0.4 },
+									},
+								},
+							},
+							{
+								n = G.UIT.R,
+								config = { align = "cm", minh = 0.6 },
+								nodes = {
+									{
+										n = G.UIT.T,
+										config = { text = "*Incomplete!", colour = G.C.WHITE, scale = 0.4 },
 									},
 								},
 							},
