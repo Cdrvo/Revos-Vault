@@ -515,7 +515,7 @@ SMODS.Joker({
 	calculate = function(self, card, context)
 		local crv = card.ability.extra
 		if context.individual and context.cardarea == G.play then
-			if context.other_card:is_suit(crv.suit) then
+			if context.other_card:is_suit(G.GAME.current_round.crv_octo_suit) then
 				return {
 					dollars = crv.mone,
 				}
