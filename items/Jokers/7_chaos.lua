@@ -412,12 +412,12 @@ SMODS.Joker({
 		local old, new = 0, nil
 		for i = 1, G.jokers.config.card_limit do
 			old = old + 1
-			print(old)
+			--print(old)
 		end
 		new = G.jokers.config.card_limit * card.ability.extra.multi
 		G.jokers.config.card_limit = G.jokers.config.card_limit * card.ability.extra.multi
 	
-		print(old, new)
+		--print(old, new)
 
 		card.ability.extra.multi_aftermath = new - old
 	end,
