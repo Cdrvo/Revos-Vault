@@ -65,7 +65,7 @@ SMODS.Gradient({
 		HEX("c80000"),
 		HEX("bb008e"),
 	},
-	cycle = 5,
+	cycle = 3,
 })
 
 SMODS.Gradient({
