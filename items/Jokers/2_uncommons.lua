@@ -3379,7 +3379,7 @@ SMODS.Joker({
 		G.GAME.glassodds = G.GAME.glassodds / 2
 	end,
 	remove_from_deck = function(self, card, from_debuff)
-		G.GAME.glassodds = G.GAME.glassodds / 2
+		G.GAME.glassodds = G.GAME.glassodds * 2
 	end,
 	calculate = function(self, card, context)
 		if
