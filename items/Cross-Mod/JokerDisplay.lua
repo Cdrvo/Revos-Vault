@@ -619,7 +619,7 @@ c_def["j_crv_news"] = {
     extra = {
         {
             { text = "(" },
-            { text = "1 in 8" },
+            { text = "1 in 4" },
             { text = ")" },
         },
         

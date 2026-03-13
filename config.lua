@@ -1,5 +1,5 @@
 return {
-  ["7_chaos_enabled"] = false,
+  ["7_chaos_enabled"] = true,
   ["6_vault_enabled"] = true,
   superior_enabled = true,
   experimental_enabled = false,

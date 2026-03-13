@@ -271,6 +271,7 @@ SMODS.Consumable({
 	end,
 	use = function(self, card)
 		if SMODS.pseudorandom_probability(card,"bottlingmyflip",1,card.ability.extra.odds) then
+			check_for_unlock({type = "crv_iamtheone"})
 			for k, v in pairs(G.jokers.cards) do
 				if not v.edition then
 					v:set_edition("e_polychrome")

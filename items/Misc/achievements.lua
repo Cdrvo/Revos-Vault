@@ -107,6 +107,24 @@ SMODS.Achievement({
     end
 })
 
+SMODS.Achievement({
+    key = "mythical",
+    unlock_condition = function(self, args)
+        if args.type == "crv_myths" then
+            return true
+        end
+    end
+})
+
+SMODS.Achievement({
+    key = "flip",
+    unlock_condition = function(self, args)
+        if args.type == "crv_iamtheone" then
+            return true
+        end
+    end
+})
+
 
 
 -- last

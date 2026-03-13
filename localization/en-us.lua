@@ -604,6 +604,10 @@ return {
 				name = "Honey",
 				text = { "Gives {C:money}+$#1#{}", "when scored" },
 			},
+			m_crv_lightning = {
+				name = "Shocked",
+				text = { "Retrigger this card","{C:attention}#1#{} times.","Turns back to normal","after playing this {C:attention}#2#{C:inactive} (#3#){} times" },
+			},
 
 			-- BANANA ENHANCEMENT
 
@@ -1016,8 +1020,8 @@ return {
 				text = {
 					"When re-rolling, Has a",
 					"{C:green}#1# in #2#{} chance to spawn {C:attention}Scrap",
-					"Gains {C:mult}+#2# {}Mult for every {C:attention}Scrap used",
-					"{C:inactive}(Currently{C:mult} +#1#{C:inactive} Mult)",
+					"Gains {C:mult}+#4# {}Mult for every {C:attention}Scrap used",
+					"{C:inactive}(Currently{C:mult} +#3#{C:inactive} Mult)",
 				},
 			},
 			j_crv_devilishprinter = {
@@ -1638,6 +1642,10 @@ return {
 			j_crv_vprint = {
 				name = "Blindprint",
 				text = { "Copies ability of","{C:attention}Joker{} to the left twice","{C:attention}Joker{} on the right","{C:red}Cannot{} trigger" },
+			},
+			j_crv_vbrainstorm = {
+				name = "Vaulted Brainstorm",
+				text = { "Copies ability of","the rightmost {C:attention}Joker{} twice","leftmost {C:attention}Joker{} {C:red}Cannot{} trigger" },
 			},
 			j_crv_rab = {
 				name = "Rain Rabbit",
@@ -2400,7 +2408,7 @@ return {
 			j_crv_glassgun = {
 				name = "Glass Gun",
 				text = {
-					"{C:red}Halves{} the {C:green}odds{} of glass cards breaking",
+					"{C:red}Doubles{} the {C:green}odds{} of glass cards breaking",
 					"Destroyed glass cards become {C:attention}Shattered{}",
 					"Scored glass cards become {C:crv_polychrome}Polychrome",
 					"{C:inactive}(eg. 4 -> 2)",
@@ -2480,7 +2488,7 @@ return {
 			j_crv_heartfive = {
 				name = "Rainbow Octopus",
 				text = {
-					"Played {C:attention}#2#{} Cards",
+					"Played {V:1}#2#{}",
 					"give {C:money}$#1#{} when scored",
 					"{s:0.8}Suit changes after every round"
 				},
@@ -2767,6 +2775,29 @@ return {
                     "{C:crv_clear}Joker, Tarot, Planet,",
                     "{C:crv_clear}and Spectral{} cards may",
                     "appear {C:crv_clear}multiple times",
+                },
+			},
+			j_crv_zeus = {
+				name = "Zeus",
+				text={
+					{
+					"All {C:attention}Jokers{} and {C:attention}Scored Cards",
+					"are retriggered {C:attention}#1#{} time."
+					},
+					{
+					"{C:green}1 in 3{} Chance to turn",
+					"scored cards into {C:attention}Shocked"
+					}
+				}
+			},
+			j_crv_mythtical_printer = {
+				name = "Mythical Printer",
+				text={
+                    "When {C:attention}Blind{} is selected",
+					"print a random {C:purple,E:2}Legendary",
+					"has a {C:green}#1# in #2#{} Chance",
+					"to print a {C:crv_mythical,E:1}Mythical{} Joker",
+					"{C:inactive}(Always prints {C:dark_edition}Negative{C:inactive})"
                 },
 			},
 			-- QUICK JOKER
@@ -3404,12 +3435,32 @@ return {
 					"{C:red}Self-Destructs{} at the end of the round",
 				},
 			},
+			--
 			c_crv_devilscontract = {
 				name = "Devil's Contract",
 				text = {
 					"When activated,",
 					"Playing cards act like {C:attention}Aflame and Stained{}",
 					"{C:red}Destroys{} any played aflame or stained card",
+					"{C:red}Self-Destructs{} at the end of the round",
+				},
+			},
+			--
+			c_crv_staineddoc = {
+				name = "Stained Contract",
+				text = {
+					"When activated,",
+					"Playing cards act like {C:attention}Stained{}",
+					"{C:red}Destroys{} any played stained card",
+					"{C:red}Self-Destructs{} at the end of the round",
+				},
+			},
+			c_crv_aflamedoc = {
+				name = "Aflame Contract",
+				text = {
+					"When activated,",
+					"Playing cards act like {C:attention}Aflame{}",
+					"{C:red}Destroys{} any played aflame card",
 					"{C:red}Self-Destructs{} at the end of the round",
 				},
 			},
@@ -3907,7 +3958,7 @@ return {
 				name = "The Superior Soul",
 				text={
                     "Creates a",
-                    "{C:crv_mythical,E:2}Mythical{} Joker",
+                    "{C:crv_mythical,E:1}Mythical{} Joker",
                     "{C:inactive}(Must have room)",
                 },
 			},
@@ -4640,6 +4691,7 @@ return {
 				text = {
 					"{C:green}1 in 4{} Chance to",
 					"give back any destroyed {C:attention}Joker",
+					"with {C:attention}Perishable{} sticker",
 					"for {C:attention}#2#{C:inactive} (#1#){} rounds",
 				},
 			},
@@ -4687,6 +4739,8 @@ return {
 			ach_crv_purification = "Curses begone!",
 			ach_crv_appreciation = "Revo's Appreciation",
 			ach_crv_twisted = "Twisted",
+			ach_crv_mythical = "Breaking the Limits",
+			ach_crv_flip = "Oops, All Polychrome!"
 		},
 		achievement_descriptions ={
 			ach_crv_get_all_stickers = "Apply all Revo's Vault stickers on one card",
@@ -4701,7 +4755,9 @@ return {
 			ach_crv_cursed = "Obtain a Curse",
 			ach_crv_purification = "Purify a Curse",
 			ach_crv_appreciation = "Win a game with only Revo's Vault jokers",
-			ach_crv_twisted = "Win a game with atleast 1 curse"
+			ach_crv_twisted = "Win a game with atleast 1 curse",
+			ach_crv_mythical = "Find The Superior Soul and obtain a Mythical Joker",
+			ach_crv_flip = "Get a successful trigger on Bottleflip"
 		},
 		labels = {
 			crv_ps_seal = "Printer's Seal",

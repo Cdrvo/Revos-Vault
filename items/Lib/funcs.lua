@@ -440,348 +440,21 @@ end
 
 -- RevosVault.replacecards(G.hand.cards,nil,nil,true,nil,nil)
 -- kill me
-
-function RevosVault.replacecards(area, replace, bypass_eternal, keep, keeporiginal, _flip) --Cards not keeping editions/seals/stickers is intended. //Probably extremely inefficient /// Like why tf did i make the keep n entire seperate section. I probably wont even use "replace" or teh destruction part of this like ever.
-	local playing_card_detected = false
-	for k, v in pairs(area) do
-		if v:is_playing_card() then
-			playing_card_detected = true
-		end
-	end
-	if playing_card_detected then
-		sendWarnMessage("replacecards does not work with playing cards.", "RevosVault")
-		sendWarnMessage("use .replace_playing_cards instead", "RevosVault")
-	end
-	if _flip and not keep then
-		sendWarnMessage("Cannot flip while destroying", "RevosVault")
-	end
-	if G.shop_booster and area == G.shop_booster.cards or G.shop_vouchers and area == G.shop_vouchers.cards then --Setting the area as these 2 disables the entire thing below and will not have a support for them anytime soon cause NONE of the jokers does anything with destroyed booster PACKS and VOUCHERS. Including mods --???
-		if area == G.shop_booster.cards then
-			for i = 1, #area do
-				local tab = {}
-				for i = 1, #RevosVault.get_eligible_cards(nil, "Booster", true) do
-					if RevosVault.get_eligible_cards(nil, "Booster", true)[i] then
-						tab[#tab + 1] = RevosVault.get_eligible_cards(nil, "Booster", true)[i].key
-					end
-				end
-				if area[i] ~= keeporiginal and area[i].ability.set == "Booster" then
-					local tab2 = pseudorandom_element(tab)
-					if _flip then
-						area[i]:flip()
-						G.E_MANAGER:add_event(Event({
-							trigger = "before",
-							delay = 1,
-							func = function()
-								area[i]:set_ability(tab2)
-								return true
-							end,
-						}))
-						G.E_MANAGER:add_event(Event({
-							trigger = "after",
-							delay = 1,
-							func = function()
-								area[i]:juice_up()
-								area[i]:flip()
-								return true
-							end,
-						}))
-					else
-						area[i]:juice_up()
-						area[i]:set_ability(pseudorandom_element(tab))
-					end
-				end
-				tab = {}
-			end
-		end
-		if area == G.shop_vouchers.cards then
-			for i = 1, #area do
-				local tab = {}
-				for i = 1, #RevosVault.get_eligible_cards(nil, "Voucher", true) do
-					if RevosVault.get_eligible_cards(nil, "Booster", true)[i] then
-						if not RevosVault.get_eligible_cards(nil, "Voucher", true)[i].requires then
-							if not G.GAME.used_vouchers[RevosVault.get_eligible_cards(nil, "Voucher", true)[i].key] then
-								tab[#tab + 1] = RevosVault.get_eligible_cards(nil, "Voucher", true)[i].key
-							end
-						else
-							for k, v in pairs(RevosVault.get_eligible_cards(nil, "Voucher", true)[i].requires) do
-								if G.GAME.used_vouchers[v] then
-									tab[#tab + 1] = RevosVault.get_eligible_cards(nil, "Voucher", true)[i].key
-								end
-							end
-						end
-					end
-				end
-				if area[i] ~= keeporiginal and area[i].ability.set == "Voucher" then
-					local tab2 = pseudorandom_element(tab)
-					if _flip then
-						area[i]:flip()
-						G.E_MANAGER:add_event(Event({
-							trigger = "before",
-							delay = 1,
-							func = function()
-								area[i]:set_ability(tab2)
-								return true
-							end,
-						}))
-						G.E_MANAGER:add_event(Event({
-							trigger = "after",
-							delay = 1,
-							func = function()
-								area[i]:juice_up()
-								area[i]:flip()
-								return true
-							end,
-						}))
-					else
-						area[i]:juice_up()
-						area[i]:set_ability(pseudorandom_element(tab))
-					end
-				end
-				tab = {}
-			end
-		end
-	else
-		if keep then
-			for i = 1, #area do
-				if area[i].config.center.rarity then
-					local b
-					local rarity
-					if not replace then
-						for k, v in pairs(G.P_JOKER_RARITY_POOLS) do
-							if area[i].config.center.rarity == k then
-								rarity = k
-								b = k
-							end
-						end
-						local set = area[i].ability.set
-						local tab = {}
-						for k, v in pairs(RevosVault.get_eligible_cards(nil, "Joker", nil)) do
-							if G.P_CENTERS[v] then
-								if b and G.P_CENTERS[v].rarity and  G.P_CENTERS[v].rarity == b then
-									tab[#tab + 1] = v.key
-								end
-							end
-						end
-						if area[i] ~= keeporiginal then
-							local tab2 = pseudorandom_element(tab)
-							if _flip then
-								area[i]:flip()
-								G.E_MANAGER:add_event(Event({
-									trigger = "before",
-									delay = 1,
-									func = function()
-										area[i]:set_ability(tab2)
-										return true
-									end,
-								}))
-								G.E_MANAGER:add_event(Event({
-									trigger = "after",
-									delay = 1,
-									func = function()
-										area[i]:juice_up()
-										area[i]:flip()
-										return true
-									end,
-								}))
-							else
-								area[i]:juice_up()
-								--area[i]:set_ability(pseudorandom_element(tab))
-								print(pseudorandom_element(tab))
-								tab = {}
-							end
-						end
-					else
-						local set = area[i].ability.set
-						local rarity = SMODS.poll_rarity(set)
-						local b = rarity
-						if rarity == 1 then
-							rarity = "Common"
-						elseif rarity == 2 then
-							rarity = "Uncommon"
-						elseif rarity == 3 then
-							rarity = "Rare"
-						elseif rarity == 4 then
-							rarity = "Legendary"
-						end
-						local tab = {}
-						for k, v in pairs(RevosVault.get_eligible_cards(nil, "Joker", true)) do
-							if v then
-								if b and v.rarity and v.rarity == b then
-									if v.key then
-										tab[#tab + 1] = v.key
-									end
-								end
-							end
-						end
-						if area[i] ~= keeporiginal then
-							local tab2 = pseudorandom_element(tab)
-							if _flip then
-								area[i]:flip()
-								G.E_MANAGER:add_event(Event({
-									trigger = "before",
-									delay = 1,
-									func = function()
-										area[i]:set_ability(tab2)
-										return true
-									end,
-								}))
-								G.E_MANAGER:add_event(Event({
-									trigger = "after",
-									delay = 1,
-									func = function()
-										area[i]:juice_up()
-										area[i]:flip()
-										return true
-									end,
-								}))
-							else
-								area[i]:juice_up()
-								area[i]:set_ability(pseudorandom_element(tab))
-							end
-						end
-						tab = {}
-					end
-				elseif area[i].ability.set then
-					local set = area[i].ability.set
-					local tab = {}
-
-					for i = 1, #RevosVault.get_consumable_pool() do
-						if RevosVault.get_eligible_cards(nil, "Booster", true)[i] then
-							if RevosVault.get_consumable_pool()[i].set == set then
-								tab[#tab + 1] = RevosVault.get_consumable_pool()[i].key
-							end
-						end
-					end
-
-					if area[i] ~= keeporiginal then
-						local tab2 = pseudorandom_element(tab)
-						if _flip then
-							area[i]:flip()
-							G.E_MANAGER:add_event(Event({
-								trigger = "before",
-								delay = 1,
-								func = function()
-									area[i]:set_ability(tab2)
-									return true
-								end,
-							}))
-							G.E_MANAGER:add_event(Event({
-								trigger = "after",
-								delay = 1,
-								func = function()
-									area[i]:juice_up()
-									area[i]:flip()
-									return true
-								end,
-							}))
-						else
-							area[i]:juice_up()
-							area[i]:set_ability(pseudorandom_element(tab))
-						end
-					end
-				end
-			end
-		else
-			if replace then --Doesnt stick to joker rarities
-				for i = 1, #area do
-					if bypass_eternal then
-						if area[i].ability.set and area[i] ~= keeporiginal then
-							local set = area[i].ability.set
-							SMODS.destroy_cards(area[i], true)
-							SMODS.add_card({
-								set = set,
-								area = G.pack_cards,
-							})
-						end
-					else
-						if area[i].ability.set and not area[i].ability.eternal and area[i] ~= keeporiginal then
-							local set = area[i].ability.set
-							SMODS.destroy_cards(area[i])
-							SMODS.add_card({
-								set = set,
-								area = G.pack_cards,
-							})
-						end
-					end
-				end
-			else
-				for i = 1, #area do
-					if bypass_eternal then
-						if area[i].config.center.rarity and area[i] ~= keeporiginal then --Reroll them while keeping the same rarity
-							local rarity
-							if area[i].config.center.rarity == 1 then
-								rarity = "Common"
-							elseif area[i].config.center.rarity == 2 then
-								rarity = "Uncommon"
-							elseif area[i].config.center.rarity == 3 then
-								rarity = "Rare"
-							elseif area[i].config.center.rarity == 4 then
-								rarity = "Legendary"
-							else
-								rarity = area[i].config.center.rarity
-							end
-							local set = area[i].ability.set
-							SMODS.destroy_cards(area[i], true)
-							SMODS.add_card({
-								set = set,
-								rarity = rarity,
-								area = G.pack_cards,
-							})
-						elseif area[i].ability.set and area[i] ~= keeporiginal then
-							for i = 1, #RevosVault.get_consumable_pool() do
-								if RevosVault.get_consumable_pool()[i].set == set then
-									tab[#tab + 1] = RevosVault.get_consumable_pool()[i].key --unused?
-								end
-							end
-
-							local set = area[i].ability.set
-							SMODS.destroy_cards(area[i], true)
-							SMODS.add_card({
-								set = set,
-								area = G.pack_cards,
-							})
-						end
-					else
-						if area[i].config.center.rarity and not area[i].ability.eternal and area[i] ~= keeporiginal then
-							local rarity
-							if area[i].config.center.rarity == 1 then
-								rarity = "Common"
-							elseif area[i].config.center.rarity == 2 then
-								rarity = "Uncommon"
-							elseif area[i].config.center.rarity == 3 then
-								rarity = "Rare"
-							elseif area[i].config.center.rarity == 4 then
-								rarity = "Legendary"
-							else
-								rarity = area[i].config.center.rarity
-							end
-							local set = area[i].ability.set
-							SMODS.destroy_cards(area[i])
-							SMODS.add_card({
-								set = set,
-								rarity = rarity,
-								area = G.pack_cards,
-							})
-						elseif area[i].ability.set and not area[i].ability.eternal and area[i] ~= keeporiginal then
-							local set = area[i].ability.set
-							SMODS.destroy_cards(area[i])
-							SMODS.add_card({
-								set = set,
-								area = G.pack_cards,
-							})
-						end
-					end
-				end
-			end
-		end
-	end
-end
-
 -- uh
 
 function RevosVault.replace_joker(area, _flip, rarity, set, specific, exclude) -- FUCK, (dont mind the name joker its not only jokers)
 	local function random_joker()
 		local a = {}
+		if rarity == 1 then
+			rarity = "Common"
+		elseif rarity == 2 then
+			rarity = "Uncommon"
+		elseif rarity == 3 then
+			rarity = "Rare"
+		elseif rarity == 4 then
+			rarity = "Legendary"
+		end
+
 		if rarity then
 			a = SMODS.get_clean_pool(set, rarity)
 		else
@@ -792,11 +465,11 @@ function RevosVault.replace_joker(area, _flip, rarity, set, specific, exclude) -
 	end
 		for i = 1, #area do
 			if ((area[i].ability.set == set)) then
-				print("set match")
+				--print("set match")
 				if (specific and area[i] == specific) or not specific then
-					print("specif match")
+					--print("specif match")
 					if (exclude and area[i] ~= exclude) or not exclude then
-						print("exclude match")
+						--print("exclude match")
 						if _flip then
 							area[i]:flip()
 							G.E_MANAGER:add_event(Event({
@@ -2625,6 +2298,15 @@ function RevosVault.reset_whiteboard()
     G.GAME.current_round.whiteboard_suit = ancient_card
 end
 
+function RevosVault.reset_octopus()
+    local ancient_suits = {}
+    for k, v in pairs(SMODS.Suits) do
+        if k ~= G.GAME.current_round.crv_octo_suit then ancient_suits[#ancient_suits + 1] = k end
+    end
+    local ancient_card = pseudorandom_element(ancient_suits, pseudoseed('anc'..G.GAME.round_resets.ante))
+    G.GAME.current_round.crv_octo_suit = ancient_card
+end
+
 function RevosVault.very_safe(var, var2)
 	if var2 then
 		if G and G.GAME and G.GAME[var] and G.GAME[var][var2] then
@@ -2668,4 +2350,27 @@ function RevosVault.internal_sticker_removal(table)
 			table[k] = nil
 		end
 	end
+end
+
+function RevosVault.use_with_sound(card, args)
+	args.sound = args.sound or "timpani"
+	args.func = args.func or function() end
+	G.E_MANAGER:add_event(Event({
+		trigger = "after",
+		delay = 0.4,
+		func = function()
+			play_sound(args.sound, args.sound_speed, args.volume)
+			card:juice_up(0.3, 0.5)
+			return true
+		end,
+	}))
+	delay(0.2)	
+	G.E_MANAGER:add_event(Event({
+		trigger = "after",
+		delay = 0,
+		func = function()
+			args.func()
+			return true
+		end,
+	}))
 end

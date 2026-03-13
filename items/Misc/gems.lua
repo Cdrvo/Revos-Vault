@@ -403,9 +403,10 @@ RevosVault.Gem({
 		end
         if context.crv_joker_destroyed and context.crv_destroyedj then
             if pseudorandom("angelite") < 1 / 4 then 
-                SMODS.add_card{
+                local ccccc = SMODS.add_card{
                     key = context.crv_destroyedj.config.center.key,
                 }
+				ccccc:add_sticker("perishable", true)
             end
         end
 	end,

@@ -415,9 +415,7 @@ SMODS.Joker({
 		if context.setting_blind and not context.blueprint and not context.repetition and not context.individual then
 			if card.ability.extra.timer < 3 then
 				card.ability.extra.timer = card.ability.extra.timer + 1
-				local new_card = create_card("Gros Michel", G.jokers, nil, nil, nil, nil, "j_gros_michel")
-				new_card:add_to_deck()
-				G.jokers:emplace(new_card)
+				SMODS.add_card{key = "j_gros_michel"}
 			end
 			if context.setting_blind and (card.ability.extra.timer == 3) then
 				G.E_MANAGER:add_event(Event({
@@ -3379,7 +3377,7 @@ SMODS.Joker({
 		G.GAME.glassodds = G.GAME.glassodds / 2
 	end,
 	remove_from_deck = function(self, card, from_debuff)
-		G.GAME.glassodds = G.GAME.glassodds / 2
+		G.GAME.glassodds = G.GAME.glassodds * 2
 	end,
 	calculate = function(self, card, context)
 		if

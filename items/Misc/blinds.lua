@@ -92,7 +92,7 @@ SMODS.Blind({
 	boss_colour = HEX("f0b900"),
 	press_play = function(self)
 		local cards = {}
-		if to_big(G.GAME.dollars) > 10 and not self.disabled then
+		if to_big(G.GAME.dollars) > to_big(10) and not self.disabled then
 			ease_dollars(-3)
 		end
 	end,
@@ -211,10 +211,12 @@ SMODS.Blind({
 	pos = { x = 0, y = 3 },
 	boss_colour = HEX("c89a00"),
 	set_blind = function(self)
-		self.old_chips = G.GAME.blind.chips
-		G.GAME.blind.chips = G.GAME.blind.chips * #G.jokers.cards
-		G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
-		self.triggered = true
+		if #G.jokers.cards>0 then
+			self.old_chips = G.GAME.blind.chips
+			G.GAME.blind.chips = G.GAME.blind.chips * #G.jokers.cards
+			G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
+			self.triggered = true
+		end
 	end,
 	defeat = function(self) -- no need
 		self.triggered = false

@@ -47,6 +47,9 @@ SMODS.Consumable({
 			joka = localize("k_none")
 			c = G.C.RED
 		end
+		if G.GAME.dont_question then
+			info_queue[#info_queue+1] = G.P_CENTERS[G.GAME.dont_question]
+		end
 		return {
 			main_end = {
 				{
@@ -1921,40 +1924,47 @@ SMODS.Consumable({
 	end,
 })
 
---[[SMODS.Consumable({
-	key = "supsoul",
-	set = "Superior",
-	atlas = "Superior",
-	crv_in_set = "Spectral",
-	
-	pos = {
-		x = 17,
-		y = 1,
-	},
-	soul_pos = {
-		x = 18,
-		y = 1,
-	},
-	pools = {
-		SuperiorSpectral = true,
-	},
-	discovered = true,
-	config = {
-		extra = { },
-	},
-	loc_vars = function(self, info_queue, card)
-		return { 1,1,1,1,1,1,1,1,1,1,1,1 }
-	end,
-	use = function(self, card, area, copier)
-		print("no func")
-	end,
-	set_card_type_badge = function(self, card, badges)
-		badges[1] = create_badge(localize("k_superior_s"), get_type_colour(self or card.config, card), nil, 1.2)
-	end,
-	in_pool = function(self)
-		return false
-	end
-})]]
+
+if RevoConfig and RevoConfig["7_chaos_enabled"] then
+	SMODS.Consumable({
+		key = "supsoul",
+		set = "Superior",
+		atlas = "Superior",
+		crv_in_set = "Spectral",
+		
+		pos = {
+			x = 17,
+			y = 1,
+		},
+		crv_soul_pos = {
+			x = 18,
+			y = 1,
+		},
+		pools = {
+			SuperiorSpectral = true,
+		},
+		discovered = true,
+		config = {
+			extra = { },
+		},
+		loc_vars = function(self, info_queue, card)
+			return { 1,1,1,1,1,1,1,1,1,1,1,1 }
+		end,
+		can_use = function()
+			return RevosVault.check("space", G.jokers)
+		end,
+		use = function(self, card, area, copier)
+			check_for_unlock({type = "crv_myths"})
+			RevosVault.use_with_sound(card, {sound_speed = 0.8, func = function() SMODS.add_card{set = "Joker", rarity = "crv_chaos"} end})
+		end,
+		set_card_type_badge = function(self, card, badges)
+			badges[1] = create_badge(localize("k_superior_s"), get_type_colour(self or card.config, card), nil, 1.2)
+		end,
+		in_pool = function(self)
+			return false
+		end
+	})
+end
 
 --Superior planets
 

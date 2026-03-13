@@ -65,7 +65,7 @@ SMODS.Gradient({
 		HEX("c80000"),
 		HEX("bb008e"),
 	},
-	cycle = 5,
+	cycle = 3,
 })
 
 SMODS.Gradient({
@@ -146,6 +146,15 @@ SMODS.Gradient({
 		HEX("ddb482"),
 	},
 	cycle = 5,
+})
+
+SMODS.Gradient({
+	key = "crv_important",
+	colours = {
+		G.C.RED,
+		G.C.IMPORTANT,
+	},
+	cycle = 0.5,
 })
 
 local loc_old = loc_colour

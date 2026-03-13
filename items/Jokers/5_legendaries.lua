@@ -147,8 +147,11 @@ SMODS.Joker({
 			end
 		end
 
-		return {
-			main_end = {
+		local t = {}
+		G.mod_icon_area.states.visible = false
+		if G.mod_icon_area and #G.mod_icon_area.cards>0 then
+			G.mod_icon_area.states.visible = true
+			t = {
 				{
 					n = G.UIT.C,
 					config = { align = "bm", padding = 0.02 },
@@ -156,7 +159,11 @@ SMODS.Joker({
 						{ n = G.UIT.O, config = { object = G.mod_icon_area } },
 					},
 				},
-			},
+			}
+		end
+
+		return {
+			main_end = t,
 			vars = { cae.cj1, cae.cj2, cae.c1, cae.c2 },
 		}
 	end,
@@ -175,6 +182,7 @@ SMODS.Joker({
 					and v.mod.id == "RevosVault"
 					and v.rarity ~= "crv_curse"
 					and v.key ~= "j_crv_modicon"
+					and not string.find(v.key, "deathcard")
 				then
 					tab[#tab + 1] = v.key
 				end

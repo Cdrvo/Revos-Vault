@@ -150,3 +150,26 @@ SMODS.DrawStep {
     end,
     conditions = { vortex = false, facing = 'front' },
 }
+
+SMODS.DrawStep {
+    key = 'crv_tilting_sprite',
+    order = 60,
+    func = function(self)
+        if self.config.center.crv_soul_pos and (self.config.center.discovered or self.bypass_discovery_center) then
+            local scale_mod = 0.05 + 0.05*math.sin(1.8*G.TIMERS.REAL) + 0.07*math.sin((G.TIMERS.REAL - math.floor(G.TIMERS.REAL))*math.pi*14)*(1 - (G.TIMERS.REAL - math.floor(G.TIMERS.REAL)))^3
+            local rotate_mod = 0.1*math.sin(1.219*G.TIMERS.REAL) + 0.07*math.sin((G.TIMERS.REAL)*math.pi*5)*(1 - (G.TIMERS.REAL - math.floor(G.TIMERS.REAL)))^2
+
+            if self.children.crv_floating_sprite then
+                self.children.crv_floating_sprite:draw_shader('dissolve',0, nil, nil, self.children.center,scale_mod, rotate_mod,nil, 0.1 + 0.03*math.sin(1.8*G.TIMERS.REAL),nil, 0.6)
+                self.children.crv_floating_sprite:draw_shader('dissolve', nil, nil, nil, self.children.center, scale_mod, rotate_mod)
+            end
+            if self.edition then 
+                local edition = G.P_CENTERS[self.edition.key]
+                if edition.apply_to_float and self.children.crv_floating_sprite then
+                    self.children.crv_floating_sprite:draw_shader(edition.shader, nil, nil, nil, self.children.center, scale_mod, rotate_mod)                    
+                end
+            end
+        end
+    end,
+    conditions = { vortex = false, facing = 'front' },
+}

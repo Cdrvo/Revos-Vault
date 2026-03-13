@@ -440,6 +440,7 @@ end
 SMODS.current_mod.reset_game_globals = function(run_start)
 	if run_start then
 		RevosVault.reset_whiteboard()
+		RevosVault.reset_octopus()
 		calculate_modded_printer()
 		G.GAME.current_round.crv_drawn_hands = 0
 
@@ -468,13 +469,14 @@ SMODS.current_mod.reset_game_globals = function(run_start)
 			TheVault.current_vault_text = "Reroll"
 			TheVault.changed = true
 			TheVault.vault_cost = 30
-			TheVualt.vault_cost_default = 30
+			TheVault.vault_cost_default = 30
 		end
 	end
 
 	G.GAME.current_round.crv_drawn_hands = 0
 	calculate_modded_printer()
 	RevosVault.reset_whiteboard()
+	RevosVault.reset_octopus()
 
 end
 
