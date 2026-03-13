@@ -604,6 +604,10 @@ return {
 				name = "Honey",
 				text = { "Gives {C:money}+$#1#{}", "when scored" },
 			},
+			m_crv_lightning = {
+				name = "Shocked",
+				text = { "Retrigger this card","{C:attention}#1#{} times.","Turns back to normal","after playing this {C:attention}#2#{C:inactive} (#3#){} times" },
+			},
 
 			-- BANANA ENHANCEMENT
 
@@ -2773,6 +2777,29 @@ return {
                     "appear {C:crv_clear}multiple times",
                 },
 			},
+			j_crv_zeus = {
+				name = "Zeus",
+				text={
+					{
+					"All {C:attention}Jokers{} and {C:attention}Scored Cards",
+					"are retriggered {C:attention}#1#{} time."
+					},
+					{
+					"{C:green}1 in 3{} Chance to turn",
+					"scored cards into {C:attention}Shocked"
+					}
+				}
+			},
+			j_crv_mythtical_printer = {
+				name = "Mythical Printer",
+				text={
+                    "When {C:attention}Blind{} is selected",
+					"print a random {C:purple,E:2}Legendary",
+					"has a {C:green}#1# in #2#{} Chance",
+					"to print a {C:crv_mythical,E:1}Mythical{} Joker",
+					"{C:inactive}(Always prints {C:dark_edition}Negative{C:inactive})"
+                },
+			},
 			-- QUICK JOKER
 			--GARBSHIT below
 			j_crv_stamprinter = {
@@ -3931,7 +3958,7 @@ return {
 				name = "The Superior Soul",
 				text={
                     "Creates a",
-                    "{C:crv_mythical,E:2}Mythical{} Joker",
+                    "{C:crv_mythical,E:1}Mythical{} Joker",
                     "{C:inactive}(Must have room)",
                 },
 			},
@@ -4712,6 +4739,8 @@ return {
 			ach_crv_purification = "Curses begone!",
 			ach_crv_appreciation = "Revo's Appreciation",
 			ach_crv_twisted = "Twisted",
+			ach_crv_mythical = "Breaking the Limits",
+			ach_crv_flip = "Oops, All Polychrome!"
 		},
 		achievement_descriptions ={
 			ach_crv_get_all_stickers = "Apply all Revo's Vault stickers on one card",
@@ -4726,7 +4755,9 @@ return {
 			ach_crv_cursed = "Obtain a Curse",
 			ach_crv_purification = "Purify a Curse",
 			ach_crv_appreciation = "Win a game with only Revo's Vault jokers",
-			ach_crv_twisted = "Win a game with atleast 1 curse"
+			ach_crv_twisted = "Win a game with atleast 1 curse",
+			ach_crv_mythical = "Find The Superior Soul and obtain a Mythical Joker",
+			ach_crv_flip = "Get a successful trigger on Bottleflip"
 		},
 		labels = {
 			crv_ps_seal = "Printer's Seal",

@@ -539,6 +539,51 @@ SMODS.Enhancement({
 	end,
 })
 
+--[[SMODS.Enhancement({
+	key = "lightning",
+	atlas = "enh",
+	pos = { x = 3, y = 2 },
+	discovered = true,
+	unlocked = true,
+	replace_base_card = false,
+	no_rank = false,
+	no_suit = false,
+	always_scores = false,
+	weight = 0,
+	config = { extra = { scored = 3, go = true, rep = 2, start = 3 } },
+	loc_vars = function(self, info_queue, card)
+		local cae = card.ability.extra
+		return { vars = { cae.rep, cae.start, cae.scored } }
+	end,
+	calculate = function(self, card, context, effect)
+		local cae = card.ability.extra
+		if context.repetition and context.cardarea == G.play and context.other_card == card then
+			return {
+				repetitions = card.ability.extra.rep,
+			}
+		end
+		if context.main_scoring and cae.go and context.cardarea == G.play then
+			cae.go = false
+			cae.scored = cae.scored - 1
+		end
+		if context.final_scoring_step then
+			cae.go = true
+			G.E_MANAGER:add_event(Event({
+				func = function()
+					if cae.scored == 0 then
+						card:set_ability("c_base")
+						card:juice_up()
+					end
+					return true
+				end,
+			}))
+		end
+	end,
+	in_pool = function(self)
+		return false
+	end,
+})]]
+
 -- there are WAY better ways of doing this but im bored and this takes time to do
 	
 --[[SMODS.Enhancement({
