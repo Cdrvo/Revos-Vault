@@ -286,6 +286,9 @@ SMODS.Joker({
 			card:set_ability("j_crv_snayn3")
 		end
 	end,
+	in_pool = function()
+		return false
+	end
 })
 
 SMODS.Joker({

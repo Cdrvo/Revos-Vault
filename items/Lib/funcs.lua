@@ -560,9 +560,7 @@ function RevosVault.check(check, area)
 	elseif check == "inshop" then
 		return G.STATE == G.STATES.SHOP
 	elseif check == "highlight" then
-		if #area.highlighted > 0 then
-			return #area.highlighted
-		end
+		return #area.highlighted
 	elseif check == "space" then
 		if #area.cards >= area.config.card_limit then
 			return false
@@ -1369,13 +1367,15 @@ function RevosVault.hide_shop()
 end
 
 function RevosVault.move_card(card, _area, args)
-	G.E_MANAGER:add_event(Event({
-		trigger = "before",
-		func = function()
-			RevosVault.remove_lock = true
-			return true
-		end,
-	}))
+	if not args.no_lock then
+		G.E_MANAGER:add_event(Event({
+			trigger = "before",
+			func = function()
+				RevosVault.remove_lock = true
+				return true
+			end,
+		}))
+	end
 	local area = card.area
 	if args then
 		if args.add_to_deck then
@@ -1389,13 +1389,15 @@ function RevosVault.move_card(card, _area, args)
 		area:remove_card(card)
 		_area:emplace(card)
 	end
-	G.E_MANAGER:add_event(Event({
-		trigger = "after",
-		func = function()
-			RevosVault.remove_lock = false
-			return true
-		end,
-	}))
+	if not args.no_lock then
+		G.E_MANAGER:add_event(Event({
+			trigger = "after",
+			func = function()
+				RevosVault.remove_lock = false
+				return true
+			end,
+		}))
+	end
 end
 
 function RevosVault.create_gem_timer(card)
@@ -1836,7 +1838,13 @@ function Card:has_potential()
 		_string = string.gsub(_string, mod_prefix .. "_", "")
 		--_string = string.gsub(_string, "c_", "")
 
-		if string.find(self.config.center.key, _string) then
+		local self_key = self.config.center.key
+		if G.P_CENTERS[self_key] and G.P_CENTERS[self_key].mod and G.P_CENTERS[self_key].mod.prefix then
+			local mod_prefix2 = G.P_CENTERS[self_key].mod.prefix 
+			self_key = string.gsub(self_key, mod_prefix2 .. "_", "")
+		end
+
+		if string.find(self_key, _string) then
 			return true
 		end
 	end
@@ -1884,38 +1892,66 @@ function RevosVault.nope(args)
 	if not args.text then
 		args.text = "k_nope_ex"
 	end
-	G.E_MANAGER:add_event(Event({
-		trigger = "after",
-		delay = 0.4,
-		func = function()
-			attention_text({
-				text = localize(args.text),
-				scale = args.scale or 1.3,
-				hold = args.hold or 1.4,
-				major = args.card,
-				backdrop_colour = args.colour or G.C.SECONDARY_SET.Tarot,
-				align = (G.STATE == G.STATES.TAROT_PACK or G.STATE == G.STATES.SPECTRAL_PACK) and "tm" or "cm",
-				offset = {
-					x = 0,
-					y = (G.STATE == G.STATES.TAROT_PACK or G.STATE == G.STATES.SPECTRAL_PACK) and -0.2 or 0,
-				},
-				silent = true,
-			})
-			G.E_MANAGER:add_event(Event({
-				trigger = "after",
-				delay = 0.06 * G.SETTINGS.GAMESPEED,
-				blockable = false,
-				blocking = false,
-				func = function()
-					play_sound("tarot2", 0.76, 0.4)
-					return true
-				end,
-			}))
-			play_sound("tarot2", 1, 0.4)
-			args.card:juice_up(0.3, 0.5)
-			return true
-		end,
-	}))
+	if args.instant then
+		attention_text({
+			text = localize(args.text),
+			scale = args.scale or 1.3,
+			hold = args.hold or 1.4,
+			major = args.card,
+			backdrop_colour = args.colour or G.C.SECONDARY_SET.Tarot,
+			align = (G.STATE == G.STATES.TAROT_PACK or G.STATE == G.STATES.SPECTRAL_PACK) and "tm" or "cm",
+			offset = {
+				x = 0,
+				y = (G.STATE == G.STATES.TAROT_PACK or G.STATE == G.STATES.SPECTRAL_PACK) and -0.2 or 0,
+			},
+			silent = true,
+		})
+		G.E_MANAGER:add_event(Event({
+			trigger = "after",
+			delay = 0.06 * G.SETTINGS.GAMESPEED,
+			blockable = false,
+			blocking = false,
+			func = function()
+				play_sound("tarot2", 0.76, 0.4)
+				return true
+			end,
+		}))
+		play_sound("tarot2", 1, 0.4)
+		args.card:juice_up(0.3, 0.5)
+	else
+		G.E_MANAGER:add_event(Event({
+			trigger = "after",
+			delay = 0.4,
+			func = function()
+				attention_text({
+					text = localize(args.text),
+					scale = args.scale or 1.3,
+					hold = args.hold or 1.4,
+					major = args.card,
+					backdrop_colour = args.colour or G.C.SECONDARY_SET.Tarot,
+					align = (G.STATE == G.STATES.TAROT_PACK or G.STATE == G.STATES.SPECTRAL_PACK) and "tm" or "cm",
+					offset = {
+						x = 0,
+						y = (G.STATE == G.STATES.TAROT_PACK or G.STATE == G.STATES.SPECTRAL_PACK) and -0.2 or 0,
+					},
+					silent = true,
+				})
+				G.E_MANAGER:add_event(Event({
+					trigger = "after",
+					delay = 0.06 * G.SETTINGS.GAMESPEED,
+					blockable = false,
+					blocking = false,
+					func = function()
+						play_sound("tarot2", 0.76, 0.4)
+						return true
+					end,
+				}))
+				play_sound("tarot2", 1, 0.4)
+				args.card:juice_up(0.3, 0.5)
+				return true
+			end,
+		}))
+	end
 end
 
 function RevosVault.get_key_pos(key, type)
@@ -2373,4 +2409,52 @@ function RevosVault.use_with_sound(card, args)
 			return true
 		end,
 	}))
+end
+
+
+RevosVault.copy_card = function(args)
+
+	args.area = args.area or (args.card.area or G.jokers)
+	local ae = copy_card(args.card)
+	if args.materialize then
+		ae.dissolve = 1
+	end
+	if args.edition then
+		ae:set_edition(args.edition)
+	end
+	if args.stickers then
+		if type(args.stickers) == "table" then
+			for _, sticker in pairs(args.stickers) do
+				ae:add_sticker(sticker, true)
+			end
+		else
+			ae:add_sticker(args.stickers, true)
+		end
+	end
+	if not args.no_add_to_deck then
+		ae:add_to_deck()
+	end
+	args.area:emplace(ae)
+	if args.materialize then
+		ae:start_materialize()
+	end
+	if args.sound then
+		play_sound(args.sound)
+	end
+end
+
+RevosVault.display = function(revert)
+	RevosVault.rrr = RevosVault.rrr or {}
+	if not revert then
+		for k, v in pairs(G) do
+			if type(v) == "table" and v.states and v.states.visible and k ~= "SPLASH_BACK" and k ~= "play" then
+				v.states.visible = false
+				RevosVault.rrr[#RevosVault.rrr+1] = v
+			end
+		end
+	else
+		for k, v in pairs(RevosVault.rrr) do
+			RevosVault.rrr[k].states.visible = true
+		end
+	end
 end

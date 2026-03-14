@@ -29,6 +29,47 @@ SMODS.Seal({
 	end,
 })
 
+
+SMODS.Seal({
+	key = "superior_seal",
+	atlas = "enh",
+	pos = { x = 4, y = 0 },
+	discovered = true,
+	badge_colour = RevosVault.C.SUP,
+	rarity = 3,
+	sound = { sound = "gold_seal", per = 1.2, vol = 0.4 },
+	config = { extra = { rep = 2, money = 3 } },
+	loc_vars = function(self,info_queue,card)
+		local case = card.ability.seal.extra
+		return{vars={case.rep,case.money}}
+	end,
+	get_p_dollars = function(self, card)
+		local case = card.ability.seal.extra
+        return case.money
+    end,
+	calculate = function(self, card, context)
+		local case = card.ability.seal.extra
+		if context.repetition then
+            return {
+                repetitions = case.rep,
+            }
+        end
+		if ((context.playing_card_end_of_round and context.cardarea == G.hand) or (context.discard and context.other_card == card)) and #G.consumeables.cards < G.consumeables.config.card_limit and not context.repetition then
+            local cons_set = "Tarot"
+            G.E_MANAGER:add_event(Event({
+                trigger = 'before',
+                delay = 0.0,
+                func = function()
+                    cons_set = crvps(SMODS.ConsumableTypes).key
+					SMODS.add_card{set = cons_set}
+                    return true
+                end
+            }))
+            return { message = localize('k_crv_plus_consumable'), colour = G.C.SECONDARY_SET[cons_set] }
+        end
+	end,
+})
+
 -- am i dumb
 
 --[[SMODS.Seal({
