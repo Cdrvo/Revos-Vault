@@ -137,21 +137,6 @@ if RevosVault.config.vault_enabled then -- i wont fix this
 	end
 end
 
-	SMODS.ObjectType({
-		key = "SuperiorTarot",
-		cards = {},
-	})
-
-	SMODS.ObjectType({
-		key = "SuperiorSpectral",
-		cards = {},
-	})
-
-	SMODS.ObjectType({
-		key = "SuperiorPlanet",
-		cards = {},
-	})
-
 	local shopcreateold = create_card_for_shop
 	function create_card_for_shop(area)
 		if RevosVault.config.gems_enabled then
@@ -215,7 +200,9 @@ local rerol_old = G.FUNCS.reroll_shop
 function G.FUNCS.reroll_shop(e)
 	if #SMODS.find_card("j_crv_shop_sign") > 0 then
 		RevosVault.replace_joker(G.shop_vouchers.cards, nil, nil, "Voucher")
+		RevosVault.simple_shop(G.shop_vouchers, "Voucher")
 		RevosVault.replace_joker(G.shop_booster.cards, nil, nil, "Booster")
+		RevosVault.simple_shop(G.shop_booster, "Booster")
 	end
 	rerol_old(e)
 end

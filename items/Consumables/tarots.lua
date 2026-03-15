@@ -23,7 +23,6 @@ SMODS.Consumable({
 		else
 			RevosVault.nope({card = card})
 		end
-		delay(0.6)
 	end,
 	crv_credits = {
 		art = "mr.cr33ps"
@@ -43,6 +42,9 @@ SMODS.ObjectType({
 
 SMODS.Consumable({
 	key = "dreamsdesires",
+	hidden = true,
+	soul_set = "Tarot",
+	soul_rate = 0.975,
 	set = "Tarot",
 	config = { extra = {} },
 	loc_vars = function(self, info_queue, card)

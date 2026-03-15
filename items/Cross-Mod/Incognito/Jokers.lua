@@ -1,3 +1,9 @@
+SMODS.Atlas({
+	key = "incog",
+	path = "Cross-Mod/incognito/incog.png",
+	px = 71,
+	py = 95,
+})
 
 SMODS.Joker({
 	key = "tetorinter",

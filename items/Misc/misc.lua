@@ -192,7 +192,7 @@ SMODS.Scoring_Parameter({
 SMODS.Scoring_Calculation({
 	key = "dollars_mult_scoring",
 	func = function(self, chips, mult, flames)
-		return (chips * mult) * G.GAME.dollars
+		return (chips + mult) * G.GAME.dollars
 	end,
 	parameters = { "chips", "mult", "crv_dollars_mult" },
 	replace_ui = function(self)
@@ -215,7 +215,7 @@ SMODS.Scoring_Calculation({
 							}),
 						},
 					},
-					RevosVault.GUI.operator(scale * 0.75, { text = "X" }),
+					RevosVault.GUI.operator(scale * 0.75, { text = "+" }),
 					{
 						n = G.UIT.C,
 						config = { align = "cm", id = "hand_mult" },

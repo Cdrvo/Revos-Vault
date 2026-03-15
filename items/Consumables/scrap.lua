@@ -69,7 +69,7 @@ SMODS.Consumable({
 	end,
 	use = function()
 		return {
-			ease_dollars(10),
+			ease_dollars(30),
 		}
 	end,
 })

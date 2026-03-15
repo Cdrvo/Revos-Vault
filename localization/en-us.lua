@@ -3390,7 +3390,8 @@ return {
 					"Creates a {C:red}Weak{}",
 					"and {C:crv_temp}Temporary",
 					"copy of the",
-					"highlighted {C:attention}Joker"
+					"highlighted {C:attention}Joker",
+					"{C:inactive}(Must have room)"
 				}
 			},
 		},
@@ -3643,6 +3644,175 @@ return {
 			},
 		},
 		Superior = {
+			c_crv_supglassdocument = {
+				name = "Superior Glass Contract",
+				text = {
+					"When activated,",
+					"Playing cards act like {C:attention}Glass{}",
+					"{C:attention}Retrigger{} glass cards {C:attention}#3#{} times",
+					"Lasts for {C:attention}#4#{C:inactive} (#5#){} uses",
+				},
+			},
+			c_crv_supsteeldocument = {
+				name = "Superior Steel Contract",
+				text = {
+					"When activated,",
+					"Playing cards act like {C:attention}Steel{}",
+					"{C:attention}Retrigger{} steel cards {C:attention}#1#{} times",
+					"Lasts for {C:attention}#2#{C:inactive} (#3#){} uses",
+				},
+			},
+			c_crv_supstaineddoc = {
+				name = "Superior Stained Contract",
+				text = {
+					"When activated,",
+					"Playing cards act like {C:attention}Stained{}",
+					"{C:attention}Retrigger{} stained cards {C:attention}#1#{} times",
+					"Lasts for {C:attention}#2#{C:inactive} (#3#){} uses",
+				},
+			},
+			c_crv_supaflamedoc = {
+				name = "Superior Aflame Contract",
+				text = {
+					"When activated,",
+					"Playing cards act like {C:attention}Aflame{}",
+					"{C:attention}Retrigger{} aflame cards {C:attention}#1#{} times",
+					"Lasts for {C:attention}#2#{C:inactive} (#3#){} uses",
+				},
+			},
+			c_crv_supmegadoc = {
+				name = "Superior Mega Contract",
+				text = {
+					"When activated,",
+					"Playing cards act like {C:attention}Mega{}",
+					"{C:attention}Retrigger{} mega cards {C:attention}#1#{} times",
+					"Lasts for {C:attention}#2#{C:inactive} (#3#){} uses",
+				},
+			},
+			c_crv_supt1doc = {
+				name = "Superior Tier 1 Contract",
+				text = {
+					"When activated,",
+					"Playing cards act like {C:attention}Tier 1{}",
+					"{C:attention}Retrigger{} tier 1 cards {C:attention}#1#{} times",
+					"Lasts for {C:attention}#2#{C:inactive} (#3#){} uses",
+				},
+			},
+			c_crv_supt2doc = {
+				name = "Superior Tier 2 Contract",
+				text = {
+					"When activated,",
+					"Playing cards act like {C:attention}Tier 2{}",
+					"{C:attention}Retrigger{} tier 2 cards {C:attention}#1#{} times",
+					"Lasts for {C:attention}#2#{C:inactive} (#3#){} uses",
+				},
+			},
+			c_crv_supt3doc = {
+				name = "Superior Tier 3 Contract",
+				text = {
+					"When activated,",
+					"Playing cards act like {C:attention}Tier 3{}",
+					"{C:attention}Retrigger{} tier 3 cards {C:attention}#1#{} times",
+					"Lasts for {C:attention}#2#{C:inactive} (#3#){} uses",
+				},
+			},
+			c_crv_supluckydocument = {
+				name = "Superior Lucky Contract",
+				text = {
+					"When activated,",
+					"Playing cards act like {C:attention}Lucky{}",
+					"{C:attention}Retrigger{} lucky cards {C:attention}#1#{} times",
+					"Lasts for {C:attention}#2#{C:inactive} (#3#){} uses",
+				},
+			},
+			c_crv_suphorn = {
+				name = "Superior Horn",
+				text = { "Gives{C:money} 60$" },
+			},
+			c_crv_suppickles = {
+				name = "Superior Pickles",
+				text = { "Gives{C:money} 45$" },
+			},
+			c_crv_supmp = {
+				name = "Superior Metal Piece",
+				text = { "Gives{C:money} 30$" },
+			},
+			c_crv_supap = {
+				name = "Superior Apparatus",
+				text = { "Gives{C:money} 75$" },
+			},
+			c_crv_supdc = {
+				name = "Superior Duck",
+				text = { "Gives{C:money} 15$" },
+			},
+			--
+			c_crv_supinkintuition = {
+				name = "Superior Ink & Intuition",
+				text = {
+					"Creates a random",
+					"{C:dark_edition}Negative{} {C:red}Printer"
+				},
+			},
+			c_crv_supheart = {
+				name = "Superior Heart",
+				text = {
+					"{C:red}Destroy{} the",
+					"highlighted {C:attention}Joker{}",
+					"or {C:attention}Playing Card{} no matter what"
+				},
+			},
+			c_crv_supdreamsdesires = {
+				name = "Superior Dreams & Desires",
+				text = {
+					"Creates a {C:dark_edition}Negative{}",
+					"{C:attention}Mega Printer"
+				},
+			},
+			c_crv_supmastery = {
+				name = "Superior Mastery",
+				text = {
+					"Upgrades the {C:attention}Enhancement",
+					"of #1# cards",
+					"and applies {C:crv_sup}Superior Seal{}",
+					"to them if eligible"
+				},
+			},
+			c_crv_supbottleflip = {
+				name = "Superior Bottleflip",
+				text = {
+					"{C:green}#1# in #2#{} Chance to",
+					"turn all Jokers {C:dark_edition}Negative",
+				},
+			},
+			c_crv_supprayer  = {
+				name = "Superior Prayer",
+				text = {
+					"Destroy up to {C:attention}#1#",
+					"{C:black}Curse{} Card"
+				}
+			},
+			c_crv_supcamera  = {
+				name = "Superior Camera",
+				text = {
+					"Creates a {C:dark_edition}Negative", 
+					"copy of the",
+					"highlighted {C:attention}Joker"
+				}
+			},
+			c_crv_supbrush = {
+				name = "Superior Brush",
+				text = {
+					"Enhances #1# Cards to {C:crv_sup}Superior",
+					"and applies {C:purple}Printer's Seal{} to them",
+				},
+			},
+			c_crv_suppurification = {
+				name = "Superior Purify",
+				text = {
+					"{C:red}Destroy{} all",
+					"{C:red}Curses"
+				},
+			},
 			c_crv_supfool = {
 				name = "Superior Fool",
 				text = {
@@ -3919,7 +4089,7 @@ return {
 				},
 			},
 			c_crv_supdeja_vu = {
-				name = "Superior De Javu",
+				name = "Superior Deja Vu",
 				text = {
 					"Enhances #1# Cards to {C:attention}Lucky or Glass",
 					"and applies {C:attention}Red{} Seal to them",
@@ -4100,7 +4270,37 @@ return {
 				text = {
 					"The selected {C:attention}Joker", "becomes one with the {C:hpfx_IjiGray,E:1}Ijiraq"
 				}
-			}
+			},
+			-- Incognito
+			c_crv_supmysteryvase = {
+				name = "Superior Mystery Vase",
+				text = {
+					"Creates {C:attention}3{} random",
+					"{C:nic_plants}???{} cards",
+					"{C:inactive}(Always {C:dark_edition}Negative{C:inactive} or {C:crv_polychrome}Polychrome{C:inactive})",
+					"{C:inactive}(Must have room)"
+				}
+			},
+			c_crv_supplantsvase = {
+				name = "Superior Plants Vase",
+				text = {
+					"Creates {C:attention}5{} random",
+					"{C:dark_edition}Negative{C:nic_plants} Plants{}",
+					"{C:inactive}(Must have room",
+					"{C:inactive}and Crazy Dave)"
+				}
+			},
+			c_crv_supshovel = {
+				name = "Superior Shovel",
+				text = {
+					"Selected {C:nic_plants}Plants{} gets",
+					"{C:attention}digged up{} and gains",
+					"{C:money,E:2}triple{} the original {C:attention}cost value",
+					"{C:green}#1# in #2#{} Chance to {C:red}not{}",
+					"destroy the plant"
+				}
+			},
+			-- QUICK SUP
 		},
 
 		-- MF colour
@@ -4153,6 +4353,17 @@ return {
 					"of the card to hand",
 					"{C:inactive}(Removes the seal from",
 					"{C:inactive}the copied card)",
+				},
+			},
+			crv_superior_seal_seal = {
+				name = "Superior Seal",
+				text = {
+					"Retrigger this card", "{C:attention}#1#{} times",
+					"Earn {C:money}+$#2#{} When scored",
+					"Creates a random",
+					"consumable if",
+					"{C:attention}held{} in hand",
+					"or when {C:red}discarded{}"
 				},
 			},
 			p_crv_pbst = {
@@ -4761,6 +4972,7 @@ return {
 		},
 		labels = {
 			crv_ps_seal = "Printer's Seal",
+			crv_superior_seal_seal = "Superior Seal",
 			crv_p = "Printer",
 			crv_curse = "Curse",
 			scrap = "Scraps",
@@ -4798,9 +5010,14 @@ return {
 		},
 		dictionary = {
 
+			k_crv_plus_consumable = "+1 Consumable!",
+
 			b_superiorspectral_cards = "Superior Spectrals",
 			b_superiortarot_cards = "Superior Tarots",
 			b_superiorplanet_cards = "Superior Planets",
+			b_superiorenchanceddocuments_cards = "Superior Contracts",
+			b_superiorscrap_cards = "Superior Scraps",
+			b_superiorzengarden_cards = "Superior Zen",
 
 			crv_Tarot = "Tarot",
 			crv_Spectral = "Spectral",
@@ -4850,10 +5067,15 @@ return {
 			b_enchanceddocuments_cards = "Contracts",
 			k_corrupt = "Corrupt",
 			b_corrupt_cards = "Corrupt Cards",
+
 			k_superior = "Superior Tarot",
 			k_superior_s = "Superior Spectral",
 			k_superior_p = "Superior Planet",
+			k_superior_contract = "Superior Contract",
+			k_superior_scrap = "Superior Scrap",
+			k_superior_zen = "Superior Zen",
 			b_superior_cards = "Superior Cards",
+			
 			crv_mode = "Change",
 			crv_mode2 = "Target",
 			k_crv_92 = "2-9",

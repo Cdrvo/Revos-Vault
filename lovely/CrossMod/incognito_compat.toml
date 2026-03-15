@@ -1,0 +1,16 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = -1
+
+# Shovel
+
+[[patches]]
+[patches.pattern]
+target = '=[SMODS Incognito "src/pvz/functions.lua"]'
+pattern = 'if v.config.center.key == "c_nic_shovel" then'
+position = "at"
+payload = '''
+if v.config.center.key == "c_nic_shovel" or v.config.center.key == "c_crv_supshovel" then
+'''
+match_indent = true 
