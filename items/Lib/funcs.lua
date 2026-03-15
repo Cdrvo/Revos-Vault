@@ -1367,6 +1367,7 @@ function RevosVault.hide_shop()
 end
 
 function RevosVault.move_card(card, _area, args)
+	args = args or {}
 	if not args.no_lock then
 		G.E_MANAGER:add_event(Event({
 			trigger = "before",
