@@ -137,31 +137,6 @@ if RevosVault.config.vault_enabled then -- i wont fix this
 	end
 end
 
-	SMODS.ObjectType({
-		key = "SuperiorTarot",
-		cards = {},
-	})
-
-	SMODS.ObjectType({
-		key = "SuperiorSpectral",
-		cards = {},
-	})
-
-	SMODS.ObjectType({
-		key = "SuperiorPlanet",
-		cards = {},
-	})
-
-	SMODS.ObjectType({
-		key = "SuperiorEnchancedDocuments",
-		cards = {},
-	})
-
-	SMODS.ObjectType({
-		key = "Superiorscrap",
-		cards = {},
-	})
-
 	local shopcreateold = create_card_for_shop
 	function create_card_for_shop(area)
 		if RevosVault.config.gems_enabled then

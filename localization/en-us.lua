@@ -4270,7 +4270,37 @@ return {
 				text = {
 					"The selected {C:attention}Joker", "becomes one with the {C:hpfx_IjiGray,E:1}Ijiraq"
 				}
-			}
+			},
+			-- Incognito
+			c_crv_supmysteryvase = {
+				name = "Superior Mystery Vase",
+				text = {
+					"Creates {C:attention}3{} random",
+					"{C:nic_plants}???{} cards",
+					"{C:inactive}(Always {C:dark_edition}Negative{C:inactive} or {C:crv_polychrome}Polychrome{C:inactive})",
+					"{C:inactive}(Must have room)"
+				}
+			},
+			c_crv_supplantsvase = {
+				name = "Superior Plants Vase",
+				text = {
+					"Creates {C:attention}5{} random",
+					"{C:dark_edition}Negative{C:nic_plants} Plants{}",
+					"{C:inactive}(Must have room",
+					"{C:inactive}and Crazy Dave)"
+				}
+			},
+			c_crv_supshovel = {
+				name = "Superior Shovel",
+				text = {
+					"Selected {C:nic_plants}Plants{} gets",
+					"{C:attention}digged up{} and gains",
+					"{C:money,E:2}triple{} the original {C:attention}cost value",
+					"{C:green}#1# in #2#{} Chance to {C:red}not{}",
+					"destroy the plant"
+				}
+			},
+			-- QUICK SUP
 		},
 
 		-- MF colour
@@ -4987,6 +5017,7 @@ return {
 			b_superiorplanet_cards = "Superior Planets",
 			b_superiorenchanceddocuments_cards = "Superior Contracts",
 			b_superiorscrap_cards = "Superior Scraps",
+			b_superiorzengarden_cards = "Superior Zen",
 
 			crv_Tarot = "Tarot",
 			crv_Spectral = "Spectral",
@@ -5036,12 +5067,15 @@ return {
 			b_enchanceddocuments_cards = "Contracts",
 			k_corrupt = "Corrupt",
 			b_corrupt_cards = "Corrupt Cards",
+
 			k_superior = "Superior Tarot",
 			k_superior_s = "Superior Spectral",
 			k_superior_p = "Superior Planet",
 			k_superior_contract = "Superior Contract",
 			k_superior_scrap = "Superior Scrap",
+			k_superior_zen = "Superior Zen",
 			b_superior_cards = "Superior Cards",
+			
 			crv_mode = "Change",
 			crv_mode2 = "Target",
 			k_crv_92 = "2-9",

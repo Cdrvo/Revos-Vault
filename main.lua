@@ -404,7 +404,14 @@ end
 for k, file in ipairs(RevosVault.CrossMod) do
 	local file_no_lua = string.gsub(file,".lua","")
 	if next(SMODS.find_mod(file_no_lua)) then
-		SMODS.load_file("items/Cross-Mod/" .. file)()
+		if file_no_lua == file then
+			local temp = NFS.getDirectoryItems(RevosPath .. "items/Cross-Mod/" .. file) -- worst way possible
+			for _, ffile in ipairs(temp) do
+				assert(SMODS.load_file("items/Cross-Mod/" .. file .. "/" .. ffile))()
+			end
+		else
+			SMODS.load_file("items/Cross-Mod/" .. file)()
+		end
 		if not RevosVault.crossed_mods then RevosVault.crossed_mods = 0 end
 		RevosVault.crossed_mods = RevosVault.crossed_mods + 1
 	end
