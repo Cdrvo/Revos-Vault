@@ -162,10 +162,14 @@ return {
 			},
 			b_crv_goldendeck = {
 				name = "Golden Deck",
-				text = { "Score is now also","{C:red}Multiplied{} by current {C:money}Dollars{}" },
+				text = { 
+					"{C:mult}Mult{} is added to",
+					"{C:chips}Chips{} instead of muliplying.",
+					"Multiply score with {C:money}dollars{}",
+					"{C:inactive}[(Chips+Mult)xDollars]"
+				},
+
 			},
-
-
 			-- Unused
 			b_crv_mach = {
 				name = "Machinery",
