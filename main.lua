@@ -375,16 +375,16 @@ for k, file in ipairs(RevosVault.Consumables) do
 	if file == file_no_lua then
 		local temp = NFS.getDirectoryItems(RevosPath .. "items/Consumables/" .. file) -- worst way possible
 		for _, ffile in ipairs(temp) do
-			assert(SMODS.load_file("items/Consumables/" .. file .. "/" .. ffile))()
+			if RevoConfig[string.lower(ffile) .. "_enabled"] ~= false then
+				assert(SMODS.load_file("items/Consumables/" .. file .. "/" .. ffile))()
+			end
 		end
 	else
 		if RevoConfig[file_no_lua .. "_enabled"] ~= nil then
 			if RevoConfig[file_no_lua .. "_enabled"] ~= false then 
-				print("items/Consumables/" .. file)
 				SMODS.load_file("items/Consumables/" .. file)()
 			end
 		else
-			print("items/Consumables/" .. file)
 			SMODS.load_file("items/Consumables/" .. file)()
 		end
 	end
