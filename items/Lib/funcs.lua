@@ -2505,3 +2505,9 @@ RevosVault.do_contract_stuff = function(context_args, enhancement, no_destroy, e
 		end
 	end
 end
+
+RevosVault.simple_shop = function(area, set)
+	for k, v in pairs(area.cards) do
+		create_shop_card_ui(v, set, area)
+	end
+end
