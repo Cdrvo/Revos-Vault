@@ -152,6 +152,16 @@ end
 		cards = {},
 	})
 
+	SMODS.ObjectType({
+		key = "SuperiorEnchancedDocuments",
+		cards = {},
+	})
+
+	SMODS.ObjectType({
+		key = "Superiorscrap",
+		cards = {},
+	})
+
 	local shopcreateold = create_card_for_shop
 	function create_card_for_shop(area)
 		if RevosVault.config.gems_enabled then

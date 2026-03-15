@@ -1865,7 +1865,13 @@ function RevosVault.unleash_potential(card)
 		_string = string.gsub(_string, mod_prefix .. "_", "")
 		--_string = string.gsub(_string, "c_", "")
 
-		if string.find(card.config.center.key, _string) then
+		local self_key = card.config.center.key
+		if G.P_CENTERS[self_key] and G.P_CENTERS[self_key].mod and G.P_CENTERS[self_key].mod.prefix then
+			local mod_prefix2 = G.P_CENTERS[self_key].mod.prefix 
+			self_key = string.gsub(self_key, mod_prefix2 .. "_", "")
+		end
+
+		if string.find(self_key, _string) then
 			card:juice_up()
 			card:set_ability(v)
 		end
@@ -2455,6 +2461,46 @@ RevosVault.display = function(revert)
 	else
 		for k, v in pairs(RevosVault.rrr) do
 			RevosVault.rrr[k].states.visible = true
+		end
+	end
+end
+
+
+RevosVault.do_contract_stuff = function(context_args, enhancement, no_destroy, effects) --ig it works but unused
+	-- effects.special_effect
+	-- effects.general_effect
+	-- effects.return_table
+
+	-- context_args.context
+	-- context_args.card
+	-- context_args.dcard
+	-- context_args.area
+
+	local c, card, dcard = context_args.context, context_args.card, context_args.dcard
+	if card then
+		if c.individual and c.other_card == card and c.cardarea == context_args.area then
+			if effects.general_effect then
+				effects.general_effect()
+			end
+			return effects.return_table
+		end
+	end
+
+	if dcard then
+		if c.destroy_card and not no_destroy and SMODS.has_enhancement(dcard, enhancement) and c.cardarea == context_args.area then
+			return{
+				remove = true
+			}
+		end
+	end
+
+	-- effects.special_effect.context_boolean
+	if effects.special_effect then
+		if effects.special_effect.context_boolean then
+			if effects.special_effect.func then
+				effects.special_effect.func()
+			end
+			return effects.special_effect.return_table
 		end
 	end
 end

@@ -3644,6 +3644,108 @@ return {
 			},
 		},
 		Superior = {
+			c_crv_supglassdocument = {
+				name = "Superior Glass Contract",
+				text = {
+					"When activated,",
+					"Playing cards act like {C:attention}Glass{}",
+					"{C:attention}Retrigger{} glass cards {C:attention}#3#{} times",
+					"Lasts for {C:attention}#4#{C:inactive} (#5#){} uses",
+				},
+			},
+			c_crv_supsteeldocument = {
+				name = "Superior Steel Contract",
+				text = {
+					"When activated,",
+					"Playing cards act like {C:attention}Steel{}",
+					"{C:attention}Retrigger{} steel cards {C:attention}#1#{} times",
+					"Lasts for {C:attention}#2#{C:inactive} (#3#){} uses",
+				},
+			},
+			c_crv_supstaineddoc = {
+				name = "Superior Stained Contract",
+				text = {
+					"When activated,",
+					"Playing cards act like {C:attention}Stained{}",
+					"{C:attention}Retrigger{} stained cards {C:attention}#1#{} times",
+					"Lasts for {C:attention}#2#{C:inactive} (#3#){} uses",
+				},
+			},
+			c_crv_supaflamedoc = {
+				name = "Superior Aflame Contract",
+				text = {
+					"When activated,",
+					"Playing cards act like {C:attention}Aflame{}",
+					"{C:attention}Retrigger{} aflame cards {C:attention}#1#{} times",
+					"Lasts for {C:attention}#2#{C:inactive} (#3#){} uses",
+				},
+			},
+			c_crv_supmegadoc = {
+				name = "Superior Mega Contract",
+				text = {
+					"When activated,",
+					"Playing cards act like {C:attention}Mega{}",
+					"{C:attention}Retrigger{} mega cards {C:attention}#1#{} times",
+					"Lasts for {C:attention}#2#{C:inactive} (#3#){} uses",
+				},
+			},
+			c_crv_supt1doc = {
+				name = "Superior Tier 1 Contract",
+				text = {
+					"When activated,",
+					"Playing cards act like {C:attention}Tier 1{}",
+					"{C:attention}Retrigger{} tier 1 cards {C:attention}#1#{} times",
+					"Lasts for {C:attention}#2#{C:inactive} (#3#){} uses",
+				},
+			},
+			c_crv_supt2doc = {
+				name = "Superior Tier 2 Contract",
+				text = {
+					"When activated,",
+					"Playing cards act like {C:attention}Tier 2{}",
+					"{C:attention}Retrigger{} tier 2 cards {C:attention}#1#{} times",
+					"Lasts for {C:attention}#2#{C:inactive} (#3#){} uses",
+				},
+			},
+			c_crv_supt3doc = {
+				name = "Superior Tier 3 Contract",
+				text = {
+					"When activated,",
+					"Playing cards act like {C:attention}Tier 3{}",
+					"{C:attention}Retrigger{} tier 3 cards {C:attention}#1#{} times",
+					"Lasts for {C:attention}#2#{C:inactive} (#3#){} uses",
+				},
+			},
+			c_crv_supluckydocument = {
+				name = "Superior Lucky Contract",
+				text = {
+					"When activated,",
+					"Playing cards act like {C:attention}Lucky{}",
+					"{C:attention}Retrigger{} lucky cards {C:attention}#1#{} times",
+					"Lasts for {C:attention}#2#{C:inactive} (#3#){} uses",
+				},
+			},
+			c_crv_suphorn = {
+				name = "Superior Horn",
+				text = { "Gives{C:money} 60$" },
+			},
+			c_crv_suppickles = {
+				name = "Superior Pickles",
+				text = { "Gives{C:money} 45$" },
+			},
+			c_crv_supmp = {
+				name = "Superior Metal Piece",
+				text = { "Gives{C:money} 30$" },
+			},
+			c_crv_supap = {
+				name = "Superior Apparatus",
+				text = { "Gives{C:money} 75$" },
+			},
+			c_crv_supdc = {
+				name = "Superior Duck",
+				text = { "Gives{C:money} 15$" },
+			},
+			--
 			c_crv_supinkintuition = {
 				name = "Superior Ink & Intuition",
 				text = {
@@ -4883,6 +4985,8 @@ return {
 			b_superiorspectral_cards = "Superior Spectrals",
 			b_superiortarot_cards = "Superior Tarots",
 			b_superiorplanet_cards = "Superior Planets",
+			b_superiorenchanceddocuments_cards = "Superior Contracts",
+			b_superiorscrap_cards = "Superior Scraps",
 
 			crv_Tarot = "Tarot",
 			crv_Spectral = "Spectral",
@@ -4935,6 +5039,8 @@ return {
 			k_superior = "Superior Tarot",
 			k_superior_s = "Superior Spectral",
 			k_superior_p = "Superior Planet",
+			k_superior_contract = "Superior Contract",
+			k_superior_scrap = "Superior Scrap",
 			b_superior_cards = "Superior Cards",
 			crv_mode = "Change",
 			crv_mode2 = "Target",

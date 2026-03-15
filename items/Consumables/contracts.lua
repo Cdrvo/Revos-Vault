@@ -581,7 +581,7 @@ SMODS.Consumable({
 		if card.ability.extra.active and context.individual and context.cardarea == G.play then
 			local effect = {}
 			if pseudorandom("luckydocument") < G.GAME.probabilities.normal / card.ability.extra.odds2 then
-				effect.mult = G.P_CENTERS.m_lucky.config.p_dollars
+				effect.dollars = G.P_CENTERS.m_lucky.config.p_dollars
 			end
 			if pseudorandom("luckydocument") < G.GAME.probabilities.normal / card.ability.extra.odds then
 				effect.mult = G.P_CENTERS.m_lucky.config.mult
