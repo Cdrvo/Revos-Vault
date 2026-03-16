@@ -116,7 +116,7 @@ SMODS.Joker({
 	blueprint_compat = true,
 	config = {
 		extra = {
-			odds = 3,
+			odds = 6,
 		},
 	},
 	loc_vars = function(self, info_queue, card)
