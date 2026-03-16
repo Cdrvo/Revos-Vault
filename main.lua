@@ -176,6 +176,12 @@ G.UIDEF.crv_other_config = function()
 								ref_value = "gems_enabled",
 								--callback = should_restart,
 							}),
+							create_toggle({
+								label = localize("crv_normalize_megas"),
+								ref_table = RevosVault.config,
+								ref_value = "normal_mega_cards",
+								--callback = should_restart,
+							}),
 							{
 								n = G.UIT.R,
 								config = { align = "cm", minh = 0.6 },

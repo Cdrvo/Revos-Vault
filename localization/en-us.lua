@@ -5119,6 +5119,7 @@ return {
 			crv_enable_secret = "Enable Secret Jokers",
 			crv_enable_blinds = "Enable Blinds",
 			crv_enable_curses = "Enable Curses",
+			crv_normalize_megas = "Normalize Mega Card Sizes",
 
 
 			ph_active_gems = "Active Gems",
