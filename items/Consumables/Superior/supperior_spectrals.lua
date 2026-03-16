@@ -908,7 +908,15 @@ SMODS.Consumable({
 		return false
 	end,
 	use = function(self, card, area, copier)
-		SMODS.destroy_cards(G.crv_curses)
+		G.E_MANAGER:add_event(Event({
+			trigger = "before",
+			delay = 0.5,
+			func = function()
+				RevosVault.purified_curse = true
+				return true
+			end,
+		}))
+		SMODS.destroy_cards(G.crv_curses.cards, true)
 	end,
 	after_use = function(self, card)
 		G.E_MANAGER:add_event(Event({
