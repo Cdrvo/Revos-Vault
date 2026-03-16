@@ -150,6 +150,13 @@ G.UIDEF.crv_other_config = function()
 						n = G.UIT.C,
 						nodes = {
 
+
+							create_toggle({
+								label = localize("crv_enable_gems"),
+								ref_table = RevosVault.config,
+								ref_value = "gems_enabled",
+								--callback = should_restart,
+							}),
 							create_toggle({
 								label = localize("crv_enable_blinds"),
 								ref_table = RevosVault.config,
@@ -164,22 +171,15 @@ G.UIDEF.crv_other_config = function()
 								--callback = should_restart,
 							}),
 							create_toggle({
-								label = localize("crv_enable_wip") .. "*",
-								ref_table = RevosVault.config,
-								ref_value = "experimental_enabled",
-								--callback = should_restart,
-							}),
-
-							create_toggle({
-								label = localize("crv_enable_gems"),
-								ref_table = RevosVault.config,
-								ref_value = "gems_enabled",
-								--callback = should_restart,
-							}),
-							create_toggle({
 								label = localize("crv_normalize_megas"),
 								ref_table = RevosVault.config,
 								ref_value = "normal_mega_cards",
+								--callback = should_restart,
+							}),
+							create_toggle({
+								label = localize("crv_enable_wip") .. "*",
+								ref_table = RevosVault.config,
+								ref_value = "experimental_enabled",
 								--callback = should_restart,
 							}),
 							{
