@@ -39,7 +39,7 @@ G.UIDEF.crv_joker_config = function()
 		back_colour = RevosVault.ui_config.back_colour,
 		contents = {
 							{n=G.UIT.R, config = { align = "cm", r = 0.1, colour = G.C.BLACK, padding = 0.1 }, nodes = {
-								{n=G.UIT.O, config={object = DynaText({string = {"Jokers"}, colours = {G.C.DARK_EDITION},shadow = true, float = true, spacing = 5, rotate = true, scale = 1.3, pop_in = 0.1, maxw = 6.5})}},
+								{n=G.UIT.O, config={object = DynaText({string = {"Jokers"}, colours = {G.C.DARK_EDITION},shadow = true, float = true, spacing = 0, rotate = true, scale = 1.3, pop_in = 0.1, maxw = 6.5})}},
 							}},
 			{
 				n = G.UIT.R,
@@ -106,7 +106,7 @@ G.UIDEF.crv_mechanic_config = function()
 		back_colour = RevosVault.ui_config.back_colour,
 		contents = {
 										{n=G.UIT.R, config = { align = "cm", r = 0.1, colour = G.C.BLACK, padding = 0.1 }, nodes = {
-								{n=G.UIT.O, config={object = DynaText({string = {"Mechanics"}, colours = {G.C.DARK_EDITION},shadow = true, float = true, spacing = 5, rotate = true, scale = 1.3, pop_in = 0.1, maxw = 6.5})}},
+								{n=G.UIT.O, config={object = DynaText({string = {"Mechanics"}, colours = {G.C.DARK_EDITION},shadow = true, float = true, spacing = 0, rotate = true, scale = 1.3, pop_in = 0.1, maxw = 6.5})}},
 							}},
 			{
 				n = G.UIT.R,
@@ -153,7 +153,7 @@ G.UIDEF.crv_other_config = function()
 		back_colour = RevosVault.ui_config.back_colour,
 		contents = {
 										{n=G.UIT.R, config = { align = "cm", r = 0.1, colour = G.C.BLACK, padding = 0.1 }, nodes = {
-								{n=G.UIT.O, config={object = DynaText({string = {"Other"}, colours = {G.C.DARK_EDITION},shadow = true, float = true, spacing = 5, rotate = true, scale = 1.3, pop_in = 0.1, maxw = 6.5})}},
+								{n=G.UIT.O, config={object = DynaText({string = {"Other"}, colours = {G.C.DARK_EDITION},shadow = true, float = true, spacing = 0, rotate = true, scale = 1.3, pop_in = 0.1, maxw = 6.5})}},
 							}},
 			{
 				n = G.UIT.R,
