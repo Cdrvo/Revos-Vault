@@ -3766,7 +3766,7 @@ SMODS.Joker({
 	cost = 4,
 	config = {
 		extra = {
-			souls = 2,
+			souls = 5,
 		},
 	},
 	loc_vars = function(self, info_queue, card)
