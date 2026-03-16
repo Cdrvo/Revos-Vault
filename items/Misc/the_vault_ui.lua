@@ -142,7 +142,7 @@ end
                                 {n=G.UIT.O, config={object = G.vault_card}},
                             }},
                             {n=G.UIT.R, config={align = "cm", padding = 0.1, emboss = 0, r = 0.2, colour = G.C.CLEAR}, nodes={
-                                {n=G.UIT.O, config={object = DynaText({string = {{ref_table = G.GAME, ref_value = 'souls', prefix = ("Souls:" .. " ")}}, maxw = 1.35, colours = {G.C.BLUE}, font = G.LANGUAGES['en-us'].font, shadow = false,spacing = 2, bump = true, scale = 0.4}), id = 'soul_text_UI'}}
+                                {n=G.UIT.O, config={object = DynaText({string = {{ref_table = G.PROFILES[G.SETTINGS.profile], ref_value = 'crv_souls', prefix = ("Souls:" .. " ")}}, maxw = 1.35, colours = {G.C.BLUE}, font = G.LANGUAGES['en-us'].font, shadow = false,spacing = 2, bump = true, scale = 0.4}), id = 'soul_text_UI'}}
                             }},
                         }},
                             --

@@ -3776,7 +3776,7 @@ SMODS.Joker({
 	calculate = function(self, card, context)
 		local crv = card.ability.extra
 		if context.destroy_card and SMODS.get_enhancements(context.destroy_card)["m_crv_soulcard"] and not context.destroy_card.getting_sliced then
-			G.GAME.souls = G.GAME.souls + crv.souls
+			RevosVault.ease_souls(crv.souls)
 			return {
 				message = "+" .. crv.souls .. " Souls",
 				message_colour = G.C.CHIPS,

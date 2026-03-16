@@ -2511,3 +2511,9 @@ RevosVault.simple_shop = function(area, set)
 		create_shop_card_ui(v, set, area)
 	end
 end
+
+RevosVault.ease_souls = function(mod, profile)
+	profile = profile or G.SETTINGS.profile
+	G.PROFILES[profile].crv_souls = G.PROFILES[profile].crv_souls + mod
+	play_sound("coin1")
+end

@@ -209,8 +209,8 @@ G.FUNCS.crv_vault_vault_can = function(e)
                 and G.vault_card.cards
                 and G.vault_card.cards[1]
                 and G.vault_card.cards[1]:is_vaultable()
-                and G.GAME.souls
-                and (G.GAME.souls >= TheVault.vault_cost)	
+                and G.PROFILES[G.SETTINGS.profile].crv_souls
+                and (G.PROFILES[G.SETTINGS.profile].crv_souls >= TheVault.vault_cost)	
     			and not TheVault.vault_lock
 				and not G.CONTROLLER.locked
 				and not G.vault_card.cards[1].crv_harvested
@@ -228,8 +228,8 @@ G.FUNCS.crv_vault_vault_can = function(e)
                 G.vault_card
                 and G.vault_card.cards
                 and G.vault_card.cards[1]
-                and G.GAME.souls
-                and (G.GAME.souls >= TheVault.vault_cost)
+                and G.PROFILES[G.SETTINGS.profile].crv_souls
+                and (G.PROFILES[G.SETTINGS.profile].crv_souls >= TheVault.vault_cost)
             )
         then
             e.config.colour = G.C.UI.BACKGROUND_INACTIVE
@@ -255,7 +255,7 @@ G.FUNCS.crv_vault_vault = function(e)
 
     if not TheVault.changed then
 		
-        G.GAME.souls = G.GAME.souls - TheVault.vault_cost
+        RevosVault.ease_souls(-TheVault.vault_cost)
 
         local vault_ver = RevosVault.vaultify(G.vault_card.cards[1], true, true)
 		RevosVault.set_ability({card = G.vault_card.cards[1], sound = "gong", effect_table = {center = vault_ver}, second_func = function()
@@ -265,7 +265,7 @@ G.FUNCS.crv_vault_vault = function(e)
         play_sound("coin1")
     else
 		
-        G.GAME.souls = G.GAME.souls - TheVault.vault_cost
+       	RevosVault.ease_souls(-TheVault.vault_cost)
         play_sound("coin1")
 
         RevosVault.replace_joker(G.vault_card.cards[1].area["cards"], nil, G.vault_card.cards[1].config.center.rarity, G.vault_card.cards[1].ability.set, nil)
@@ -288,8 +288,8 @@ G.FUNCS.crv_vault_enhance_can = function(e)
 			G.vault_card
 			and G.vault_card.cards
 			and G.vault_card.cards[1]
-			and G.GAME.souls
-			and (G.GAME.souls >= TheVault.enhance_cost)
+			and G.PROFILES[G.SETTINGS.profile].crv_souls
+			and (G.PROFILES[G.SETTINGS.profile].crv_souls >= TheVault.enhance_cost)
 			and not TheVault.vault_lock
 			and not G.CONTROLLER.locked
 			and not G.vault_card.cards[1].crv_harvested
@@ -312,7 +312,7 @@ G.FUNCS.crv_vault_enhance = function(e)
 			return true
 		end
 	}))
-	G.GAME.souls = G.GAME.souls - TheVault.enhance_cost
+	RevosVault.ease_souls(-TheVault.enhance_cost)
 
 	local edition = poll_edition(nil, nil, true, true)
 	G.vault_card.cards[1]:set_edition(edition)
@@ -335,8 +335,8 @@ G.FUNCS.crv_vault_upgrade_can = function(e)
 			and G.vault_card.cards
 			and G.vault_card.cards[1]
 			and G.vault_card.cards[1]:crv_is_upgradeable()
-			and G.GAME.souls
-			and (G.GAME.souls >= TheVault.upgrade_cost)
+			and G.PROFILES[G.SETTINGS.profile].crv_souls
+			and (G.PROFILES[G.SETTINGS.profile].crv_souls >= TheVault.upgrade_cost)
 			and not TheVault.vault_lock
 			and not G.CONTROLLER.locked
 			and not G.vault_card.cards[1].crv_harvested
@@ -376,7 +376,8 @@ G.FUNCS.crv_vault_upgrade = function(e)
 			return true
 		end
 	}))
-	G.GAME.souls = G.GAME.souls - TheVault.upgrade_cost
+
+	RevosVault.ease_souls(-TheVault.upgrade_cost)
 
 	local new_key = RevosVault.modify_rarity(G.vault_card.cards[1], 1, nil, nil, true)
 	RevosVault.set_ability({card = G.vault_card.cards[1], sound = nil, effect_table = {center = new_key}, second_func = function()
@@ -393,7 +394,7 @@ G.FUNCS.crv_vault_harvest_can = function(e)
 			G.vault_card
 			and G.vault_card.cards
 			and G.vault_card.cards[1]
-			and G.GAME.souls
+			and G.PROFILES[G.SETTINGS.profile].crv_souls
 			and G.vault_card.cards[1].sell_cost
 			and not SMODS.is_eternal(G.vault_card.cards[1])
 			and not TheVault.vault_lock
@@ -424,8 +425,8 @@ G.FUNCS.crv_vault_harvest = function(e)
 			return true
 		end
 	}))
-	G.GAME.souls = G.GAME.souls + (G.vault_card.cards[1].sell_cost + TheVault.harvest_cost_extra )
-	play_sound("coin1")
+
+	RevosVault.ease_souls((G.vault_card.cards[1].sell_cost + TheVault.harvest_cost_extra ))
 
 	G.vault_card.cards[1].crv_harvested = true
 	SMODS.destroy_cards(G.vault_card.cards[1])
