@@ -542,6 +542,18 @@ function Card:set_ability(center, initial, delay_sprites)
 end
 
 
+function CardArea:not_collection() --boop beep bap boop
+	if not G.your_collection then return true end
+	if G.your_collection then
+		for k, v in pairs(G.your_collection) do
+			if self == v then
+				return false
+			end
+		end
+	end
+	return true
+end
+
 local emplace_old = CardArea.emplace
 function CardArea:emplace(card, location, stay_flipped)
 	emplace_old(self, card, location, stay_flipped)
@@ -551,7 +563,7 @@ function CardArea:emplace(card, location, stay_flipped)
 	end
 
 	if card and card.config and card.config.center and card.config.center.key and not card.crv_fake then
-		if card.config.center.crv_special then
+		if card.config.center.crv_special and self:not_collection() then
 			for _, area in pairs(SMODS.get_card_areas("jokers")) do
 				if area and area.cards then
 					for __, cards in pairs(area.cards) do
