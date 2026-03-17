@@ -820,6 +820,14 @@ return {
 					"{C:attention}unique{} suit in scoring hand",
 				},
 			},
+			-- GIGA below
+			m_crv_gigamega = {
+				name = "Upgraded Mega",
+				text = {
+					"{C:xmult,C:white}X#1#{} Mult if scored",
+					"or kept in hand"
+				}
+			}
 		},
 		Joker = {
 			j_crv_revoo_ = {
