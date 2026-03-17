@@ -13,6 +13,7 @@ SMODS.Joker({
 	config = {
 		extra = {},
 	},
+	dependencies = "GIGA",
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue+1] = {set = 'Other', key = 'giga_astral_chance', vars = { (G.GAME.giga and G.GAME.giga_astral_chance and (G.GAME.giga_astral_chance[1] / G.GAME.giga_astral_chance[2]) * 100) or 5, 'Celestial Printer'}}
     end,
