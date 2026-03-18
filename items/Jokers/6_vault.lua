@@ -116,7 +116,7 @@ SMODS.Joker({
 	blueprint_compat = true,
 	config = {
 		extra = {
-			odds = 3,
+			odds = 6,
 		},
 	},
 	loc_vars = function(self, info_queue, card)
@@ -356,7 +356,7 @@ SMODS.Joker({
 		y = 6,
 	},
 	config = {
-		extra = { xmult = 30, odds = 12 },
+		extra = { xmult = 20, odds = 14 },
 	},
 	pools = {
 		Food = true,
@@ -775,7 +775,7 @@ SMODS.Joker({
 	blueprint_compat = true,
 	config = {
 		extra = {
-			odds = 4,
+			odds = 8,
 		},
 	},
 	loc_vars = function(self, info_queue, card)

@@ -38,15 +38,22 @@ G.UIDEF.crv_joker_config = function()
 		colour = RevosVault.ui_config.colour,
 		back_colour = RevosVault.ui_config.back_colour,
 		contents = {
+							{n=G.UIT.R, config = { align = "cm", r = 0.1, colour = G.C.BLACK, padding = 0.1 }, nodes = {
+								{n=G.UIT.O, config={object = DynaText({string = {"Jokers"}, colours = {G.C.DARK_EDITION},shadow = true, float = true, spacing = 0, rotate = true, scale = 1.3, pop_in = 0.1, maxw = 6.5})}},
+							}},
 			{
 				n = G.UIT.R,
 				config = { align = "cm", r = 0.1, colour = G.C.BLACK },
 				nodes = {
+				
+					
+					
 					{
 						n = G.UIT.C,
 						nodes = {
+							{n=G.UIT.R, config = { align = "cm", r = 0.1, colour = G.C.CLEAR, padding = 0.1 }, nodes = {}},
 							create_toggle({
-								label = localize("crv_enable_chaoscards") .. "*",
+								label = localize("crv_enable_chaoscards"),
 								ref_table = RevosVault.config,
 								ref_value = "7_chaos_enabled",
 								--callback = should_restart,
@@ -73,7 +80,7 @@ G.UIDEF.crv_joker_config = function()
 									},
 								},
 							},
-							{
+							--[[{
 								n = G.UIT.R,
 								config = { align = "cm", minh = 0.6 },
 								nodes = {
@@ -82,7 +89,7 @@ G.UIDEF.crv_joker_config = function()
 										config = { text = "*Incomplete!", colour = G.C.WHITE, scale = 0.4 },
 									},
 								},
-							},
+							},]]
 						},
 					},
 				},
@@ -98,6 +105,9 @@ G.UIDEF.crv_mechanic_config = function()
 		colour = RevosVault.ui_config.colour,
 		back_colour = RevosVault.ui_config.back_colour,
 		contents = {
+										{n=G.UIT.R, config = { align = "cm", r = 0.1, colour = G.C.BLACK, padding = 0.1 }, nodes = {
+								{n=G.UIT.O, config={object = DynaText({string = {"Mechanics"}, colours = {G.C.DARK_EDITION},shadow = true, float = true, spacing = 0, rotate = true, scale = 1.3, pop_in = 0.1, maxw = 6.5})}},
+							}},
 			{
 				n = G.UIT.R,
 				config = { align = "cm", r = 0.1, colour = G.C.BLACK },
@@ -142,6 +152,9 @@ G.UIDEF.crv_other_config = function()
 		colour = RevosVault.ui_config.colour,
 		back_colour = RevosVault.ui_config.back_colour,
 		contents = {
+										{n=G.UIT.R, config = { align = "cm", r = 0.1, colour = G.C.BLACK, padding = 0.1 }, nodes = {
+								{n=G.UIT.O, config={object = DynaText({string = {"Other"}, colours = {G.C.DARK_EDITION},shadow = true, float = true, spacing = 0, rotate = true, scale = 1.3, pop_in = 0.1, maxw = 6.5})}},
+							}},
 			{
 				n = G.UIT.R,
 				config = { align = "cm", r = 0.1, colour = G.C.BLACK },
@@ -150,6 +163,13 @@ G.UIDEF.crv_other_config = function()
 						n = G.UIT.C,
 						nodes = {
 
+
+							create_toggle({
+								label = localize("crv_enable_gems"),
+								ref_table = RevosVault.config,
+								ref_value = "gems_enabled",
+								--callback = should_restart,
+							}),
 							create_toggle({
 								label = localize("crv_enable_blinds"),
 								ref_table = RevosVault.config,
@@ -164,16 +184,15 @@ G.UIDEF.crv_other_config = function()
 								--callback = should_restart,
 							}),
 							create_toggle({
+								label = localize("crv_normalize_megas"),
+								ref_table = RevosVault.config,
+								ref_value = "normal_mega_cards",
+								--callback = should_restart,
+							}),
+							create_toggle({
 								label = localize("crv_enable_wip") .. "*",
 								ref_table = RevosVault.config,
 								ref_value = "experimental_enabled",
-								--callback = should_restart,
-							}),
-
-							create_toggle({
-								label = localize("crv_enable_gems"),
-								ref_table = RevosVault.config,
-								ref_value = "gems_enabled",
 								--callback = should_restart,
 							}),
 							{
@@ -407,7 +426,9 @@ for k, file in ipairs(RevosVault.CrossMod) do
 		if file_no_lua == file then
 			local temp = NFS.getDirectoryItems(RevosPath .. "items/Cross-Mod/" .. file) -- worst way possible
 			for _, ffile in ipairs(temp) do
-				assert(SMODS.load_file("items/Cross-Mod/" .. file .. "/" .. ffile))()
+				if RevoConfig[ffile .. "_enabled"] ~= false then 
+					assert(SMODS.load_file("items/Cross-Mod/" .. file .. "/" .. ffile))()
+				end
 			end
 		else
 			SMODS.load_file("items/Cross-Mod/" .. file)()

@@ -62,7 +62,8 @@ return {
 					{
 					  "The {C:blue}Harvest{} button is used to {C:red}Destroy{} ",
 					  "the placed joker and give it's {C:attention}Sell Value{}",
-					  "as {C:blue}Souls"
+					  "as {C:blue}Souls{}. Unlike dollars, souls are kept",
+					  "between runs"
 					}
                     }
                 },
@@ -99,7 +100,8 @@ return {
 					{
 					  "The {C:blue}Harvest{} button is used to {C:red}Destroy{} ",
 					  "the placed joker and give it's {C:attention}Sell Value{}",
-					  "as {C:blue}Souls"
+					  "as {C:blue}Souls{}. Unlike dollars, souls are kept",
+					  "between runs"
 					}
                     }
                 },
@@ -395,7 +397,12 @@ return {
 
 			sleeve_crv_goldensleeve = {
 				name = "Golden Sleeve",
-				text = { "Score is now also","{C:red}Multiplied{} by current {C:money}Dollars{}" },
+				text = { 
+					"{C:mult}Mult{} is added to",
+					"{C:chips}Chips{} instead of muliplying.",
+					"Multiply score with {C:money}dollars{}",
+					"{C:inactive}[(Chips+Mult)xDollars]"
+				},
 			},
 			sleeve_crv_goldensleeve_alt = {
 				name = "Golden Sleeve",
@@ -818,6 +825,14 @@ return {
 					"{C:attention}unique{} suit in scoring hand",
 				},
 			},
+			-- GIGA below
+			m_crv_gigamega = {
+				name = "Ultra Mega",
+				text = {
+					"{C:xmult,C:white}X#1#{} Mult if scored",
+					"or kept in hand"
+				}
+			}
 		},
 		Joker = {
 			j_crv_revoo_ = {
@@ -2803,6 +2818,20 @@ return {
 					"to print a {C:crv_mythical,E:1}Mythical{} Joker",
 					"{C:inactive}(Always prints {C:dark_edition}Negative{C:inactive})"
                 },
+			},
+			j_crv_vfinger = {
+				name = "Three Fingers",
+				text = {
+					{
+						"All {C:attention}Flushes{} and",
+						"{C:attention}Straights{} can be",
+						"made with {C:attention}3{} cards",
+					},
+					{
+						"{C:red}-#1#{} Consumeable{} and",
+						"Joker limit"
+					},
+				},
 			},
 			-- QUICK JOKER
 			--GARBSHIT below
@@ -5103,6 +5132,7 @@ return {
 			crv_enable_secret = "Enable Secret Jokers",
 			crv_enable_blinds = "Enable Blinds",
 			crv_enable_curses = "Enable Curses",
+			crv_normalize_megas = "Normalize Mega Card Sizes",
 
 
 			ph_active_gems = "Active Gems",

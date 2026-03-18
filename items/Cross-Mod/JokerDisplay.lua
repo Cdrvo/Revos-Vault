@@ -1,4 +1,4 @@
-local c_def = JokerDisplay.Definitions  
+--[[local c_def = JokerDisplay.Definitions  
 
 c_def["j_crv_revoo_"] = {
     text = {
@@ -1233,3 +1233,4 @@ c_def["j_crv_vmichel"]= {
 
 
 
+]]

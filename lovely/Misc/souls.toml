@@ -1,0 +1,31 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 1
+
+# Temp profile
+
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = '''local temp_profile = {'''
+position = "after"
+payload = '''crv_souls = 0,'''
+match_indent = true
+
+# Profile view
+
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = '''return {n=G.UIT.R, config={align = "cm", padding = 0.05, r = 0.1, colour = G.C.BLACK, emboss = 0.05}, nodes={'''
+position = "before"
+payload = '''
+    rows[#rows+1] = {n=G.UIT.R, config={align = "cm", padding = 0.05, r = 0.1, colour = darken(G.C.CLEAR, 0.1), emboss = 0.05}, nodes={
+      {n=G.UIT.R, config={align = "cm", padding = 0.05, minw = 3.5*text_scale, maxw = 3.5*text_scale}, nodes={
+        {n=G.UIT.T, config={text = "Souls: ", scale = 0.5, colour = G.C.WHITE, shadow = true}},
+        {n=G.UIT.T, config={ref_table = G.PROFILES[G.focused_profile],ref_value = "crv_souls", scale = 0.5, colour = G.C.BLUE, shadow = true}},
+      }},
+    }}
+'''
+match_indent = true

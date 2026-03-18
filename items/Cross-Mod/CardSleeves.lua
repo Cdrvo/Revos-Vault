@@ -43,7 +43,7 @@ CardSleeves.Sleeve {
                     RevosVault.flace_fix = true
                 end
                 if not RevosVault.partner_fix and not RevosVault.flace_fix then
-                    G.FUNCS.get_printer_box()
+                    G.GAME.crv_printer_box = true
                 end
             end
         end
