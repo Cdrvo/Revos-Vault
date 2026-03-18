@@ -18,7 +18,7 @@ payload = '''
 should_apply = function(self, card, center, area, bypass_roll)
             local revo_apply = nil
             if string.find(self.key, "crv_") then revo_apply = true end
-            if
+            if center and 
                ((( not self.sets or self.sets[center.set or {}]) and not revo_apply) or (revo_apply and ( not self.sets or self.sets[center.set or {}]) and (card and card.crv_area and RevosVault.stickerizeable(card.crv_area)))) and
 '''
 match_indent = true
