@@ -164,6 +164,6 @@ SMODS.Joker({
 		end
 	end,
 	in_pool = function(self, args)
-		return true
+		return G.GAME.akyrs_wording_enabled 
 	end,
 })
