@@ -1,6 +1,6 @@
 SMODS.Atlas({
     key = "felisjokeria",
-    path = "Cross-Mod/felisjokeria.png",
+    path = "Cross-Mod/felisjokeria/felisjokeria.png",
     px = 71,
     py = 95
 })

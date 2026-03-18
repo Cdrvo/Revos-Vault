@@ -90,9 +90,22 @@ random_phrase = function()
 	G.E_MANAGER:add_event(Event({
 		func = function()
 
-			for k, v in pairs(AKYRS.words) do
-				if v and #k <= 6 then wtab[#wtab+1] = k
+			for k, v in pairs(AKYRS_WORDS) do
+
+				if v then
+					if type(v) == "table" then
+						for kk, vv in pairs(v) do
+							if #kk <= 6 then
+								wtab[#wtab+1] = kk	
+							end
+						end
+					else
+						if #k <= 6 then
+							wtab[#wtab+1] = k
+						end
+					end
 				end
+
 			end	
 
 			local random_phrase = pseudorandom_element(wtab, pseudoseed("AikoShenCrossMod"))

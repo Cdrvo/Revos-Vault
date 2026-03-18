@@ -426,7 +426,9 @@ for k, file in ipairs(RevosVault.CrossMod) do
 		if file_no_lua == file then
 			local temp = NFS.getDirectoryItems(RevosPath .. "items/Cross-Mod/" .. file) -- worst way possible
 			for _, ffile in ipairs(temp) do
-				assert(SMODS.load_file("items/Cross-Mod/" .. file .. "/" .. ffile))()
+				if RevoConfig[ffile .. "_enabled"] ~= false then 
+					assert(SMODS.load_file("items/Cross-Mod/" .. file .. "/" .. ffile))()
+				end
 			end
 		else
 			SMODS.load_file("items/Cross-Mod/" .. file)()
