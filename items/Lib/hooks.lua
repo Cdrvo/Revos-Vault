@@ -680,6 +680,15 @@ function Game:start_run(args)
 	end
 
 	start_run_old(self, args)
+	if G.GAME.crv_printer_box then
+		G.E_MANAGER:add_event(Event{
+			func = function()
+				G.FUNCS.get_printer_box()
+				return true
+			end
+		})
+		G.GAME.crv_printer_box = false
+	end
 	if RevoConfig and RevoConfig["deathcards_enabled"] then
 		RevosVault.reset_dcard_states()
 		local PDCARD = G.PROFILES[G.SETTINGS.profile].crv_deathcards

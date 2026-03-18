@@ -397,7 +397,12 @@ return {
 
 			sleeve_crv_goldensleeve = {
 				name = "Golden Sleeve",
-				text = { "Score is now also","{C:red}Multiplied{} by current {C:money}Dollars{}" },
+				text = { 
+					"{C:mult}Mult{} is added to",
+					"{C:chips}Chips{} instead of muliplying.",
+					"Multiply score with {C:money}dollars{}",
+					"{C:inactive}[(Chips+Mult)xDollars]"
+				},
 			},
 			sleeve_crv_goldensleeve_alt = {
 				name = "Golden Sleeve",
