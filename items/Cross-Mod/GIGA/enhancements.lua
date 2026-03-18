@@ -4,7 +4,6 @@ SMODS.Enhancement({
 	pos = { x = 3, y = 1},
     giga_data = {
         is_upgraded = true,
-        enh_upgrade = "m_giga_ultimateGigaMax"
     },
     dependencies = "GIGA",
 	display_size = { w = RevoConfig and not RevoConfig["normal_mega_cards"] and 90 or 71, h = RevoConfig and not RevoConfig["normal_mega_cards"] and 120 or 95 },

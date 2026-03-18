@@ -163,6 +163,9 @@ SMODS.Enhancement({
 	key = "mega",
 	atlas = "enh",
 	pos = { x = 2, y = 3},
+	giga_data = {
+		enh_upgrade = 'm_crv_gigamega'
+	},
 	display_size = { w = RevoConfig and not RevoConfig["normal_mega_cards"] and 90 or 71, h = RevoConfig and not RevoConfig["normal_mega_cards"] and 120 or 95 },
 	pixel_size = { w = 71, h = 95 },
 	discovered = true,

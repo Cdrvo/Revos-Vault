@@ -827,7 +827,7 @@ return {
 			},
 			-- GIGA below
 			m_crv_gigamega = {
-				name = "Upgraded Mega",
+				name = "Ultra Mega",
 				text = {
 					"{C:xmult,C:white}X#1#{} Mult if scored",
 					"or kept in hand"
