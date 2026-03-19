@@ -3,6 +3,7 @@ SMODS.Consumable({
 	set = "Spectral",
 	config = { extra = { cards = 1 } },
 	loc_vars = function(self, info_queue, card)
+		info_queue[#info_queue+1] = G.P_SEALS["crv_ps"]
 		return { vars = { card.ability.extra.cards } }
 	end,
 	pos = { x = 0, y = 0 },

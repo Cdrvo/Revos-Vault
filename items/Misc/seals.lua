@@ -6,7 +6,6 @@ SMODS.Seal({
 	badge_colour = HEX("A020F0"),
 	rarity = 3,
 	sound = { sound = "gold_seal", per = 1.2, vol = 0.4 },
-
 	calculate = function(self, card, context)
 		if context.main_scoring and context.cardarea == G.play then
 			local card = copy_card(card)
