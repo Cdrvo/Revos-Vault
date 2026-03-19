@@ -271,3 +271,28 @@ SMODS.Shader({
 	key = "radiated",
 	path = "radiated.fs",
 })
+
+--
+
+SMODS.Edition({
+	in_shop = true,
+	extra_cost = 5,
+	weight = 5,
+	key = "megachrome",
+	shader = "radiated",
+		loc_vars = function(self, info_queue, card)
+			return{
+				vars = {
+					(G.GAME.probabilities.normal or 1)
+				}
+			}
+	end,
+	calculate = function(self, card, context)
+
+	end,
+})
+
+SMODS.Shader({
+	key = "megachrome",
+	path = "megachrome.fs",
+})
