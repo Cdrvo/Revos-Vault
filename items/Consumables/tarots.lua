@@ -44,7 +44,7 @@ SMODS.Consumable({
 	key = "dreamsdesires",
 	hidden = true,
 	soul_set = "Tarot",
-	soul_rate = 0.975,
+	soul_rate = 0.01,
 	set = "Tarot",
 	config = { extra = {} },
 	loc_vars = function(self, info_queue, card)
