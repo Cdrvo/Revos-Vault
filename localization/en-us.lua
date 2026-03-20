@@ -62,8 +62,7 @@ return {
 					{
 					  "The {C:blue}Harvest{} button is used to {C:red}Destroy{} ",
 					  "the placed joker and give it's {C:attention}Sell Value{}",
-					  "as {C:blue}Souls{}. Unlike dollars, souls are kept",
-					  "between runs"
+					  "as {C:blue}Souls{}"
 					}
                     }
                 },
@@ -100,8 +99,7 @@ return {
 					{
 					  "The {C:blue}Harvest{} button is used to {C:red}Destroy{} ",
 					  "the placed joker and give it's {C:attention}Sell Value{}",
-					  "as {C:blue}Souls{}. Unlike dollars, souls are kept",
-					  "between runs"
+					  "as {C:blue}Souls{}"
 					}
                     }
                 },
@@ -619,6 +617,10 @@ return {
 				name = "Shocked",
 				text = { "Retrigger this card","{C:attention}#1#{} times.","Turns back to normal","after playing this {C:attention}#2#{C:inactive} (#3#){} times" },
 			},
+			m_crv_rhodium = {
+				name = "Rhodium",
+				text = { "{C:money}+$#1#{} When scored","or kept in hand" },
+			},
 
 			-- BANANA ENHANCEMENT
 
@@ -829,7 +831,7 @@ return {
 			m_crv_gigamega = {
 				name = "Ultra Mega",
 				text = {
-					"{C:xmult,C:white}X#1#{} Mult if scored",
+					"{X:xmult,C:white}X#1#{} Mult if scored",
 					"or kept in hand"
 				}
 			}
@@ -2831,6 +2833,31 @@ return {
 						"{C:red}-#1#{} Consumeable{} and",
 						"Joker limit"
 					},
+				},
+			},
+			j_crv_goldprinter = {
+				name = "Gold Printer",
+				text = {
+					"When first hand is drawn,",
+					"Enhances a random card in hand to {C:attention}Gold{}",
+					"{C:green}#1# in #2#{} Chance for it to be a {C:attention}Rhodium Card{}",
+					"{X:mult,C:white}X#1#{} Mult",
+				},
+			},
+			j_crv_death = {
+				name = "Death",
+				text = {
+					"Gains {X:chips,C:white}X#2#{} Chips",
+					"for each joker {C:blue}harvested{}",
+					"{C:inactive}(Currently {X:chips,C:white}X#1#{C:inactive} Chips)"
+				},
+			},
+			j_crv_keymaster = {
+				name = "Master Key",
+				text = {
+					"After {C:blue}harvesting{} a Joker",
+					"{C:green}1 in 4{} chance to",
+					"not destroy it"
 				},
 			},
 			-- QUICK JOKER

@@ -1,6 +1,6 @@
 TheVault = {
-	vault_cost = 75,
-	vault_cost_default = 75,
+	vault_cost = 70,
+	vault_cost_default = 70,
 
 	enhance_cost = 15,
 	enhance_cost_default = 15,
@@ -209,8 +209,8 @@ G.FUNCS.crv_vault_vault_can = function(e)
                 and G.vault_card.cards
                 and G.vault_card.cards[1]
                 and G.vault_card.cards[1]:is_vaultable()
-                and G.PROFILES[G.SETTINGS.profile].crv_souls
-                and (G.PROFILES[G.SETTINGS.profile].crv_souls >= TheVault.vault_cost)	
+                and G.GAME.crv_souls
+                and (G.GAME.crv_souls >= TheVault.vault_cost)	
     			and not TheVault.vault_lock
 				and not G.CONTROLLER.locked
 				and not G.vault_card.cards[1].crv_harvested
@@ -228,8 +228,8 @@ G.FUNCS.crv_vault_vault_can = function(e)
                 G.vault_card
                 and G.vault_card.cards
                 and G.vault_card.cards[1]
-                and G.PROFILES[G.SETTINGS.profile].crv_souls
-                and (G.PROFILES[G.SETTINGS.profile].crv_souls >= TheVault.vault_cost)
+                and G.GAME.crv_souls
+                and (G.GAME.crv_souls >= TheVault.vault_cost)
             )
         then
             e.config.colour = G.C.UI.BACKGROUND_INACTIVE
@@ -288,8 +288,8 @@ G.FUNCS.crv_vault_enhance_can = function(e)
 			G.vault_card
 			and G.vault_card.cards
 			and G.vault_card.cards[1]
-			and G.PROFILES[G.SETTINGS.profile].crv_souls
-			and (G.PROFILES[G.SETTINGS.profile].crv_souls >= TheVault.enhance_cost)
+			and G.GAME.crv_souls
+			and (G.GAME.crv_souls >= TheVault.enhance_cost)
 			and not TheVault.vault_lock
 			and not G.CONTROLLER.locked
 			and not G.vault_card.cards[1].crv_harvested
@@ -335,8 +335,8 @@ G.FUNCS.crv_vault_upgrade_can = function(e)
 			and G.vault_card.cards
 			and G.vault_card.cards[1]
 			and G.vault_card.cards[1]:crv_is_upgradeable()
-			and G.PROFILES[G.SETTINGS.profile].crv_souls
-			and (G.PROFILES[G.SETTINGS.profile].crv_souls >= TheVault.upgrade_cost)
+			and G.GAME.crv_souls
+			and (G.GAME.crv_souls >= TheVault.upgrade_cost)
 			and not TheVault.vault_lock
 			and not G.CONTROLLER.locked
 			and not G.vault_card.cards[1].crv_harvested
@@ -394,7 +394,7 @@ G.FUNCS.crv_vault_harvest_can = function(e)
 			G.vault_card
 			and G.vault_card.cards
 			and G.vault_card.cards[1]
-			and G.PROFILES[G.SETTINGS.profile].crv_souls
+			and G.GAME.crv_souls
 			and G.vault_card.cards[1].sell_cost
 			and not SMODS.is_eternal(G.vault_card.cards[1])
 			and not TheVault.vault_lock
@@ -427,9 +427,15 @@ G.FUNCS.crv_vault_harvest = function(e)
 	}))
 
 	RevosVault.ease_souls((G.vault_card.cards[1].sell_cost + TheVault.harvest_cost_extra ))
+	
+	SMODS.calculate_context({crv_harvest = true, other_card = G.vault_card.cards[1], harvested_for = (G.vault_card.cards[1].sell_cost + TheVault.harvest_cost_extra)})
 
-	G.vault_card.cards[1].crv_harvested = true
-	SMODS.destroy_cards(G.vault_card.cards[1])
+	if next(SMODS.find_card("j_crv_keymaster")) and pseudorandom("yesyeyes")<1/4 then
+		RevosVault.c_message(G.vault_card.cards[1], "Kept!")
+	else
+		G.vault_card.cards[1].crv_harvested = true
+		SMODS.destroy_cards(G.vault_card.cards[1])
+	end
 
 	G.E_MANAGER:add_event(Event({
 		trigger = "after",

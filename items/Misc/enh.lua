@@ -696,3 +696,33 @@ end,
 	end,
 })
 ]]
+
+SMODS.Enhancement({
+	key = "rhodium",
+	from = "m_gold",
+	atlas = "enh",
+	pos = { x = 3, y = 1 },
+	discovered = true,
+	unlocked = true,
+	replace_base_card = false,
+	no_rank = false,
+	no_suit = false,
+	overrides_base_rank = false,
+	any_suit = false,
+	always_scores = false,
+	weight = 0,
+	config = { extra = { dollars = 6 } },
+	loc_vars = function(self, info_queue, card)
+		return { vars = { card.ability.extra.dollars } }
+	end,
+	calculate = function(self, card, context, effect)
+		if context.main_scoring and (context.cardarea == G.play or context.cardarea == G.hand)then
+			return {
+				dollars = card.ability.extra.dollars,
+			}
+		end
+	end,
+	in_pool = function(self)
+		return false
+	end,
+})

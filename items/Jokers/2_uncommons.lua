@@ -3863,8 +3863,8 @@ SMODS.Joker({
 	end,
 })
 
-
---[[SMODS.Joker({
+--[[
+SMODS.Joker({
 	key = "man",
 	atlas = "Jokers2",
 	pos = {
@@ -3879,3 +3879,41 @@ SMODS.Joker({
 	end,
 })
 ]]
+
+
+SMODS.Joker({
+	key = "death",
+	atlas = "Jokers2",
+	pos = {
+		x = 6,
+		y = 8,
+	},
+	config = {
+		extra = {
+			xchips = 1,
+			xchips_gain = 0.1
+		}
+	},
+	rarity = 2,
+	cost = 4,
+	blueprint_compat = true,
+	loc_vars = function(self, info_queue, card)
+		local cae = card.ability.extra
+		return{vars={cae.xchips, cae.xchips_gain}}
+	end,
+	calculate = function(self, card, context)
+		local cae = card.ability.extra
+		if context.crv_harvest and not context.blueprint then
+			SMODS.scale_card(card, {
+				ref_table = cae,
+				ref_value = "xchips",
+				scalar_value = "xchips_gain"
+			})
+		end
+		if context.joker_main then
+			return{
+				xchips = cae.xchips
+			}
+		end
+	end,
+})

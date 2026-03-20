@@ -3,6 +3,7 @@ RevosVault = SMODS.current_mod
 RevoConfig = SMODS.current_mod.config
 RevosPath = SMODS.current_mod.path
 crvps = pseudorandom_element
+RevosOther = {}
 
 SMDOS = SMODS
 
@@ -482,8 +483,8 @@ SMODS.current_mod.reset_game_globals = function(run_start)
 		G.GAME.current_round.crv_drawn_hands = 0
 
 		TheVault = {
-			vault_cost = 75,
-			vault_cost_default = 75,
+			vault_cost = 70,
+			vault_cost_default = 70,
 
 			enhance_cost = 15,
 			enhance_cost_default = 15,

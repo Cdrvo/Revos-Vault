@@ -1505,7 +1505,6 @@ function RevosVault.upgrade_enhancement(card, ret)
 		and card.ability.name ~= "Default Base"
 		and card.ability.name ~= "Wild Card"
 		and card.ability.name ~= "Stone Card"
-		and card.ability.name ~= "Gold Card"
 	then
 		if card.ability.name == "Bonus" then
 			enh = "m_bonus"
@@ -1517,6 +1516,8 @@ function RevosVault.upgrade_enhancement(card, ret)
 			enh = "m_steel"
 		elseif card.ability.name == "Lucky Card" then
 			enh = "m_lucky"
+		elseif card.ability.name == "Gold Card" then
+			enh = "m_gold"
 		else
 			enh = card.ability.name
 		end
@@ -2514,6 +2515,7 @@ end
 
 RevosVault.ease_souls = function(mod, profile)
 	profile = profile or G.SETTINGS.profile
-	G.PROFILES[profile].crv_souls = G.PROFILES[profile].crv_souls + mod
+	-- G.PROFILES[profile].G.PROFILES[G.SETTINGS.profile].crv_souls = G.PROFILES[profile].G.PROFILES[G.SETTINGS.profile].crv_souls + mod
+	G.GAME.crv_souls = G.GAME.crv_souls + mod
 	play_sound("coin1")
 end

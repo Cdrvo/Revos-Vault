@@ -1593,3 +1593,44 @@ SMODS.Joker({
 	end,
 })
 
+SMODS.Joker({
+	key = "goldprinter",
+	atlas = "Jokers2",
+	rarity = "crv_p",
+	cost = 10,
+	unlocked = true,
+	discovered = false,
+	blueprint_compat = true,
+	pos = {
+		x = 5,
+		y = 8,
+	},
+	config = {
+		extra = {
+			dollars = 3,
+			odds = 4
+		},
+	},
+	loc_vars = function(self, info_queue, card)
+		info_queue[#info_queue + 1] = G.P_CENTERS.m_gold
+		info_queue[#info_queue + 1] = G.P_CENTERS.m_crv_rhodium
+		local cae = card.ability.extra
+		local num, den = SMODS.get_probability_vars(card, 1, cae.odds, "general_printer_seed_cause_im_lazy")
+		return {
+			vars = { num, den },
+		}
+	end,
+	calculate = function(self, card, context)
+		if context.first_hand_drawn then
+			RevosVault.printer_apply("m_gold", "m_crv_rhodium", nil)
+		end
+		if context.joker_main then
+			return {
+				dollars = card.ability.extra.dollars,
+			}
+		end
+	end,
+	in_pool = function(self, wawa, wawa2)
+		return true
+	end,
+})

@@ -1,7 +1,7 @@
 SMODS.Enhancement({
 	key = "gigamega",
 	atlas = "giga",
-	pos = { x = 3, y = 1},
+	pos = { x = 1, y = 0},
     giga_data = {
         is_upgraded = true,
     },

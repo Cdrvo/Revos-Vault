@@ -604,3 +604,33 @@ SMODS.Joker({
 		end
 	end,
 })
+
+SMODS.Joker({
+	key = "keymaster",
+	rarity = 1,
+	cost = 5,
+	unlocked = true,
+	discovered = false,
+	blueprint_compat = false,
+	atlas = "Jokers2",
+	pos = {
+		x = 5,
+		y = 14,
+	},
+	config = {
+		extra = {
+		},
+	},
+	crv_credits = {
+		art = {"Chainsawmert"}
+	},
+	loc_vars = function(self, info_queue, card)
+		info_queue[#info_queue+1] = {set = "Other", key = "crv_fixed_chances"}
+		local cae = card.ability.extra
+		return {
+			vars = {},
+		}
+	end,
+	calculate = function(self, card, context)
+	end,
+})

@@ -230,7 +230,7 @@ Game.init_game_object = function(self)
 	ret.curse_cashout = 1
 	ret.gem_rate = 0.70
 
-	ret.souls = 0 -- metaprog soon
+	ret.crv_souls = 0 -- metaprog soon // no
 
 	ret.superior_mod = 1
 
