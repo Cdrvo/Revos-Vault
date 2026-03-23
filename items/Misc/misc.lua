@@ -157,6 +157,15 @@ SMODS.Gradient({
 	cycle = 0.5,
 })
 
+SMODS.Gradient({
+	key = "revosvault",
+	colours = {
+		HEX("7E7AFF"),
+		HEX("40093A")
+	},
+	cycle = 5
+})
+
 local loc_old = loc_colour
 function loc_colour(_c, _default)
 	if not G.ARGS.LOC_COLOURS then

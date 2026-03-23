@@ -831,7 +831,7 @@ return {
 			m_crv_gigamega = {
 				name = "Ultra Mega",
 				text = {
-					"{X:xmult,C:white}X#1#{} Mult if scored",
+					"{X:mult,C:white}X#1#{} Mult if scored",
 					"or kept in hand"
 				}
 			}

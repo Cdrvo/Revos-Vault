@@ -1367,7 +1367,7 @@ SMODS.Joker({
 	end,
 })
 
-SMODS.Joker({
+--[[SMODS.Joker({
 	key = "rprinter",
 	atlas = "Jokers2",
 	rarity = "crv_p",
@@ -1396,7 +1396,7 @@ SMODS.Joker({
 	in_pool = function(self, wawa, wawa2)
 		return true
 	end,
-})
+})]]
 
 if RevoConfig["superior_enabled"] then
 	SMODS.Joker({
