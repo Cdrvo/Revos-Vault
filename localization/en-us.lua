@@ -62,8 +62,7 @@ return {
 					{
 					  "The {C:blue}Harvest{} button is used to {C:red}Destroy{} ",
 					  "the placed joker and give it's {C:attention}Sell Value{}",
-					  "as {C:blue}Souls{}. Unlike dollars, souls are kept",
-					  "between runs"
+					  "as {C:blue}Souls{}"
 					}
                     }
                 },
@@ -100,8 +99,7 @@ return {
 					{
 					  "The {C:blue}Harvest{} button is used to {C:red}Destroy{} ",
 					  "the placed joker and give it's {C:attention}Sell Value{}",
-					  "as {C:blue}Souls{}. Unlike dollars, souls are kept",
-					  "between runs"
+					  "as {C:blue}Souls{}"
 					}
                     }
                 },
