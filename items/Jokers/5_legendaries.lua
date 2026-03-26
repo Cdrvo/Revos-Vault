@@ -16,7 +16,8 @@ SMODS.Joker({
 	},
 	loc_vars = function(self, info_queue, card)
 		if not G.real_modicon_area and G.jokers then
-			G.real_modicon_area = CardArea(G.jokers.T.x, -15, G.jokers.T.w, G.jokers.T.h, { card_limit = 1e300, type = "discard" })
+			G.real_modicon_area =
+				CardArea(G.jokers.T.x, -15, G.jokers.T.w, G.jokers.T.h, { card_limit = 1e300, type = "discard" })
 		end
 		info_queue[1] = { set = "Other", key = "crv_crash_desc" }
 		info_queue[2] = { set = "Other", key = "crv_modicon_desc_1" }
@@ -67,7 +68,7 @@ SMODS.Joker({
 
 		local t = {}
 		G.mod_icon_area.states.visible = false
-		if G.mod_icon_area and #G.mod_icon_area.cards>0 then
+		if G.mod_icon_area and #G.mod_icon_area.cards > 0 then
 			G.mod_icon_area.states.visible = true
 			t = {
 				{
@@ -90,7 +91,8 @@ SMODS.Joker({
 
 		if context.setting_blind and not context.blueprint then
 			if not G.real_modicon_area and G.jokers then
-				G.real_modicon_area = CardArea(G.jokers.T.x, -15, G.jokers.T.w, G.jokers.T.h, { card_limit = 1e300, type = "discard" })
+				G.real_modicon_area =
+					CardArea(G.jokers.T.x, -15, G.jokers.T.w, G.jokers.T.h, { card_limit = 1e300, type = "discard" })
 			end
 			local tab = {}
 			for k, v in pairs(G.P_CENTER_POOLS.Joker) do
@@ -263,18 +265,67 @@ SMODS.Joker({
 	soul_pos = { x = 12, y = 10 },
 	config = {
 		extra = {
-			xchips = 4
-		}
+			xchips = 4,
+		},
 	},
-	calculate = function(self, card, context) 
+	cost = 20,
+	loc_vars = function(self, info_queue, card)
+		local crv = card.ability.extra
+		return {
+			vars = { crv.xchips },
+		}
+	end,
+	calculate = function(self, card, context)
+		local cae = card.ability.extra
 		if context.individual and context.cardarea == G.play then
 			if context.other_card:get_id() <= 4 then
-			return{
-				xchips = cae.xchips
-			}
-		end
-		else
-			SMODS.destroy_cards(card)
+				return {
+					xchips = cae.xchips,
+				}
+			else
+				SMODS.destroy_cards(card)
+			end
 		end
 	end,
+	crv_credits = {
+		art = { "thingifithinker" },
+	},
+})
+
+SMODS.Joker({
+	key = "agoraphobia",
+	atlas = "Jokers2",
+	rarity = 4,
+	blueprint_compat = false,
+	pos = { x = 11, y = 9 },
+	soul_pos = { x = 12, y = 9 },
+	config = {
+		extra = {
+			xchips = 4,
+		},
+	},
+	cost = 20,
+	calculate = function(self, card, context)
+		local cae = card.ability.extra
+		if context.setting_blind and not context.blueprint then
+			local a, b = nil, {}
+			for k, v in pairs(SMODS.Rarities) do
+				if k ~= "crv_pedro" and k ~= "crv_holy" and k ~= "crv_curse" then
+					b[#b + 1] = k
+				end
+				a = pseudorandom_element(b, pseudoseed("aaa" .. G.GAME.round_resets.ante))
+				SMODS.add_card({
+					set = "Joker",
+					rarity = a,
+				})
+
+				if a == "Legendary" then
+					SMODS.destroy_cards(card)
+				end
+			end
+		end
+	end,
+	crv_credits = {
+		art = { "thingifithinker" },
+	},
 })

@@ -2871,6 +2871,7 @@ return {
 			j_crv_timeprinter = {
 				name = "Time Printer",
 				text = {
+					"When Blind is selected,",
 					"{C:green}1 in 4{} chance to",
 					"print {C:attention}-#1#{} Ante."
 				}
@@ -2880,6 +2881,28 @@ return {
 				text = {
 					"Always has a",
 					"random {C:dark_edition}Edition{}",
+				}
+			},
+			j_crv_chaetophobia = {
+				name = "Chaetophobia",
+				text = {
+					"{C:attention}Scored cards{} give {X:chips,C:white}X#1#{} Chips",
+					"{C:red}Self-destructs{} if a",
+					"card with a rank {C:attention}higher{} than",
+					"{C:attention}4{} is scored"
+				}
+			},
+			j_crv_agoraphobia = {
+				name = "Agoraphobia",
+				text = {
+					"When Blind is selected,",
+					"creates a random {C:attention}Joker{}.",
+					"Each rarity has an {C:green}equal{} chance",
+					"of appearing.",
+					"{C:red}Self-destructs{} when a {C:purple,E:1}Legendary{}",
+					"Joker is created",
+					"{C:inactive}(Pedro, Holy Banana and Curses excluded)"
+					
 				}
 			},
 			-- QUICK JOKER
