@@ -98,7 +98,7 @@ end
 if G.real_modicon_area then
     table.insert(t, 1, G.real_modicon_area)
 end
-if G.crv_chaos_calc) then
+if G.crv_chaos_calc then
     table.insert(t, 1, G.crv_chaos_calc)
 end
 '''
