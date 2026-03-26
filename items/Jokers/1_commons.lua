@@ -621,9 +621,6 @@ SMODS.Joker({
 		extra = {
 		},
 	},
-	crv_credits = {
-		art = {"Chainsawmert"}
-	},
 	loc_vars = function(self, info_queue, card)
 		info_queue[#info_queue+1] = {set = "Other", key = "crv_fixed_chances"}
 		local cae = card.ability.extra

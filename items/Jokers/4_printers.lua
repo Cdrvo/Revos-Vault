@@ -1634,3 +1634,41 @@ SMODS.Joker({
 		return true
 	end,
 })
+
+SMODS.Joker({
+	key = "timeprinter",
+	atlas = "Jokers2",
+	rarity = "crv_p",
+	cost = 10,
+	unlocked = true,
+	discovered = false,
+	blueprint_compat = true,
+	pos = {
+		x = 5,
+		y = 4,
+	},
+	config = {
+		extra = {
+			ante = 1
+		},
+	},
+	crv_credits = {
+		art = {"Tatsu"},
+	},
+	loc_vars = function(self, info_queue, card)
+		local cae = card.ability.extra
+		info_queue[#info_queue+1] = {set = "Other", key = "crv_fixed_chances"}
+		return {
+			vars = { cae.ante },
+		}
+	end,
+	calculate = function(self, card, context)
+		local cae = card.ability.extra
+			if context.end_of_round and context.main_eval then
+				if pseudorandom("ff")<1/4 then
+					ease_ante(-cae.ante)
+					RevosVault.c_message(card, ("-" .. cae.ante .. " " ..  localize("k_crv_ante")))
+				end
+			end
+	end,
+})

@@ -1349,7 +1349,7 @@ SMODS.Joker({
 			local numbers, all_cards = 0, 0
 			for k, v in ipairs(G.hand.cards) do
 				all_cards = all_cards + 1
-				if v:get_id() >= 2 and v:get_id() <= 6 then
+				if v:get_id() >= 2 and v:get_id() <= 4 then
 					numbers = numbers + 1
 				end
 			end
@@ -2890,67 +2890,6 @@ SMODS.Joker({
 	end,
 	remove_from_deck = function(self, card, from_debuff)
 		G.jokers.config.card_limit = G.jokers.config.card_limit - 1
-	end,
-	in_pool = function(self, wawa, wawa2)
-		return true
-	end,
-})
-
-SMODS.Joker({
-	key = "eyes",
-	atlas = "Jokers2",
-	rarity = 2,
-	cost = 6,
-	unlocked = true,
-	discovered = false,
-	blueprint_compat = false,
-
-	pos = {
-		x = 8,
-		y = 10,
-	},
-	config = {
-		extra = {},
-	},
-	crv_credits = {
-		art = {"mr.cr33ps"}
-	},
-	loc_vars = function(self, info_queue, card)
-		return {
-			vars = {},
-		}
-	end,
-
-	calculate = function(self, card, context)
-		if context.setting_blind and not context.blueprint then
-			local rr = nil
-			for i = 1, #G.jokers.cards do
-				if G.jokers.cards[i] == card then
-					rr = i
-					break
-				end
-			end
-			if card.area == G.real_modicon_area then
-				rr = RevosVault.get_key_pos("j_crv_modicon")
-			end
-			if
-				G.jokers.cards[rr - 1] ~= nil and G.jokers.cards[rr + 1] ~= nil
-				or self.area == G.jokers and not G.jokers.cards[rr - 1].crv_eyed
-			then
-				G.E_MANAGER:add_event(Event({
-					trigger = "after",
-					func = function()
-						G.jokers.cards[rr - 1].crv_eyed = true
-						G.jokers.cards[rr - 1]:start_dissolve({ HEX("57ecab") }, nil, 1.6)
-						local copied = copy_card(G.jokers.cards[rr + 1], nil)
-						copied:add_to_deck()
-						G.jokers:emplace(copied)
-						card_eval_status_text(card, "extra", nil, nil, nil, { message = "Copied!" })
-						return true
-					end,
-				}))
-			end
-		end
 	end,
 	in_pool = function(self, wawa, wawa2)
 		return true

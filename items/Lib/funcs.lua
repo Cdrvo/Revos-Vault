@@ -550,7 +550,7 @@ end
 
 -- Nothing to see here
 
-function RevosVault.check(check, area)
+function RevosVault.check(check, other) --???
 	if check == "inblind" then
 		return G.STATE == G.STATES.SELECTING_HAND
 	elseif check == "hasjoker" then
@@ -560,12 +560,16 @@ function RevosVault.check(check, area)
 	elseif check == "inshop" then
 		return G.STATE == G.STATES.SHOP
 	elseif check == "highlight" then
-		return #area.highlighted
+		return #other.highlighted
 	elseif check == "space" then
-		if #area.cards >= area.config.card_limit then
+		if #other.cards >= other.config.card_limit then
 			return false
 		else
 			return true
+		end
+	elseif check == "edition" then
+		if G.jokers and G.jokers.highlighted and G.jokers.highlighted[1] then
+			return G.jokers.highlighted[1].edition and G.jokers.highlighted[1].edition[other]
 		end
 	end
 end
@@ -2518,4 +2522,23 @@ RevosVault.ease_souls = function(mod, profile)
 	-- G.PROFILES[profile].G.PROFILES[G.SETTINGS.profile].crv_souls = G.PROFILES[profile].G.PROFILES[G.SETTINGS.profile].crv_souls + mod
 	G.GAME.crv_souls = G.GAME.crv_souls + mod
 	play_sound("coin1")
+end
+
+RevosVault.calculate_rounds_left = function(card)
+	if 1 < card.ability.extra.rounds_left then
+		card.ability.extra.rounds_left = card.ability.extra.rounds_left - 1
+		RevosVault.c_message(card, "-1 Rounds")
+	else
+		SMODS.destroy_cards(card, true)
+	end
+	G.E_MANAGER:add_event(Event({ func = function() save_run(); return true end}))
+end
+
+RevosVault.perma_upgrade = function(card, type, upgrade_text, amount)
+	local cap = card.ability
+	cap["perma_" .. type] = cap["perma_" .. type] or (type == "xmult" and 1 or 0)
+	cap["perma_" .. type] = cap["perma_" .. type] + amount
+	if upgrade_text then
+		RevosVault.c_message(card, localize("k_upgrade_ex"))
+	end
 end

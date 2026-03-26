@@ -185,6 +185,9 @@ function Card:is_face(from_boss)
 	if #SMODS.find_card("j_crv_revoo_") > 0 then
 		return false
 	end
+	if self.seal == "crv_royal" then
+		return true
+	end
 	return isfaceold(self, from_boss)
 end
 
@@ -375,7 +378,7 @@ function Game:update(dt)
 	end
 	if SMODS then
 		for _, area in ipairs(SMODS.get_card_areas("jokers")) do
-			if area and area.cards then
+			if area and area and area.cards then
 				for _, _card in ipairs(area.cards) do
 					if _card.debuff and _card.ability.crv_wet then
 						_card.debuff = false
@@ -1013,4 +1016,15 @@ function SMODS.calculate_context(context, ...)
 		G.GAME.current_round.crv_drawn_hands = G.GAME.current_round.crv_drawn_hands + 1
 	end
     return calculate_context_old(context, ...)
+end
+
+local draw_from_deck_to_hand_old = G.FUNCS.draw_from_deck_to_hand 
+G.FUNCS.draw_from_deck_to_hand = function(e)
+	draw_from_deck_to_hand_old()
+    G.E_MANAGER:add_event(Event({
+		func = function()
+			SMODS.calculate_context({crv_after_draw = true})
+			return true
+		end
+	}))
 end

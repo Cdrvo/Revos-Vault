@@ -38,6 +38,21 @@ SMODS.DrawStep({
 })
 
 SMODS.DrawStep({
+	key = "crv_negative_runes",
+	order = 11,
+	func = function(self)
+		if  
+            self.ability.set == "crv_Rune"
+			and self:should_draw_base_shader()
+		then
+			self.children.center:draw_shader("negative", nil, self.ARGS.send_to_shader)
+            self.children.center:draw_shader("negative_shine", nil, self.ARGS.send_to_shader)
+		end
+	end,
+	conditions = { vortex = false, facing = "front" },
+})
+
+SMODS.DrawStep({
 	key = "force_canvas",
 	order = 11,
 	func = function(self)

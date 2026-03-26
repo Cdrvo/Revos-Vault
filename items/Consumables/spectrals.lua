@@ -85,3 +85,147 @@ if RevoConfig["8_curses_enabled"] then
 		end
 	})
 end
+
+SMODS.Consumable({
+	key = "planetary_contract",
+	set = "Spectral",
+	discovered = true,
+	atlas = "spec",
+	pos = { x = 1, y = 0 },
+	hidden = true,
+	soul_set = "Planet",
+	soul_rate = 0.003, --too rare? idfk
+	config = {
+		extra = {
+			active = false,
+            rounds = 5,
+            rounds_left = 5,
+		},
+	},
+	loc_vars = function(self, info_queue, card)
+        local cae = card.ability.extra
+		return { vars = {cae.rounds, cae.rounds_left } }
+	end,
+	can_use = function(self, card)
+		return card.ability.extra.active == false
+	end,
+	keep_on_use = function(self, card)
+		return true
+	end,
+	use = function(self, card, area, copier)
+		card.ability.extra.active = true
+		local eval = function()
+			return card.ability.extra.active == true
+		end
+		juice_card_until(card, eval, true)
+	end,
+	calculate = function(self, card, context)
+        local cae = card.ability.extra
+        if cae.active then
+            local cae = card.ability.extra
+            if context.modify_hand then
+					hand_chips = mod_chips(hand_chips * 2)
+					mult = mod_mult(mult * 2)
+					RevosVault.c_message(card, localize("k_crv_double"))
+            end
+            if context.end_of_round and context.main_eval then
+                card.ability.extra.active = false
+                RevosVault.c_message(card, "-1")
+                if cae.rounds_left > 1  then
+                    cae.rounds_left = cae.rounds_left - 1
+                else
+                    SMODS.destroy_cards(card)
+                end
+                
+            end
+        end
+        
+	end,
+})
+
+
+SMODS.Consumable {
+    key = 'crown',
+    atlas = 'spec',
+	set = "Spectral",
+    pos = { x = 1, y = 1 },
+    config = { extra = { seal = 'crv_royal' }, max_highlighted = 1 },
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = G.P_SEALS[card.ability.extra.seal]
+        return { vars = { card.ability.max_highlighted } }
+    end,
+    use = function(self, card, area, copier)
+        local conv_card = G.hand.highlighted[1]
+        G.E_MANAGER:add_event(Event({
+            func = function()
+                play_sound('tarot1')
+                card:juice_up(0.3, 0.5)
+                return true
+            end
+        }))
+
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.1,
+            func = function()
+                conv_card:set_seal(card.ability.extra.seal, nil, true)
+                return true
+            end
+        }))
+
+        delay(0.5)
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.2,
+            func = function()
+                G.hand:unhighlight_all()
+                return true
+            end
+        }))
+    end,
+
+}
+
+--[[SMODS.Consumable { idk if i want to add this rn
+    key = 'black_hole',
+    set = 'Spectral',
+	atlas = "spec",
+    pos = { x = 2, y = 0 },
+    hidden = true,
+    soul_set = 'Planet',
+    use = function(self, card, area, copier)
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.2,
+            func = function()
+                play_sound('tarot1')
+                card:juice_up(0.8, 0.5)
+                G.TAROT_INTERRUPT_PULSE = true
+                return true
+            end
+        }))
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.9,
+            func = function()
+                play_sound('tarot1')
+                card:juice_up(0.8, 0.5)
+                return true
+            end
+        }))
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.9,
+            func = function()
+                play_sound('tarot1')
+                card:juice_up(0.8, 0.5)
+                G.TAROT_INTERRUPT_PULSE = nil
+                return true
+            end
+        }))
+        SMODS.upgrade_poker_hands({hands = {RevosVault.most_played()}, level_up = to_number(G.GAME.hands[RevosVault.most_played()].level )})
+    end,
+    can_use = function(self, card)
+        return true
+    end,
+}]]

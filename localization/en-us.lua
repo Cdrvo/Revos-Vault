@@ -621,6 +621,14 @@ return {
 				name = "Rhodium",
 				text = { "{C:money}+$#1#{} When scored","or kept in hand" },
 			},
+			m_crv_celestial = {
+				name = "Celestial",
+				text = {
+					"Gives the {C:attention}most played hand's{}",
+					"{C:chips}Chips{} and {C:mult}Mult{}",
+					"{C:inactive}(#1#, {C:chips}+#2#{C:inactive} Chips, {C:mult}+#3#{C:inactive} Mult)"
+				}
+			},
 
 			-- BANANA ENHANCEMENT
 
@@ -1366,8 +1374,8 @@ return {
 				text = {
 					"{X:red,C:white} X#1# {} Mult if all",
 					"cards held in hand",
-					"are between {C:attention}2{} and {C:attention}6{}",
-					"{C:inactive}(2 and 6 included)",
+					"are between {C:attention}2{} and {C:attention}4{}",
+					"{C:inactive}(2 and 4 included)",
 				},
 			},
 			j_crv_smbj = {
@@ -2860,6 +2868,13 @@ return {
 					"not destroy it"
 				},
 			},
+			j_crv_timeprinter = {
+				name = "Time Printer",
+				text = {
+					"{C:green}1 in 4{} chance to",
+					"print {C:attention}-#1#{} Ante."
+				}
+			},
 			-- QUICK JOKER
 			--GARBSHIT below
 			j_crv_stamprinter = {
@@ -3453,6 +3468,193 @@ return {
 					"highlighted {C:attention}Joker",
 					"{C:inactive}(Must have room)"
 				}
+			},
+			c_crv_void = {
+				name = "Void",
+				text = {
+					"Enhances {C:attention}#1#{} selected",
+					"card into a",
+					"{C:attention}Celestial Card"
+				},
+			}
+		},
+		crv_Rune  = {
+			c_crv_fehu = {
+				name = "Fehu",
+				text = {
+					"When active,",
+					"{C:attention}Unscored cards{} give {C:money}+$#1#{}",
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} round"
+				},
+			},
+			c_crv_uruz = {
+				name = "Uruz",
+				text = {
+					"When active,",
+					"retrigger {C:attention}Scored Cards{}",
+					"{C:attention}#3#{} time",
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} round"
+				},
+			},
+			c_crv_thurisaz = {
+				name = "Thurisaz",
+				text = {
+					"When active,",
+					"{C:red}Rare{} Jokers appear",
+					"as much as {C:green}Uncommon{} Jokers",
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} shop"
+				},
+			},
+			c_crv_ansuz = {
+				name = "Ansuz",
+				text = {
+					"When active,",
+					"{C:green}#1# in #2#{} chance to create",
+					"{C:legendary,E:1}The Soul{} after",
+					"selecting a {C:attention}Blind",
+					"Lasts for {C:attention}#3#{C:inactive} (#4#){} rounds"
+				},
+			},
+			c_crv_raidho = {
+				name = "Raidho",
+				text = {
+					"When active,",
+					"{C:attention}Scored Cards{} gain a",
+					"random {C:dark_edition}Enhancement{},",
+					"{C:attention}Seal{} or {C:dark_edition}Edition{}",
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} rounds"
+				},
+			},
+			c_crv_kenaz = {
+				name = "Kenaz",
+				text = {
+					"When active,",
+					"{C:attention}Unscored cards{} are {C:red}destroyed",
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} round"
+				},
+			},
+			c_crv_gebo = {
+				name = "Gebo",
+				text = {
+					"When active",
+					"At the {C:attention}end of a round{},",
+					"all owned Consumables",
+					"turn {C:dark_edition}Negative{}",
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} rounds"
+				},
+			},
+			c_crv_wunjo = {
+				name = "Wunjo",
+				text = {
+					"When active",
+					"{C:attention}Scored cards{} gain",
+					"{C:money}+$#3#{} Permanent Dollars",
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} round"
+				},
+			},
+			c_crv_hagalaz = {
+				name = "Hagalaz",
+				text = {
+					"When active,",
+					"draw {C:attention}#3#{} extra cards",
+					"after {C:red}discarding{}",
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} rounds"
+				},
+			},
+			c_crv_isa = {
+				name = "Isa",
+				text = {
+					"When active,",
+					"{C:red}debuffed{} cards",
+					"give {X:mult,C:white}X#3#{} Mult",
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} rounds"
+				},
+			},
+			c_crv_jera = {
+				name = "Jera",
+				text = {
+					"When active,",
+					"duplicate the {C:attention}rightmost{}",
+					"scoring card",
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} hands"
+				},
+			},
+			c_crv_eihwaz = {
+				name = "Eihwaz",
+				text = {
+					"When active,",
+					"disable the selected {C:attention}Blind{}",
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} blind"
+				},
+			},
+			c_crv_perthro = {
+				name = "Perthro",
+				text = {
+					"When active,",
+					"gain a random {C:attention}Tag{}",
+					"at the end of the round.",
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} rounds"
+				},
+			},
+			c_crv_algiz = {
+				name = "Algiz",
+				text = {
+					"When active,",
+					"multiply the selected {C:attention}Blinds{}",
+					"requirement by {X:attention,C:white}X#3#{}",
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} blinds"
+				},
+			},
+			c_crv_sowilo = {
+				name = "Sowilo",
+				text = {
+					"When active,",
+					"{C:attention}Unscored cards{} give",
+					"their rank as {C:chips}Chips",
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} rounds"
+				},
+			},
+			c_crv_towaz = {
+				name = "Towaz",
+				text = {
+					"When active,",
+					"{C:attention}+#3#{} card selection limit",
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} rounds"
+				},
+			},
+			c_crv_mannaz = {
+				name = "Mannaz",
+				text = {
+					"When active,",
+					"Played {C:attention}face cards{} give",
+					"{X:chips,C:white}X#3#{} Chips",
+					"{s:0.8}debuffed cards included",
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} rounds"
+				},
+			},
+			c_crv_berkana = {
+				name = "Berkana",
+				text = {
+					"When active,",
+					"{C:attention}+#3#{} hand size until",
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} rounds"
+				},
+			},
+			c_crv_othala = {
+				name = "Othala",
+				text = {
+					"When active",
+					"{C:blue}+#3#{} hands until",
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} rounds"
+				},
+			},
+			c_crv_inguz = {
+				name = "Inguz",
+				text = {
+					"When active,",
+					"{C:red}+#3#{} discards until",
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} rounds"
+				},
 			},
 		},
 		scrap = {
@@ -4360,6 +4562,21 @@ return {
 					"destroy the plant"
 				}
 			},
+			c_crv_supcrown = {
+				name = "Superior Crown",
+				text = {
+					"Enhances #1# Cards to {C:attention}Celestial",
+					"and applies {C:attention}Royal{} Seal to them",
+				},
+			},
+			c_crv_supplanetary_contract = {
+				name = "Superior Planetary Contract",
+				text = {
+					"Base {C:mult}Mult{} and",
+					"{C:chips}Chips{} are quadrupled",
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} uses",
+				}
+			},
 			-- QUICK SUP
 		},
 
@@ -4395,6 +4612,23 @@ return {
 					"Destroy up to {C:attention}#1#",
 					"{C:black}Curse{} Card"
 				}
+			},
+			c_crv_planetary_contract = {
+				name  = "Planetary Contract",
+				text = {
+					"Base {C:mult}Mult{} and",
+					"{C:chips}Chips{} are doubled",
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} uses",
+
+				}
+			},
+			c_crv_crown = {
+				name = "Crown",
+				text={
+                    "Add a {C:attention}Royal Seal{}",
+                    "to {C:attention}1{} selected",
+                    "card in your hand",
+                },
 			}
 		},
 		Other = {
@@ -4424,6 +4658,13 @@ return {
 					"consumable if",
 					"{C:attention}held{} in hand",
 					"or when {C:red}discarded{}"
+				},
+			},
+			crv_royal_seal = {
+				name = "Royal Seal",
+				text = {
+					"Card is considered",
+					"a {C:attention}face{} card"
 				},
 			},
 			p_crv_pbst = {
@@ -5033,9 +5274,11 @@ return {
 		labels = {
 			crv_ps_seal = "Printer's Seal",
 			crv_superior_seal_seal = "Superior Seal",
+			crv_royal_seal = "Royal Seal",
 			crv_p = "Printer",
 			crv_curse = "Curse",
 			scrap = "Scraps",
+			crv_rune = "Runes",
 			enchanceddocuments = "Contracts",
 			crv_vamp = "Vampiric",
 			crv_haunted = "Haunted",
@@ -5102,6 +5345,7 @@ return {
 			k_crv_cleaning = "Cleaning file...",
 			k_crv_overscore = "Overscore!",
 			k_crv_double = "Double!",
+			k_crv_quadruple = "Quadrupled!",
 			k_crv_nothing = "Nothing!",
 			k_crv_dept = "In Dept!",
 			k_crv_vaa = "Opened Vault!",
@@ -5127,6 +5371,9 @@ return {
 			b_enchanceddocuments_cards = "Contracts",
 			k_corrupt = "Corrupt",
 			b_corrupt_cards = "Corrupt Cards",
+			k_crv_rune = "Rune",
+			b_crv_rune_cards = "Runes",
+			k_crv_ante = "Ante",
 
 			k_superior = "Superior Tarot",
 			k_superior_s = "Superior Spectral",
