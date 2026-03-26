@@ -268,9 +268,13 @@ SMODS.Joker({
 	},
 	calculate = function(self, card, context) 
 		if context.individual and context.cardarea == G.play then
+			if context.other_card:get_id() <= 4 then
 			return{
 				xchips = cae.xchips
 			}
+		end
+		else
+			SMODS.destroy_cards(card)
 		end
 	end,
 })

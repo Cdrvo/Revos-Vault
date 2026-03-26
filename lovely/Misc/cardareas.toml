@@ -92,7 +92,7 @@ payload = '''
 if RevoConfig["8_curses_enabled"] and G.crv_curses then
     table.insert(t, 1, G.crv_curses)
 end
-if RevoConfig["gems_enabled"] and G.crv_gem_area) then
+if RevoConfig["gems_enabled"] and G.crv_gem_area then
     table.insert(t, 1, G.crv_gem_area)
 end
 if G.real_modicon_area then
