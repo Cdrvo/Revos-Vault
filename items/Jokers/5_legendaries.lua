@@ -1,85 +1,3 @@
---[[SMODS.Joker({
-	key = "oldjimbo",
-	atlas = "Jokers2",
-	rarity = 4,
-	cost = 20,
-	unlocked = true,
-	discovered = false,
-	blueprint_compat = false,
-	pos = {
-		x = 3,
-		y = 8,
-	},
-	soul_pos = {
-		x = 4,
-		y = 8,
-	},
-	config = {
-		extra = {},
-	},
-	loc_vars = function(self, info_queue, card)
-		return {
-			vars = { card.ability.extra.dollars },
-		}
-	end,
-	calculate = function(self, card, context)
-		if card.area then
-			SMODS.Stickers["eternal"]:apply(card, true)
-		end
-	end,
-	add_to_deck = function(self, card, from_debuff)
-		SMODS.add_card({
-			set = "Joker",
-			area = G.jokers,
-			key = "j_crv_adamap",
-		})
-		SMODS.Stickers["eternal"]:apply(card, true)
-	end,
-})
-
-SMODS.Joker({
-	key = "adamap",
-	atlas = "Jokers2",
-	rarity = 4,
-	cost = 0,
-	unlocked = true,
-	discovered = false,
-	blueprint_compat = true,
-	no_collection = true,
-	pos = {
-		x = 5,
-		y = 8,
-	},
-	soul_pos = {
-		x = 6,
-		y = 8,
-	},
-	config = {
-		extra = {
-			xmult = 3,
-		},
-	},
-	pools = {
-		Food = true,
-	},
-	loc_vars = function(self, info_queue, card)
-		return {
-			vars = { card.ability.extra.xmult },
-		}
-	end,
-	calculate = function(self, card, context)
-		if context.joker_main then
-			return {
-				xmult = card.ability.extra.xmult,
-			}
-		end
-	end,
-	in_pool = function(self, wawa, wawa2)
-		return false
-	end,
-})
-]]
-
 SMODS.Joker({
 	key = "modicon",
 	atlas = "Jokers2",
@@ -334,5 +252,25 @@ SMODS.Joker({
 		local frame_amount = #shopframes
 		local wrapped_value = (math.floor(timer) - 1) % frame_amount + 1
 		card.children.floating_sprite:set_sprite_pos({ x = shopframes[wrapped_value], y = 14 })
+	end,
+})
+
+SMODS.Joker({
+	key = "chaetophobia",
+	atlas = "Jokers2",
+	rarity = 4,
+	pos = { x = 11, y = 10 },
+	soul_pos = { x = 12, y = 10 },
+	config = {
+		extra = {
+			xchips = 4
+		}
+	},
+	calculate = function(self, card, context) 
+		if context.individual and context.cardarea == G.play then
+			return{
+				xchips = cae.xchips
+			}
+		end
 	end,
 })

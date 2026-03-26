@@ -2875,6 +2875,13 @@ return {
 					"print {C:attention}-#1#{} Ante."
 				}
 			},
+			j_crv_useless_joker = {
+				name = "Useless Joker",
+				text = {
+					"Always has a",
+					"random {C:dark_edition}Edition{}",
+				}
+			},
 			-- QUICK JOKER
 			--GARBSHIT below
 			j_crv_stamprinter = {

@@ -42,14 +42,17 @@ end
 
     -- Gems area
 
-    self.crv_gem_area = CardArea(
-        G.discard.T.x, 
-        G.discard.T.y,
-        G.discard.T.w, 
-        G.discard.T.h,
-        { type = "discard", card_limit = 1e308 }
-    )
+    if RevoConfig["gems_enabled"] then
 
+        self.crv_gem_area = CardArea(
+            G.discard.T.x, 
+            G.discard.T.y,
+            G.discard.T.w, 
+            G.discard.T.h,
+            { type = "discard", card_limit = 1e308 }
+        )
+
+    end
     -- Chaotic Printer Machine area
 
     self.crv_chaos_calc = CardArea(
@@ -86,14 +89,18 @@ target = '=[SMODS _ "src/utils.lua"]'
 pattern = '-- TARGET: add your own CardAreas for joker evaluation'
 position = "after"
 payload = '''
-if RevoConfig["8_curses_enabled"] then
+if RevoConfig["8_curses_enabled"] and G.crv_curses then
     table.insert(t, 1, G.crv_curses)
 end
-if RevoConfig["gems_enabled"] then
+if RevoConfig["gems_enabled"] and G.crv_gem_area) then
     table.insert(t, 1, G.crv_gem_area)
 end
-table.insert(t, 1, G.real_modicon_area)
-table.insert(t, 1, G.crv_chaos_calc)
+if G.real_modicon_area then
+    table.insert(t, 1, G.real_modicon_area)
+end
+if G.crv_chaos_calc) then
+    table.insert(t, 1, G.crv_chaos_calc)
+end
 '''
 match_indent = true
 

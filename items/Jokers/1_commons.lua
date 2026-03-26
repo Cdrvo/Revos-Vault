@@ -631,3 +631,27 @@ SMODS.Joker({
 	calculate = function(self, card, context)
 	end,
 })
+
+SMODS.Joker({
+	key = "useless_joker",
+	rarity = 1,
+	cost = 1,
+	unlocked = true,
+	discovered = false,
+	blueprint_compat = false,
+	atlas = "Jokers2",
+	pos = {
+		x = 11,
+		y = 11,
+	},
+	config = {
+		extra = {
+		},
+	},
+	set_ability = function(self, card, initial, delay_sprites)
+		card:set_edition(poll_edition(nil, nil, nil, true), true, true)
+	end,
+	crv_credits = {
+		art = {"lfmoth"}
+	}
+})
