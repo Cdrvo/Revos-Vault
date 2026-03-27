@@ -1654,6 +1654,7 @@ SMODS.Joker({
 	},
 	crv_credits = {
 		art = {"Tatsu"},
+		idea = {"Tatsu"}
 	},
 	loc_vars = function(self, info_queue, card)
 		local cae = card.ability.extra
@@ -1665,7 +1666,7 @@ SMODS.Joker({
 	calculate = function(self, card, context)
 		local cae = card.ability.extra
 			if context.end_of_round and context.main_eval then
-				if pseudorandom("ff")<1/4 then
+				if pseudorandom("ff")<1/6 then
 					ease_ante(-cae.ante)
 					RevosVault.c_message(card, ("-" .. cae.ante .. " " ..  localize("k_crv_ante")))
 				end

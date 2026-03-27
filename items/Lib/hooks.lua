@@ -372,9 +372,9 @@ function Game:update(dt)
 			end
 		end
 	end
-	if G and G.GAME and G.GAME.current_round and G.GAME.current_round.current_hand and G.GAME.current_round.current_hand.crv_dollars_mult_text then
+	if G and G.GAME and G.GAME.current_round and G.GAME.current_round.current_hand and G.GAME.current_round.current_hand.crv_dollars_mult_text and not RevosVault.scoring  then
 		SMODS.Scoring_Parameters.crv_dollars_mult:crv_set(G.GAME.dollars or 0)
-		G.GAME.current_round.current_hand.crv_dollars_mult = SMODS.Scoring_Parameters.crv_dollars_mult.current
+		SMODS.Scoring_Parameters.crv_dollars_mult:modify()
 	end
 	if SMODS then
 		for _, area in ipairs(SMODS.get_card_areas("jokers")) do

@@ -742,7 +742,8 @@ SMODS.Enhancement({
 		}}
 	end,
 	crv_credits = {
-		art = {"WombatCountry"}
+		art = {"WombatCountry"},
+		idea = {"theOfficialFem"}
 	},
 	calculate = function(self, card, context, effect)
 		if context.main_scoring and (context.cardarea == G.play) then

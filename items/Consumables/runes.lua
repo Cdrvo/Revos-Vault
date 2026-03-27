@@ -35,7 +35,8 @@ RevosVault.Rune = SMODS.Consumable:extend({
         return not card.ability.extra.active
     end,
 	crv_credits = {
-		art = {"Tatteredlurker"}
+		art = {"Tatteredlurker"},
+		idea = {"theOfficialFem"}
 	}
 })
 

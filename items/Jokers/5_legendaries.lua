@@ -289,6 +289,7 @@ SMODS.Joker({
 	end,
 	crv_credits = {
 		art = { "thingifithinker" },
+		idea = {"theOfficialFem"}
 	},
 })
 
@@ -327,5 +328,6 @@ SMODS.Joker({
 	end,
 	crv_credits = {
 		art = { "thingifithinker" },
+		idea = {"theOfficialFem"}
 	},
 })

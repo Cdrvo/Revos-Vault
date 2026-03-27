@@ -2871,8 +2871,8 @@ return {
 			j_crv_timeprinter = {
 				name = "Time Printer",
 				text = {
-					"When Blind is selected,",
-					"{C:green}1 in 4{} chance to",
+					"When a round ends,",
+					"{C:green}1 in 6{} chance to",
 					"print {C:attention}-#1#{} Ante."
 				}
 			},
@@ -2903,6 +2903,14 @@ return {
 					"Joker is created",
 					"{C:inactive}(Pedro, Holy Banana and Curses excluded)"
 					
+				}
+			},
+			j_crv_cursed_banana = {
+				name = "Bananaphobia",
+				text = {
+					"When a {C:attention}Blind{} is selected",
+					"apply {C:dark_edition}Perishable{} to a",
+					"random eligible Joker"
 				}
 			},
 			-- QUICK JOKER
@@ -4763,6 +4771,33 @@ return {
 					text = { "???" },
 				},
 			},
+			undiscovered_scrap={
+                name="Not Discovered",
+                text={
+                    "Purchase or use",
+                    "this card in an",
+                    "unseeded run to",
+                    "learn what it does",
+                },
+            },
+			undiscovered_crv_rune={
+                name="Not Discovered",
+                text={
+                    "Purchase or use",
+                    "this card in an",
+                    "unseeded run to",
+                    "learn what it does",
+                },
+            },
+			undiscovered_superior={
+                name="Not Discovered",
+                text={
+                    "Purchase or use",
+                    "this card in an",
+                    "unseeded run to",
+                    "learn what it does",
+                },
+            },
 			crv_vamp = {
 				name = "Vampiric",
 				text = {

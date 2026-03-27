@@ -652,6 +652,7 @@ SMODS.Joker({
 		card:set_edition(poll_edition(nil, nil, nil, true), true, true)
 	end,
 	crv_credits = {
-		art = {"lfmoth"}
+		art = {"lfmoth"},
+		idea = {"theOfficialFem"}
 	}
 })

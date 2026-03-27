@@ -196,14 +196,20 @@ SMODS.Scoring_Parameter({
 	crv_set = function(self, amount)
 		self.current = amount
 	end,
+	modify = function(self, amount)
+    	self.current = self.current
+    	self.default_value = self.current 
+		 G.GAME.current_round.current_hand.crv_dollars_mult = self.current
+    	-- update_hand_text({delay = 0}, {[self.key] = self.current}) 
+	end
 })
 
 SMODS.Scoring_Calculation({
 	key = "dollars_mult_scoring",
 	func = function(self, chips, mult, flames)
-		return (chips + mult) * G.GAME.dollars
+		return (chips + mult) * SMODS.Scoring_Parameters.crv_dollars_mult.current
 	end,
-	parameters = { "chips", "mult", "crv_dollars_mult" },
+	parameters = { "chips", "mult","crv_dollars_mult"},
 	replace_ui = function(self)
 		local scale = 0.3
 			return {
