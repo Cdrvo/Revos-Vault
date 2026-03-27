@@ -3856,3 +3856,37 @@ SMODS.Joker({
 		end
 	end,
 })
+
+SMODS.Joker({
+	key = "viking_joker",
+	atlas = "Jokers2",
+	pos = {
+		x = 11,
+		y = 7,
+	},
+	config = {
+		extra = {
+			dollars = 3
+		}
+	},
+	rarity = 2,
+	cost = 4,
+	blueprint_compat = true,
+	loc_vars = function(self, info_queue, card)
+		local cae = card.ability.extra
+		return{vars={cae.dollars}}
+	end,
+	calculate = function(self, card, context)
+		local cae = card.ability.extra
+		if context.other_consumeable and context.other_consumeable.ability.set == "crv_Rune" then
+			return{
+				dollars = cae.dollars,
+				card = context.other_consumeable,
+				message_card = context.other_consumeable
+			}
+		end
+	end,
+	crv_credits = {
+		art = {"Breuhh"}
+	}
+})

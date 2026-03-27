@@ -188,3 +188,22 @@ SMODS.DrawStep {
     end,
     conditions = { vortex = false, facing = 'front' },
 }
+
+SMODS.DrawStep { 
+    key = 'all_card_no_card',
+    order = 0,
+    func = function(self, layer)
+        G.crv_nocards = G.crv_nocards or {}
+        if self.ability.set == "Joker" and next(SMODS.find_card("j_crv_the_nameless_creature_that_shouldnotbe_spoken_of"))  then 
+            local ccard = G.P_CENTERS.j_crv_the_nameless_creature_that_shouldnotbe_spoken_of
+            if not G.crv_nocards[ccard.key] then 
+                G.crv_nocards[ccard.key] = SMODS.create_sprite(0, 0, G.CARD_W, G.CARD_H, ccard.atlas, {x = ccard.pos.x, y = ccard.pos.y})
+            end
+            G.crv_nocards[ccard.key].role.draw_major = self
+            G.crv_nocards[ccard.key]:draw_shader('dissolve', nil, nil, nil, self.children.center) 
+            if self.edition then G.crv_nocards[ccard.key]:draw_shader(SMODS.Edition.obj_table[self.edition.key].shader, nil, self.ARGS.send_to_shader, nil, self.children.center) end 
+            
+        end
+    end,
+    conditions = { vortex = false, facing = 'front' },
+}

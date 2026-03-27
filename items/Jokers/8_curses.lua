@@ -672,3 +672,37 @@ SMODS.Joker({
 		art = {"ven_the_person"}
 	}
 })
+
+
+SMODS.Joker({
+	key = "the_nameless_creature_that_shouldnotbe_spoken_of",
+	atlas = "Jokers2",
+	pos = {
+		x = 11,
+		y = 6,
+	},
+	config = {
+		extra = {
+			def = nil
+		}
+	},
+	rarity = "crv_curse",
+	blueprint_compat = false,
+	cost = 0,
+	remove_from_deck = function(self, card, from_debuff) 
+		if not RevosVault.purified_curse then
+			local ccard = copy_card(card)
+			if card.ability.crv_curse_triggered then
+				ccard.ability.crv_curse_triggered = true
+			end
+			ccard:add_to_deck()
+			G.crv_curses:emplace(ccard)
+		else
+			-- false
+		end
+  	end,
+	crv_credits = {
+		art = {"isa"},
+		idea = {"isa"}
+	}
+})

@@ -128,7 +128,7 @@ SMODS.Joker({
 		
 				
 		if context.using_consumeable and not context.blueprint then
-				if context.consumeable.config.center.is_scrap then
+				if context.consumeable.config.center.crv_is_scrap then
 					card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.xmultg
 					card.ability.extra.scrapc = card.ability.extra.scrapc + 1
 				end

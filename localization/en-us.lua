@@ -2913,6 +2913,21 @@ return {
 					"random eligible Joker"
 				}
 			},
+			j_crv_viking_joker = {
+				name = "Viking Joker",
+				text = {
+					"Owned {C:purple}Rune Cards{} give",
+					"{C:money}+$#1#{}",
+				}
+			},
+			j_crv_the_nameless_creature_that_shouldnotbe_spoken_of = {
+				name = ' "            " ',
+				text = {
+					"{X:black,C:black}AAAAAAAAAAAAAAA",
+					"{X:black,C:black}AAA{} {X:black,C:black}AAAAAAAAAA",
+					"{X:black,C:black}AAAAAAA",
+				}
+			},
 			-- QUICK JOKER
 			--GARBSHIT below
 			j_crv_stamprinter = {
@@ -4759,18 +4774,15 @@ return {
 					"{C:attention}#2#{C:attention} Bananas{}",
 				},
 			},
-			undiscovered_scrap = {
-				undiscovered = {
-					name = "???",
-					text = { "???" },
-				},
-			},
-			undiscovered_enchanceddocuments = {
-				undiscovered = {
-					name = "???",
-					text = { "???" },
-				},
-			},
+			undiscovered_enchanceddocument={
+                name="Not Discovered",
+                text={
+                    "Purchase or use",
+                    "this card in an",
+                    "unseeded run to",
+                    "learn what it does",
+                },
+            },
 			undiscovered_scrap={
                 name="Not Discovered",
                 text={
