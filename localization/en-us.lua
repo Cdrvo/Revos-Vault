@@ -2472,7 +2472,7 @@ return {
 			j_crv_icece = {
 				name = "Cookie Cats",
 				text = {
-					"If {C:attention}played hand{} does not",
+					"If {C:attention}scored hand{} does not",
 					"contain any {C:heart}Heart cards",
 					"gives {X:chips,C:white}X#1#{} Chips",
 				},
