@@ -15,7 +15,7 @@ RevosVault.Rune = SMODS.Consumable:extend({
 			rounds_left = 1
 		}
 	},
-		loc_vars = function(self, info_queue, card)
+	loc_vars = function(self, info_queue, card)
 		local cae = card.ability.extra
 		return {
 			vars = { cae.rounds, cae.rounds_left },

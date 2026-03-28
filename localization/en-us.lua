@@ -1,5 +1,31 @@
 return {
 		Menus = {
+		crv_boons_help  = {
+            name = "{C:attention}Boons",
+            text = {
+                {
+                    name = "Overview",
+                    text = {
+					{
+					  "{C:attention}Boons{} are a new type of Consumable",
+					  "that can only be obtained via the new",
+					  "Shop button that has a {C:green}1 in 6{} chance",
+					  "to replace {C:purple}The Vault{}",
+					  "{C:inactive}(The chances are immutable)"
+					},
+					{
+					  "You can only have {C:attention}1{} Boon at a time",
+					  "Obtaining a new one will replace the previous"
+					},
+					{
+						"Boons are {C:red,E:1}unremovable{} manually",
+						"{C:inactive}(e.g. they have no sell button)"
+					},
+					
+                    }
+                },
+            },
+        },
 		crv_deathcards_help = {
             name = "{C:crv_deathcard}Deathcards",
             text = {
@@ -2933,6 +2959,15 @@ return {
 				text = {
 					"{C:dark_edition}+2{} Joker slots"
 				}
+			},
+			j_crv_runeprinter = {
+				name = "Rune Printer",
+				text = {
+					"When Blind is selected,",
+					"print a Random",
+					"{C:purple}Rune {C:attention}Card{}",
+					"{C:inactive}(Must have room)",
+				},
 			},
 			-- QUICK JOKER
 			--GARBSHIT below

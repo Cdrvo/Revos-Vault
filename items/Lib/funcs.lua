@@ -2542,3 +2542,24 @@ RevosVault.perma_upgrade = function(card, type, upgrade_text, amount)
 		RevosVault.c_message(card, localize("k_upgrade_ex"))
 	end
 end
+
+RevosVault.get_nopool_boons = function()
+	local a = SMODS.get_clean_pool("crv_boons")
+		for k, v in pairs(a) do
+			if G.boon_shop and G.boon_shop.cards then
+				for k2, v2 in pairs(G.boon_shop.cards) do
+					if v == v2.config.center.key then
+						table.remove(a, k)
+					end
+				end
+		end
+		if G.crv_boons and G.crv_boons.cards then
+			for k2, v2 in pairs(G.crv_boons.cards) do
+					if v == v2.config.center.key then
+						table.remove(a, k)
+					end
+				end
+		end
+	end
+	return pseudorandom_element(a, "whathtefuck?*????")
+end

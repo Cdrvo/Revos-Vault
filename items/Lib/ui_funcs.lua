@@ -591,7 +591,7 @@ G.FUNCS.crv_boon_menu = function(e)
 	RevosVault.easy_overlay(false, G.UIDEF.crv_blessing_overlay())
 	for i = 1, (G.GAME.crv_boon_limit or 3) do
 		local boon = SMODS.create_card{
-			set = "crv_boons",
+			key = RevosVault.get_nopool_boons(),
 			area = G.boon_shop
 		}
 		G.boon_shop:emplace(boon)
@@ -602,8 +602,8 @@ G.FUNCS.exit_crv_boons = function(e)
 	G.boon_shop:remove()
 	G.boon_shop = nil
 	G.FUNCS.exit_overlay_menu()
-	save_run()
 	G.GAME.crv_boon_was_picked = true
+	save_run()
 end
 
 G.FUNCS.crv_boon_menu_func = function(e)
@@ -616,14 +616,15 @@ G.FUNCS.crv_boon_menu_func = function(e)
 	end
 end
 
-
 G.FUNCS.crv_accept_blessing = function(e)
 	local boon = e.config.ref_table
-	SMODS.add_card{
+	SMODS.add_card({
 		key = boon.config.center.key,
-		area = G.consumeables
-	}
+		area = G.consumeables,
+	})
 	G.FUNCS.exit_crv_boons()
-
-	--if 
+	if not RevosVault.ui_disbled("crv_boons_help") then
+		G.FUNCS.RevosVault_info({ menu_type = "crv_boons_help" })
+	end
+	--if
 end

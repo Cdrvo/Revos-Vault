@@ -1673,3 +1673,28 @@ SMODS.Joker({
 			end
 	end,
 })
+
+if RevoConfig["runes_enabled"] then
+	SMODS.Joker({
+		key = "runeprinter",
+		atlas = "Jokers2",
+		rarity = "crv_p",
+		cost = 10,
+		unlocked = true,
+		discovered = false,
+		blueprint_compat = true,
+		pos = { x = 12, y = 8 },
+		config = {
+			extra = {},
+		},
+		calculate = function(self, card, context)
+			if context.setting_blind then
+				RevosVault.pseudorandom_printer({card = card, sets = "crv_Rune",seed = "runeprinter", area = G.consumeables})
+			end
+		end,
+
+		in_pool = function(self, wawa, wawa2)
+			return true
+		end,
+	})
+end
