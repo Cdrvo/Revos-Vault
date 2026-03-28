@@ -6,9 +6,6 @@ SMODS.ConsumableType({
 })
 
 RevosVault.Boon = SMODS.Consumable:extend({
-	config = {
-		crv_no_buttons = true
-	},
 	crv_credits = {
 		art = {"GeorgeTheRat"},
 	}
