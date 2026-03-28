@@ -151,6 +151,7 @@ RevosVault.Rune({
 		juice_card_until(card, eval, true)
 	end,
 	calculate = function(self,card,context)
+		local cae = card.ability.extra
 		if context.ending_shop and cae.active then
 			RevosVault.calculate_rounds_left(card)
 		end
