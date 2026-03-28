@@ -888,7 +888,7 @@ SMODS.Joker({
 			end
 		end
 		if context.crv_vaulted_suit and context.suit ~= "Diamonds" then
-			SMODS.scale_card(card.card, {
+			SMODS.scale_card(card, {
 				ref_table = card.ability.extra,
 				ref_value = "xmult",
 				scalar_value = "xmult_reduce",
@@ -945,7 +945,7 @@ SMODS.Joker({
 			end
 		end
 		if context.crv_vaulted_suit and context.suit ~= "Hearts" then
-			SMODS.scale_card(card.card, {
+			SMODS.scale_card(card, {
 				ref_table = card.ability.extra,
 				ref_value = "xmult",
 				scalar_value = "xmult_reduce",
@@ -1002,7 +1002,7 @@ SMODS.Joker({
 			end
 		end
 		if context.crv_vaulted_suit and context.suit ~= "Spades" then
-			SMODS.scale_card(card.card, {
+			SMODS.scale_card(card, {
 				ref_table = card.ability.extra,
 				ref_value = "xmult",
 				scalar_value = "xmult_reduce",
@@ -1059,7 +1059,7 @@ SMODS.Joker({
 			end
 		end
 		if context.crv_vaulted_suit and context.suit ~= "Clubs" then
-			SMODS.scale_card(card.card, {
+			SMODS.scale_card(card, {
 				ref_table = card.ability.extra,
 				ref_value = "xmult",
 				scalar_value = "xmult_reduce",
