@@ -21,7 +21,7 @@ return {
 						"Boons are {C:red,E:1}unremovable{} manually",
 						"{C:inactive}(e.g. they have no sell button)"
 					},
-					
+
                     }
                 },
             },
@@ -4891,6 +4891,27 @@ return {
 					"{C:attention}#2#{C:attention} Contracts{}",
 				},
 			},
+			p_crv_rune_booster_1 = {
+				name = "Rune Pack",
+				text = {
+					"Choose {C:attention}#1#{} of up to",
+					"{C:attention}#2#{C:purple} Runes{}",
+				},
+			},
+			p_crv_rune_booster_3 = {
+				name = "Jumbo Rune Pack",
+				text = {
+					"Choose {C:attention}#1#{} of up to",
+					"{C:attention}#2#{C:purple} Runes{}",
+				},
+			},
+			p_crv_rune_booster_4 = {
+				name = "Mega Rune Pack",
+				text = {
+					"Choose {C:attention}#1#{} of up to",
+					"{C:attention}#2#{C:purple} Runes{}",
+				},
+			},
 			p_crv_bbst = {
 				name = "Banana Pack",
 				text = {
@@ -5552,6 +5573,7 @@ return {
 			crv_revosvault = "Revo's Vault",
 			k_crv_pbstg = "Printer Pack",
 			k_crv_cbstg = "Contract Pack",
+			k_crv_runep = "Rune Pack",
 			k_crv_bbstg = "Banana Pack",
 			k_crv_std_ex = "Sacrified to the Divine!",
 			k_crv_sbg_ex = "Shielded by Grace!",

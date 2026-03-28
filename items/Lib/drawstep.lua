@@ -42,7 +42,7 @@ SMODS.DrawStep({
 	order = 11,
 	func = function(self)
 		if  
-            (self.ability.set == "crv_Rune" or self.config.center.key == "j_crv_runeprinter")
+            (self.ability.set == "crv_Rune" or self.config.center.key == "j_crv_runeprinter") or (self.config.center.group_key and self.config.center.group_key == "k_crv_runep") 
 			and self:should_draw_base_shader()
 		then
 			self.children.center:draw_shader("negative", nil, self.ARGS.send_to_shader)
