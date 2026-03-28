@@ -187,6 +187,94 @@ G.UIDEF.crv_mechanic_config = function()
 	return t
 end
 
+G.UIDEF.crv_consumable_config = function()
+	local t = create_UIBox_generic_options({
+		back_func = "openModUI_RevosVault",
+		colour = RevosVault.ui_config.colour,
+		back_colour = RevosVault.ui_config.back_colour,
+		contents = {
+			{
+				n = G.UIT.R,
+				config = { align = "cm", r = 0.1, colour = G.C.BLACK, padding = 0.1 },
+				nodes = {
+					{
+						n = G.UIT.O,
+						config = {
+							object = DynaText({
+								string = { "Consumables" },
+								colours = { G.C.DARK_EDITION },
+								shadow = true,
+								float = true,
+								spacing = 0,
+								rotate = true,
+								scale = 1.3,
+								pop_in = 0.1,
+								maxw = 6.5,
+							}),
+						},
+					},
+				},
+			},
+			{
+				n = G.UIT.R,
+				config = { align = "cm", r = 0.1, colour = G.C.BLACK },
+				nodes = {
+					{
+						n = G.UIT.C,
+						config = { align = "cm", r = 0.1, colour = G.C.CLEAR },
+						nodes = {
+
+
+						-- [[	
+							create_toggle({
+								label = localize("crv_enable_superior"),
+								ref_table = RevosVault.config,
+								ref_value = "superior_enabled",
+								--callback = should_restart,
+							}),
+							create_toggle({
+								label = localize("crv_enable_boons"),
+								ref_table = RevosVault.config,
+								ref_value = "boons_enabled",
+								--callback = should_restart,
+							}),
+							create_toggle({
+								label = localize("crv_enable_runes"),
+								ref_table = RevosVault.config,
+								ref_value = "runes_enabled",
+								--callback = should_restart,
+							}),
+							--]]
+							
+							{
+								n = G.UIT.R,
+								config = { align = "cm", minh = 0.6 },
+								nodes = {
+									{
+										n = G.UIT.T,
+										config = { text = "Requires restart!", colour = G.C.RED, scale = 0.4 },
+									},
+								},
+							},
+							--[[{
+								n = G.UIT.R,
+								config = { align = "cm", minh = 0.6 },
+								nodes = {
+									{
+										n = G.UIT.T,
+										config = { text = "*Not recommended!", colour = G.C.WHITE, scale = 0.4 },
+									},
+								},
+							},]]
+						},
+					},
+				},
+			},
+		},
+	})
+	return t
+end
+
 G.UIDEF.crv_other_config = function()
 	local t = create_UIBox_generic_options({
 		back_func = "openModUI_RevosVault",
@@ -217,7 +305,7 @@ G.UIDEF.crv_other_config = function()
 			},
 			{
 				n = G.UIT.R,
-				config = { align = "cr", r = 0.1, colour = G.C.BLACK },
+				config = { align = "cm", r = 0.1, colour = G.C.BLACK },
 				nodes = {
 					{
 						n = G.UIT.C,
@@ -236,12 +324,14 @@ G.UIDEF.crv_other_config = function()
 								--callback = should_restart,
 							}),
 
+						--[[	
 							create_toggle({
 								label = localize("crv_enable_superior"),
 								ref_table = RevosVault.config,
 								ref_value = "superior_enabled",
 								--callback = should_restart,
 							}),
+							--]]
 							create_toggle({
 								label = localize("crv_normalize_megas"),
 								ref_table = RevosVault.config,
@@ -282,6 +372,9 @@ G.FUNCS.crv_open_jconfig = function()
 end
 G.FUNCS.crv_open_mconfig = function()
 	RevosVault.easy_overlay(false, G.UIDEF.crv_mechanic_config())
+end
+G.FUNCS.crv_open_cconfig = function()
+	RevosVault.easy_overlay(false, G.UIDEF.crv_consumable_config())
 end
 G.FUNCS.crv_open_oconfig = function()
 	RevosVault.easy_overlay(false, G.UIDEF.crv_other_config())
@@ -334,6 +427,14 @@ RevosVault.config_tab = function()
 						colour = RevosVault.ui_config.tab_button_colour,
 						button = "crv_open_mconfig",
 						label = { "Mechanics" },
+						minw = 4.5,
+						focus_args = { snap_to = true },
+					}),
+					{ n = G.UIT.R, config = { colour = G.C.CLEAR, scale = 0.1, padding = 0.1 } },
+					UIBox_button({
+						colour = RevosVault.ui_config.tab_button_colour,
+						button = "crv_open_cconfig",
+						label = { "Consumables" },
 						minw = 4.5,
 						focus_args = { snap_to = true },
 					}),

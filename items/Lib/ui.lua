@@ -1006,11 +1006,31 @@ function Card:highlight(is_highlighted)
 				self.children.use_button:remove()
 				self.children.use_button = nil
 			end
-	elseif self.highlighted and self.ability.set == "crv_boons" then
+	elseif self.highlighted and self.ability.set == "crv_boons" and self.area ~= G.boon_shop then
 			if self.children.use_button then
 				self.children.use_button:remove()
 				self.children.use_button = nil
 			end
+	elseif self.highlighted and self.area == G.boon_shop then
+			self.children.use_button = UIBox({
+			definition = RevosVault.button_func(self, {
+				sell = false,
+				use = true,
+				button = "crv_accept_blessing",
+				under = true,
+				text = "ACCEPT",
+				align_text = "cm",
+				colour = G.C.GREEN
+			}),
+			config = {
+				align = "cm",
+				offset = {
+					x = 0,
+					y = 1,
+				},
+				parent = self,
+			},
+		})
 	else
 		cardhighold(self, is_highlighted)
 	end

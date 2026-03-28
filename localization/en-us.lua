@@ -4663,8 +4663,8 @@ return {
 		crv_boons = {
 			c_crv_knowledge_unowned= {
 				name = "Knowledge",
-				text = { "Have this card",
-							"to access its ability" },
+				text = { "Shows the next {C:attention}#1#{}",
+								"cards in the deck." },
 			},
 			c_crv_knowledge = {
 				name = "Knowledge",
@@ -5593,6 +5593,8 @@ return {
 			crv_enable_vaulteds = "Enable Vaulted Jokers",
 			crv_enable_wip = "Enable Experimental/Wip Features",
 			crv_enable_superior = "Enable Superior Cards",
+			crv_enable_boons = "Enable Boons",
+			crv_enable_runes = "Enable Runes",
 			crv_enable_secret = "Enable Secret Jokers",
 			crv_enable_blinds = "Enable Blinds",
 			crv_enable_curses = "Enable Curses",
@@ -5627,7 +5629,10 @@ return {
 
 
 
-			-- Boon stuff (unused)
+			b_crv_vault = "Vault",
+			b_crv_the = "The",
+			b_crv_blessing = "Blessing",
+			-- Boon stuff (scraped)
 			crv_Common = "Common",
 			crv_Rare = "Rare",
 			crv_Epic = "Epic",

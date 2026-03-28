@@ -34,10 +34,10 @@ RevosVault.Boon({
 		local t = {}
 		local cae = card.ability.extra
 		local _key = card.config.center.key
-		if not card.added_to_deck then
+		if not card.added_to_deck or card.area == G.boon_shop then
 			_key = _key .. "_unowned"
 		end
-		if card.area and card.area.config and not card.area.config.collection then
+		if card.area and card.area.config and not card.area.config.collection and card.area ~= G.boon_shop then
 			if G.crv_nextfivecard then
 				G.crv_nextfivecard:remove()
 				G.crv_nextfivecard = nil

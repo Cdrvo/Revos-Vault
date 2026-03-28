@@ -233,6 +233,13 @@ Game.init_game_object = function(self)
 	ret.curse_cashout = 1
 	ret.gem_rate = 0.70
 	ret.crv_skip_tag = "tag_uncommon"
+	ret.crv_shop_button = {
+		pre_text = localize("b_crv_the"),
+		text = localize("b_crv_vault"),
+		button = "enter_vault",
+		func = "can_enter_vault",
+		colour = G.C.PURPLE
+	}
 
 	ret.crv_souls = 0 -- metaprog soon // no
 
@@ -894,6 +901,15 @@ function end_round()
 		return true
 	end
 	}))
+
+	if (pseudorandom("boon_select")<1/6 or G.GAME.crv_guarantee_boon) and RevoConfig["boons_enabled"] then
+		G.GAME.crv_shop_button = {
+			text = localize("b_crv_blessing"),
+			colour = G.C.IMPORTANT,
+			button = "crv_boon_menu",
+			func = "crv_boon_menu_func"
+		}
+	end
 	return end_round_old()
 end
 
@@ -931,6 +947,16 @@ function G.FUNCS.toggle_shop(e)
 	if G.shop and G.GAME.gem_skip then
 		G.GAME.gem_skip = false
 	end
+	G.GAME.crv_shop_button = {
+		pre_text = localize("b_crv_the"),
+		text = localize("b_crv_vault"),
+		button = "enter_vault",
+		func = "can_enter_vault",
+		colour = G.C.PURPLE
+	}
+	G.GAME.crv_boon_text = nil
+	G.GAME.crv_boon_was_picked = nil
+	G.GAME.crv_guarantee_boon = false
     toggle_shop_old(e)
 end
 

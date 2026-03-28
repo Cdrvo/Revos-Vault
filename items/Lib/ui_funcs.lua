@@ -542,3 +542,88 @@ function RevosVault.get_discover_tally(pool)
 	end
 	return count
 end
+
+G.UIDEF.crv_blessing_overlay = function()
+		G.boon_shop = CardArea(
+      0,
+      0,
+      math.min((G.GAME.crv_boon_limit or 3)*1.02*G.CARD_W,4.08*G.CARD_W),
+      1.05*G.CARD_H, 
+      {card_limit = G.GAME.crv_boon_limit or 3, type = 'shop', highlight_limit = 1, negative_info = true})
+	local t = create_UIBox_generic_options({
+		back_func = "exit_crv_boons",
+		contents = {
+			{
+				n = G.UIT.R,
+				config = { align = "cm", r = 0.1, colour = G.C.CLEAR, padding = 0.1 },
+				nodes = {
+					{
+						n = G.UIT.O,
+						config = {
+							object = DynaText({
+								string = {  "BOONS" },
+								colours = { G.C.EDITION },
+								shadow = true,
+								float = true,
+								spacing = 0.3,
+								rotate = true,
+								scale = 1.4,
+								pop_in = 0.1,
+								maxw = 6.5,
+							}),
+						},
+					},
+				},
+			},
+			{
+				n = G.UIT.R,
+				config = { align = "cm", r = 0.1, colour = G.C.BLACK },
+				nodes = {
+					{ n = G.UIT.O, config = { object = G.boon_shop} },
+				},
+			},
+		},
+	})
+	return t
+end
+
+G.FUNCS.crv_boon_menu = function(e)
+	RevosVault.easy_overlay(false, G.UIDEF.crv_blessing_overlay())
+	for i = 1, (G.GAME.crv_boon_limit or 3) do
+		local boon = SMODS.create_card{
+			set = "crv_boons",
+			area = G.boon_shop
+		}
+		G.boon_shop:emplace(boon)
+	end
+end
+
+G.FUNCS.exit_crv_boons = function(e)
+	G.boon_shop:remove()
+	G.boon_shop = nil
+	G.FUNCS.exit_overlay_menu()
+	save_run()
+	G.GAME.crv_boon_was_picked = true
+end
+
+G.FUNCS.crv_boon_menu_func = function(e)
+	if not G.GAME.crv_boon_was_picked then
+		e.config.colour = G.C.IMPORTANT
+		e.config.button = "crv_boon_menu"
+	else
+		e.config.colour = G.C.UI.BACKGROUND_INACTIVE
+        e.config.button = nil
+	end
+end
+
+
+G.FUNCS.crv_accept_blessing = function(e)
+	local boon = e.config.ref_table
+	SMODS.add_card{
+		key = boon.config.center.key,
+		area = G.consumeables
+	}
+	G.FUNCS.exit_crv_boons()
+
+	--if 
+end

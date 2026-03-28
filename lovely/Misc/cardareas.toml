@@ -65,14 +65,15 @@ end
 
     -- Boons area
 
-    self.crv_boons = CardArea(
-        G.consumeables.T.x + 3,
-        G.consumeables.T.y + G.consumeables.T.h + 1, 
-        1 ,
-        1, 
-        {card_limit = 1, type = 'joker', highlight_limit = 1}
-    )
-    
+    if RevoConfig["boons_enabled"] then
+        self.crv_boons = CardArea(
+            G.consumeables.T.x + 3,
+            G.consumeables.T.y + G.consumeables.T.h + 1, 
+            1 ,
+            1, 
+            {card_limit = 1, type = 'joker', highlight_limit = 1}
+        )
+    end
     '''
 match_indent = true
 
@@ -112,7 +113,7 @@ end
 if G.crv_chaos_calc then
     table.insert(t, 1, G.crv_chaos_calc)
 end
-if G.crv_boons then
+if  RevoConfig["boons_enabled"] and G.crv_boons then
     table.insert(t, 1, G.crv_boons)
 end
 '''

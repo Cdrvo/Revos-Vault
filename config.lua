@@ -9,5 +9,7 @@ return {
   ["8_curses_enabled"] = true,
   deathcards_enabled = true,
   --prenerf_goldendeck = false,
-  normal_mega_cards = false
+  normal_mega_cards = false,
+  boons_enabled = true,
+  runes_enabled = true,
 }
