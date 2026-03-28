@@ -668,11 +668,11 @@ SMODS.current_mod.reset_game_globals = function(run_start)
 		G.GAME.current_round.crv_drawn_hands = 0
 
 		TheVault = {
-			vault_cost = 70,
-			vault_cost_default = 70,
+			vault_cost = 60,
+			vault_cost_default = 60,
 
-			enhance_cost = 15,
-			enhance_cost_default = 15,
+			enhance_cost = 10,
+			enhance_cost_default = 10,
 
 			upgrade_cost = 40,
 			upgrade_cost_default = 40,
