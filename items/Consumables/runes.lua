@@ -176,6 +176,7 @@ RevosVault.Rune({
 		extra = {
 			odds = 20,
 			rounds = 3,
+			rounds_left = 3,
 			active = false	
 		},
 	},
