@@ -186,7 +186,7 @@ SMODS.Joker({
 	end,
 	calculate = function(self, card, context)
 		local crv = card.ability.extra
-		if context.retrigger_joker_check and not context.retrigger_joker and context.other_card ~= card then
+		if context.retrigger_joker_check and not context.retrigger_joker and context.other_card ~= card and context.other_card.ability.set == "Joker" then
 			return {
 				repetitions = card.ability.extra.repetitions,
 			}
