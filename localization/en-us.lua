@@ -9,7 +9,7 @@ return {
 					{
 					  "{C:attention}Boons{} are a new type of Consumable",
 					  "that can only be obtained via the new",
-					  "Shop button that has a {C:green}1 in 6{} chance",
+					  "Shop button that has a {C:green}1 in 4{} chance",
 					  "to replace {C:purple}The Vault{}",
 					  "{C:inactive}(The chances are immutable)"
 					},

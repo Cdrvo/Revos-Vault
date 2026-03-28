@@ -902,7 +902,7 @@ function end_round()
 	end
 	}))
 
-	if (pseudorandom("boon_select")<1/6 or G.GAME.crv_guarantee_boon) and RevoConfig["boons_enabled"] then
+	if (pseudorandom("boon_select")<1/4 or G.GAME.crv_guarantee_boon) and RevoConfig["boons_enabled"] then
 		G.GAME.crv_shop_button = {
 			text = localize("b_crv_blessing"),
 			colour = G.C.IMPORTANT,
