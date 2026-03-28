@@ -2479,7 +2479,7 @@ SMODS.Joker({
 	end,
 })]]
 
-SMODS.Joker({
+--[[SMODS.Joker({
 	key = "kitf",
 	atlas = "Jokers2",
 	rarity = 3,
@@ -2541,7 +2541,7 @@ SMODS.Joker({
 	in_pool = function(self, wawa, wawa2)
 		return true
 	end,
-})
+})]]
 
 SMODS.Joker({
 	key = "those",

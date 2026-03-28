@@ -571,7 +571,9 @@ SMODS.Consumable({
 	set = "Superior",
 	atlas = "Superior",
 	crv_in_set = "Planet",
-	
+		pools = {
+		SuperiorPlanet = true,
+	},
 	pos = {
 		x = 11,
 		y = 2,
@@ -631,7 +633,9 @@ SMODS.Consumable({
 	set = "Superior",
 	atlas = "Superior",
 	crv_in_set = "Planet",
-	
+		pools = {
+		SuperiorPlanet = true,
+	},
 	pos = {
 		x = 12,
 		y = 2,
@@ -695,7 +699,9 @@ SMODS.Consumable({
 	set = "Superior",
 	atlas = "Superior",
 	crv_in_set = "Planet",
-	
+		pools = {
+		SuperiorPlanet = true,
+	},
 	pos = {
 		x = 13,
 		y = 2,
@@ -739,6 +745,73 @@ SMODS.Consumable({
 			context.final_scoring_step
 			and card.ability.extra.can_activate == false
 			and context.scoring_name == "Five of a Kind"
+		then
+			card.ability.extra.can_keep = false
+			RevosVault.boost_hand()
+		end
+		if context.end_of_round and context.main_eval then
+			if card.ability.extra.can_keep == false then
+				SMODS.destroy_cards(card)
+			end
+		end
+	end,
+	set_card_type_badge = function(self, card, badges)
+		badges[1] = create_badge(localize("k_superior_p"), get_type_colour(self or card.config, card), nil, 1.2)
+	end,
+})
+
+
+SMODS.Consumable({
+	key = "supsmertrios",
+	set = "Superior",
+	atlas = "Superior",
+	crv_in_set = "Planet",
+		pools = {
+		SuperiorPlanet = true,
+	},
+	pos = {
+		x = 14,
+		y = 2,
+	},
+	discovered = true,
+	config = {
+		max_highlighted = 2,
+		extra = { can_activate = true, can_keep = true, level = 1 },
+	},
+	keep_on_use = function(self, card)
+		if card.ability.extra.can_keep == true then
+			return true
+		end
+	end,
+	can_use = function(self, card)
+		if card.ability.extra.can_activate and (RevosVault.has_room(G.consumeables) or card.area == G.consumeables) then
+			return true
+		end
+	end,
+	loc_vars = function(self, info_queue, card)
+		return {
+			vars = {
+				G.GAME.hands["crv_blackjack"].level,
+				"Blackjack",
+				G.GAME.hands["crv_blackjack"].mult,
+				G.GAME.hands["crv_blackjack"].chips,
+			},
+		}
+	end,
+	use = function(self, card, area, copier)
+		card.ability.extra.can_activate = false
+		RevosVault.level_up_hand("crv_blackjack", card.ability.extra.level, card)
+		local eval = function()
+			return card.ability.extra.can_activate == false
+		end
+		juice_card_until(card, eval, true)
+		card.ability.extra.can_keep = false
+	end,
+	calculate = function(self, card, context)
+		if
+			context.final_scoring_step
+			and card.ability.extra.can_activate == false
+			and context.scoring_name == "crv_blackjack"
 		then
 			card.ability.extra.can_keep = false
 			RevosVault.boost_hand()

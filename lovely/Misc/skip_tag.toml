@@ -1,0 +1,15 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 1
+
+[[patches]]
+[patches.pattern]
+target = "functions/button_callbacks.lua"
+pattern = "if G.blind_select then "
+position = "after"
+payload = '''
+    local _tag = e.UIBox:get_UIE_by_ID('tag_container')
+    G.GAME.crv_skip_tag = _tag
+'''
+match_indent = true

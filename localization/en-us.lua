@@ -2928,6 +2928,12 @@ return {
 					"{X:black,C:black}AAAAAAA",
 				}
 			},
+			j_crv_snek = {
+				name = "snake",
+				text = {
+					"{C:dark_edition}+2{} Joker slots"
+				}
+			},
 			-- QUICK JOKER
 			--GARBSHIT below
 			j_crv_stamprinter = {
@@ -3467,6 +3473,17 @@ return {
 				}
 			},
 			--
+		},
+		Planet = {
+			c_crv_smertrios = {
+				name = "Smertrios",
+				text = {
+					"[lvl.#2#] Level up",
+					"{C:attention}Blackjack",
+					"{C:mult}+#2#{} Mult and",
+					"{C:chips}+#3#{} chips",
+				},
+			},
 		},
 		Tarot = {
 			c_crv_inkintuition = {
@@ -4579,6 +4596,17 @@ return {
 					"until the end of the round",
 				},
 			},
+			c_crv_supsmertrios = {
+				name = "Superior Smertrios",
+				text = {
+					"{s:0.8}(lvl.#1#){} Level up",
+					"{C:attention}#2#",
+					"{C:mult}+#3#{} Mult and",
+					"{C:chips}+#4#{} chips.",
+					"Played {C:attention}#2#{}s are {C:green}Boosted",
+					"until the end of the round",
+				},
+			},
 			-- Hyperfixation (first ever crosmmod superior :fire::fire:)
 			c_crv_suphpfx_iji_deceit = {
 				name = "Superior Deceit",
@@ -4631,6 +4659,81 @@ return {
 				}
 			},
 			-- QUICK SUP
+		},
+		crv_boons = {
+			c_crv_knowledge_unowned= {
+				name = "Knowledge",
+				text = { "Have this card",
+							"to access its ability" },
+			},
+			c_crv_knowledge = {
+				name = "Knowledge",
+				text = { "Next {C:attention}#1#{} Cards:" },
+			},
+			c_crv_health = {
+				name = "Health",
+				text = {
+					"{C:attention}Played cards{} are",
+					"undebuffed before scoring"
+				},
+			},
+			c_crv_wealth = {
+				name = "Wealth",
+				text = {
+					"Gain {C:money}$#2#{C:inactive} (#1#){} for each",
+					"defeated blind at end",
+					"of round",
+				},
+			},
+			c_crv_serendipity = {
+				name = "Serendipity",
+				text = {
+					"{C:rare}Rare{} Jokers appear more often",
+				},
+			},
+			c_crv_power = {
+				name = "Power",
+				text = {
+					"{C:green}1 in 50{} chance to create a",
+					"{C:legendary,E:1}Legendary{} Joker when entering a Blind",
+				},
+			},
+			c_crv_resource = {
+				name = "Resource",
+				text = {
+					"{C:red}+#1#{} Discard limit"
+				},
+			},
+			c_crv_respect = {
+				name = "Respect",
+				text = {
+					"{C:common}Common{} Jokers cannot appear",
+				},
+			},
+			c_crv_leadership = {
+				name = "Leadership",
+				text = {
+					"{C:attention}Scored cards{} with the",
+					"same rank as the {C:attention}lefmost{} card",
+					"give {X:chips,C:white}X#1#{} Chips"
+				},
+			},
+			c_crv_opportunity = {
+				name = "Opportunity",
+				text = {
+					"Defeating a {C:attention}Blind{}",
+					"in one hand",
+					"rewards you with its",
+					"{C:attention}Skip Tag{}"
+				},
+			},
+			c_crv_love = {
+				name = "Love",
+				text = {
+					"All cards counts",
+					"as every suit"
+				},
+			},
 		},
 
 		-- MF colour
@@ -5314,6 +5417,14 @@ return {
 		},
 	},
 	misc = {
+		poker_hands = {
+			crv_blackjack = "Blackjack"
+		},
+		poker_hand_descriptions = {
+			crv_blackjack = {
+				"Cards that add up to 21"
+			}
+		},
 		achievement_names={
 			ach_crv_get_all_stickers = "How did we get here?",
 			ach_crv_printing_away = "Printing Away!",
@@ -5446,6 +5557,8 @@ return {
 			b_scrap_cards = "Scraps",
 			k_enchanceddocuments = "Contract",
 			b_enchanceddocuments_cards = "Contracts",
+			k_crv_boons = "Boon",
+			b_crv_boons_cards = "Boons",
 			k_corrupt = "Corrupt",
 			b_corrupt_cards = "Corrupt Cards",
 			k_crv_rune = "Rune",

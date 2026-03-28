@@ -1001,6 +1001,16 @@ function Card:highlight(is_highlighted)
 				parent = self,
 			},
 		})
+	elseif self.highlighted and self.ability.crv_no_buttons then
+			if self.children.use_button then
+				self.children.use_button:remove()
+				self.children.use_button = nil
+			end
+	elseif self.highlighted and self.ability.set == "crv_boons" then
+			if self.children.use_button then
+				self.children.use_button:remove()
+				self.children.use_button = nil
+			end
 	else
 		cardhighold(self, is_highlighted)
 	end

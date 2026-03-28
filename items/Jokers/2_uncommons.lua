@@ -3890,3 +3890,34 @@ SMODS.Joker({
 		art = {"Breuhh"}
 	}
 })
+
+SMODS.Joker({
+	key = "snek",
+	atlas = "Jokers2",
+	pos = {
+		x = 12,
+		y = 6,
+	},
+	config = {
+		extra = {
+			dollars = 3
+		}
+	},
+	rarity = 2,
+	cost = 4,
+	blueprint_compat = true,
+	loc_vars = function(self, info_queue, card)
+		local cae = card.ability.extra
+		return{vars={cae.dollars}}
+	end,
+	add_to_deck = function(self,card,from_debuff)
+			G.jokers.config.card_limit = G.jokers.config.card_limit + 2
+	end,
+	remove_from_deck = function(self,card,from_debuff)
+		G.jokers.config.card_limit = G.jokers.config.card_limit - 2
+	end,
+	crv_credits = {
+		art = {"isa"},
+		idea = {"isa"}
+	}
+})

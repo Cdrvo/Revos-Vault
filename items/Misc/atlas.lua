@@ -492,3 +492,17 @@ SMODS.Atlas({
 	px = 65,
 	py = 95,
 })
+
+SMODS.Atlas({
+	key = "planetsornot",
+	path = "planets.png",
+	px = 71,
+	py = 95
+})
+
+SMODS.Atlas({
+	key = "boons",
+	path = "boons.png",
+	px = 42,
+	py = 42,
+})

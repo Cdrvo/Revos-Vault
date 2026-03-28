@@ -232,6 +232,7 @@ Game.init_game_object = function(self)
 	ret.xinflation = 1
 	ret.curse_cashout = 1
 	ret.gem_rate = 0.70
+	ret.crv_skip_tag = "tag_uncommon"
 
 	ret.crv_souls = 0 -- metaprog soon // no
 
@@ -584,6 +585,17 @@ function CardArea:emplace(card, location, stay_flipped)
 			if G.crv_curses.T.y > G.jokers.T.y then
 				G.jokers.T.y = 0
 				G.crv_curses.T.y = -5
+			end
+		end
+
+		if self and self == G.consumeables and card and card.ability.set == "crv_boons" then
+			if G.crv_boons then
+				if #G.crv_boons.cards > 0 then
+					for k, v in pairs(G.crv_boons.cards) do
+						SMODS.destroy_cards(v)
+					end
+				end
+				RevosVault.move_card(card, G.crv_boons, { add_to_deck = false })
 			end
 		end
 
@@ -1027,4 +1039,22 @@ G.FUNCS.draw_from_deck_to_hand = function(e)
 			return true
 		end
 	}))
+end
+
+local is_suit_old = Card.is_suit
+function Card:is_suit(suit, bypass_debuff, flush_calc)
+	if next(SMODS.find_card("c_crv_love")) then
+		if flush_calc then
+			if not self.debuff then
+				return true
+			end
+		else
+			if self.debuff and not bypass_debuff then
+				return
+			end
+			return true
+		end
+	else
+		return is_suit_old(self, suit, bypass_debuff, flush_calc)
+	end
 end
