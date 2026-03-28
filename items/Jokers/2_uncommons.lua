@@ -2602,7 +2602,7 @@ SMODS.Joker({
 				xmult = card.ability.xmult,
 			}
 		end
-		if context.before then
+		if context.initial_scoring_step then
 			for k, v in ipairs(G.play.cards) do
 				if v:is_suit("Hearts", true) then
 					card.ability.extra.xmultg = card.ability.extra.xmultg + 0.1
