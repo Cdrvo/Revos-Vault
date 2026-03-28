@@ -608,7 +608,7 @@ SMODS.Joker({
 SMODS.Joker({
 	key = "keymaster",
 	rarity = 1,
-	cost = 5,
+	cost = 2,
 	unlocked = true,
 	discovered = false,
 	blueprint_compat = false,
