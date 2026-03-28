@@ -550,7 +550,7 @@ end
 
 -- Nothing to see here
 
-function RevosVault.check(check, area)
+function RevosVault.check(check, other) --???
 	if check == "inblind" then
 		return G.STATE == G.STATES.SELECTING_HAND
 	elseif check == "hasjoker" then
@@ -560,12 +560,16 @@ function RevosVault.check(check, area)
 	elseif check == "inshop" then
 		return G.STATE == G.STATES.SHOP
 	elseif check == "highlight" then
-		return #area.highlighted
+		return #other.highlighted
 	elseif check == "space" then
-		if #area.cards >= area.config.card_limit then
+		if #other.cards >= other.config.card_limit then
 			return false
 		else
 			return true
+		end
+	elseif check == "edition" then
+		if G.jokers and G.jokers.highlighted and G.jokers.highlighted[1] then
+			return G.jokers.highlighted[1].edition and G.jokers.highlighted[1].edition[other]
 		end
 	end
 end
@@ -1505,7 +1509,6 @@ function RevosVault.upgrade_enhancement(card, ret)
 		and card.ability.name ~= "Default Base"
 		and card.ability.name ~= "Wild Card"
 		and card.ability.name ~= "Stone Card"
-		and card.ability.name ~= "Gold Card"
 	then
 		if card.ability.name == "Bonus" then
 			enh = "m_bonus"
@@ -1517,6 +1520,8 @@ function RevosVault.upgrade_enhancement(card, ret)
 			enh = "m_steel"
 		elseif card.ability.name == "Lucky Card" then
 			enh = "m_lucky"
+		elseif card.ability.name == "Gold Card" then
+			enh = "m_gold"
 		else
 			enh = card.ability.name
 		end
@@ -2514,6 +2519,47 @@ end
 
 RevosVault.ease_souls = function(mod, profile)
 	profile = profile or G.SETTINGS.profile
-	G.PROFILES[profile].crv_souls = G.PROFILES[profile].crv_souls + mod
+	-- G.PROFILES[profile].G.PROFILES[G.SETTINGS.profile].crv_souls = G.PROFILES[profile].G.PROFILES[G.SETTINGS.profile].crv_souls + mod
+	G.GAME.crv_souls = G.GAME.crv_souls + mod
 	play_sound("coin1")
+end
+
+RevosVault.calculate_rounds_left = function(card)
+	if 1 < card.ability.extra.rounds_left then
+		card.ability.extra.rounds_left = card.ability.extra.rounds_left - 1
+		RevosVault.c_message(card, "-1 Rounds")
+	else
+		SMODS.destroy_cards(card, true)
+	end
+	G.E_MANAGER:add_event(Event({ func = function() save_run(); return true end}))
+end
+
+RevosVault.perma_upgrade = function(card, type, upgrade_text, amount)
+	local cap = card.ability
+	cap["perma_" .. type] = cap["perma_" .. type] or (type == "xmult" and 1 or 0)
+	cap["perma_" .. type] = cap["perma_" .. type] + amount
+	if upgrade_text then
+		RevosVault.c_message(card, localize("k_upgrade_ex"))
+	end
+end
+
+RevosVault.get_nopool_boons = function()
+	local a = SMODS.get_clean_pool("crv_boons")
+		for k, v in pairs(a) do
+			if G.boon_shop and G.boon_shop.cards then
+				for k2, v2 in pairs(G.boon_shop.cards) do
+					if v == v2.config.center.key then
+						table.remove(a, k)
+					end
+				end
+		end
+		if G.crv_boons and G.crv_boons.cards then
+			for k2, v2 in pairs(G.crv_boons.cards) do
+					if v == v2.config.center.key then
+						table.remove(a, k)
+					end
+				end
+		end
+	end
+	return pseudorandom_element(a, "whathtefuck?*????")
 end

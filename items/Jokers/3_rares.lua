@@ -2479,7 +2479,7 @@ SMODS.Joker({
 	end,
 })]]
 
-SMODS.Joker({
+--[[SMODS.Joker({
 	key = "kitf",
 	atlas = "Jokers2",
 	rarity = 3,
@@ -2541,7 +2541,7 @@ SMODS.Joker({
 	in_pool = function(self, wawa, wawa2)
 		return true
 	end,
-})
+})]]
 
 SMODS.Joker({
 	key = "those",
@@ -2828,5 +2828,63 @@ SMODS.Joker({
 				card:set_ability("j_crv_chicken_printer")
 			end
 		end
+	end,
+})
+
+
+SMODS.Joker({
+	key = "eyes",
+	atlas = "Jokers2",
+	rarity = 3,
+	cost = 5,
+	unlocked = true,
+	discovered = false,
+	blueprint_compat = false,
+
+	pos = {
+		x = 8,
+		y = 10,
+	},
+	config = {
+		extra = {},
+	},
+	crv_credits = {
+		art = {"mr.cr33ps"}
+	},
+	loc_vars = function(self, info_queue, card)
+		return {
+			vars = {},
+		}
+	end,
+
+	calculate = function(self, card, context)
+		if context.setting_blind and not context.blueprint then
+			local rr = nil
+			for i = 1, #G.jokers.cards do
+				if G.jokers.cards[i] == card then
+					rr = i
+					break
+				end
+			end
+			if card.area == G.real_modicon_area then
+				rr = RevosVault.get_key_pos("j_crv_modicon")
+			end
+			if
+				G.jokers.cards[rr - 1] ~= nil and G.jokers.cards[rr + 1] ~= nil and not G.jokers.cards[rr - 1].crv_eyed and not SMODS.is_eternal(G.jokers.cards[rr - 1]) 
+			then
+				G.E_MANAGER:add_event(Event({
+					trigger = "after",
+					func = function()
+						G.jokers.cards[rr - 1].crv_eyed = true
+						SMODS.destroy_cards(G.jokers.cards[rr - 1])
+						RevosVault.copy_card({card = G.jokers.cards[rr + 1]})
+						return true
+					end,
+				}))
+			end
+		end
+	end,
+	in_pool = function(self, wawa, wawa2)
+		return true
 	end,
 })

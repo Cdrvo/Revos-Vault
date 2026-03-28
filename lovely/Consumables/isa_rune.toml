@@ -1,0 +1,16 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = -9
+
+# sticker should_apply fix
+
+[[patches]]
+[patches.pattern]
+target = '=[SMODS _ "src/utils.lua"]'
+pattern = '''card_eval_status_text(card, 'debuff')'''
+position = 'after'
+payload = '''
+SMODS.calculate_context({crv_debuff = true, crv_cardarea == "debuff", crv_card = card})
+'''
+match_indent = true

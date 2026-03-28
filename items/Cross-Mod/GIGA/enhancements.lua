@@ -1,12 +1,12 @@
 SMODS.Enhancement({
 	key = "gigamega",
 	atlas = "giga",
-	pos = { x = 3, y = 1},
+	pos = { x = 1, y = 0},
     giga_data = {
         is_upgraded = true,
     },
     dependencies = "GIGA",
-	display_size = { w = RevoConfig and not RevoConfig["normal_mega_cards"] and 90 or 71, h = RevoConfig and not RevoConfig["normal_mega_cards"] and 120 or 95 },
+	display_size = { w = (RevoConfig and not RevoConfig["normal_mega_cards"] and 90 )or 71, h = (RevoConfig and not RevoConfig["normal_mega_cards"] and 120) or 95 },
 	pixel_size = { w = 71, h = 95 },
 	discovered = true,
 	unlocked = true,

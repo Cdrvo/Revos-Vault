@@ -46,7 +46,7 @@ end
             G.hand.T.y+G.ROOM.T.y + 9,
             1*1.02*G.CARD_W,
             1.05*G.CARD_H, 
-            {card_limit = 1, type = 'shop', highlight_limit = 1}
+            {card_limit = 1, type = 'joker', highlight_limit = 1,no_card_count = true,bg_colour =G.C.CLEAR }
         )
 
         
@@ -91,7 +91,7 @@ end
                 }},
             }},
                 UIBox_dyn_container({
-                    {n=G.UIT.R, config={align = "cm", padding = 0.1, emboss = 0.05, r = 0.1, colour = G.C.DYN_UI.BOSS_MAIN}, nodes={
+                    {n=G.UIT.R, config={align = "cm", padding = 0.1, emboss = 0.05, r = 0.1, colour = G.C.DYN_UI.BOSS_MAIN, shadow = false}, nodes={
 
                             --
                         {n=G.UIT.C, config={align = "cm", padding = 0.1, emboss = 0.05, r = 0.1, colour = G.C.DYN_UI.BOSS_MAIN,shadow = false}, nodes={
@@ -142,7 +142,7 @@ end
                                 {n=G.UIT.O, config={object = G.vault_card}},
                             }},
                             {n=G.UIT.R, config={align = "cm", padding = 0.1, emboss = 0, r = 0.2, colour = G.C.CLEAR}, nodes={
-                                {n=G.UIT.O, config={object = DynaText({string = {{ref_table = G.PROFILES[G.SETTINGS.profile], ref_value = 'crv_souls', prefix = ("Souls:" .. " ")}}, maxw = 1.35, colours = {G.C.BLUE}, font = G.LANGUAGES['en-us'].font, shadow = false,spacing = 2, bump = true, scale = 0.4}), id = 'soul_text_UI'}}
+                                {n=G.UIT.O, config={object = DynaText({string = {{ref_table = G.GAME, ref_value = 'crv_souls', prefix = ("Souls:" .. " ")}}, maxw = 1.35, colours = {G.C.BLUE}, font = G.LANGUAGES['en-us'].font, shadow = false,spacing = 2, bump = true, scale = 0.4}), id = 'soul_text_UI'}}
                             }},
                         }},
                             --

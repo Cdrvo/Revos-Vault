@@ -1,5 +1,31 @@
 return {
 		Menus = {
+		crv_boons_help  = {
+            name = "{C:attention}Boons",
+            text = {
+                {
+                    name = "Overview",
+                    text = {
+					{
+					  "{C:attention}Boons{} are a new type of Consumable",
+					  "that can only be obtained via the new",
+					  "Shop button that has a {C:green}1 in 4{} chance",
+					  "to replace {C:purple}The Vault{}",
+					  "{C:inactive}(The chances are immutable)"
+					},
+					{
+					  "You can only have {C:attention}1{} Boon at a time",
+					  "Obtaining a new one will replace the previous"
+					},
+					{
+						"Boons are {C:red,E:1}unremovable{} manually",
+						"{C:inactive}(e.g. they have no sell button)"
+					},
+
+                    }
+                },
+            },
+        },
 		crv_deathcards_help = {
             name = "{C:crv_deathcard}Deathcards",
             text = {
@@ -617,6 +643,18 @@ return {
 				name = "Shocked",
 				text = { "Retrigger this card","{C:attention}#1#{} times.","Turns back to normal","after playing this {C:attention}#2#{C:inactive} (#3#){} times" },
 			},
+			m_crv_rhodium = {
+				name = "Rhodium",
+				text = { "{C:money}+$#1#{} When scored","or kept in hand" },
+			},
+			m_crv_celestial = {
+				name = "Celestial",
+				text = {
+					"Gives the {C:attention}most played hand's{}",
+					"{C:chips}Chips{} and {C:mult}Mult{}",
+					"{C:inactive}(#1#, {C:chips}+#2#{C:inactive} Chips, {C:mult}+#3#{C:inactive} Mult)"
+				}
+			},
 
 			-- BANANA ENHANCEMENT
 
@@ -827,7 +865,7 @@ return {
 			m_crv_gigamega = {
 				name = "Ultra Mega",
 				text = {
-					"{C:xmult,C:white}X#1#{} Mult if scored",
+					"{X:mult,C:white}X#1#{} Mult if scored",
 					"or kept in hand"
 				}
 			}
@@ -1362,8 +1400,8 @@ return {
 				text = {
 					"{X:red,C:white} X#1# {} Mult if all",
 					"cards held in hand",
-					"are between {C:attention}2{} and {C:attention}6{}",
-					"{C:inactive}(2 and 6 included)",
+					"are between {C:attention}2{} and {C:attention}4{}",
+					"{C:inactive}(2 and 4 included)",
 				},
 			},
 			j_crv_smbj = {
@@ -2434,7 +2472,7 @@ return {
 			j_crv_icece = {
 				name = "Cookie Cats",
 				text = {
-					"If {C:attention}played hand{} does not",
+					"If {C:attention}scored hand{} does not",
 					"contain any {C:heart}Heart cards",
 					"gives {X:chips,C:white}X#1#{} Chips",
 				},
@@ -2829,6 +2867,106 @@ return {
 						"{C:red}-#1#{} Consumeable{} and",
 						"Joker limit"
 					},
+				},
+			},
+			j_crv_goldprinter = {
+				name = "Gold Printer",
+				text = {
+					"When first hand is drawn,",
+					"Enhances a random card in hand to {C:attention}Gold{}",
+					"{C:green}#1# in #2#{} Chance for it to be a {C:attention}Rhodium Card{}",
+					"{X:mult,C:white}X#1#{} Mult",
+				},
+			},
+			j_crv_death = {
+				name = "Death",
+				text = {
+					"Gains {X:chips,C:white}X#2#{} Chips",
+					"for each joker {C:blue}harvested{}",
+					"{C:inactive}(Currently {X:chips,C:white}X#1#{C:inactive} Chips)"
+				},
+			},
+			j_crv_keymaster = {
+				name = "Master Key",
+				text = {
+					"After {C:blue}harvesting{} a Joker",
+					"{C:green}1 in 4{} chance to",
+					"not destroy it"
+				},
+			},
+			j_crv_timeprinter = {
+				name = "Time Printer",
+				text = {
+					"When a round ends,",
+					"{C:green}1 in 6{} chance to",
+					"print {C:attention}-#1#{} Ante."
+				}
+			},
+			j_crv_useless_joker = {
+				name = "Useless Joker",
+				text = {
+					"Always has a",
+					"random {C:dark_edition}Edition{}",
+				}
+			},
+			j_crv_chaetophobia = {
+				name = "Chaetophobia",
+				text = {
+					"{C:attention}Scored cards{} give {X:chips,C:white}X#1#{} Chips",
+					"{C:red}Self-destructs{} if a",
+					"card with a rank {C:attention}higher{} than",
+					"{C:attention}4{} is scored"
+				}
+			},
+			j_crv_agoraphobia = {
+				name = "Agoraphobia",
+				text = {
+					"When Blind is selected,",
+					"creates a random {C:attention}Joker{}.",
+					"Each rarity has an {C:green}equal{} chance",
+					"of appearing.",
+					"{C:red}Self-destructs{} when a {C:purple,E:1}Legendary{}",
+					"Joker is created",
+					"{C:inactive}(Pedro, Holy Banana and Curses excluded)"
+					
+				}
+			},
+			j_crv_cursed_banana = {
+				name = "Bananaphobia",
+				text = {
+					"When a {C:attention}Blind{} is selected",
+					"apply {C:dark_edition}Perishable{} to a",
+					"random eligible Joker"
+				}
+			},
+			j_crv_viking_joker = {
+				name = "Viking Joker",
+				text = {
+					"Owned {C:purple}Rune Cards{} give",
+					"{C:money}+$#1#{}",
+				}
+			},
+			j_crv_the_nameless_creature_that_shouldnotbe_spoken_of = {
+				name = ' "            " ',
+				text = {
+					"{X:black,C:black}AAAAAAAAAAAAAAA",
+					"{X:black,C:black}AAA{} {X:black,C:black}AAAAAAAAAA",
+					"{X:black,C:black}AAAAAAA",
+				}
+			},
+			j_crv_snek = {
+				name = "snake",
+				text = {
+					"{C:dark_edition}+2{} Joker slots"
+				}
+			},
+			j_crv_runeprinter = {
+				name = "Rune Printer",
+				text = {
+					"When Blind is selected,",
+					"print a Random",
+					"{C:purple}Rune {C:attention}Card{}",
+					"{C:inactive}(Must have room)",
 				},
 			},
 			-- QUICK JOKER
@@ -3371,6 +3509,17 @@ return {
 			},
 			--
 		},
+		Planet = {
+			c_crv_smertrios = {
+				name = "Smertrios",
+				text = {
+					"[lvl.#2#] Level up",
+					"{C:attention}Blackjack",
+					"{C:mult}+#2#{} Mult and",
+					"{C:chips}+#3#{} chips",
+				},
+			},
+		},
 		Tarot = {
 			c_crv_inkintuition = {
 				name = "Ink & Intuition",
@@ -3424,6 +3573,193 @@ return {
 					"highlighted {C:attention}Joker",
 					"{C:inactive}(Must have room)"
 				}
+			},
+			c_crv_void = {
+				name = "Void",
+				text = {
+					"Enhances {C:attention}#1#{} selected",
+					"card into a",
+					"{C:attention}Celestial Card"
+				},
+			}
+		},
+		crv_Rune  = {
+			c_crv_fehu = {
+				name = "Fehu",
+				text = {
+					"When active,",
+					"{C:attention}Unscored cards{} give {C:money}+$#1#{}",
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} round"
+				},
+			},
+			c_crv_uruz = {
+				name = "Uruz",
+				text = {
+					"When active,",
+					"retrigger {C:attention}Scored Cards{}",
+					"{C:attention}#3#{} time",
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} round"
+				},
+			},
+			c_crv_thurisaz = {
+				name = "Thurisaz",
+				text = {
+					"When active,",
+					"{C:red}Rare{} Jokers appear",
+					"as much as {C:green}Uncommon{} Jokers",
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} shop"
+				},
+			},
+			c_crv_ansuz = {
+				name = "Ansuz",
+				text = {
+					"When active,",
+					"{C:green}#1# in #2#{} chance to create",
+					"{C:legendary,E:1}The Soul{} after",
+					"selecting a {C:attention}Blind",
+					"Lasts for {C:attention}#3#{C:inactive} (#4#){} rounds"
+				},
+			},
+			c_crv_raidho = {
+				name = "Raidho",
+				text = {
+					"When active,",
+					"{C:attention}Scored Cards{} gain a",
+					"random {C:dark_edition}Enhancement{},",
+					"{C:attention}Seal{} or {C:dark_edition}Edition{}",
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} rounds"
+				},
+			},
+			c_crv_kenaz = {
+				name = "Kenaz",
+				text = {
+					"When active,",
+					"{C:attention}Unscored cards{} are {C:red}destroyed",
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} round"
+				},
+			},
+			c_crv_gebo = {
+				name = "Gebo",
+				text = {
+					"When active",
+					"At the {C:attention}end of a round{},",
+					"all owned Consumables",
+					"turn {C:dark_edition}Negative{}",
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} rounds"
+				},
+			},
+			c_crv_wunjo = {
+				name = "Wunjo",
+				text = {
+					"When active",
+					"{C:attention}Scored cards{} gain",
+					"{C:money}+$#3#{} Permanent Dollars",
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} round"
+				},
+			},
+			c_crv_hagalaz = {
+				name = "Hagalaz",
+				text = {
+					"When active,",
+					"draw {C:attention}#3#{} extra cards",
+					"after {C:red}discarding{}",
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} rounds"
+				},
+			},
+			c_crv_isa = {
+				name = "Isa",
+				text = {
+					"When active,",
+					"{C:red}debuffed{} cards",
+					"give {X:mult,C:white}X#3#{} Mult",
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} rounds"
+				},
+			},
+			c_crv_jera = {
+				name = "Jera",
+				text = {
+					"When active,",
+					"duplicate the {C:attention}rightmost{}",
+					"scoring card",
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} hands"
+				},
+			},
+			c_crv_eihwaz = {
+				name = "Eihwaz",
+				text = {
+					"When active,",
+					"disable the selected {C:attention}Blind{}",
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} blind"
+				},
+			},
+			c_crv_perthro = {
+				name = "Perthro",
+				text = {
+					"When active,",
+					"gain a random {C:attention}Tag{}",
+					"at the end of the round.",
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} rounds"
+				},
+			},
+			c_crv_algiz = {
+				name = "Algiz",
+				text = {
+					"When active,",
+					"multiply the selected {C:attention}Blinds{}",
+					"requirement by {X:attention,C:white}X#3#{}",
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} blinds"
+				},
+			},
+			c_crv_sowilo = {
+				name = "Sowilo",
+				text = {
+					"When active,",
+					"{C:attention}Unscored cards{} give",
+					"their rank as {C:chips}Chips",
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} rounds"
+				},
+			},
+			c_crv_towaz = {
+				name = "Towaz",
+				text = {
+					"When active,",
+					"{C:attention}+#3#{} card selection limit",
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} rounds"
+				},
+			},
+			c_crv_mannaz = {
+				name = "Mannaz",
+				text = {
+					"When active,",
+					"Played {C:attention}face cards{} give",
+					"{X:chips,C:white}X#3#{} Chips",
+					"{s:0.8}debuffed cards included",
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} rounds"
+				},
+			},
+			c_crv_berkana = {
+				name = "Berkana",
+				text = {
+					"When active,",
+					"{C:attention}+#3#{} hand size until",
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} rounds"
+				},
+			},
+			c_crv_othala = {
+				name = "Othala",
+				text = {
+					"When active",
+					"{C:blue}+#3#{} hands until",
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} rounds"
+				},
+			},
+			c_crv_inguz = {
+				name = "Inguz",
+				text = {
+					"When active,",
+					"{C:red}+#3#{} discards until",
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} rounds"
+				},
 			},
 		},
 		scrap = {
@@ -4295,6 +4631,17 @@ return {
 					"until the end of the round",
 				},
 			},
+			c_crv_supsmertrios = {
+				name = "Superior Smertrios",
+				text = {
+					"{s:0.8}(lvl.#1#){} Level up",
+					"{C:attention}#2#",
+					"{C:mult}+#3#{} Mult and",
+					"{C:chips}+#4#{} chips.",
+					"Played {C:attention}#2#{}s are {C:green}Boosted",
+					"until the end of the round",
+				},
+			},
 			-- Hyperfixation (first ever crosmmod superior :fire::fire:)
 			c_crv_suphpfx_iji_deceit = {
 				name = "Superior Deceit",
@@ -4331,7 +4678,97 @@ return {
 					"destroy the plant"
 				}
 			},
+			c_crv_supcrown = {
+				name = "Superior Crown",
+				text = {
+					"Enhances #1# Cards to {C:attention}Celestial",
+					"and applies {C:attention}Royal{} Seal to them",
+				},
+			},
+			c_crv_supplanetary_contract = {
+				name = "Superior Planetary Contract",
+				text = {
+					"Base {C:mult}Mult{} and",
+					"{C:chips}Chips{} are quadrupled",
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} uses",
+				}
+			},
 			-- QUICK SUP
+		},
+		crv_boons = {
+			c_crv_knowledge_unowned= {
+				name = "Knowledge",
+				text = { "Shows the next {C:attention}#1#{}",
+								"cards in the deck." },
+			},
+			c_crv_knowledge = {
+				name = "Knowledge",
+				text = { "Next {C:attention}#1#{} Cards:" },
+			},
+			c_crv_health = {
+				name = "Health",
+				text = {
+					"{C:attention}Played cards{} are",
+					"undebuffed before scoring"
+				},
+			},
+			c_crv_wealth = {
+				name = "Wealth",
+				text = {
+					"Gain {C:money}$#2#{C:inactive} (#1#){} for each",
+					"defeated blind at end",
+					"of round",
+				},
+			},
+			c_crv_serendipity = {
+				name = "Serendipity",
+				text = {
+					"{C:rare}Rare{} Jokers appear more often",
+				},
+			},
+			c_crv_power = {
+				name = "Power",
+				text = {
+					"{C:green}1 in 50{} chance to create a",
+					"{C:legendary,E:1}Legendary{} Joker when entering a Blind",
+				},
+			},
+			c_crv_resource = {
+				name = "Resource",
+				text = {
+					"{C:red}+#1#{} Discard limit"
+				},
+			},
+			c_crv_respect = {
+				name = "Respect",
+				text = {
+					"{C:common}Common{} Jokers cannot appear",
+				},
+			},
+			c_crv_leadership = {
+				name = "Leadership",
+				text = {
+					"{C:attention}Scored cards{} with the",
+					"same rank as the {C:attention}lefmost{} card",
+					"give {X:chips,C:white}X#1#{} Chips"
+				},
+			},
+			c_crv_opportunity = {
+				name = "Opportunity",
+				text = {
+					"Defeating a {C:attention}Blind{}",
+					"in one hand",
+					"rewards you with its",
+					"{C:attention}Skip Tag{}"
+				},
+			},
+			c_crv_love = {
+				name = "Love",
+				text = {
+					"All cards counts",
+					"as every suit"
+				},
+			},
 		},
 
 		-- MF colour
@@ -4366,6 +4803,23 @@ return {
 					"Destroy up to {C:attention}#1#",
 					"{C:black}Curse{} Card"
 				}
+			},
+			c_crv_planetary_contract = {
+				name  = "Planetary Contract",
+				text = {
+					"Base {C:mult}Mult{} and",
+					"{C:chips}Chips{} are doubled",
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} uses",
+
+				}
+			},
+			c_crv_crown = {
+				name = "Crown",
+				text={
+                    "Add a {C:attention}Royal Seal{}",
+                    "to {C:attention}1{} selected",
+                    "card in your hand",
+                },
 			}
 		},
 		Other = {
@@ -4395,6 +4849,13 @@ return {
 					"consumable if",
 					"{C:attention}held{} in hand",
 					"or when {C:red}discarded{}"
+				},
+			},
+			crv_royal_seal = {
+				name = "Royal Seal",
+				text = {
+					"Card is considered",
+					"a {C:attention}face{} card"
 				},
 			},
 			p_crv_pbst = {
@@ -4430,6 +4891,27 @@ return {
 					"{C:attention}#2#{C:attention} Contracts{}",
 				},
 			},
+			p_crv_rune_booster_1 = {
+				name = "Rune Pack",
+				text = {
+					"Choose {C:attention}#1#{} of up to",
+					"{C:attention}#2#{C:purple} Runes{}",
+				},
+			},
+			p_crv_rune_booster_3 = {
+				name = "Jumbo Rune Pack",
+				text = {
+					"Choose {C:attention}#1#{} of up to",
+					"{C:attention}#2#{C:purple} Runes{}",
+				},
+			},
+			p_crv_rune_booster_4 = {
+				name = "Mega Rune Pack",
+				text = {
+					"Choose {C:attention}#1#{} of up to",
+					"{C:attention}#2#{C:purple} Runes{}",
+				},
+			},
 			p_crv_bbst = {
 				name = "Banana Pack",
 				text = {
@@ -4451,18 +4933,42 @@ return {
 					"{C:attention}#2#{C:attention} Bananas{}",
 				},
 			},
-			undiscovered_scrap = {
-				undiscovered = {
-					name = "???",
-					text = { "???" },
-				},
-			},
-			undiscovered_enchanceddocuments = {
-				undiscovered = {
-					name = "???",
-					text = { "???" },
-				},
-			},
+			undiscovered_enchanceddocument={
+                name="Not Discovered",
+                text={
+                    "Purchase or use",
+                    "this card in an",
+                    "unseeded run to",
+                    "learn what it does",
+                },
+            },
+			undiscovered_scrap={
+                name="Not Discovered",
+                text={
+                    "Purchase or use",
+                    "this card in an",
+                    "unseeded run to",
+                    "learn what it does",
+                },
+            },
+			undiscovered_crv_rune={
+                name="Not Discovered",
+                text={
+                    "Purchase or use",
+                    "this card in an",
+                    "unseeded run to",
+                    "learn what it does",
+                },
+            },
+			undiscovered_superior={
+                name="Not Discovered",
+                text={
+                    "Purchase or use",
+                    "this card in an",
+                    "unseeded run to",
+                    "learn what it does",
+                },
+            },
 			crv_vamp = {
 				name = "Vampiric",
 				text = {
@@ -4967,6 +5473,14 @@ return {
 		},
 	},
 	misc = {
+		poker_hands = {
+			crv_blackjack = "Blackjack"
+		},
+		poker_hand_descriptions = {
+			crv_blackjack = {
+				"Cards that add up to 21"
+			}
+		},
 		achievement_names={
 			ach_crv_get_all_stickers = "How did we get here?",
 			ach_crv_printing_away = "Printing Away!",
@@ -5004,9 +5518,11 @@ return {
 		labels = {
 			crv_ps_seal = "Printer's Seal",
 			crv_superior_seal_seal = "Superior Seal",
+			crv_royal_seal = "Royal Seal",
 			crv_p = "Printer",
 			crv_curse = "Curse",
 			scrap = "Scraps",
+			crv_rune = "Runes",
 			enchanceddocuments = "Contracts",
 			crv_vamp = "Vampiric",
 			crv_haunted = "Haunted",
@@ -5057,6 +5573,7 @@ return {
 			crv_revosvault = "Revo's Vault",
 			k_crv_pbstg = "Printer Pack",
 			k_crv_cbstg = "Contract Pack",
+			k_crv_runep = "Rune Pack",
 			k_crv_bbstg = "Banana Pack",
 			k_crv_std_ex = "Sacrified to the Divine!",
 			k_crv_sbg_ex = "Shielded by Grace!",
@@ -5073,6 +5590,7 @@ return {
 			k_crv_cleaning = "Cleaning file...",
 			k_crv_overscore = "Overscore!",
 			k_crv_double = "Double!",
+			k_crv_quadruple = "Quadrupled!",
 			k_crv_nothing = "Nothing!",
 			k_crv_dept = "In Dept!",
 			k_crv_vaa = "Opened Vault!",
@@ -5096,8 +5614,13 @@ return {
 			b_scrap_cards = "Scraps",
 			k_enchanceddocuments = "Contract",
 			b_enchanceddocuments_cards = "Contracts",
+			k_crv_boons = "Boon",
+			b_crv_boons_cards = "Boons",
 			k_corrupt = "Corrupt",
 			b_corrupt_cards = "Corrupt Cards",
+			k_crv_rune = "Rune",
+			b_crv_rune_cards = "Runes",
+			k_crv_ante = "Ante",
 
 			k_superior = "Superior Tarot",
 			k_superior_s = "Superior Spectral",
@@ -5127,6 +5650,8 @@ return {
 			crv_enable_vaulteds = "Enable Vaulted Jokers",
 			crv_enable_wip = "Enable Experimental/Wip Features",
 			crv_enable_superior = "Enable Superior Cards",
+			crv_enable_boons = "Enable Boons",
+			crv_enable_runes = "Enable Runes",
 			crv_enable_secret = "Enable Secret Jokers",
 			crv_enable_blinds = "Enable Blinds",
 			crv_enable_curses = "Enable Curses",
@@ -5161,7 +5686,10 @@ return {
 
 
 
-			-- Boon stuff (unused)
+			b_crv_vault = "Vault",
+			b_crv_the = "The",
+			b_crv_blessing = "Blessing",
+			-- Boon stuff (scraped)
 			crv_Common = "Common",
 			crv_Rare = "Rare",
 			crv_Epic = "Epic",

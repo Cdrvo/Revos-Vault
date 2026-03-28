@@ -300,7 +300,8 @@ SMODS.Consumable({
 		info_queue[#info_queue+1] = {set = "Other", key = "crv_temp"}
 	end,
 	can_use = function(self, card)
-		return G.jokers and ((RevosVault.check("highlight", G.jokers)==1) and RevosVault.check("space", G.jokers))
+		return G.jokers and (RevosVault.check("highlight", G.jokers)==1) and ((RevosVault.check("space", G.jokers)) or RevosVault.check("edition","negative"))
+			
 	end,
 	use = function(self, card)
 		a = copy_card(G.jokers.highlighted[1])
@@ -309,5 +310,20 @@ SMODS.Consumable({
 		a:add_sticker("crv_temp", true)
 		G.jokers:emplace(a)
 
+	end,
+})
+
+SMODS.Consumable({
+	key = "void",
+	set = "Tarot",
+	config = { max_highlighted = 1, mod_conv = "m_crv_celestial" },
+	pos = { x = 3, y = 0 },
+	atlas = "tarots",
+	cost = 4,
+	unlocked = true,
+	discovered = true,
+	loc_vars = function(self,info_queue,card)
+		info_queue[#info_queue+1] = G.P_CENTERS.m_crv_celestial
+		return {vars = {card.ability.consumeable.max_highlighted}}
 	end,
 })

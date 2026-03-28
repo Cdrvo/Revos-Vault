@@ -67,6 +67,9 @@ SMODS.Seal({
             return { message = localize('k_crv_plus_consumable'), colour = G.C.SECONDARY_SET[cons_set] }
         end
 	end,
+	in_pool = function(self,card)
+		return false
+	end
 })
 
 -- am i dumb
@@ -116,3 +119,13 @@ SMODS.Seal({
 		end
     end
 })]]
+
+SMODS.Seal({
+	key = "royal",
+	atlas = "enh",
+	pos = {x=4,y=1},
+	discovered = true,
+	badge_colour = HEX("4f6367"),
+	rarity = 3,
+	sound = { sound = "gold_seal", per = 1.2, vol = 0.4 },
+})

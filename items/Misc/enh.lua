@@ -696,3 +696,61 @@ end,
 	end,
 })
 ]]
+
+SMODS.Enhancement({
+	key = "rhodium",
+	from = "m_gold",
+	atlas = "enh",
+	pos = { x = 3, y = 1 },
+	discovered = true,
+	unlocked = true,
+	replace_base_card = false,
+	no_rank = false,
+	no_suit = false,
+	overrides_base_rank = false,
+	any_suit = false,
+	always_scores = false,
+	weight = 0,
+	config = { extra = { dollars = 6 } },
+	loc_vars = function(self, info_queue, card)
+		return { vars = { card.ability.extra.dollars } }
+	end,
+	calculate = function(self, card, context, effect)
+		if context.main_scoring and (context.cardarea == G.play or context.cardarea == G.hand)then
+			return {
+				dollars = card.ability.extra.dollars,
+			}
+		end
+	end,
+	in_pool = function(self)
+		return false
+	end,
+})
+
+SMODS.Enhancement({
+	key = "celestial",
+	atlas = "enh",
+	pos = { x = 4, y = 4 },
+	discovered = true,
+	unlocked = true,
+	config = { extra = { } },
+	loc_vars = function(self, info_queue, card)
+		return { vars =  { 
+			G.localization.misc.poker_hands[RevosVault.most_played()] or RevosVault.most_played(),
+			(RevosVault.most_played() and G.GAME.hands[RevosVault.most_played()].chips) or 0,
+			(RevosVault.most_played() and G.GAME.hands[RevosVault.most_played()].mult) or 0
+		}}
+	end,
+	crv_credits = {
+		art = {"WombatCountry"},
+		idea = {"theOfficialFem"}
+	},
+	calculate = function(self, card, context, effect)
+		if context.main_scoring and (context.cardarea == G.play) then
+			return {
+				chips = (RevosVault.most_played() and G.GAME.hands[RevosVault.most_played()].chips) or 0,
+				mult = (RevosVault.most_played() and G.GAME.hands[RevosVault.most_played()].mult) or 0
+			}
+		end
+	end,
+})

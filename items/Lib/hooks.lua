@@ -185,6 +185,9 @@ function Card:is_face(from_boss)
 	if #SMODS.find_card("j_crv_revoo_") > 0 then
 		return false
 	end
+	if self.seal == "crv_royal" then
+		return true
+	end
 	return isfaceold(self, from_boss)
 end
 
@@ -229,8 +232,16 @@ Game.init_game_object = function(self)
 	ret.xinflation = 1
 	ret.curse_cashout = 1
 	ret.gem_rate = 0.70
+	ret.crv_skip_tag = "tag_uncommon"
+	ret.crv_shop_button = {
+		pre_text = localize("b_crv_the"),
+		text = localize("b_crv_vault"),
+		button = "enter_vault",
+		func = "can_enter_vault",
+		colour = G.C.PURPLE
+	}
 
-	ret.souls = 0 -- metaprog soon
+	ret.crv_souls = 0 -- metaprog soon // no
 
 	ret.superior_mod = 1
 
@@ -369,13 +380,13 @@ function Game:update(dt)
 			end
 		end
 	end
-	if G and G.GAME and G.GAME.current_round and G.GAME.current_round.current_hand and G.GAME.current_round.current_hand.crv_dollars_mult_text then
+	if G and G.GAME and G.GAME.current_round and G.GAME.current_round.current_hand and G.GAME.current_round.current_hand.crv_dollars_mult_text and not RevosVault.scoring  then
 		SMODS.Scoring_Parameters.crv_dollars_mult:crv_set(G.GAME.dollars or 0)
-		G.GAME.current_round.current_hand.crv_dollars_mult = SMODS.Scoring_Parameters.crv_dollars_mult.current
+		SMODS.Scoring_Parameters.crv_dollars_mult:modify()
 	end
 	if SMODS then
 		for _, area in ipairs(SMODS.get_card_areas("jokers")) do
-			if area and area.cards then
+			if area and area and area.cards then
 				for _, _card in ipairs(area.cards) do
 					if _card.debuff and _card.ability.crv_wet then
 						_card.debuff = false
@@ -581,6 +592,17 @@ function CardArea:emplace(card, location, stay_flipped)
 			if G.crv_curses.T.y > G.jokers.T.y then
 				G.jokers.T.y = 0
 				G.crv_curses.T.y = -5
+			end
+		end
+
+		if self and self == G.consumeables and card and card.ability.set == "crv_boons" then
+			if G.crv_boons then
+				if #G.crv_boons.cards > 0 then
+					for k, v in pairs(G.crv_boons.cards) do
+						SMODS.destroy_cards(v)
+					end
+				end
+				RevosVault.move_card(card, G.crv_boons, { add_to_deck = false })
 			end
 		end
 
@@ -879,6 +901,15 @@ function end_round()
 		return true
 	end
 	}))
+
+	if (pseudorandom("boon_select")<1/4 or G.GAME.crv_guarantee_boon) and RevoConfig["boons_enabled"] then
+		G.GAME.crv_shop_button = {
+			text = localize("b_crv_blessing"),
+			colour = G.C.IMPORTANT,
+			button = "crv_boon_menu",
+			func = "crv_boon_menu_func"
+		}
+	end
 	return end_round_old()
 end
 
@@ -916,6 +947,16 @@ function G.FUNCS.toggle_shop(e)
 	if G.shop and G.GAME.gem_skip then
 		G.GAME.gem_skip = false
 	end
+	G.GAME.crv_shop_button = {
+		pre_text = localize("b_crv_the"),
+		text = localize("b_crv_vault"),
+		button = "enter_vault",
+		func = "can_enter_vault",
+		colour = G.C.PURPLE
+	}
+	G.GAME.crv_boon_text = nil
+	G.GAME.crv_boon_was_picked = nil
+	G.GAME.crv_guarantee_boon = false
     toggle_shop_old(e)
 end
 
@@ -1013,4 +1054,33 @@ function SMODS.calculate_context(context, ...)
 		G.GAME.current_round.crv_drawn_hands = G.GAME.current_round.crv_drawn_hands + 1
 	end
     return calculate_context_old(context, ...)
+end
+
+local draw_from_deck_to_hand_old = G.FUNCS.draw_from_deck_to_hand 
+G.FUNCS.draw_from_deck_to_hand = function(e)
+	draw_from_deck_to_hand_old()
+    G.E_MANAGER:add_event(Event({
+		func = function()
+			SMODS.calculate_context({crv_after_draw = true})
+			return true
+		end
+	}))
+end
+
+local is_suit_old = Card.is_suit
+function Card:is_suit(suit, bypass_debuff, flush_calc)
+	if next(SMODS.find_card("c_crv_love")) then
+		if flush_calc then
+			if not self.debuff then
+				return true
+			end
+		else
+			if self.debuff and not bypass_debuff then
+				return
+			end
+			return true
+		end
+	else
+		return is_suit_old(self, suit, bypass_debuff, flush_calc)
+	end
 end

@@ -56,13 +56,13 @@ pattern = '''
 '''
 position = "after"
 payload = '''
-{n=G.UIT.R, config={align = "cm", minw = 1.4, minh = 0.8, r=0.15,colour = G.C.PURPLE, button = 'enter_vault', func = 'can_enter_vault', hover = true,shadow = true}, nodes = {
+{n=G.UIT.R, config={align = "cm", minw = 1.4, minh = 0.8, r=0.15,colour = G.GAME.crv_shop_button.colour, button = (G.GAME.crv_shop_button.button), func =(G.GAME.crv_shop_button.func), hover = true,shadow = true}, nodes = {
                           {n=G.UIT.R, config={align = "cm", padding = 0.07, focus_args = {button = 'x', orientation = 'cr'}, func = 'set_button_pip'}, nodes={
-                            {n=G.UIT.R, config={align = "cm", maxw = 1.4}, nodes={
-                              {n=G.UIT.T, config={text = "The", scale = 0.4, colour = G.C.WHITE, shadow = true}},
+                           G.GAME.crv_shop_button.pre_text and {n=G.UIT.R, config={align = "cm", maxw = 1.4}, nodes={
+                              {n=G.UIT.T, config={text = G.GAME.crv_shop_button.pre_text, scale = 0.4, colour = G.C.WHITE, shadow = true}},
                             }},
                             {n=G.UIT.R, config={align = "cm", maxw = 1.4, minw = 1}, nodes={
-                              {n=G.UIT.T, config={text = "Vault", scale = 0.4, colour = G.C.WHITE, shadow = true}},
+                              {n=G.UIT.T, config={text = (G.GAME.crv_shop_button.text), scale = 0.4, colour = G.C.WHITE, shadow = true}},
                             }}
                           }}
                         }},

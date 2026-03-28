@@ -78,7 +78,7 @@ SMODS.Consumable({
 		local cards = {}
 		if G and G.hand and #G.hand.cards > 0 then
 			for i = 1, #G.hand.cards do
-				if G.hand.cards[i]:get_id() == 14 then
+				if G.hand.cards[i]:get_id() ~= 14 then
 					cards[#cards + 1] = G.hand.cards[i]
 					if #cards > 0 then
 						return true
@@ -91,7 +91,7 @@ SMODS.Consumable({
 	use = function(self, card, area, copier)
 		local cards = {}
 		for i = 1, #G.hand.cards do
-			if G.hand.cards[i]:get_id() == 14 then
+			if G.hand.cards[i]:get_id() ~= 14 then
 				cards[#cards + 1] = G.hand.cards[i]
 			end
 		end
@@ -939,5 +939,123 @@ SMODS.Consumable({
 				and (RevosVault.rarity_in("crv_curse", G.crv_curses.cards) > 0)
 			)
 		)
+	end,
+})
+
+
+SMODS.Consumable({
+	key = "supcrown",
+	set = "Superior",
+	atlas = "Superior",
+	crv_in_set = "Spectral",
+
+	pos = {
+		x = 19,
+		y = 2,
+	},
+	pools = {
+		SuperiorSpectral = true,
+	},
+	discovered = true,
+	config = { extra = { seal = 'crv_royal' }, max_highlighted = 2, mod_conv = "m_crv_celestial" },
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = G.P_SEALS[card.ability.extra.seal]
+		 info_queue[#info_queue + 1] = G.P_CENTERS[card.ability.extra.seal]
+        return { vars = { card.ability.max_highlighted } }
+    end,
+	use = function(self, card, area, copier)
+        local conv_card = G.hand.highlighted[1]
+        G.E_MANAGER:add_event(Event({
+            func = function()
+                play_sound('tarot1')
+                card:juice_up(0.3, 0.5)
+                return true
+            end
+        }))
+
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.1,
+            func = function()
+                conv_card:set_seal(card.ability.extra.seal, nil, true)
+                return true
+            end
+        }))
+
+        delay(0.5)
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.2,
+            func = function()
+                G.hand:unhighlight_all()
+                return true
+            end
+        }))
+    end,
+	set_card_type_badge = function(self, card, badges)
+		badges[1] = create_badge(localize("k_superior_s"), get_type_colour(self or card.config, card), nil, 1.2)
+	end,
+})
+
+SMODS.Consumable({
+	key = "supplanetary_contract",
+	set = "Superior",
+	discovered = true,
+	atlas = "Superior",
+	pos = {
+		x = 19,
+		y = 1,
+	},
+	pools = {
+		SuperiorSpectral = true,
+	},
+	config = {
+		extra = {
+			active = false,
+            rounds = 8,
+            rounds_left = 8,
+		},
+	},
+	loc_vars = function(self, info_queue, card)
+        local cae = card.ability.extra
+		return { vars = {cae.rounds, cae.rounds_left } }
+	end,
+	can_use = function(self, card)
+		return card.ability.extra.active == false
+	end,
+	keep_on_use = function(self, card)
+		return true
+	end,
+	use = function(self, card, area, copier)
+		card.ability.extra.active = true
+		local eval = function()
+			return card.ability.extra.active == true
+		end
+		juice_card_until(card, eval, true)
+	end,
+	calculate = function(self, card, context)
+        local cae = card.ability.extra
+        if cae.active then
+            local cae = card.ability.extra
+            if context.modify_hand then
+					hand_chips = mod_chips(hand_chips * 4)
+					mult = mod_mult(mult * 4)
+					RevosVault.c_message(card, localize("k_crv_quadruple"))
+            end
+            if context.end_of_round and context.main_eval then
+                card.ability.extra.active = false
+                RevosVault.c_message(card, "-1")
+                if cae.rounds_left > 1  then
+                    cae.rounds_left = cae.rounds_left - 1
+                else
+                    SMODS.destroy_cards(card)
+                end
+                
+            end
+        end
+        
+	end,
+	set_card_type_badge = function(self, card, badges)
+		badges[1] = create_badge(localize("k_superior_s"), get_type_colour(self or card.config, card), nil, 1.2)
 	end,
 })

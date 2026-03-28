@@ -1,85 +1,3 @@
---[[SMODS.Joker({
-	key = "oldjimbo",
-	atlas = "Jokers2",
-	rarity = 4,
-	cost = 20,
-	unlocked = true,
-	discovered = false,
-	blueprint_compat = false,
-	pos = {
-		x = 3,
-		y = 8,
-	},
-	soul_pos = {
-		x = 4,
-		y = 8,
-	},
-	config = {
-		extra = {},
-	},
-	loc_vars = function(self, info_queue, card)
-		return {
-			vars = { card.ability.extra.dollars },
-		}
-	end,
-	calculate = function(self, card, context)
-		if card.area then
-			SMODS.Stickers["eternal"]:apply(card, true)
-		end
-	end,
-	add_to_deck = function(self, card, from_debuff)
-		SMODS.add_card({
-			set = "Joker",
-			area = G.jokers,
-			key = "j_crv_adamap",
-		})
-		SMODS.Stickers["eternal"]:apply(card, true)
-	end,
-})
-
-SMODS.Joker({
-	key = "adamap",
-	atlas = "Jokers2",
-	rarity = 4,
-	cost = 0,
-	unlocked = true,
-	discovered = false,
-	blueprint_compat = true,
-	no_collection = true,
-	pos = {
-		x = 5,
-		y = 8,
-	},
-	soul_pos = {
-		x = 6,
-		y = 8,
-	},
-	config = {
-		extra = {
-			xmult = 3,
-		},
-	},
-	pools = {
-		Food = true,
-	},
-	loc_vars = function(self, info_queue, card)
-		return {
-			vars = { card.ability.extra.xmult },
-		}
-	end,
-	calculate = function(self, card, context)
-		if context.joker_main then
-			return {
-				xmult = card.ability.extra.xmult,
-			}
-		end
-	end,
-	in_pool = function(self, wawa, wawa2)
-		return false
-	end,
-})
-]]
-
 SMODS.Joker({
 	key = "modicon",
 	atlas = "Jokers2",
@@ -98,7 +16,8 @@ SMODS.Joker({
 	},
 	loc_vars = function(self, info_queue, card)
 		if not G.real_modicon_area and G.jokers then
-			G.real_modicon_area = CardArea(G.jokers.T.x, -15, G.jokers.T.w, G.jokers.T.h, { card_limit = 1e300, type = "discard" })
+			G.real_modicon_area =
+				CardArea(G.jokers.T.x, -15, G.jokers.T.w, G.jokers.T.h, { card_limit = 1e300, type = "discard" })
 		end
 		info_queue[1] = { set = "Other", key = "crv_crash_desc" }
 		info_queue[2] = { set = "Other", key = "crv_modicon_desc_1" }
@@ -149,7 +68,7 @@ SMODS.Joker({
 
 		local t = {}
 		G.mod_icon_area.states.visible = false
-		if G.mod_icon_area and #G.mod_icon_area.cards>0 then
+		if G.mod_icon_area and #G.mod_icon_area.cards > 0 then
 			G.mod_icon_area.states.visible = true
 			t = {
 				{
@@ -172,7 +91,8 @@ SMODS.Joker({
 
 		if context.setting_blind and not context.blueprint then
 			if not G.real_modicon_area and G.jokers then
-				G.real_modicon_area = CardArea(G.jokers.T.x, -15, G.jokers.T.w, G.jokers.T.h, { card_limit = 1e300, type = "discard" })
+				G.real_modicon_area =
+					CardArea(G.jokers.T.x, -15, G.jokers.T.w, G.jokers.T.h, { card_limit = 1e300, type = "discard" })
 			end
 			local tab = {}
 			for k, v in pairs(G.P_CENTER_POOLS.Joker) do
@@ -335,4 +255,79 @@ SMODS.Joker({
 		local wrapped_value = (math.floor(timer) - 1) % frame_amount + 1
 		card.children.floating_sprite:set_sprite_pos({ x = shopframes[wrapped_value], y = 14 })
 	end,
+})
+
+SMODS.Joker({
+	key = "chaetophobia",
+	atlas = "Jokers2",
+	rarity = 4,
+	pos = { x = 11, y = 10 },
+	soul_pos = { x = 12, y = 10 },
+	config = {
+		extra = {
+			xchips = 4,
+		},
+	},
+	cost = 20,
+	loc_vars = function(self, info_queue, card)
+		local crv = card.ability.extra
+		return {
+			vars = { crv.xchips },
+		}
+	end,
+	calculate = function(self, card, context)
+		local cae = card.ability.extra
+		if context.individual and context.cardarea == G.play then
+			if context.other_card:get_id() <= 4 then
+				return {
+					xchips = cae.xchips,
+				}
+			else
+				SMODS.destroy_cards(card)
+			end
+		end
+	end,
+	crv_credits = {
+		art = { "thingifithinker" },
+		idea = {"theOfficialFem"}
+	},
+})
+
+SMODS.Joker({
+	key = "agoraphobia",
+	atlas = "Jokers2",
+	rarity = 4,
+	blueprint_compat = false,
+	pos = { x = 11, y = 9 },
+	soul_pos = { x = 12, y = 9 },
+	config = {
+		extra = {
+			xchips = 4,
+		},
+	},
+	cost = 20,
+	calculate = function(self, card, context)
+		local cae = card.ability.extra
+		if context.setting_blind and not context.blueprint then
+			local a, b = nil, {}
+			for k, v in pairs(SMODS.Rarities) do
+				if k ~= "crv_pedro" and k ~= "crv_holy" and k ~= "crv_curse" then
+					b[#b + 1] = k
+				end
+				a = pseudorandom_element(b, pseudoseed("aaa" .. G.GAME.round_resets.ante))
+				SMODS.add_card({
+					set = "Joker",
+					rarity = a,
+				})
+
+				if a == "Legendary" then
+					SMODS.destroy_cards(card)
+				end
+			end
+		end
+	end,
+	crv_credits = {
+		art = { "thingifithinker" },
+		idea = {"theOfficialFem"}
+	},
 })

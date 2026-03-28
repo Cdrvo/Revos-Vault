@@ -153,3 +153,69 @@ SMODS.Booster({
 		})
 	end,
 })
+
+SMODS.Booster({
+	key = "rune_booster_1",
+	atlas = "booster",
+	pos = { x = 0, y = 3 },
+	config = { extra = 2, choose = 1 },
+	group_key = "k_crv_runep",
+	cost = 4,
+	weight = 0.1,
+	kind = "Rune",
+	select_card = "consumeables",
+	create_card = function(self, card, i)
+		return SMODS.create_card({
+			set = "crv_Rune",
+			skip_materialize = true,
+		})
+	end,
+	ease_background_colour = function(self)
+		ease_colour(G.C.DYN_UI.MAIN, HEX("134192"))
+		ease_background_colour({ new_colour = HEX("063992"), special_colour = darken(HEX("ed8965"), 0.3) , contrast = 5})
+	end,
+})
+
+SMODS.Booster({
+	key = "rune_booster_3",
+	atlas = "booster",
+	pos = { x = 1, y = 3 },
+	config = { extra = 4, choose = 1 },
+	group_key = "k_crv_runep",
+	cost = 6,
+	weight = 0.08,
+	kind = "Rune",
+	select_card = "consumeables",
+	create_card = function(self, card, i)
+		return SMODS.create_card({
+			set = "crv_Rune",
+			skip_materialize = true,
+		})
+	end,
+	ease_background_colour = function(self)
+		ease_colour(G.C.DYN_UI.MAIN, HEX("134192"))
+		ease_background_colour({ new_colour = HEX("063992"), special_colour = darken(HEX("ed8965"), 0.3) })
+	end,
+})
+
+SMODS.Booster({
+	key = "rune_booster_4",
+	atlas = "booster",
+	pos = { x = 2, y = 3 },
+	config = { extra = 4, choose = 2 },
+	group_key = "k_crv_runep",
+	cost = 8,
+	weight = 0.01,
+	kind = "Rune",
+	select_card = "consumeables",
+	create_card = function(self, card, i)
+		return SMODS.create_card({
+			set = "crv_Rune",
+			skip_materialize = true,
+		})
+	end,
+	ease_background_colour = function(self)
+		ease_colour(G.C.DYN_UI.MAIN, HEX("134192"))
+		ease_background_colour({ new_colour = HEX("063992"), special_colour = darken(HEX("ed8965"), 0.3) })
+	end,
+})

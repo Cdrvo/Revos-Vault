@@ -1349,7 +1349,7 @@ SMODS.Joker({
 			local numbers, all_cards = 0, 0
 			for k, v in ipairs(G.hand.cards) do
 				all_cards = all_cards + 1
-				if v:get_id() >= 2 and v:get_id() <= 6 then
+				if v:get_id() >= 2 and v:get_id() <= 4 then
 					numbers = numbers + 1
 				end
 			end
@@ -2897,67 +2897,6 @@ SMODS.Joker({
 })
 
 SMODS.Joker({
-	key = "eyes",
-	atlas = "Jokers2",
-	rarity = 2,
-	cost = 6,
-	unlocked = true,
-	discovered = false,
-	blueprint_compat = false,
-
-	pos = {
-		x = 8,
-		y = 10,
-	},
-	config = {
-		extra = {},
-	},
-	crv_credits = {
-		art = {"mr.cr33ps"}
-	},
-	loc_vars = function(self, info_queue, card)
-		return {
-			vars = {},
-		}
-	end,
-
-	calculate = function(self, card, context)
-		if context.setting_blind and not context.blueprint then
-			local rr = nil
-			for i = 1, #G.jokers.cards do
-				if G.jokers.cards[i] == card then
-					rr = i
-					break
-				end
-			end
-			if card.area == G.real_modicon_area then
-				rr = RevosVault.get_key_pos("j_crv_modicon")
-			end
-			if
-				G.jokers.cards[rr - 1] ~= nil and G.jokers.cards[rr + 1] ~= nil
-				or self.area == G.jokers and not G.jokers.cards[rr - 1].crv_eyed
-			then
-				G.E_MANAGER:add_event(Event({
-					trigger = "after",
-					func = function()
-						G.jokers.cards[rr - 1].crv_eyed = true
-						G.jokers.cards[rr - 1]:start_dissolve({ HEX("57ecab") }, nil, 1.6)
-						local copied = copy_card(G.jokers.cards[rr + 1], nil)
-						copied:add_to_deck()
-						G.jokers:emplace(copied)
-						card_eval_status_text(card, "extra", nil, nil, nil, { message = "Copied!" })
-						return true
-					end,
-				}))
-			end
-		end
-	end,
-	in_pool = function(self, wawa, wawa2)
-		return true
-	end,
-})
-
-SMODS.Joker({
 	key = "asc",
 	atlas = "Jokers2",
 	rarity = 2,
@@ -3863,8 +3802,8 @@ SMODS.Joker({
 	end,
 })
 
-
---[[SMODS.Joker({
+--[[
+SMODS.Joker({
 	key = "man",
 	atlas = "Jokers2",
 	pos = {
@@ -3879,3 +3818,108 @@ SMODS.Joker({
 	end,
 })
 ]]
+
+
+SMODS.Joker({
+	key = "death",
+	atlas = "Jokers2",
+	pos = {
+		x = 6,
+		y = 8,
+	},
+	config = {
+		extra = {
+			xchips = 1,
+			xchips_gain = 0.1
+		}
+	},
+	rarity = 2,
+	cost = 4,
+	blueprint_compat = true,
+	loc_vars = function(self, info_queue, card)
+		local cae = card.ability.extra
+		return{vars={cae.xchips, cae.xchips_gain}}
+	end,
+	calculate = function(self, card, context)
+		local cae = card.ability.extra
+		if context.crv_harvest and not context.blueprint then
+			SMODS.scale_card(card, {
+				ref_table = cae,
+				ref_value = "xchips",
+				scalar_value = "xchips_gain"
+			})
+		end
+		if context.joker_main then
+			return{
+				xchips = cae.xchips
+			}
+		end
+	end,
+})
+
+if RevoConfig["runes_enabled"] then
+	SMODS.Joker({
+		key = "viking_joker",
+		atlas = "Jokers2",
+		pos = {
+			x = 11,
+			y = 7,
+		},
+		config = {
+			extra = {
+				dollars = 3
+			}
+		},
+		rarity = 2,
+		cost = 4,
+		blueprint_compat = true,
+		loc_vars = function(self, info_queue, card)
+			local cae = card.ability.extra
+			return{vars={cae.dollars}}
+		end,
+		calculate = function(self, card, context)
+			local cae = card.ability.extra
+			if context.other_consumeable and context.other_consumeable.ability.set == "crv_Rune" then
+				return{
+					dollars = cae.dollars,
+					card = context.other_consumeable,
+					message_card = context.other_consumeable
+				}
+			end
+		end,
+		crv_credits = {
+			art = {"Breuhh"}
+		}
+	})
+end
+
+SMODS.Joker({
+	key = "snek",
+	atlas = "Jokers2",
+	pos = {
+		x = 12,
+		y = 6,
+	},
+	config = {
+		extra = {
+			dollars = 3
+		}
+	},
+	rarity = 2,
+	cost = 4,
+	blueprint_compat = true,
+	loc_vars = function(self, info_queue, card)
+		local cae = card.ability.extra
+		return{vars={cae.dollars}}
+	end,
+	add_to_deck = function(self,card,from_debuff)
+			G.jokers.config.card_limit = G.jokers.config.card_limit + 2
+	end,
+	remove_from_deck = function(self,card,from_debuff)
+		G.jokers.config.card_limit = G.jokers.config.card_limit - 2
+	end,
+	crv_credits = {
+		art = {"isa"},
+		idea = {"isa"}
+	}
+})

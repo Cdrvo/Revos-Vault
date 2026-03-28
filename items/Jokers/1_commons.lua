@@ -604,3 +604,55 @@ SMODS.Joker({
 		end
 	end,
 })
+
+SMODS.Joker({
+	key = "keymaster",
+	rarity = 1,
+	cost = 2,
+	unlocked = true,
+	discovered = false,
+	blueprint_compat = false,
+	atlas = "Jokers2",
+	pos = {
+		x = 5,
+		y = 14,
+	},
+	config = {
+		extra = {
+		},
+	},
+	loc_vars = function(self, info_queue, card)
+		info_queue[#info_queue+1] = {set = "Other", key = "crv_fixed_chances"}
+		local cae = card.ability.extra
+		return {
+			vars = {},
+		}
+	end,
+	calculate = function(self, card, context)
+	end,
+})
+
+SMODS.Joker({
+	key = "useless_joker",
+	rarity = 1,
+	cost = 1,
+	unlocked = true,
+	discovered = false,
+	blueprint_compat = false,
+	atlas = "Jokers2",
+	pos = {
+		x = 11,
+		y = 11,
+	},
+	config = {
+		extra = {
+		},
+	},
+	set_ability = function(self, card, initial, delay_sprites)
+		card:set_edition(poll_edition(nil, nil, nil, true), true, true)
+	end,
+	crv_credits = {
+		art = {"lfmoth"},
+		idea = {"theOfficialFem"}
+	}
+})

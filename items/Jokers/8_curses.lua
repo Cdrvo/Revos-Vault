@@ -624,3 +624,85 @@ SMODS.Joker({
 		end
 	end
 })
+
+SMODS.Joker({
+	key = "cursed_banana",
+	atlas = "Jokers2",
+	pos = { x = 11, y = 8 },
+	rarity = "crv_curse",
+	blueprint_compat = false,
+	cost = 0,
+	loc_vars = function(self, info_queue, card)
+		info_queue[#info_queue+1] = {set = "Other", key = "crv_curse_desc"}
+	end,
+	add_to_deck = function(self,card,from_debuff)
+		-- true
+	end,
+	remove_from_deck = function(self, card, from_debuff) 
+		if not RevosVault.purified_curse then
+			local ccard = copy_card(card)
+			if card.ability.crv_curse_triggered then
+				ccard.ability.crv_curse_triggered = true
+			end
+			ccard:add_to_deck()
+			G.crv_curses:emplace(ccard)
+		else
+			-- false
+		end
+  	end,
+	calculate = function(self,card,context)
+		if context.setting_blind then
+			local a = {}
+			for k, v in pairs(G.jokers.cards) do
+				if not v.ability.perishable and not v.ability.eternal and  v.config.center.perishable_compat then
+					a[#a+1] = v
+				end
+			end
+
+
+			local joker = pseudorandom_element(a, pseudoseed("brr_brr_bananacurse"))
+			if joker then
+				joker:add_sticker("perishable", true)
+				joker:juice_up()
+				play_sound("tarot1")
+			end
+		end
+	end,
+	crv_credits = {
+		art = {"ven_the_person"}
+	}
+})
+
+
+SMODS.Joker({
+	key = "the_nameless_creature_that_shouldnotbe_spoken_of",
+	atlas = "Jokers2",
+	pos = {
+		x = 11,
+		y = 6,
+	},
+	config = {
+		extra = {
+			def = nil
+		}
+	},
+	rarity = "crv_curse",
+	blueprint_compat = false,
+	cost = 0,
+	remove_from_deck = function(self, card, from_debuff) 
+		if not RevosVault.purified_curse then
+			local ccard = copy_card(card)
+			if card.ability.crv_curse_triggered then
+				ccard.ability.crv_curse_triggered = true
+			end
+			ccard:add_to_deck()
+			G.crv_curses:emplace(ccard)
+		else
+			-- false
+		end
+  	end,
+	crv_credits = {
+		art = {"isa"},
+		idea = {"isa"}
+	}
+})
