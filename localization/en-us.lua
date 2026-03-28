@@ -553,6 +553,7 @@ return {
 				name = "Shattered",
 				text = {
 					"{X:mult,C:white}X#1#{} Mult",
+					"{C:inactive}no rank or suit"
 				},
 			},
 			m_crv_superiore = {
