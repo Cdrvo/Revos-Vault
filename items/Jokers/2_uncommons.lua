@@ -3311,6 +3311,7 @@ SMODS.Joker({
 		art = {"Heaven"}
 	},
 	loc_vars = function(self, info_queue, card)
+		info_queue[#info_queue+1] = G.P_CENTERS.m_crv_shattered
 	end,
 	add_to_deck = function(self, card, from_debuff)
 		G.GAME.glassodds = G.GAME.glassodds / 2
