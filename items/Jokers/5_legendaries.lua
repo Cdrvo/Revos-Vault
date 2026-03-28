@@ -314,7 +314,8 @@ SMODS.Joker({
 				if k ~= "crv_pedro" and k ~= "crv_holy" and k ~= "crv_curse" then
 					b[#b + 1] = k
 				end
-				a = pseudorandom_element(b, pseudoseed("aaa" .. G.GAME.round_resets.ante))
+			end
+			a = pseudorandom_element(b, pseudoseed("aaa" .. G.GAME.round_resets.ante))
 				SMODS.add_card({
 					set = "Joker",
 					rarity = a,
@@ -323,7 +324,6 @@ SMODS.Joker({
 				if a == "Legendary" then
 					SMODS.destroy_cards(card)
 				end
-			end
 		end
 	end,
 	crv_credits = {
