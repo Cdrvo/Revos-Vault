@@ -191,7 +191,7 @@ SMODS.DrawStep {
 
 SMODS.DrawStep { 
     key = 'all_card_no_card',
-    order = 0,
+    order = 9999999,
     func = function(self, layer)
         G.crv_nocards = G.crv_nocards or {}
         if self.ability.set == "Joker" and next(SMODS.find_card("j_crv_the_nameless_creature_that_shouldnotbe_spoken_of"))  then 

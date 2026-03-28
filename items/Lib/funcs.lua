@@ -1144,7 +1144,7 @@ function RevosVault.get_eligible_cards(mod, type, ret_center)
 	local tab_centers = {}
 	for k, v in pairs(vv) do
 		if mod then
-			if v ~= "UNAVAILABLE" and G.P_CENTERS[v] and G.P_CENTERS[v].mod and G.P_CENTERS[v].mod.id == mod then
+			if v ~= "UNAVAILABLE" and G.P_CENTERS[v] and G.P_CENTERS[v].mod and G.P_CENTERS[v].mod.id == mod and v.set ~= "Superior" then
 				tab[#tab + 1] = v
 				tab_centers[#tab_centers + 1] = G.P_CENTERS[v]
 			end
