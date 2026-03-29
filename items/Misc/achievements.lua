@@ -1,4 +1,11 @@
-SMODS.Achievement({
+RevosVault.Achievement = SMODS.Achievement :extend({
+    atlas = "crv_ach",
+    pos = {x=0,y=0},
+    hidden_pos = {x=1,y=0},
+    bypass_all_unlocked = true
+})
+
+RevosVault.Achievement ({
     key = "get_all_stickers",
     unlock_condition = function(self, args)
         if args.type == "howdidwegethere" then
@@ -7,7 +14,7 @@ SMODS.Achievement({
     end
 })
 
-SMODS.Achievement({
+RevosVault.Achievement ({
     key = "printing_away",
     unlock_condition = function(self, args)
         if args.type == "obtain_printer" then
@@ -16,7 +23,7 @@ SMODS.Achievement({
     end
 })
 
-SMODS.Achievement({
+RevosVault.Achievement ({
     key = "mega_printer",
     unlock_condition = function(self, args)
         if args.type == "megaify" then
@@ -25,7 +32,7 @@ SMODS.Achievement({
     end
 })
 
-SMODS.Achievement({
+RevosVault.Achievement ({
     key = "buckshotifying",
     unlock_condition = function(self, args)
         if args.type == "buckshotify" then
@@ -34,7 +41,7 @@ SMODS.Achievement({
     end
 })
 
-SMODS.Achievement({
+RevosVault.Achievement ({
     key = "vaultingify",
     unlock_condition = function(self, args)
         if args.type == "vaulting_it" then
@@ -43,7 +50,7 @@ SMODS.Achievement({
     end
 })
 
-SMODS.Achievement({
+RevosVault.Achievement ({
     key = "lame_card",
     unlock_condition = function(self, args)
         if args.type == "revoing_it" then
@@ -52,7 +59,7 @@ SMODS.Achievement({
     end
 })
 
-SMODS.Achievement({
+RevosVault.Achievement ({
     key = "welcome_mine",
     unlock_condition = function(self, args)
         if args.type == "gemming_it" then
@@ -62,7 +69,7 @@ SMODS.Achievement({
 })
 
 
-SMODS.Achievement({
+RevosVault.Achievement ({
     key = "pedro_mayhem",
     unlock_condition = function(self, args)
         if args.type == "pedro_go_brr" then
@@ -71,7 +78,7 @@ SMODS.Achievement({
     end
 })
 
-SMODS.Achievement({
+RevosVault.Achievement ({
     key = "cursed",
     unlock_condition = function(self, args)
         if args.type == "clovering_it" then
@@ -80,7 +87,7 @@ SMODS.Achievement({
     end
 })
 
-SMODS.Achievement({
+RevosVault.Achievement ({
     key = "purification",
     unlock_condition = function(self, args)
         if args.type == "purifying_it" then
@@ -89,7 +96,7 @@ SMODS.Achievement({
     end
 })
 
-SMODS.Achievement({
+RevosVault.Achievement ({
     key = "appreciation",
     unlock_condition = function(self, args)
         if args.type == "crv_appreciation" then
@@ -98,7 +105,7 @@ SMODS.Achievement({
     end
 })
 
-SMODS.Achievement({
+RevosVault.Achievement ({
     key = "twisted",
     unlock_condition = function(self, args)
         if args.type == "crv_twisted" then
@@ -107,7 +114,7 @@ SMODS.Achievement({
     end
 })
 
-SMODS.Achievement({
+RevosVault.Achievement ({
     key = "mythical",
     unlock_condition = function(self, args)
         if args.type == "crv_myths" then
@@ -116,7 +123,7 @@ SMODS.Achievement({
     end
 })
 
-SMODS.Achievement({
+RevosVault.Achievement ({
     key = "flip",
     unlock_condition = function(self, args)
         if args.type == "crv_iamtheone" then
@@ -128,7 +135,7 @@ SMODS.Achievement({
 
 
 -- last
-SMODS.Achievement({
+RevosVault.Achievement ({
     key = "secret_joker",
     hidden_text = true,
     unlock_condition = function(self, args)

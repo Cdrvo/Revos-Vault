@@ -49,6 +49,7 @@ RevosVault.C = {
 	SUP = HEX("f7baff"),
 	Continuity = HEX("96a0ff"),
 	Mystery = HEX("8a8a8a"),
+	REVO = HEX("7E7AFF"),
 	--[[BOONS = {
 		DEFAULT = HEX("e8b867"),
 		HAVE_BOONS = HEX("88beb0"),
@@ -183,6 +184,7 @@ function loc_colour(_c, _default)
 	loc.crv_deathcard = SMODS.Gradients["crv_deathcard"]
 	loc.crv_mythical = SMODS.Gradients["crv_mythical"]
 	loc.crv_clear = G.C.CLEAR
+	loc.crv_revo = RevosVault.C.REVO
 
 	return loc_old(_c, _default)
 end

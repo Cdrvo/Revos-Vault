@@ -506,3 +506,10 @@ SMODS.Atlas({
 	px = 42,
 	py = 42,
 })
+
+SMODS.Atlas({
+	key = "crv_ach",
+	path = "trophy.png",
+	px = 66,
+	py = 66,
+})
