@@ -1,13 +1,13 @@
 SMODS.Atlas({
-    key = "felisjokeria",
-    path = "Cross-Mod/felisjokeria/felisjokeria.png",
+    key = "felis_jokers",
+    path = "Cross-Mod/felisadditionsgallery/jokers.png",
     px = 71,
     py = 95
 })
 
 SMODS.Joker({
 	key = "peltprinter",
-	atlas = "felisjokeria",
+	atlas = "felis_jokers",
 	rarity = "crv_p",
 	cost = 10,
 	unlocked = true,
@@ -24,9 +24,9 @@ SMODS.Joker({
 		},
 	},
 	loc_vars = function(self, info_queue, card)
-		info_queue[#info_queue + 1] = G.P_CENTERS.m_felijo_plt_wlf
-		info_queue[#info_queue + 1] = G.P_CENTERS.m_felijo_plt_bny
-        info_queue[#info_queue + 1] = G.P_CENTERS.m_felijo_plt_gold
+		info_queue[#info_queue + 1] = G.P_CENTERS.m_feli_fag_plt_wlf
+		info_queue[#info_queue + 1] = G.P_CENTERS.m_feli_fag_plt_bny
+        info_queue[#info_queue + 1] = G.P_CENTERS.m_feli_fag_plt_gold
 		local cae = card.ability.extra
 		local num, den = SMODS.get_probability_vars(card, 1, cae.odds, "general_printer_seed_cause_im_lazy")
 		return {
@@ -35,8 +35,8 @@ SMODS.Joker({
 	end,
 	calculate = function(self, card, context)
 		if context.first_hand_drawn then
-            local selected_pelt = pseudorandom_element({"m_felijo_plt_wlf", "m_felijo_plt_bny"})
-			RevosVault.printer_apply(selected_pelt, "m_felijo_plt_gold", nil, nil, nil, "m_felijo_plt_olddata", nil)
+            local selected_pelt = pseudorandom_element({"m_feli_fag_plt_wlf", "m_feli_fag_plt_bny"})
+			RevosVault.printer_apply(selected_pelt, "m_feli_fag_plt_gold", nil, nil, nil, "m_feli_fag_plt_olddata", nil)
 		end
 	end,
 })

@@ -1,13 +1,13 @@
 SMODS.Atlas({
 	key = "revo_totems",
-	path = "Cross-Mod/felisjokeria/totems.png",
+	path = "Cross-Mod/felisadditionsgallery/totems.png",
 	px = 71,
 	py = 95,
 })
 
---[[FELIJO.Consumable({
-	key = "felijo_" .. "ttm_hd_printer",
-	set = "felijo_totem_parts",
+--[[FELI_FAG.Consumable({
+	key = "feli_fag_" .. "ttm_hd_printer",
+	set = "feli_fag_totem_parts",
 	config = {
 		is_totem_head = true,
 		tribe = "Printer",

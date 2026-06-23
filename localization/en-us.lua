@@ -3321,7 +3321,7 @@ return {
 					"{C:inactive}(Must have room)",
 				}
 			},
-			-- Feli's Jokeria below
+			-- Feli's Jokeria/Feli's Additions Gallery below
 			j_crv_peltprinter = {
 				name = "Pelt Printer",
 				text = {
