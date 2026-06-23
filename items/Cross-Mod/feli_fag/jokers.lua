@@ -1,13 +1,13 @@
 SMODS.Atlas({
-    key = "felisadditionsgallery",
-    path = "Cross-Mod/felisadditionsgallery/felisadditionsgallery.png",
+    key = "felis_jokers",
+    path = "Cross-Mod/felisadditionsgallery/jokers.png",
     px = 71,
     py = 95
 })
 
 SMODS.Joker({
 	key = "peltprinter",
-	atlas = "felisadditionsgallery",
+	atlas = "felis_jokers",
 	rarity = "crv_p",
 	cost = 10,
 	unlocked = true,
