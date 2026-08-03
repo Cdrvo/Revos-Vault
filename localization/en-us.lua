@@ -53,6 +53,24 @@ return {
 					"{C:chips}+#1#{} Chips",
 				},
 			},
+			j_crv_golden_banana = {
+				name = "Golden Banana",
+				text = {
+					"Each scored card has",
+					"a {C:green}#2# in #3#{} Chance to",
+					"give {C:money}+$#1#{} when scored",
+					"{C:green}#2# in #4#{} chance to",
+					"get destroyed at end of round"
+				},
+			},
+			j_crv_daily_news = {
+				name = "Daily News Joker",
+				text = {
+					"Has a {C:green}#1# in #2#{} chance to",
+					"Create a {C:red}Coupon Tag{} at",
+					"end of round"
+				},
+			},
 			-- Uncommon
 			j_crv_those_who_joke = {
 				name = "Those Who Joke",
