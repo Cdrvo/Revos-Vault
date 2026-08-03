@@ -10,6 +10,11 @@ SMODS.Enhancement({
 	overrides_base_rank = false,
 	any_suit = false,
 	always_scores = true,
+	attributes = {
+		"xmult",
+		"chance",
+		"destroy_card"
+	},
 	config = { extra = { xmult = 2, odds = 2 } },
 	loc_vars = function(self, info_queue, card)
 		local cae = card.ability.extra

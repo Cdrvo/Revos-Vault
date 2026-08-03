@@ -51,10 +51,41 @@ SMODS.Atlas({
 	frames = 4,
 })
 
+SMODS.Atlas({
+    key = "revo_tags",
+    path = "tags.png",
+    px = 34,
+    py = 34
+})
 -- sounds
 
 SMODS.Sound({
 	volume = 0.3,
 	key = "swoon",
 	path = "crv_swoon.ogg",
+})
+
+
+-- attributes
+
+SMODS.Attribute{
+    key = "banana",
+    keys = {
+        "j_gros_michel",
+        "j_cavendish"
+    },
+    alias = {
+        "food"
+    }
+}
+
+-- object types
+
+SMODS.ObjectType({
+	key = "Banana",
+	inject = function(self)
+		SMODS.ObjectType.inject(self)
+		self:inject_card(G.P_CENTERS.j_gros_michel)
+		self:inject_card(G.P_CENTERS.j_cavendish)
+	end,
 })

@@ -18,9 +18,11 @@ SMODS.Joker({
     attributes = {
 		"chips",
         "food",
+		"banana"
 	},
 	pools = {
 		Food = true,
+		Banana = true,
 	},
 	loc_vars = function(self, info_queue, card)
 		return {

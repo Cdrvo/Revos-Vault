@@ -21,6 +21,7 @@ Game.init_game_object = function(self)
 	local igo = init_game_object_old(self)
 	igo.crv_minispamton = {}
 	igo.crv_spamton_help = true
+	igo.crv_jimfinity = 0
 
 	igo.crv_fun = math.random(1, 500)
 	return igo

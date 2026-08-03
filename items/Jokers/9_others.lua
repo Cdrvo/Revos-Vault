@@ -26,7 +26,8 @@ SMODS.Joker({
         "food",
         "xmult",
         "xchips",
-        "chance"
+        "chance",
+		"banana"
     },
 	loc_vars = function(self, info_queue, card)
         local cae = card.ability.extra

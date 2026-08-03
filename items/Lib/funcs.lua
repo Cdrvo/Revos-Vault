@@ -168,3 +168,8 @@ RevosVault.FUNCS.nat = function()
 	return a
 end
 --]]
+
+RevosVault.FUNCS.add_tag = function(tag, silent)
+	add_tag(Tag(tag))
+	if not silent then play_sound('generic1') end
+end

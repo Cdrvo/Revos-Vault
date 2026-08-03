@@ -19,6 +19,7 @@ function loc_colour(_c, _default)
 	end
 	local loc = G.ARGS.LOC_COLOURS
 	loc.crv_polychrome = SMODS.Gradients["crv_polychrome"]
+	loc.crv_banana = SMODS.Gradients["crv_banana"]
 	return loc_old(_c, _default)
 end
 
@@ -29,6 +30,15 @@ SMODS.Gradient({
 	colours = {
 		HEX("ffaee5"),
 		HEX("fffc87"),
+	},
+	cycle = 5,
+})
+
+SMODS.Gradient({
+	key = "crv_banana",
+	colours = {
+		HEX("b5dc54"),
+		HEX("ffed81"),
 	},
 	cycle = 5,
 })
