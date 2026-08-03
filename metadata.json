@@ -1,0 +1,16 @@
+{
+	"id": "RevosVault",
+	"name": "Revo's Vault",
+	"display_name": "Revo's Vault",
+	"author": ["CodeRevo"],
+	"description": "Adds a lot of random stuff",
+	"prefix": "crv",
+	"main_file": "main.lua",
+	"priority": 1,
+	"version": "3.0.0-remake",
+	"dependencies": ["Steamodded (>=1.0.0~BETA-1814a)"],
+	"badge_colour": "7E7AFF",
+	"badge_text_colour": "40093A",
+	"allow_redistribution": true
+}
+

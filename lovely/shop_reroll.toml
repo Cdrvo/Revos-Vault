@@ -1,0 +1,16 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+# context check for timing
+
+[[patches]]
+[patches.pattern]
+target = 'functions/button_callbacks.lua'
+pattern = '''--save_run()'''
+position = 'after'
+payload = '''
+SMODS.calculate_context({crv_pre_reroll = true})
+'''
+match_indent = true
