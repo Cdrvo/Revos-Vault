@@ -22,6 +22,7 @@ Game.init_game_object = function(self)
 	igo.crv_minispamton = {}
 	igo.crv_spamton_help = true
 	igo.crv_jimfinity = 0
+	igo.crv_old_area_locations = {}
 
 	igo.crv_fun = math.random(1, 500)
 	return igo
@@ -397,15 +398,40 @@ G.FUNCS.go_to_menu = function(e)
 	RevosVault.FUNCS.spamton_setup()
 end
 
-
 local sort_hand_value_old = G.FUNCS.sort_hand_value
 function G.FUNCS.sort_hand_value(e)
 	sort_hand_value_old(e)
-	SMODS.calculate_context({crv_sort_hand = true, crv_ranks = true})
+	SMODS.calculate_context({ crv_sort_hand = true, crv_ranks = true })
 end
 
 local sort_hand_suit_old = G.FUNCS.sort_hand_suit
 function G.FUNCS.sort_hand_suit(e)
 	sort_hand_suit_old(e)
-	SMODS.calculate_context({crv_sort_hand = true, crv_suits = true})
+	SMODS.calculate_context({ crv_sort_hand = true, crv_suits = true })
+end
+
+local cardarea_align_cards_ref = CardArea.align_cards
+function CardArea:align_cards()
+	cardarea_align_cards_ref(self)
+	if self.config.type == "joker" then
+		local spin_value = 0.01
+		for k, card in ipairs(self.cards) do
+			if
+				card
+				and card.ability
+				and (
+					(RVF.has_cartridge(card, "c_crv_spin"))
+					or card.ability.crv_force_spin
+				)
+			then
+				if card.states.hover.is then
+					spin_value = 0.05
+				end
+				if card.states.drag.is then
+					spin_value = 0.05
+				end
+				card.T.r = card.T.r + spin_value*(G.GAME and G.GAME.crv_spin_mult or 1)
+			end
+		end
+	end
 end

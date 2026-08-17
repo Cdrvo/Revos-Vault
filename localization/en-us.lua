@@ -44,6 +44,14 @@ return {
 					"no rank or suit",
 				},
 			},
+			m_crv_honey = {
+				name = "Honey",
+				text = {
+					"{C:money}+$#1#{} when scored",
+					"{C:green}#2# in #3#{} chance to",
+					"return to hand",
+				},
+			},
 		},
 		Joker = {
 			-- Common
@@ -60,15 +68,38 @@ return {
 					"a {C:green}#2# in #3#{} Chance to",
 					"give {C:money}+$#1#{} when scored",
 					"{C:green}#2# in #4#{} chance to",
-					"get destroyed at end of round"
+					"get destroyed at end of round",
 				},
 			},
 			j_crv_daily_news = {
 				name = "Daily News Joker",
 				text = {
 					"Has a {C:green}#1# in #2#{} chance to",
-					"Create a {C:red}Coupon Tag{} at",
-					"end of round"
+					"create a {C:red}Coupon Tag{} at",
+					"end of round",
+				},
+			},
+			j_crv_henchman = {
+				name = "Henchman",
+				text = { "{C:mult}+#1#{} Mult" },
+			},
+			j_crv_rekoj = {
+				name = "Rekoj",
+				text = { "{C:chips}+#1#{} Chips" },
+			},
+			j_crv_collection = {
+				name = "Collection",
+				text = {
+					"Gains {C:mult}+#2#{} Mult",
+					"when buying a card",
+					"{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult)",
+				},
+			},
+			j_crv_bee = {
+				name = "Bee",
+				text = {
+					"Spreads scored {C:attention}Honey{} cards",
+					"to a random adjacent card",
 				},
 			},
 			-- Uncommon
@@ -91,8 +122,16 @@ return {
 					"if there are no {C:attention}Jokers{}",
 					"around this card",
 					"Resets at the end of ante",
-					"{C:inactive}(Currently {C:mult}+#2#{C:inactive} Mult)"
-				}
+					"{C:inactive}(Currently {C:mult}+#2#{C:inactive} Mult)",
+				},
+			},
+			j_crv_boss = {
+				name = "The Boss",
+				text = {
+					"{X:mult,C:white}X#1#{} Mult for",
+					"each {C:attention}Henchman{} in hand",
+					"(Currently {X:mult,C:white}X#2#{} Mult)",
+				},
 			},
 			-- Rare
 			j_crv_bocchi = {
@@ -301,27 +340,31 @@ return {
 			},
 			j_crv_majestic_four = {
 				name = "Majestic 4",
-				text = { "{X:mult,C:white}X#1#{} Mult if played",
-                 "hand contains", 
-                 "a {C:attention}Four of a Kind" },
+				text = {
+					"{X:mult,C:white}X#1#{} Mult if played",
+					"hand contains",
+					"a {C:attention}Four of a Kind",
+				},
 			},
 			j_crv_the_perfect_three = {
 				name = "The Perfect 3",
-				text = { "{X:mult,C:white}X#1#{} Mult if played", 
-                "hand contains"
-                ,"a {C:attention}Three of a Kind" },
+				text = {
+					"{X:mult,C:white}X#1#{} Mult if played",
+					"hand contains",
+					"a {C:attention}Three of a Kind",
+				},
 			},
-            j_crv_kon = {
-                name = "Kon",
-                text = {
-                    "Use to destroy",
-                    "all the cards in",
-                    "the next {C:attention}scored hand.",
-                    "Gains {C:chips}+#1#{} Chips",
-                    "per destroyed card",
-                    "{C:inactive}(Currently {C:chips}+#2#{C:inactive} Chips)"
-                }
-            },
+			j_crv_kon = {
+				name = "Kon",
+				text = {
+					"Use to destroy",
+					"all the cards in",
+					"the next {C:attention}scored hand.",
+					"Gains {C:chips}+#1#{} Chips",
+					"per destroyed card",
+					"{C:inactive}(Currently {C:chips}+#2#{C:inactive} Chips)",
+				},
+			},
 			j_crv_jimfinity = {
 				name = "Jimfinity",
 				text = {
@@ -331,10 +374,36 @@ return {
 					"{C:green}#3# in #2#{} chance to",
 					"create a {C:attention}Jimfinity{} tag",
 					"when destroyed",
-					"{C:inactive}(Currently {X:mult,C:white}X#1{C:inactive} Mult)"
-				}
+					"{C:inactive}(Currently {X:mult,C:white}X#1{C:inactive} Mult)",
+				},
 			},
 			-- Printer
+			j_crv_blueprinter = {
+				name = "Blueprinter",
+				text = {
+					"When {C:attention}Blind{} is selected",
+					"print a {C:attention}Blueprint{}",
+					"{C:inactive}(Must have room)"
+				}
+			},
+			j_crv_gros_printer = {
+				name = "Gros Printer",
+				text = {
+					"When {C:attention}Blind{} is selected",
+					"print a random {C:attention}Banana{}",
+					"{C:green}#1# in #2#{} chance to",
+					"print {C:dark_edition}Holy Banana{}",
+					"{C:inactive}(Must have room)"
+				}
+			},
+			j_crv_rusty_printer = {
+				name = "Rusty Printer",
+				text = {
+					"When {C:attention}Blind{} is selected",
+					"print a {C:attention}Brainstorm{}",
+					"{C:inactive}(Must have room)"
+				}
+			},
 			-- Legendary
 			j_crv_the_ace = {
 				name = "The Ace",
@@ -420,6 +489,67 @@ return {
 		},
 		Tarot = {},
 		Voucher = {},
+
+		-- mod
+
+		crv_cartridge = {
+			c_crv_glitchy = {
+				name = "Glitchy Cartridge",
+				text = {
+					"Copies the card",
+					"printed by the",
+					"applied {C:red}Printer{}",
+					"{C:inactive}(Must have room)"
+				}
+			},
+			c_crv_mixed = {
+				name = "Mixed Cartridge",
+				text = {
+					"Cards printed",
+					"by the applied {C:red}Printer{}",
+					"has a random {C:dark_edition}Edition"
+				}
+			},
+			c_crv_ghostly = {
+				name = "Ghostly Cartridge",
+				text = {
+					"Cards printed",
+					"by the applied {C:red}Printer{}",
+					"fills {C:dark_edition}0{} slots"
+				}
+			},
+			c_crv_golden = {
+				name = "Golden Cartridge",
+				text = {
+					"Cards printed",
+					"by the applied {C:red}Printer{}",
+					"has double the sell cost"
+				}
+			},
+			c_crv_soul = {
+				name = "Cartridge Soul",
+				text = {
+					"When applied {C:red}Printer",
+					"is triggered,",
+					"has a small chance to",
+					"create {C:dark_edition}The Soul{}"
+				}
+			},
+			c_crv_spin = {
+				name = "Spinny Cartridge",
+				text = {
+					"Applied {C:red}Printer{}",
+					"continuously spins"
+				}
+			},
+			c_crv_anti = {
+				name = "Anti Cartridge",
+				text = {
+					"Applied {C:red}Printer{}",
+					"becomes {C:dark_edition}Negative{}"
+				}
+			}
+		}
 	},
 	misc = {
 		achievement_descriptions = {},
@@ -428,16 +558,24 @@ return {
 		challenge_names = {},
 		collabs = {},
 		dictionary = {
+			-- UI
+			crv_cartridges = "Cartridges",
 			-- Rariities
 			k_crv_holy = "Holy Banana",
+			k_crv_printer = "Printer",
 			-- Text
 			k_crv_split = "Split!",
 			k_crv_half = "Halved!",
 			k_crv_ready = "Ready",
-            k_crv_destroyed = "Destroyed"
+			k_crv_destroyed = "Destroyed",
+			k_crv_sticky = "Sticky!",
+			-- Consumabels
+			k_crv_cartridge = "Cartridge",
+			b_crv_cartridge_cards = "Cartridges",
 		},
 		high_scores = {},
 		labels = {
+			-- Other
 			crv_spamton_buff = "Spamton Buff",
 		},
 		poker_hand_descriptions = {},

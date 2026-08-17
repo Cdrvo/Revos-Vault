@@ -2,6 +2,7 @@ RevosVault = SMODS.current_mod
 SMDOS = SMODS
 RevosVault.FUNCS = {}
 RevosVault.PATHS = {}
+RevosVault.MISC = {}
 
 SMODS.current_mod.optional_features = function()
 	return {
@@ -14,6 +15,7 @@ SMODS.current_mod.optional_features = function()
 end
 
 RevosVault.PATHS.Jokers = NFS.getDirectoryItems(RevosVault.path .. "items/Jokers")
+RevosVault.PATHS.Consumables = NFS.getDirectoryItems(RevosVault.path .. "items/Consumables")
 RevosVault.PATHS.Misc = NFS.getDirectoryItems(RevosVault.path .. "items/Misc")
 RevosVault.PATHS.Lib = NFS.getDirectoryItems(RevosVault.path .. "items/Lib")
 
@@ -27,6 +29,17 @@ for k, file in ipairs(RevosVault.PATHS.Jokers) do
 		end
 	else
 		SMODS.load_file("items/Jokers/" .. file)()
+	end
+end
+
+for k, file in ipairs(RevosVault.PATHS.Consumables) do
+	local file_no_lua = string.gsub(file, ".lua", "")
+	if RevosVault.config[file_no_lua .. "_enabled"] ~= nil then
+		if RevosVault.config[file_no_lua .. "_enabled"] ~= false then
+			SMODS.load_file("items/Consumables/" .. file)()
+		end
+	else
+		SMODS.load_file("items/Consumables/" .. file)()
 	end
 end
 
@@ -67,8 +80,47 @@ RevosVault.calculate = function(mod, context)
 			v:juice_up()
 		end
 	end
+	if context.printer_trigger and context.printer and context.printer.ability.crv_cartridges then
+		local p, card = context.printer, context.card_made.center
+		local extra = false
+
+		local to_sort = {}
+
+		for k, v in pairs(p.ability.crv_cartridges) do
+			to_sort[#to_sort + 1] = k
+		end
+
+		table.sort(to_sort, function(a, b)
+			return G.P_CENTERS[a].crv_priority < G.P_CENTERS[b].crv_priority
+		end)
+
+		for k, v in pairs(to_sort) do
+			if G.P_CENTERS[v].crv_calculate then
+				G.P_CENTERS[v]:crv_calculate(context.printer, context.card_made)
+				extra = true
+			end
+		end
+
+		if not extra then
+			--[[if p.ability.crv_cartridges["c_crv_glitchy"] then
+				if RVF.has_room(G.jokers) then
+					SMODS.copy_card(card)
+					RVF.msg(p, "Another!")
+				else
+					RVF.msg(p, localize("k_no_room_ex"))
+				end
+			end]]
+		end
+	end
 end
 
+SMODS.current_mod.menu_cards = function()
+	return {
+		{ key = "j_crv_blueprinter" },
+		{ key = "j_crv_gros_printer" },
+		remove_original = true,
+	}
+end
 
 -- Credits system from Hot Potato // fixed
 local smcmb = SMODS.create_mod_badges

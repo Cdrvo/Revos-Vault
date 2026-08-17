@@ -105,3 +105,58 @@ SMODS.Joker{
 		end
 	end
 }
+
+SMODS.Joker({
+	key = "boss",
+	atlas = "revo_jokers",
+	cost = 5,
+	unlocked = true,
+	discovered = false,
+	blueprint_compat = true,
+	rarity = 2,
+	pos = {
+		x = 4,
+		y = 4,
+	},
+	config = {
+		extra = {
+			xmult = 2,
+		},
+	},
+	crv_credits = {
+		art = {"Astro"},
+	},
+	attributes = {
+		"xmult",
+		"joker",
+		"scaling"
+	},
+	loc_vars = function(self, info_queue, card)
+		local cae = card.ability.extra
+		local henchmans = 1
+		if G.jokers and G.jokers.cards then
+			for k, v in pairs(G.jokers.cards) do
+				if v.config.center.key == "j_crv_henchman" then
+					henchmans = henchmans + 1
+				end
+			end
+		end
+		return {
+			vars = { cae.xmult,cae.xmult*henchmans },
+		}
+	end,
+	calculate = function(self, card, context)
+		local cae = card.ability.extra
+		if context.joker_main then
+			local henchmans = 1
+			for k, v in pairs(G.jokers.cards) do
+				if v.config.center.key == "j_crv_henchman" then
+					henchmans = henchmans + 1
+				end
+			end
+			return {
+				xmult = cae.xmult * henchmans,
+			}
+		end
+	end,
+})

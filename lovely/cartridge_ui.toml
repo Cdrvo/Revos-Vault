@@ -1,0 +1,19 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+# generate_card_ui()
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = "if not hide_desc and card and card.ability and (card.ability.extra_slots_used or 0) ~= 0 then"
+match_indent = true
+position = "before"
+payload = '''
+if card and card.ability and card.ability.crv_cartridges then
+    for k,v in pairs(card.ability.crv_cartridges) do
+            info_queue[#info_queue+1] = G.P_CENTERS[k]
+        end
+    end
+'''

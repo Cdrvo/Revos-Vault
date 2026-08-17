@@ -57,6 +57,13 @@ SMODS.Atlas({
     px = 34,
     py = 34
 })
+
+SMODS.Atlas({
+    key = "car_holder",
+    path = "placeholder.png",
+    px = 34,
+    py = 34
+})
 -- sounds
 
 SMODS.Sound({
@@ -79,6 +86,9 @@ SMODS.Attribute{
     }
 }
 
+SMODS.Attribute{
+    key = "printer",
+}
 -- object types
 
 SMODS.ObjectType({

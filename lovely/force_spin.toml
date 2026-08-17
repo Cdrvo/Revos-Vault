@@ -1,0 +1,17 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+# spin that boi
+[[patches]]
+[patches.pattern]
+target = "cardarea.lua"
+pattern = "                card.T.r = 0.1*(-#self.cards/2 - 0.5 + k)/(#self.cards)+ (G.SETTINGS.reduced_motion and 0 or 1)*0.02*math.sin(2*G.TIMERS.REAL+card.T.x)"
+match_indent = true
+position = "at"
+payload = '''
+if not card.ability.crv_force_spin and not RVF.has_cartridge(card, "c_crv_spin") then
+   card.T.r = 0.1*(-#self.cards/2 - 0.5 + k)/(#self.cards)+ (G.SETTINGS.reduced_motion and 0 or 1)*0.02*math.sin(2*G.TIMERS.REAL+card.T.x)
+end
+'''
