@@ -413,7 +413,7 @@ end
 local cardarea_align_cards_ref = CardArea.align_cards
 function CardArea:align_cards()
 	cardarea_align_cards_ref(self)
-	if self.config.type == "joker" then
+	if self.config.type == "joker" or self.config.type == "title" then
 		local spin_value = 0.01
 		for k, card in ipairs(self.cards) do
 			if

@@ -15,3 +15,22 @@ if not card.ability.crv_force_spin and not RVF.has_cartridge(card, "c_crv_spin")
    card.T.r = 0.1*(-#self.cards/2 - 0.5 + k)/(#self.cards)+ (G.SETTINGS.reduced_motion and 0 or 1)*0.02*math.sin(2*G.TIMERS.REAL+card.T.x)
 end
 '''
+[[patches]]
+[patches.pattern]
+target = "cardarea.lua"
+pattern = '''
+if self.config.type == 'title' or (self.config.type == 'voucher' and #self.cards == 1) then
+        for k, card in ipairs(self.cards) do
+            if not card.states.drag.is and not card.disable_align then
+                card.T.r = 0.2*(-#self.cards/2 - 0.5 + k)/(#self.cards)+ (G.SETTINGS.reduced_motion and 0 or 1)*0.02*math.sin(2*G.TIMERS.REAL+card.T.x)
+'''
+match_indent = true
+position = "at"
+payload = '''
+if self.config.type == 'title' or (self.config.type == 'voucher' and #self.cards == 1) then
+        for k, card in ipairs(self.cards) do
+            if not card.states.drag.is and not card.disable_align then
+            if not card.ability.crv_force_spin and not RVF.has_cartridge(card, "c_crv_spin") then
+                card.T.r = 0.2*(-#self.cards/2 - 0.5 + k)/(#self.cards)+ (G.SETTINGS.reduced_motion and 0 or 1)*0.02*math.sin(2*G.TIMERS.REAL+card.T.x)
+            end
+'''

@@ -82,7 +82,7 @@ function RVF.card_position(card, area)
 end
 
 function RVF.msg(card, message)
-    card_eval_status_text(card, "extra", nil, nil, nil, { message = message })
+	card_eval_status_text(card, "extra", nil, nil, nil, { message = message })
 end
 
 G.FUNCS.crv_use_joker = function(e)
@@ -101,7 +101,6 @@ G.FUNCS.can_crv_use_joker = function(e)
 	end
 end
 
-
 RevosVault.FUNCS.swoon = function()
 	RVF.spamton_setup()
 	RVF.do_event(function()
@@ -119,12 +118,11 @@ RevosVault.FUNCS.swoon = function()
 	end)
 end
 
-
 RevosVault.FUNCS.has_room = function(area, extra, num)
 	if not num then
-    	return #area.cards < area.config.card_limit+(extra or 0)
+		return #area.cards < area.config.card_limit + (extra or 0)
 	else
-		return (area.config.card_limit+(extra or 0) ) - #area.cards
+		return (area.config.card_limit + (extra or 0)) - #area.cards
 	end
 end
 --
@@ -143,12 +141,14 @@ end
 
 RevosVault.FUNCS.add_tag = function(tag, silent)
 	add_tag(Tag(tag))
-	if not silent then play_sound('generic1') end
+	if not silent then
+		play_sound("generic1")
+	end
 end
 
 function RevosVault.FUNCS.find_enhancement(check, compare) --idk
-    local ret = false
-	if not compare or (compare and type(compare) ~= "table") then 
+	local ret = false
+	if not compare or (compare and type(compare) ~= "table") then
 		for k, v in pairs(G.playing_cards) do
 			if SMODS.has_enhancement(v, check) then
 				ret = true
@@ -161,11 +161,11 @@ function RevosVault.FUNCS.find_enhancement(check, compare) --idk
 				truenum = truenum + 1
 			end
 		end
-		if op == "more" and truenum>=num then
+		if op == "more" and truenum >= num then
 			ret = true
-		elseif op == "less" and truenum<=num then
+		elseif op == "less" and truenum <= num then
 			ret = true
-		elseif op == "exact" and truenum==num then
+		elseif op == "exact" and truenum == num then
 			ret = true
 		end
 	end
@@ -173,9 +173,11 @@ function RevosVault.FUNCS.find_enhancement(check, compare) --idk
 end
 
 function RevosVault.FUNCS.highlight(area, amount)
-	if not area then return end
+	if not area then
+		return
+	end
 	if area and area.highlighted then
-		if #area.highlighted>(amount or 0) then
+		if #area.highlighted > (amount or 0) then
 			return true, area.highlighted
 		end
 	end
@@ -206,7 +208,7 @@ RVF.UI.move_area = function(area, move_to, back, reset)
 		if not ez[area] or reset then
 			ez[area] = {
 				x = G[area].T.x,
-				y = G[area].T.y
+				y = G[area].T.y,
 			}
 		end
 
@@ -217,30 +219,83 @@ end
 
 -- the special function
 
-RVF.printer_create = function(card, make, args)
-	args = args or {}
-	local the_key, ccard = nil, nil
+RVF.printer_create = function(card, make)
+	local the_key, ccard, context = nil, nil, false
 
-	-- voucher check / args later
+	if make.set == "Voucher" then
+		ccard = SMODS.add_card{
+			set = "Voucher",
+			key = make.key,
+			area = G.play
+		}
+		RVF.redeem(ccard, true)
+		context = true
+	else
+		make.area = make.area or G.jokers
 
-	if make and RVF.has_room(G.jokers) then
-		if type(make) ~= "function" then
-			the_key = make.key
-			ccard = SMODS.add_card{
-				key = make.key,
-				area = make.area or G.jokers,
-				edition = make.edition,
-				no_edition = not make.edition
-			}
+		if
+			make
+			and (
+				RVF.has_room(make.area)
+				or RVF.has_cartridge(card, "c_crv_ghostly")
+				or make.area == G.deck
+				or make.area == G.hand
+				or (make.edition and make.edition == "e_negative")
+			)
+		then
+			if type(make) ~= "function" then
+				ccard = SMODS.add_card({
+					set = make.set,
+					legendary = make.legendary,
+					key = make.key,
+					area = make.area,
+					edition = make.edition,
+					no_edition = not make.edition,
+					force_stickers = make.stickers,
+				})
+			else
+				make()
+			end
+			context = true
 		else
-			make()
+			RVF.msg(card, localize("k_no_room_ex"))
+		end
+	end
+
+	if context and not make.no_context then
+			SMODS.calculate_context({
+				printer_trigger = true,
+				printer = card,
+				card_made = { key = make.key or ccard.config.center.key, center = ccard, set = make.set or ccard.ability.set },
+			}) 
 		end
 
-		SMODS.calculate_context({printer_trigger = true, printer = card, card_made = {key = the_key, center = ccard}}) -- for cartridges and maybe some jokers in the future
+	return ccard
+end
 
-	else
-		RVF.msg(card, localize("k_no_room_ex"))
+function RVF.redeem(card, free)
+	local old_state = G.STATE
+	G.GAME.crv_old_state = G.GAME.crv_old_state or {}
+	if not G.GAME.crv_old_state.voucher_redeem then
+		G.GAME.crv_old_state.voucher_redeem = G.STATE
 	end
+
+	if free then
+		card.cost = 0
+	end
+	card:redeem()
+	G.E_MANAGER:add_event(Event({
+		trigger = "after",
+		delay = 1,
+		func = function()
+			if #G.play.cards<=1 then
+				G.STATE = G.GAME.crv_old_state.voucher_redeem or old_state
+				G.GAME.crv_old_state.voucher_redeem = nil
+			end
+			card:start_dissolve()
+			return true
+		end,
+	}))
 end
 
 -- Miniton related functions
@@ -253,9 +308,9 @@ function RevosVault.FUNCS.spamton_setup()
 	MiniSpamton_table.active = false
 	RevosVault.FUNCS.convert_pixels = function(val, reverse)
 		if reverse then
-			return val * (G.TILESCALE*G.TILESIZE)
+			return val * (G.TILESCALE * G.TILESIZE)
 		end
-		return val / (G.TILESCALE*G.TILESIZE)
+		return val / (G.TILESCALE * G.TILESIZE)
 	end
 	MiniSpamton_table.window_width = RevosVault.FUNCS.convert_pixels(MiniSpamton_table.window_width)
 	MiniSpamton_table.window_height = RevosVault.FUNCS.convert_pixels(MiniSpamton_table.window_height)

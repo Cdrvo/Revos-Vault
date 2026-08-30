@@ -6,14 +6,20 @@ SMODS.ConsumableType({
 	text_colour = G.C.WHITE,
 })
 
-local function fah(t)
+local function fah(thing)
 	local a = 0
-	for k, v in pairs(t) do
+	for k, v in pairs(thing) do
 		a = a + 1
 	end
 	return a
 end
 
+local function cart_blacklist(cart, card)
+	if card.config.center.crv_cartridge_blacklist and card.config.center.crv_cartridge_blacklist[cart] then
+		return true
+	end
+	return false
+end
 RevosVault.Cartridge = SMODS.Consumable:extend({
 	set = "crv_cartridge",
 	crv_priority = 1,
@@ -22,17 +28,10 @@ RevosVault.Cartridge = SMODS.Consumable:extend({
 			local _, cards = RVF.highlight(G.jokers)
 			if
 				#cards == 1
+				and cards[1].config.center.attributes
 				and cards[1].config.center.attributes.printer
-				and (
-					not cards[1].ability.crv_cartridges
-					or (
-						cards[1].ability.crv_cartridges
-						and (
-							fah(cards[1].ability.crv_cartridges) > 0
-							and not cards[1].ability.crv_cartridges[card.config.center.key]
-						)
-					)
-				)
+				and not cart_blacklist(card.config.center.key, cards[1])
+				and not RVF.has_cartridge(cards[1], card.config.center.key)
 			then
 				return true
 			end
@@ -45,7 +44,7 @@ RevosVault.Cartridge = SMODS.Consumable:extend({
 		cards[1].ability.crv_cartridges[card.config.center.key] = true
 
 		if self.apply then
-			self:apply(card, cards[1])
+			self:apply(cards[1])
 		end
 	end,
 })
@@ -53,17 +52,21 @@ RevosVault.Cartridge = SMODS.Consumable:extend({
 RevosVault.Cartridge({
 	key = "glitchy",
 	cost = 6,
-	atlas = "car_holder",
+	atlas = "revo_cartridges",
 	pos = {
 		x = 0,
 		y = 0,
 	},
 	crv_calculate = function(self, printer, made_card)
-		if RVF.has_room(G.jokers) then
-			SMODS.copy_card(made_card.center)
-			RVF.msg(printer, "Another!")
-		else
-			RVF.msg(printer, localize("k_no_room_ex"))
+		if printer.config.center.key == "j_crv_voucher_printer" then
+			RVF.printer_create(card, { set = "Voucher", no_context = true })
+		else --me when hardcoding
+			if RVF.has_room(G.jokers) then
+				SMODS.copy_card(made_card.center)
+				RVF.msg(printer, "Another!")
+			else
+				RVF.msg(printer, localize("k_no_room_ex"))
+			end
 		end
 	end,
 })
@@ -71,9 +74,9 @@ RevosVault.Cartridge({
 RevosVault.Cartridge({
 	key = "mixed",
 	cost = 6,
-	atlas = "car_holder",
+	atlas = "revo_cartridges",
 	pos = {
-		x = 0,
+		x = 1,
 		y = 0,
 	},
 	crv_priority = 0,
@@ -87,25 +90,9 @@ RevosVault.Cartridge({
 RevosVault.Cartridge({
 	key = "ghostly",
 	cost = 6,
-	atlas = "car_holder",
+	atlas = "revo_cartridges",
 	pos = {
-		x = 0,
-		y = 0,
-	},
-	crv_priority = 0,
-	crv_calculate = function(self, printer, made_card)
-		if made_card then
-			made_card.center.ability.extra_slots_used = -1
-		end
-	end,
-})
-
-RevosVault.Cartridge({
-	key = "ghostly",
-	cost = 6,
-	atlas = "car_holder",
-	pos = {
-		x = 0,
+		x = 2,
 		y = 0,
 	},
 	crv_priority = 0,
@@ -119,9 +106,9 @@ RevosVault.Cartridge({
 RevosVault.Cartridge({
 	key = "golden",
 	cost = 7,
-	atlas = "car_holder",
+	atlas = "revo_cartridges",
 	pos = {
-		x = 0,
+		x = 3,
 		y = 0,
 	},
 	crv_priority = 0,
@@ -129,6 +116,7 @@ RevosVault.Cartridge({
 		if made_card then
 			made_card.center.extra_value = made_card.center.extra_value or 0
 			made_card.center.extra_value = made_card.center.extra_value + made_card.center.sell_cost
+			made_card.center:set_cost()
 		end
 	end,
 })
@@ -136,9 +124,9 @@ RevosVault.Cartridge({
 RevosVault.Cartridge({
 	key = "soul",
 	cost = 6,
-	atlas = "car_holder",
+	atlas = "revo_cartridges",
 	pos = {
-		x = 0,
+		x = 4,
 		y = 0,
 	},
 	config = {
@@ -167,27 +155,39 @@ RevosVault.Cartridge({
 RevosVault.Cartridge({
 	key = "spin",
 	cost = 6,
-	atlas = "car_holder",
-	pos = {
-		x = 0,
-		y = 0,
-	},
+	atlas = "revo_cartridges",
 	config = {
+		crv_force_spin = true
+	},
+	pos = {
+		x = 5,
+		y = 0,
 	},
 })
 
 RevosVault.Cartridge({
 	key = "anti",
 	cost = 8,
-	atlas = "car_holder",
+	atlas = "revo_cartridges",
 	pos = {
-		x = 0,
+		x = 6,
 		y = 0,
 	},
 	config = {
 	},
 	apply = function(self, printer)
-		printer:set_edition({"e_negative"})
+		printer:set_edition("e_negative")
 	end,
 	
+})
+
+RevosVault.Cartridge({
+	key = "bonus",
+	cost = 8,
+	atlas = "wip",
+	pos = {x=2,y=0},
+	config = {},
+	crv_calculate = function(self, printer, made_card, card)
+		RVF.add_tag(SMODS.poll_object({type = 'Tag'}))
+	end
 })

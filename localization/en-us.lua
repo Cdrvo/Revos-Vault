@@ -386,6 +386,16 @@ return {
 					"{C:inactive}(Must have room)"
 				}
 			},
+			j_crv_broken_blueprinter = {
+				name = "Broken Blueprinter",
+				text = {
+					"When {C:attention}Blind{} is selected",
+					"print a {C:attention}Blueprint{}",
+					"{C:green}#1# in #2#{} chance to",
+					"{C:red}self-destruct{}",
+					"{C:inactive}(Must have room)"
+				}
+			},
 			j_crv_gros_printer = {
 				name = "Gros Printer",
 				text = {
@@ -402,6 +412,85 @@ return {
 					"When {C:attention}Blind{} is selected",
 					"print a {C:attention}Brainstorm{}",
 					"{C:inactive}(Must have room)"
+				}
+			},
+			j_crv_default_printer = {
+				name = "Default Printer",
+				text = {
+					"When {C:attention}Blind{} is selected",
+					"print a random",
+					"{C:attention}Consumable{},{C:attention} Joker{}",
+					"or {C:attention}Playing Card{}",
+					"{C:inactive}(Must have room)"
+				}
+			},
+			j_crv_joker_printer = {
+				name = "Joker Printer",
+				text = {
+					"When {C:attention}Blind{} is selected",
+					"print a {C:attention}Joker{}",
+					"{C:inactive}(Must have room)"
+				}
+			},
+			j_crv_obelisk_printer = {
+				name = "Obelisk Printer",
+				text = {
+					"When {C:attention}Blind{} is selected",
+					"print a {C:attention}Obelisk{}",
+					"{C:inactive}(Must have room)"
+				}
+			},
+			j_crv_golden_printer = {
+				name = "Golden Printer",
+				text = {
+					"When {C:attention}Blind{} is selected",
+					"print a random "
+					,"{C:money}Economy{} Joker.",
+					"{C:inactive}(Must have room)"
+				}
+			},
+			j_crv_spectral_printer = {
+				name = "Spectral Printer",
+				text = {
+					"When {C:attention}Blind{} is selected",
+					"print a random",
+					"{C:dark_edition}Spectral{} Card",
+					"{C:inactive}(Must have room)"
+				}
+			},
+			j_crv_legendary_printer = {
+				name = "Legendary Printer",
+				text = {
+					"When {C:attention}Blind{} is selected",
+					"{C:green}#1# in #2#{} chance to",
+					"print a random",
+					"{C:attention}Perishable{} and {C:dark_edition}Negative{}",
+					"{C:legendary,E:1}Legendary{} Joker.",
+					"{C:inactive}(Must have room)"
+				}
+			},
+			j_crv_voucher_printer = {
+				name = "Voucher Printer",
+				text = {
+					"When {C:attention}Blind{} is selected,",
+					"print a random"
+					,"{C:attention}Voucher{}"
+				},
+			},
+			j_crv_food_printer = {
+				name = "Food Printer",
+				text = {
+					"When {C:attention}Blind{} is selected",
+					"print a random",
+					"{C:attention}Food{} Joker",
+				},
+			},
+			j_crv_fax_machine = {
+				name = "Fax Machine",
+				text = {
+					"When {C:attention}Blind{} is selected",
+					"print a random",
+					"{C:attention}Contract{}"
 				}
 			},
 			-- Legendary
@@ -492,13 +581,26 @@ return {
 
 		-- mod
 
+		crv_Contracts = {
+			c_crv_glass_contract = {
+				name = "Glass Contract",
+				text = {
+					"Upgrades up to {C:attention}1{}",
+					"selected {C:attention}Glass Cards{}",
+					"to {C:dark_edition}Bulletproof Glass{}",
+					"{C:green}#1# in #2#{} chance to",
+					"destroy the card"
+				}
+			}
+		},
+
 		crv_cartridge = {
 			c_crv_glitchy = {
 				name = "Glitchy Cartridge",
 				text = {
-					"Copies the card",
-					"printed by the",
-					"applied {C:red}Printer{}",
+					"Wheb applied {C:red}Printer{}",
+					"is triggered,",
+					"retrigger the {C:red}Printer{}",
 					"{C:inactive}(Must have room)"
 				}
 			},
@@ -547,6 +649,14 @@ return {
 				text = {
 					"Applied {C:red}Printer{}",
 					"becomes {C:dark_edition}Negative{}"
+				}
+			},
+			c_crv_bonus = {
+				name = "Bonus Cartridge",
+				text = {
+					"When applied {C:red}Printer",
+					"is triggered,",
+					"creates a random {C:attention}Tag{}"
 				}
 			}
 		}
