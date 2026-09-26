@@ -160,3 +160,59 @@ SMODS.Joker({
 		end
 	end,
 })
+
+SMODS.Keybind({
+	key_pressed = "f1",
+	event = "pressed",
+	action = function(self)
+		SMODS.calculate_context({ crv_call_for_help = true })
+	end,
+})
+SMODS.Joker({ 
+	key = "spamton",
+	atlas = "revo_jokers",
+	rarity = 2,
+	cost = 4,
+	unlocked = true,
+	discovered = false,
+	blueprint_compat = false,
+	pos = {
+		x = 2,
+		y = 3,
+	},
+	config = {
+		extra = {
+			ready = true,
+			hands = 2,
+			discards = 1
+		},
+	},
+	crv_credits = {
+		art = { "Nyxel" },
+	},
+	loc_vars = function(self, info_queue, card)
+		local text = localize("s_crv_not_ready")
+		if card.ability.extra.ready then
+			text = localize("s_crv_ready")
+		end
+		return{vars={card.ability.extra.hands, card.ability.extra.discards, text, colours = {(card.ability.extra.ready and G.C.GREEN) or (G.C.RED)}}}
+	end,
+	attributes = {
+		"hands",
+		"discards"
+	},
+	calculate = function(self, card, context)
+		if context.crv_call_for_help and not context.blueprint and card.ability.extra.ready and G.GAME.blind and G.GAME.blind.in_blind then
+			ease_hands_played(card.ability.extra.hands)
+			ease_discard(card.ability.extra.discards)
+			card.ability.extra.ready = false
+		end
+		if context.ante_end and not context.blueprint then
+			card.ability.extra.ready = true
+			return{
+				message = localize("s_crv_ready")
+			}
+		end
+	end
+	
+})

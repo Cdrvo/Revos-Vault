@@ -991,40 +991,6 @@ SMODS.Joker({
 	end,
 })
 
-SMODS.Keybind({
-	key_pressed = "f1",
-	event = "pressed",
-	action = function(self)
-		SMODS.calculate_context({ crv_call_for_help = true })
-	end,
-})
-
-SMODS.Joker({ 
-	key = "spamton",
-	atlas = "revo_jokers",
-	rarity = 3,
-	cost = 7,
-	unlocked = true,
-	discovered = false,
-	blueprint_compat = false,
-	pos = {
-		x = 2,
-		y = 3,
-	},
-	config = {
-		extra = {
-			ready = true,
-		},
-	},
-	crv_credits = {
-		art = { "Nyxel" },
-	},
-	attributes = {
-		"modify_card",
-	},
-	
-})
-
 SMODS.Joker({
 	key = "the_computer",
 	atlas = "revo_jokers",

@@ -143,10 +143,6 @@ SMODS.Joker({
 	key = "default_printer",
 	atlas = "revo_jokers",
 	rarity = "crv_printer",
-	--[[fg_data = {
-			is_alternate = false,
-			alternate_key ='j_crv_aberration_printer'
-		},	]]
 	cost = 13,
 
 	discovered = false,

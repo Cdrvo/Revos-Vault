@@ -212,3 +212,55 @@ SMODS.Joker({
 		end
 	end,
 })
+
+SMODS.Joker({
+	key = "chaetophobia",
+	atlas = "revo_jokers",
+	rarity = 4,
+	pos = { x = 6, y = 6 },
+	soul_pos = { x = 7, y = 6 },
+	config = {
+		extra = {
+			hand_size = 1,
+			remove = 0
+		},
+	},
+	attributes = {
+		"passive",
+		"hand_size",
+		"5"
+	},
+	blueprint_compat = false,
+	cost = 20,
+	loc_vars = function(self, info_queue, card)
+		local cae = card.ability.extra
+		return {
+			vars = { cae.hand_size },
+		}
+	end,
+	calculate = function(self, card, context)
+		local cae = card.ability.extra
+		if context.first_hand_drawn and not context.blueprint then
+			local a = 0
+			for k,v in pairs(G.hand.cards) do
+				if v.base.nominal < 5 then
+					a = a + 1
+				end
+			end
+			if a > 0 then
+				G.hand:change_size(a*cae.hand_size)
+				cae.remove = a
+				RVF.msg(card, "+" .. a)
+				card:juice_up()
+			end
+		end
+		if context.end_of_round and not context.blueprint and context.main_eval then
+			G.hand:change_size(-cae.remove)
+			cae.remove = 0
+		end
+	end,
+	crv_credits = {
+		art = { "thingifithinker" },
+		idea = {"theOfficialFem, CapitalChirp"}
+	},
+})

@@ -178,6 +178,17 @@ return {
 					"(Currently {X:mult,C:white}X#2#{} Mult)",
 				},
 			},
+			j_crv_spamton = {
+				name = "Spamton J. Spamton",
+				text = {
+					"Press {C:attention}[[F1]]{} when {C:attention}READY{}",
+					"and while in {C:attention}Blind{}",
+					"to gain {C:blue}+#1#{} Hands and",
+					"{C:red}+#2#{} Discard.",
+					"Resets at end of ante",
+					"{C:inactive}(Currently {V:1}#3#{C:inactive})"
+				},
+			},
 			-- Rare
 			j_crv_bocchi = {
 				name = "Bocchi the Joker",
@@ -349,14 +360,7 @@ return {
 					"{C:inactive}(Currently {C:attention}#1#{C:inactive}/#2#)",
 				},
 			},
-			j_crv_spamton = {
-				name = "Spamton J. Spamton",
-				text = {
-					"Press {C:attention}[[F1]]{} per ante",
-					"for a {C:attention}[[specil DEAL]]{}",
-					"{C:inactive}(Apply Spamton Buff to playing cards)",
-				},
-			},
+		
 			j_crv_the_computer = {
 				name = "The Computer",
 				text = {
@@ -606,6 +610,14 @@ return {
 					"the {C:attention}Booster Packs",
 				},
 			},
+			j_crv_chaetophobia = {
+				name = "Chaetophobia",
+				text = {
+					"When first hand is drawn",
+					"{C:attention}+#1#{} hand size for",
+					"every card below {C:attention}5"
+				}
+			},
 			-- Mythical
 			-- Curse
 			-- Other
@@ -797,6 +809,8 @@ return {
 			k_crv_ready = "Ready",
 			k_crv_destroyed = "Destroyed",
 			k_crv_sticky = "Sticky!",
+			s_crv_ready = "READY",
+			s_crv_not_ready = "NOT READY",
 			-- Consumabels
 			k_crv_cartridge = "Cartridge",
 			b_crv_cartridge_cards = "Cartridges",
