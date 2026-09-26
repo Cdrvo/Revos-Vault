@@ -19,8 +19,6 @@ end
 local init_game_object_old = Game.init_game_object
 Game.init_game_object = function(self)
 	local igo = init_game_object_old(self)
-	igo.crv_minispamton = {}
-	igo.crv_spamton_help = true
 	igo.crv_jimfinity = 0
 	igo.crv_old_area_locations = {}
 
@@ -204,171 +202,6 @@ function love.draw()
 			_yscale * 2 * 2
 		)
 	end
-
-	if MiniSpamton_table.active and MiniSpamton_table.the_thing then
-		local mst, mx, my = MiniSpamton_table.the_thing, MiniSpamton_table.mouse_x, MiniSpamton_table.mouse_y
-		mst.state = mst.state or 1
-
-		local imgdata = NFS.newFileData(RevosVault.path .. "assets/Other/mini_spamton.png")
-		local img = love.image.newImageData(imgdata)
-		local real_img = love.graphics.newImage(img)
-
-		local anim = newAnimation(real_img, 50, 50)
-
-		if mst then
-			love.graphics.setColor(1, 1, 1, 1)
-			love.graphics.draw(
-				anim.spriteSheet,
-				anim.quads[mst.state],
-				RVF.convert_pixels(mst.x, true),
-				RVF.convert_pixels(mst.y, true),
-				mst.scale_r,
-				mst.scale_x,
-				mst.scale_y
-			)
-		end
-	end
-end
-
-local love_update_old = love.update
-function love.update(dt)
-	love_update_old(dt)
-	if MiniSpamton_table.active and not G.SETTINGS.paused then
-		if not next(SMODS.find_card("j_crv_spamton")) then
-			RVF.spamton_setup()
-		end
-
-		G.GAME.crv_minispamton = MiniSpamton_table
-		MiniSpamton_table.window_width, MiniSpamton_table.window_height = love.window.getMode()
-		MiniSpamton_table.window_width = RVF.convert_pixels(MiniSpamton_table.window_width)
-		MiniSpamton_table.window_height = RVF.convert_pixels(MiniSpamton_table.window_height)
-
-		MiniSpamton_table.the_thing = MiniSpamton_table.the_thing or MiniSpamton()
-
-		local thex, they = MiniSpamton_table.window_width, MiniSpamton_table.window_height
-		local mst = MiniSpamton_table.the_thing
-
-		if RevosVault.config.miniton_wander then --idk
-			if mst.going_x == 0 then
-				mst.going_x = math.random(1, thex)
-			end
-			if mst.going_y == 0 then
-				mst.going_y = math.random(1, they)
-			end
-		else
-			if not mst.starting_pos_set then
-				mst.y = -4
-				mst.x = G.deck.children.view_deck.T.x
-				mst.going_x = mst.x
-				mst.going_y = mst.y
-
-				mst.starting_pos_set = true
-			end
-		end
-
-		if math.ceil(mst.x) == mst.going_x and math.ceil(mst.y) == mst.going_y then
-			mst.standing_still = true
-		else
-			mst.standing_still = false
-		end
-
-		if not MiniSpamton_table.manual_control then
-			if mst.x < mst.going_x then
-				mst.x = mst.x + (mst.speed * 2.5 * dt)
-				if not mst.standing_still then
-					mst.scale_x = -1
-				end
-			end
-			if mst.x > mst.going_x then
-				mst.x = mst.x - (mst.speed * 2.5 * dt)
-				if not mst.standing_still then
-					mst.scale_x = 1
-				end
-			end
-			if mst.y < mst.going_y then
-				mst.y = mst.y + (mst.speed * 2.5 * dt)
-			end
-			if mst.y > mst.going_y then
-				mst.y = mst.y - (mst.speed * 2.5 * dt)
-			end
-		end
-
-		if mst.state ~= 3 then
-			mst.time_left = mst.time_left - 1
-			if mst.time_left <= 0 then
-				mst.time_left = 15
-				if mst.state == 2 then
-					mst.state = 1
-				else
-					mst.state = 2
-				end
-			end
-		end
-
-		if RevosVault.config.miniton_wander then
-			if G.GAME.crv_spamton_help then
-				mst.time_left_other = mst.time_left_other or 5
-				mst.time_left_other = mst.time_left_other - dt
-				if mst.time_left_other <= 0 then
-					mst.time_left_other = 5
-					mst.going_x = math.random(1, thex)
-					mst.going_y = math.random(1, they)
-				end
-
-				local half = thex / 2
-				if mst.standing_still then
-					if mst.going_x > half then
-						mst.scale_x = 1
-					else
-						mst.scale_x = -1
-					end
-				end
-			end
-		end
-		if not G.GAME.crv_spamton_help then
-			local ggg = G.deck.children.view_deck or { T = { x = 0, y = 0 } }
-			local middle = { x = ggg.T.x, y = ggg.T.y }
-
-			if not mst.leaving then
-				mst.going_x = middle.x
-				mst.going_y = middle.y
-				mst.leaving = true
-			end
-
-			if
-				((math.ceil(mst.x) == math.ceil(middle.x)) or (math.ceil(mst.x) == math.floor(middle.x)))
-				and ((math.ceil(mst.y) == math.ceil(middle.y)) or (math.ceil(mst.y) == math.ceil(middle.y)))
-				and mst.true_leaving
-			then
-				mst.state = 1
-				mst.going_y = -5
-			elseif
-				(math.ceil(mst.x) == math.ceil(middle.x))
-				and (math.ceil(mst.y) == math.ceil(middle.y))
-				and not mst.timer_begun
-			then
-				mst.state = 3
-				mst.timer_begun = 1.5
-			end
-
-			if mst.timer_begun then
-				mst.timer_begun = mst.timer_begun - dt
-				if mst.timer_begun <= 0 then
-					mst.true_leaving = true
-					play_sound("holo1")
-					RVF.msg(G.deck.cards[1] or G.deck, localize("k_upgrade_ex"))
-					for k, v in pairs(G.playing_cards) do
-						SMODS.Stickers["crv_spamton_buff"]:apply(v, true)
-					end
-					mst.timer_begun = nil
-				end
-			end
-		end
-
-		if math.ceil(mst.y) == -5 then
-			RevosVault.FUNCS.spamton_setup()
-		end
-	end
 end
 
 local update_old = Game.update
@@ -380,22 +213,6 @@ function Game:update(dt)
 			SMODS.calculate_context({ crv_swoon_shake = true })
 		end
 	end
-end
-
-local start_run_old = Game.start_run
-function Game:start_run(args)
-	start_run_old(self, args)
-	if G.jokers and G.jokers.cards then
-		if next(SMODS.find_card("j_crv_spamton")) and G.GAME.crv_spamton_help then
-			RVF.summon_mini_spamton()
-		end
-	end
-end
-
-local go_to_menu_old = G.FUNCS.go_to_menu
-G.FUNCS.go_to_menu = function(e)
-	go_to_menu_old(e)
-	RevosVault.FUNCS.spamton_setup()
 end
 
 local sort_hand_value_old = G.FUNCS.sort_hand_value

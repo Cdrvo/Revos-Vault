@@ -975,11 +975,10 @@ SMODS.Joker({
 					if enh then
 						v:set_ability(enh)
 					end
-					SMODS.change_base(
-						v,
+					local suit, rank =
 						pseudorandom_element(SMODS.Suits, pseudoseed("thed6_seed")).key,
 						pseudorandom_element(SMODS.Ranks, pseudoseed("thed6_seed")).key
-					)
+					assert(SMODS.change_base(v, suit, rank))
 				end)
 			end
 		end
@@ -1000,25 +999,7 @@ SMODS.Keybind({
 	end,
 })
 
--- referenced from Spiked Ball from Smallpox
-
-MiniSpamton = Object:extend()
-
-function MiniSpamton:init()
-	self.speed = 3
-	self.x = 0
-	self.y = 0
-	self.scale_x = 1
-	self.scale_y = 1
-	self.scale_r = 0
-
-	self.going_x = 0
-	self.going_y = 0
-
-	self.time_left = 15
-end
-
-SMODS.Joker({ -- rework some functions related to this
+SMODS.Joker({ 
 	key = "spamton",
 	atlas = "revo_jokers",
 	rarity = 3,
@@ -1041,35 +1022,13 @@ SMODS.Joker({ -- rework some functions related to this
 	attributes = {
 		"modify_card",
 	},
-	loc_vars = function(self, info_queue, card)
-		info_queue[#info_queue + 1] = { set = "Other", key = "crv_spamton_buff" }
-	end,
-	add_to_deck = function(self, card, from_debuff)
-		if (card.ability.extra.ready and G.GAME.crv_minispamton) and RevosVault.config.miniton_wander then
-			RVF.summon_mini_spamton()
-		end
-	end,
-	calculate = function(self, card, context)
-		if context.crv_call_for_help and card.ability.extra.ready then
-			if not RevosVault.config.miniton_wander then
-				RVF.summon_mini_spamton()
-			end
-			card.ability.extra.ready = false
-			RVF.leave_mini_spamton()
-		end
-		if context.ante_end and not context.blueprint and context.main_eval then
-			card.ability.extra.ready = true
-			if RevosVault.config.miniton_wander then
-				RVF.summon_mini_spamton()
-			end
-		end
-	end,
+	
 })
 
 SMODS.Joker({
 	key = "the_computer",
-	atlas = "wip",
-	pos = { x = 0, y = 0 },
+	atlas = "revo_jokers",
+	pos = { x = 2, y = 6 },
 	cost = 7,
 	rarity = 3,
 	loc_vars = function(self, info_queue, card)
@@ -1079,6 +1038,9 @@ SMODS.Joker({
 	end,
 	attributes = {
 		"mult",
+	},
+	crv_credits = {
+		art = { "mr.cr33ps" },
 	},
 	calculate = function(self, card, context)
 		if context.joker_main then
@@ -1153,7 +1115,7 @@ SMODS.Joker({
 	attributes = {
 		"banana",
 		"joker",
-		"food"
+		"food",
 	},
 	loc_vars = function(self, info_queue, card)
 		local cae = card.ability.extra
@@ -1192,8 +1154,7 @@ SMODS.Joker({
 	end,
 })
 
-
-SMODS.Joker({ 
+SMODS.Joker({
 	key = "majestic_four",
 	atlas = "revo_jokers",
 	rarity = 3,
@@ -1203,7 +1164,7 @@ SMODS.Joker({
 	blueprint_compat = true,
 	attributes = {
 		"xmult",
-		"hand_type"
+		"hand_type",
 	},
 	pos = {
 		x = 6,
@@ -1229,7 +1190,7 @@ SMODS.Joker({
 	end,
 })
 
-SMODS.Joker({ 
+SMODS.Joker({
 	key = "the_perfect_three",
 	atlas = "revo_jokers",
 	rarity = 3,
@@ -1248,7 +1209,7 @@ SMODS.Joker({
 	},
 	attributes = {
 		"xmult",
-		"hand_type"
+		"hand_type",
 	},
 	crv_credits = {
 		art = { "Chainsawmert" },
@@ -1268,13 +1229,13 @@ SMODS.Joker({
 	end,
 })
 
-SMODS.Joker({ 
+SMODS.Joker({
 	key = "kon",
 	config = {
 		extra = {
 			chip_gain = 15,
 			chips = 0,
-			active = false
+			active = false,
 		},
 	},
 	rarity = 3,
@@ -1285,16 +1246,14 @@ SMODS.Joker({
 		x = 8,
 		y = 3,
 	},
-	attributes = {
-
-	},
+	attributes = {},
 	crv_credits = {
 		art = { "Chainsawmert" },
 	},
 	cost = 7,
 	loc_vars = function(self, info_queue, card)
 		return {
-			vars = { card.ability.extra.chip_gain, card.ability.extra.chips,  },
+			vars = { card.ability.extra.chip_gain, card.ability.extra.chips },
 		}
 	end,
 	crv_can_use = function(self, card)
@@ -1321,22 +1280,21 @@ SMODS.Joker({
 				ref_value = "chips",
 				scalar_value = "chip_gain",
 				scalar_factor = cards,
-				message_colour = G.C.CHIPS
+				message_colour = G.C.CHIPS,
+			})
+			return {
+				remove = true,
 			}
-		)
-		return{
-			remove = true
-		}
 		end
 		if context.after then
 			card.ability.extra.active = false
 		end
 		if context.joker_main then
-			return{
-				chips = card.ability.extra.chips
+			return {
+				chips = card.ability.extra.chips,
 			}
 		end
-	end
+	end,
 })
 
 SMODS.Joker({
@@ -1360,24 +1318,29 @@ SMODS.Joker({
 	},
 	attributes = {
 		"xmult",
-		"scaling"
+		"scaling",
 	},
 	loc_vars = function(self, info_queue, card)
-		info_queue[#info_queue + 1] = { set = "Other", key = "crv_fixed_chances" }
+		info_queue[#info_queue + 1] = { set = "Other", key = "crv_immutable" }
 		local crv = card.ability.extra
 		return {
-			vars = { crv.xmult * (G.GAME.crv_jimfinity+1), crv.odds, 1, G.GAME.crv_jimfinity+1 },
+			vars = { crv.xmult * (G.GAME.crv_jimfinity + 1), crv.odds, 1, G.GAME.crv_jimfinity + 1 },
 		}
 	end,
 	calculate = function(self, card, context)
 		local cae = card.ability.extra
-		if context.joker_type_destroyed and SMODS.pseudorandom_probability(card, "crv_jimfinity_seed", 1, cae.odds) and context.card == card and not context.blueprint then
+		if
+			context.joker_type_destroyed
+			and SMODS.pseudorandom_probability(card, "crv_jimfinity_seed", 1, cae.odds)
+			and context.card == card
+			and not context.blueprint
+		then
 			G.GAME.crv_jimfinity = G.GAME.crv_jimfinity + 1
 			RVF.add_tag("tag_crv_jimfinity")
 		end
 		if context.joker_main then
 			return {
-				xmult = cae.xmult * (G.GAME.crv_jimfinity+1),
+				xmult = cae.xmult * (G.GAME.crv_jimfinity + 1),
 			}
 		end
 	end,

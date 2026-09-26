@@ -8,7 +8,7 @@ RVF.do_event = function(func, queue, trigger, delay)
 	}, queue))
 end
 
-RVF.cool_enhance = function(card, stuff, no_flip, no_juice, no_sound, queue)
+RVF.cool_enhance = function(card, stuff, no_flip, no_juice, no_sound, shatter, queue) -- I AM HARDCODING IT AAAAAAAAAAAAAAA
 	RVF.do_event(function()
 		--[[if not no_juice then
                 card:juice_up()
@@ -16,7 +16,7 @@ RVF.cool_enhance = function(card, stuff, no_flip, no_juice, no_sound, queue)
 		if not no_flip then
 			card:flip()
 		end
-		if not no_sound then
+		if not no_sound and not shatter then
 			play_sound("card1")
 		end
 		return true
@@ -42,7 +42,12 @@ RVF.cool_enhance = function(card, stuff, no_flip, no_juice, no_sound, queue)
 			card:flip()
 		end
 		if not no_sound then
-			play_sound("card1")
+			if shatter then
+				play_sound("glass" .. math.random(1, 6), math.random() * 0.2 + 0.9, 0.5)
+				play_sound("generic1", math.random() * 0.2 + 0.9, 0.5)
+			else
+				play_sound("card1")
+			end
 		end
 		return true
 	end, queue)
@@ -102,7 +107,6 @@ G.FUNCS.can_crv_use_joker = function(e)
 end
 
 RevosVault.FUNCS.swoon = function()
-	RVF.spamton_setup()
 	RVF.do_event(function()
 		G.crv_swooned = 60 * G.SETTINGS.GAMESPEED -- maybe a lil inspo from hot potato
 		return true
@@ -140,10 +144,12 @@ end
 --]]
 
 RevosVault.FUNCS.add_tag = function(tag, silent)
+	local ret = Tag(tag)
 	add_tag(Tag(tag))
 	if not silent then
 		play_sound("generic1")
 	end
+	return ret
 end
 
 function RevosVault.FUNCS.find_enhancement(check, compare) --idk
@@ -222,12 +228,29 @@ end
 RVF.printer_create = function(card, make)
 	local the_key, ccard, context = nil, nil, false
 
-	if make.set == "Voucher" then
-		ccard = SMODS.add_card{
+	if make.set == "Booster" then
+		RVF.do_event(function()
+			local key = make.key or pseudorandom_element(SMODS.get_clean_pool("Booster"), pseudoseed("revo_booster")) -- yes
+			local _booster = Card(
+				G.play.T.x + G.play.T.w / 2 - G.CARD_W * 1.27 / 2,
+				G.play.T.y + G.play.T.h / 2 - G.CARD_H * 1.27 / 2,
+				G.CARD_W * 1.27,
+				G.CARD_H * 1.27,
+				G.P_CARDS.empty,
+				G.P_CENTERS[key],
+				{ bypass_discovery_center = true, bypass_discovery_ui = true }
+			)
+			_booster.cost = 0
+			G.FUNCS.use_card({ config = { ref_table = _booster } })
+			_booster:start_materialize()
+			return true
+		end)
+	elseif make.set == "Voucher" then
+		ccard = SMODS.add_card({
 			set = "Voucher",
 			key = make.key,
-			area = G.play
-		}
+			area = G.play,
+		})
 		RVF.redeem(ccard, true)
 		context = true
 	else
@@ -263,12 +286,16 @@ RVF.printer_create = function(card, make)
 	end
 
 	if context and not make.no_context then
-			SMODS.calculate_context({
-				printer_trigger = true,
-				printer = card,
-				card_made = { key = make.key or ccard.config.center.key, center = ccard, set = make.set or ccard.ability.set },
-			}) 
-		end
+		SMODS.calculate_context({
+			printer_trigger = true,
+			printer = card,
+			card_made = {
+				key = make.key or ccard.config.center.key,
+				center = ccard,
+				set = make.set or ccard.ability.set,
+			},
+		})
+	end
 
 	return ccard
 end
@@ -288,7 +315,7 @@ function RVF.redeem(card, free)
 		trigger = "after",
 		delay = 1,
 		func = function()
-			if #G.play.cards<=1 then
+			if #G.play.cards <= 1 then
 				G.STATE = G.GAME.crv_old_state.voucher_redeem or old_state
 				G.GAME.crv_old_state.voucher_redeem = nil
 			end
@@ -296,32 +323,4 @@ function RVF.redeem(card, free)
 			return true
 		end,
 	}))
-end
-
--- Miniton related functions
-
--- referenced from Spiked Ball from Smallpox
-
-function RevosVault.FUNCS.spamton_setup()
-	MiniSpamton_table = {}
-	MiniSpamton_table.window_width, MiniSpamton_table.window_height = love.window.getMode()
-	MiniSpamton_table.active = false
-	RevosVault.FUNCS.convert_pixels = function(val, reverse)
-		if reverse then
-			return val * (G.TILESCALE * G.TILESIZE)
-		end
-		return val / (G.TILESCALE * G.TILESIZE)
-	end
-	MiniSpamton_table.window_width = RevosVault.FUNCS.convert_pixels(MiniSpamton_table.window_width)
-	MiniSpamton_table.window_height = RevosVault.FUNCS.convert_pixels(MiniSpamton_table.window_height)
-end
-RevosVault.FUNCS.spamton_setup()
-
-RevosVault.FUNCS.summon_mini_spamton = function()
-	G.GAME.crv_spamton_help = true
-	MiniSpamton_table.active = true
-end
-
-RevosVault.FUNCS.leave_mini_spamton = function()
-	G.GAME.crv_spamton_help = false
 end

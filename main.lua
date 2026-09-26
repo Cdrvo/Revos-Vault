@@ -68,17 +68,15 @@ RevosVault.calculate = function(mod, context)
 				v.ability.crv_copycat = nil
 			end
 		end
-		for k, v in pairs(G.playing_cards) do
-			if v.ability.crv_spamton_buff then
-				SMODS.Stickers["crv_spamton_buff"]:apply(v, false)
-			end
-		end
 	end
 	if context.crv_swoon_shake then
 		G.ROOM.jiggle = 50
 		for k, v in pairs(G.jokers.cards) do
 			v:juice_up()
 		end
+	end
+	if context.ending_shop then
+		G.GAME.crv_stop_booster = false
 	end
 	if context.printer_trigger and context.printer and context.printer.ability.crv_cartridges then
 		local p, card = context.printer, context.card_made.center

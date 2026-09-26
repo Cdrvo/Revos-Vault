@@ -59,6 +59,13 @@ SMODS.Atlas({
 })
 
 SMODS.Atlas({
+    key = "revo_contracts",
+    path = "contracts.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
     key = "revo_cartridges",
     path = "cartridges.png",
     px = 71,

@@ -245,12 +245,15 @@ SMODS.Joker({
 	config = {
 		extra = {
 			mult = 0,
-			mult_gain = 0.5,
+			mult_gain = 1,
 		},
 	},
 	attributes = {
 		"mult",
 		"scaling"
+	},
+	crv_credits = {
+		art = { "mr.cr33ps" },
 	},
 	loc_vars = function(self, info_queue, card)
 		local cae = card.ability.extra

@@ -52,6 +52,51 @@ return {
 					"return to hand",
 				},
 			},
+			m_crv_reinforced_glass = {
+				name = "Reinforced Glass",
+				text = {
+					"{X:mult,C:white} X#1# {} Mult",
+					"{C:green}#2# in #3#{} chance to",
+					"turn back into {C:attention}Glass{}",
+				},
+			},
+			m_crv_diamond = {
+				name = "Diamond Card",
+				text = {
+					"{X:mult,C:white}X#1#{} Mult",
+					"while this card",
+					"stays in hand",
+				},
+			},
+			m_crv_rhodium = {
+				name = "Rhodium Card",
+				text = {
+					"{C:money}$#1#{} if this",
+					"card is held in hand",
+					"at end of round",
+				},
+			},
+			m_crv_blessed = {
+				name = "Blessed Card",
+				text = {
+					"{C:green}#1# in #2#{} chance",
+					"for {X:mult,C:white}X#4#{} Mult",
+					"{C:green}#6# in #3#{} chance",
+					"to win {C:money}$#5#{}",
+				},
+			},
+			m_crv_xmult = {
+				name = "Xmult Card",
+				text = {
+					"{X:mult,C:white}X#1#{} Mult",
+				},
+			},
+			m_crv_boosted = {
+				name = "Boosted Card",
+				text = {
+					"{C:chips}+#1#{} Chips",
+				},
+			},
 		},
 		Joker = {
 			-- Common
@@ -383,8 +428,8 @@ return {
 				text = {
 					"When {C:attention}Blind{} is selected",
 					"print a {C:attention}Blueprint{}",
-					"{C:inactive}(Must have room)"
-				}
+					"{C:inactive}(Must have room)",
+				},
 			},
 			j_crv_broken_blueprinter = {
 				name = "Broken Blueprinter",
@@ -393,8 +438,8 @@ return {
 					"print a {C:attention}Blueprint{}",
 					"{C:green}#1# in #2#{} chance to",
 					"{C:red}self-destruct{}",
-					"{C:inactive}(Must have room)"
-				}
+					"{C:inactive}(Must have room)",
+				},
 			},
 			j_crv_gros_printer = {
 				name = "Gros Printer",
@@ -403,16 +448,16 @@ return {
 					"print a random {C:attention}Banana{}",
 					"{C:green}#1# in #2#{} chance to",
 					"print {C:dark_edition}Holy Banana{}",
-					"{C:inactive}(Must have room)"
-				}
+					"{C:inactive}(Must have room)",
+				},
 			},
 			j_crv_rusty_printer = {
 				name = "Rusty Printer",
 				text = {
 					"When {C:attention}Blind{} is selected",
 					"print a {C:attention}Brainstorm{}",
-					"{C:inactive}(Must have room)"
-				}
+					"{C:inactive}(Must have room)",
+				},
 			},
 			j_crv_default_printer = {
 				name = "Default Printer",
@@ -421,33 +466,33 @@ return {
 					"print a random",
 					"{C:attention}Consumable{},{C:attention} Joker{}",
 					"or {C:attention}Playing Card{}",
-					"{C:inactive}(Must have room)"
-				}
+					"{C:inactive}(Must have room)",
+				},
 			},
 			j_crv_joker_printer = {
 				name = "Joker Printer",
 				text = {
 					"When {C:attention}Blind{} is selected",
 					"print a {C:attention}Joker{}",
-					"{C:inactive}(Must have room)"
-				}
+					"{C:inactive}(Must have room)",
+				},
 			},
 			j_crv_obelisk_printer = {
 				name = "Obelisk Printer",
 				text = {
 					"When {C:attention}Blind{} is selected",
 					"print a {C:attention}Obelisk{}",
-					"{C:inactive}(Must have room)"
-				}
+					"{C:inactive}(Must have room)",
+				},
 			},
 			j_crv_golden_printer = {
 				name = "Golden Printer",
 				text = {
 					"When {C:attention}Blind{} is selected",
-					"print a random "
-					,"{C:money}Economy{} Joker.",
-					"{C:inactive}(Must have room)"
-				}
+					"print a random ",
+					"{C:money}Economy{} Joker.",
+					"{C:inactive}(Must have room)",
+				},
 			},
 			j_crv_spectral_printer = {
 				name = "Spectral Printer",
@@ -455,8 +500,8 @@ return {
 					"When {C:attention}Blind{} is selected",
 					"print a random",
 					"{C:dark_edition}Spectral{} Card",
-					"{C:inactive}(Must have room)"
-				}
+					"{C:inactive}(Must have room)",
+				},
 			},
 			j_crv_legendary_printer = {
 				name = "Legendary Printer",
@@ -466,15 +511,15 @@ return {
 					"print a random",
 					"{C:attention}Perishable{} and {C:dark_edition}Negative{}",
 					"{C:legendary,E:1}Legendary{} Joker.",
-					"{C:inactive}(Must have room)"
-				}
+					"{C:inactive}(Must have room)",
+				},
 			},
 			j_crv_voucher_printer = {
 				name = "Voucher Printer",
 				text = {
 					"When {C:attention}Blind{} is selected,",
-					"print a random"
-					,"{C:attention}Voucher{}"
+					"print a random",
+					"{C:attention}Voucher{}",
 				},
 			},
 			j_crv_food_printer = {
@@ -490,7 +535,31 @@ return {
 				text = {
 					"When {C:attention}Blind{} is selected",
 					"print a random",
-					"{C:attention}Contract{}"
+					"{C:attention}Contract{}",
+				},
+			},
+			j_crv_camera = {
+				name = "Camera",
+				text = {
+					"When {C:attention}Blind{} is selected",
+					"print a {C:attention}Photograph{}",
+					"if a {C:attention}Joker{} is present{}",
+				},
+			},
+			j_crv_3d_printer = {
+				name = "3D Printer",
+				text = {
+					"When entering {C:attention}Shop{},",
+					"print a random",
+					"{C:attention}Booster Pack{}",
+				},
+			},
+			j_crv_time_printer = {
+				name = "Time Printer",
+				text = {
+					"At end of round",
+					"{C:green}#1# in #2#{} chance to",
+					"print {C:attention}-#3#{} Ante."
 				}
 			},
 			-- Legendary
@@ -551,19 +620,13 @@ return {
 			},
 		},
 		Other = {
-			crv_fixed_chances = {
+			crv_immutable = {
 				name = "Immutable Chances",
 				text = {
 					"This Card's {C:attention}listed",
-					"{C:green,E:1,S:1.1}probability {C:red}cannot{}",
-					"be changed",
-				},
-			},
-			crv_spamton_buff = {
-				name = "Spamton Buff",
-				text = {
-					"Retrigger this card",
-					"twice",
+					"{C:green,E:1,S:1.1}probabilities {C:red}cannot{}",
+					"be changed via Jokers",
+					"like {C:attention}Oops! All 6s"
 				},
 			},
 		},
@@ -574,6 +637,10 @@ return {
 			tag_crv_jimfinity = {
 				name = "Jimfinity Tag",
 				text = { "Next shop has a free", "{C:attention}Jimfinity" },
+			},
+			tag_crv_3dprinter_tag = {
+				name = "3D Printer Tag",
+				text = { "Creates a random", "{C:attention}Booster Pack" },
 			},
 		},
 		Tarot = {},
@@ -587,11 +654,61 @@ return {
 				text = {
 					"Upgrades up to {C:attention}1{}",
 					"selected {C:attention}Glass Cards{}",
-					"to {C:dark_edition}Bulletproof Glass{}",
+					"to {C:dark_edition}Reinforced Glass{}",
 					"{C:green}#1# in #2#{} chance to",
-					"destroy the card"
-				}
-			}
+					"destroy the card",
+				},
+			},
+			c_crv_steel_contract = {
+				name = "Steel Contract",
+				text = {
+					"Upgrades up to {C:attention}1{}",
+					"selected {C:attention}Steel Cards{}",
+					"to {C:dark_edition}Diamond Card{}",
+					"{C:green}#1# in #2#{} chance to",
+					"destroy the card",
+				},
+			},
+			c_crv_gold_contract = {
+				name = "Gold Contract",
+				text = {
+					"Upgrades up to {C:attention}1{}",
+					"selected {C:attention}Gold Cards{}",
+					"to {C:dark_edition}Rhodium Card{}",
+					"{C:green}#1# in #2#{} chance to",
+					"destroy the card",
+				},
+			},
+			c_crv_mult_contract = {
+				name = "Mult Contract",
+				text = {
+					"Upgrades up to {C:attention}1{}",
+					"selected {C:attention}Mult Cards{}",
+					"to {C:dark_edition}Xmult Card{}",
+					"{C:green}#1# in #2#{} chance to",
+					"destroy the card",
+				},
+			},
+			c_crv_lucky_contract = {
+				name = "Lucky Contract",
+				text = {
+					"Upgrades up to {C:attention}1{}",
+					"selected {C:attention}Lucky Cards{}",
+					"to {C:dark_edition}Blessed Card{}",
+					"{C:green}#1# in #2#{} chance to",
+					"destroy the card",
+				},
+			},
+			c_crv_bonus_contract = {
+				name = "Bonus Contract",
+				text = {
+					"Upgrades up to {C:attention}1{}",
+					"selected {C:attention}Bonus Cards{}",
+					"to {C:dark_edition}Boosted Card{}",
+					"{C:green}#1# in #2#{} chance to",
+					"destroy the card",
+				},
+			},
 		},
 
 		crv_cartridge = {
@@ -601,32 +718,32 @@ return {
 					"Wheb applied {C:red}Printer{}",
 					"is triggered,",
 					"retrigger the {C:red}Printer{}",
-					"{C:inactive}(Must have room)"
-				}
+					"{C:inactive}(Must have room)",
+				},
 			},
 			c_crv_mixed = {
 				name = "Mixed Cartridge",
 				text = {
 					"Cards printed",
 					"by the applied {C:red}Printer{}",
-					"has a random {C:dark_edition}Edition"
-				}
+					"has a random {C:dark_edition}Edition",
+				},
 			},
 			c_crv_ghostly = {
 				name = "Ghostly Cartridge",
 				text = {
 					"Cards printed",
 					"by the applied {C:red}Printer{}",
-					"fills {C:dark_edition}0{} slots"
-				}
+					"fills {C:dark_edition}0{} slots",
+				},
 			},
 			c_crv_golden = {
 				name = "Golden Cartridge",
 				text = {
 					"Cards printed",
 					"by the applied {C:red}Printer{}",
-					"has double the sell cost"
-				}
+					"has double the sell cost",
+				},
 			},
 			c_crv_soul = {
 				name = "Cartridge Soul",
@@ -634,32 +751,32 @@ return {
 					"When applied {C:red}Printer",
 					"is triggered,",
 					"has a small chance to",
-					"create {C:dark_edition}The Soul{}"
-				}
+					"create {C:dark_edition}The Soul{}",
+				},
 			},
 			c_crv_spin = {
 				name = "Spinny Cartridge",
 				text = {
 					"Applied {C:red}Printer{}",
-					"continuously spins"
-				}
+					"continuously spins",
+				},
 			},
 			c_crv_anti = {
 				name = "Anti Cartridge",
 				text = {
 					"Applied {C:red}Printer{}",
-					"becomes {C:dark_edition}Negative{}"
-				}
+					"becomes {C:dark_edition}Negative{}",
+				},
 			},
 			c_crv_bonus = {
 				name = "Bonus Cartridge",
 				text = {
 					"When applied {C:red}Printer",
 					"is triggered,",
-					"creates a random {C:attention}Tag{}"
-				}
-			}
-		}
+					"creates a random {C:attention}Tag{}",
+				},
+			},
+		},
 	},
 	misc = {
 		achievement_descriptions = {},
@@ -670,6 +787,7 @@ return {
 		dictionary = {
 			-- UI
 			crv_cartridges = "Cartridges",
+			crv_contracts = "Contracts",
 			-- Rariities
 			k_crv_holy = "Holy Banana",
 			k_crv_printer = "Printer",
@@ -682,6 +800,9 @@ return {
 			-- Consumabels
 			k_crv_cartridge = "Cartridge",
 			b_crv_cartridge_cards = "Cartridges",
+
+			k_crv_contracts = "Contract",
+			b_crv_contracts_cards = "Contracts",
 		},
 		high_scores = {},
 		labels = {

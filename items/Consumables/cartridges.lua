@@ -184,8 +184,8 @@ RevosVault.Cartridge({
 RevosVault.Cartridge({
 	key = "bonus",
 	cost = 8,
-	atlas = "wip",
-	pos = {x=2,y=0},
+	atlas = "revo_cartridges",
+	pos = {x=0,y=1},
 	config = {},
 	crv_calculate = function(self, printer, made_card, card)
 		RVF.add_tag(SMODS.poll_object({type = 'Tag'}))
