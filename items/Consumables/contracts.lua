@@ -15,6 +15,9 @@ SMODS.Consumable({
         }
     },
     atlas = "revo_contracts",
+    crv_credits = {
+        art = {"mr.cr33ps"}
+    },
     pos = {x=9,y=9},
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue+1] = G.P_CENTERS.m_crv_reinforced_glass
@@ -49,6 +52,9 @@ SMODS.Consumable({
         }
     },
     atlas = "revo_contracts",
+    crv_credits = {
+        art = {"mr.cr33ps"}
+    },
     pos = {x=9,y=9},
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue+1] = G.P_CENTERS.m_crv_diamond
@@ -83,6 +89,9 @@ SMODS.Consumable({
         }
     },
     atlas = "revo_contracts",
+    crv_credits = {
+        art = {"mr.cr33ps"}
+    },
     pos = {x=9,y=9},
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue+1] = G.P_CENTERS.m_crv_rhodium
@@ -117,6 +126,9 @@ SMODS.Consumable({
         }
     },
     atlas = "revo_contracts",
+    crv_credits = {
+        art = {"mr.cr33ps"}
+    },
     pos = {x=9,y=9},
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue+1] = G.P_CENTERS.m_crv_xmult
@@ -151,6 +163,9 @@ SMODS.Consumable({
         }
     },
     atlas = "revo_contracts",
+    crv_credits = {
+        art = {"mr.cr33ps"}
+    },
     pos = {x=9,y=9},
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue+1] = G.P_CENTERS.m_crv_blessed
@@ -185,6 +200,9 @@ SMODS.Consumable({
         }
     },
     atlas = "revo_contracts",
+    crv_credits = {
+        art = {"mr.cr33ps"}
+    },
     pos = {x=9,y=9},
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue+1] = G.P_CENTERS.m_crv_boosted

@@ -486,7 +486,7 @@ SMODS.Joker({
 	end,
 })
 
-SMODS.Joker({ -- idk
+SMODS.Joker({ 
 	key = "time_printer",
 	atlas = "revo_jokers",
 	rarity = "crv_printer",
@@ -496,7 +496,7 @@ SMODS.Joker({ -- idk
 	blueprint_compat = false,
 	pos = {
 		x = 5,
-		y = 4,
+		y = 6,
 	},
 	config = {
 		extra = {
@@ -516,7 +516,7 @@ SMODS.Joker({ -- idk
 		local num, den = SMODS.get_probability_vars(card, 1, cae.odds, "time_printer_seed", nil, true)
 		info_queue[#info_queue + 1] = { set = "Other", key = "crv_immutable" }
 		return {
-			vars = { cae.odds, cae.ante },
+			vars = { num, den, cae.ante },
 		}
 	end,
 	calculate = function(self, card, context)
