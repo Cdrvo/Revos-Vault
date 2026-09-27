@@ -566,6 +566,45 @@ return {
 					"print {C:attention}-#3#{} Ante."
 				}
 			},
+			-- Mega Printer
+			j_crv_mega_printer = {
+				name = "Mega Printer",
+				text = {
+					"When {C:attention}Blind{} is selected",
+					"prints a random {C:red}Printer{}"
+				}
+			},
+			--
+			j_crv_energy_generator = {
+				name = "Energy Generator",
+				text = {
+					"A powerful generator",
+					"for something that requires",
+					"efficent and much power",
+					"Used to create the {C:dark_edition,E:1}Mega Printer",
+					"{C:inactive}(1/3)"
+				}
+			},
+			j_crv_printer_core = {
+				name = "Printer Core",
+				text = {
+					"A huge printer",
+					"that requires a lot",
+					"of resources to function",
+					"Used to create the {C:dark_edition,E:1}Mega Printer",
+					"{C:inactive}(2/3)"
+				}
+			},
+			j_crv_fluid_tank = {
+				name = "Fluid Tank",
+				text = {
+					"Keeps a big machine",
+					"suficent with any",
+					"kind of fluid",
+					"Used to create the {C:dark_edition,E:1}Mega Printer",
+					"{C:inactive}(3/3)"
+				}
+			},
 			-- Legendary
 			j_crv_the_ace = {
 				name = "The Ace",
@@ -727,7 +766,7 @@ return {
 			c_crv_glitchy = {
 				name = "Glitchy Cartridge",
 				text = {
-					"Wheb applied {C:red}Printer{}",
+					"When applied {C:red}Printer{}",
 					"is triggered,",
 					"retrigger the {C:red}Printer{}",
 					"{C:inactive}(Must have room)",

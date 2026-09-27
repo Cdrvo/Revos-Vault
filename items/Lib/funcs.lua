@@ -275,6 +275,7 @@ RVF.printer_create = function(card, make)
 					edition = make.edition,
 					no_edition = not make.edition,
 					force_stickers = make.stickers,
+					rarity = make.rarity
 				})
 			else
 				make()

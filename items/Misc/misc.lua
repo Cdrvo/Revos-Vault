@@ -71,6 +71,13 @@ SMODS.Atlas({
     px = 71,
     py = 95
 })
+
+SMODS.Atlas({
+    key = "revo_mega_printer",
+    path = "mega_printer.png",
+    px = 128,
+    py = 95
+})
 -- sounds
 
 SMODS.Sound({

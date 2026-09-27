@@ -524,6 +524,46 @@ SMODS.Joker({
 	end,
 })
 -- leg
+
+SMODS.Joker({
+	key = "mega_printer", 
+	atlas = "revo_mega_printer",
+	rarity = 4,
+	cost = 25,
+
+	discovered = false,
+	blueprint_compat = false,
+	crv_cartridge_blacklist = {
+	},
+	display_size = {w=128, h=95},
+	pos = {
+		x = 0,
+		y = 0,
+	},
+	soul_pos = {
+		x = 0,
+		y = 1,
+	},
+	config = {
+		extra = {
+		},
+	},
+	attributes = {
+		"printer",
+		"joker",
+		"generation",
+	},
+	loc_vars = function(self, info_queue, card)
+	end,
+	calculate = function(self, card, context)
+		local cae = card.ability.extra
+		if context.setting_blind and not context.blueprint then
+			RVF.printer_create(card, {set = "Joker", area = G.jokers, rarity = "crv_printer"})
+		end
+	end,
+})
+
+
 SMODS.Joker({
 	key = "legendary_printer", -- should i add printer badge idk
 	atlas = "revo_jokers",

@@ -1311,3 +1311,117 @@ SMODS.Joker({
 		end
 	end,
 })
+
+local function mega_printer_check()
+	local head, middle, bottom = nil, nil, nil
+	if next(SMODS.find_card("j_crv_energy_generator")) then
+		head = true
+	end
+	if next(SMODS.find_card("j_crv_printer_core")) then
+		middle = true
+	end
+	if next(SMODS.find_card("j_crv_fluid_tank")) then
+		bottom = true
+	end
+
+	if head and middle and bottom then
+		SMODS.destroy_cards({
+			SMODS.find_card("j_crv_energy_generator")[1],
+			--SMODS.find_joker("j_crv_printer_core")[1],
+			SMODS.find_card("j_crv_fluid_tank")[1],
+		}, { bypass_eternal = true })
+		SMODS.find_card("j_crv_printer_core")[1]:set_ability("j_crv_mega_printer")
+	end
+end
+
+SMODS.Joker({
+	key = "energy_generator",
+	atlas = "revo_jokers",
+	rarity = 3,
+	cost = 5,
+	blueprint_compat = false,
+	pos = {
+		x = 0,
+		y = 7,
+	},
+	config = {
+		extra = {
+			xmult = 2,
+			odds = 2,
+		},
+	},
+	loc_vars = function(self, info_queue, card)
+		info_queue[#info_queue + 1] = G.P_CENTERS.j_crv_mega_printer
+	end,
+	calculate = function(self, card, context) end,
+	add_to_deck = function() 
+		G.E_MANAGER:add_event(Event({
+			func = function()
+				mega_printer_check()
+				return true
+			end
+		}))
+	end,
+})
+
+SMODS.Joker({
+	key = "printer_core",
+	atlas = "revo_jokers",
+	rarity = 3,
+	cost = 5,
+	blueprint_compat = false,
+	pos = {
+		x = 1,
+		y = 7,
+	},
+	config = {
+		extra = {
+			xmult = 2,
+			odds = 2,
+		},
+	},
+	loc_vars = function(self, info_queue, card)
+		info_queue[#info_queue + 1] = G.P_CENTERS.j_crv_mega_printer
+	end,
+	calculate = function(self, card, context) end,
+	add_to_deck = function() 
+		G.E_MANAGER:add_event(Event({
+			func = function()
+				mega_printer_check()
+				return true
+			end
+		}))
+	end,
+})
+
+
+SMODS.Joker({
+	key = "fluid_tank",
+	atlas = "revo_jokers",
+	rarity = 3,
+	cost = 5,
+	blueprint_compat = false,
+	pos = {
+		x = 2,
+		y = 7,
+	},
+	config = {
+		extra = {
+			xmult = 2,
+			odds = 2,
+		},
+	},
+	loc_vars = function(self, info_queue, card)
+		info_queue[#info_queue + 1] = G.P_CENTERS.j_crv_mega_printer
+	end,
+	calculate = function(self, card, context) end,
+	add_to_deck = function() 
+		G.E_MANAGER:add_event(Event({
+			func = function()
+				mega_printer_check()
+				return true
+			end
+		}))
+	end,
+})
+
