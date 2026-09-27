@@ -453,6 +453,12 @@ SMODS.Joker({
 			vars = {},
 		}
 	end,
+	crv_cartridge_blacklist = {
+		c_crv_mixed = true,
+		c_crv_ghostly = true,
+		c_crv_golden = true,
+
+	},
 	atlas = "revo_jokers",
 	rarity = "crv_printer",
 	cost = 13,
@@ -494,6 +500,12 @@ SMODS.Joker({
 		x = 5,
 		y = 6,
 	},
+	crv_cartridge_blacklist = {
+		c_crv_mixed = true,
+		c_crv_ghostly = true,
+		c_crv_golden = true,
+		
+	},
 	config = {
 		extra = {
 			odds = 6,
@@ -533,8 +545,6 @@ SMODS.Joker({
 
 	discovered = false,
 	blueprint_compat = false,
-	crv_cartridge_blacklist = {
-	},
 	display_size = {w=128, h=95},
 	pos = {
 		x = 0,
