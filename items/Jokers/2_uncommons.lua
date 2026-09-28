@@ -216,3 +216,50 @@ SMODS.Joker({
 	end
 	
 })
+
+SMODS.Joker({
+	key = "paperwork",
+	config = {
+		extra = {
+			chips = 20.4,
+			mult = 9.8,
+		},
+	},
+	rarity = 2,
+	atlas = "revo_jokers",
+	blueprint_compat = true,
+	discovered = false,
+	pos = {
+		x = 0,
+		y = 8,
+	},
+	cost = 6,
+	loc_vars = function(self, info_queue, card)
+		return {
+			vars = { card.ability.extra.chips, card.ability.extra.mult },
+		}
+	end,
+	attributes = {
+		"chips",
+		"mult",
+		"two",
+		"three",
+		"four",
+		"five",
+		"six",
+		"seven",
+		"eight",
+		"nine"	
+	},
+	calculate = function(self, card, context)
+		if context.individual and context.cardarea == G.play then
+			if context.other_card:get_id() >= 2 and context.other_card:get_id() <= 9 then
+				return {
+					chips = card.ability.extra.chips,
+					mult = card.ability.extra.mult,
+					card = card.other_card,
+				}
+			end
+		end
+	end,
+})

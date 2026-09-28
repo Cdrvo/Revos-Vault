@@ -228,7 +228,7 @@ SMODS.Joker({
 	attributes = {
 		"passive",
 		"hand_size",
-		"5"
+		"five"
 	},
 	blueprint_compat = false,
 	cost = 20,

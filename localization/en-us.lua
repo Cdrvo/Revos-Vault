@@ -185,7 +185,7 @@ return {
 				text = {
 					"Gains {C:mult}+#2#{} Mult",
 					"when a joker is destroyed",
-					"{C:inactive}(Currently {C:mult}+#3#{C:inactive} Mult)"
+					"{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult)"
 				}
 			},
 			j_crv_rainbow = {
@@ -244,6 +244,15 @@ return {
 					"{C:red}+#2#{} Discard.",
 					"Resets at end of ante",
 					"{C:inactive}(Currently {V:1}#3#{C:inactive})"
+				},
+			},
+			j_crv_paperwork = {
+				name = "Paperwork",
+				text = {
+					"Scored cards between {C:attention}9{} and {C:attention}2",
+					"gives {C:chips}+#1#{} Chips and",
+					"{C:mult}+#2#{} Mult",
+					"{C:inactive}(9 and 2 included){}",
 				},
 			},
 			-- Rare
