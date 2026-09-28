@@ -400,6 +400,11 @@ SMODS.Joker({
 			chip_gain = 15,
 		},
 	},
+	attributes = {
+		"chips",
+		"scaling",
+		"booster"
+	},
 	loc_vars = function(self, info_queue, card)
 		local cae = card.ability.extra
 		return {
@@ -429,4 +434,194 @@ SMODS.Joker({
 			}
 		end
 	end,
+})
+
+SMODS.Joker({
+	key = "emergency_button",
+	atlas = "revo_jokers",
+
+	rarity = 1,
+	cost = 3,
+	unlocked = true,
+	discovered = false,
+	blueprint_compat = false,
+	attributes = {
+		"hands"
+	},
+	pos = {
+		x = 5,
+		y = 7,
+	},
+	config = {
+		extra = {
+			hands = 2,
+		},
+	},
+	loc_vars = function(self, info_queue, card)
+		local crv = card.ability.extra
+		return {
+			vars = { crv.hands },
+		}
+	end,
+	calculate = function(self, card, context)
+		local crv = card.ability.extra
+		if context.selling_self and not context.blueprint and G.GAME.blind and G.GAME.blind.in_blind then
+			ease_hands_played(card.ability.extra.hands)
+		end
+	end,
+})
+
+
+SMODS.Joker({
+	key = "rainbow_octopus",
+	atlas = "revo_jokers",
+	pos = { x = 6, y = 7 },
+	rarity = 1,
+	cost = 6,
+	config = {
+		extra = {
+			dollars = 2,
+			odds = 2
+		},
+	},
+	attributes = {
+		"chance",
+		"economy",
+		"suit"
+	},
+	crv_credits = {
+		art = {"Chainsawmert"}
+	},
+	loc_vars = function(self, info_queue, card)
+		local cae = card.ability.extra
+		local num, den = SMODS.get_probability_vars(card, 1, cae.odds, "rainbow_octopus_seed" )
+		return {
+			vars = { cae.dollars, (G.GAME.current_round.crv_rainbow_octopus_suit or "Spades"), num, den, colours = {G.C.SUITS[((G.GAME.current_round) and G.GAME.current_round.crv_rainbow_octopus_suit) or "Spades"]} },
+		} 
+	end,
+	calculate = function(self, card, context)
+		local cae = card.ability.extra 
+		if context.individual and context.cardarea == G.play and SMODS.pseudorandom_probability(card, "rainbow_octopus_seed", 1, cae.odds) then
+			if context.other_card:is_suit(G.GAME.current_round.crv_rainbow_octopus_suit) then
+				return {
+					dollars = cae.dollars,
+				}
+			end
+		end
+	end,
+})
+
+
+SMODS.Joker({
+	key = "evil_joker",
+	atlas = "revo_jokers",
+	rarity = 1,
+	cost = 5,
+	unlocked = true,
+	discovered = false,
+	blueprint_compat = true,
+	pos = {
+		x = 7,
+		y = 7,
+	},
+	config = {
+		extra = {
+			mult = 0,
+			mult_gain = 3
+		},
+	},
+	attributes = {
+		"mult",
+		"scaling",
+		"joker"
+	},
+	loc_vars = function(self, info_queue, card)
+		local cae = card.ability.extra
+		return {
+			vars = { cae.mult, cae.mult_gain},
+		}
+	end,
+
+	calculate = function(self, card, context)
+		local cae = card.ability.extra
+		if context.joker_main and cae.mult>0 then
+			return{
+				mult = cae.mult
+			}
+		end
+		if context.joker_type_destroyed and context.card ~= card and context.card.ability.set == "Joker" and not context.blueprint then
+			SMODS.scale_card(card,{
+				ref_table = cae,
+				ref_value = "mult",
+				scalar_value = "mult_gain",
+				message_colour = G.C.MULT
+			})
+		end
+	end,
+})
+
+SMODS.Joker({
+	key = "rainbow",
+	rarity = 1,
+	cost = 5,
+	unlocked = true,
+	discovered = false,
+	blueprint_compat = false,
+	atlas = "revo_jokers",
+	pos = {
+		x = 8,
+		y = 7,
+	},
+	attributes = {
+		"passive",
+		"suit"
+	},
+	crv_credits = {
+		art = {"Chainsawmert"}
+	},
+	loc_vars = function(self, info_queue, card)
+		local cae = card.ability.extra
+	end,
+
+	calculate = function(self, card, context)
+		local cae = card.ability.extra
+		if context.first_hand_drawn and not context.blueprint then
+			local suits, list = {}, {}
+			for k,v in pairs(G.hand.cards) do
+				if not list[v.base.suit] then
+					list[v.base.suit] = true
+					suits[#suits+1] = v.base.suit
+				end
+			end
+			local suit = pseudorandom_element(suits, pseudoseed("rianbow_suit_seed"))
+			for k, v in pairs(G.hand.cards) do
+				RVF.cool_enhance(v, function() assert(SMODS.change_base(v, suit, nil)) end, nil)
+			end
+		end
+	end,
+})
+
+SMODS.Joker({
+	key = "useless_joker",
+	rarity = 1,
+	cost = 1,
+	unlocked = true,
+	discovered = false,
+	blueprint_compat = false,
+	atlas = "revo_jokers",
+	pos = {
+		x = 9,
+		y = 7,
+	},
+	config = {
+		extra = {
+		},
+	},
+	set_ability = function(self, card, initial, delay_sprites)
+		card:set_edition(poll_edition(nil, nil, nil, true), true, true)
+	end,
+	crv_credits = {
+		art = {"lfmoth"},
+		idea = {"theOfficialFem"}
+	}
 })

@@ -112,12 +112,23 @@ RevosVault.calculate = function(mod, context)
 	end
 end
 
+-- Other
+
 SMODS.current_mod.menu_cards = function()
 	return {
 		{ key = "j_crv_blueprinter" },
 		{ key = "j_crv_gros_printer" },
 		remove_original = true,
 	}
+end
+
+SMODS.current_mod.reset_game_globals = function(run_start)
+	if run_start then
+		--
+	end
+	
+	RVF.reset_suit_jokers("crv_rainbow_octopus_suit")
+
 end
 
 -- Credits system from Hot Potato // fixed

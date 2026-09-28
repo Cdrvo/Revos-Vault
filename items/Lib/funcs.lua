@@ -325,3 +325,13 @@ function RVF.redeem(card, free)
 		end,
 	}))
 end
+
+
+function RVF.reset_suit_jokers(var)
+    local all_suits = {}
+    for k, v in pairs(SMODS.Suits) do
+        if k ~= G.GAME.current_round[var] then all_suits[#all_suits + 1] = k end
+    end
+    local select = pseudorandom_element(all_suits, pseudoseed('anc'..G.GAME.round_resets.ante))
+    G.GAME.current_round[var] = select
+end

@@ -164,6 +164,46 @@ return {
 					"{C:inactive}(Currently {C:chips}+#1#{C:inactive} Chips)",
 				},
 			},
+			j_crv_emergency_button = {
+				name = "Emergency Button",
+				text = {
+					"Sell this {C:attention}Joker{} during",
+					"a blind to gain {C:blue}+#1#{} Hands"
+				}
+			},
+			j_crv_rainbow_octopus = {
+				name = "Rainbow Octopus",
+				text = {
+					"Played {V:1}#2#{}",
+					"has a {C:green}#3# in #4#{} chance to",
+					"give {C:money}$#1#{} when scored",
+					"{s:0.8}Suit changes after every round"
+				},
+			},
+			j_crv_evil_joker = {
+				name = "Evil Joker",
+				text = {
+					"Gains {C:mult}+#2#{} Mult",
+					"when a joker is destroyed",
+					"{C:inactive}(Currently {C:mult}+#3#{C:inactive} Mult)"
+				}
+			},
+			j_crv_rainbow = {
+				name = "Rainbow",
+				text = {
+					"When {C:attention}first hand{} is drawn",
+					"all cards in hand",
+					"turns into a random suit",
+					"selected from those cards"
+				}
+			},
+			j_crv_useless_joker = {
+				name = "Useless Joker",
+				text = {
+					"Always has a",
+					"random {C:dark_edition}Edition{}",
+				}
+			},
 			-- Uncommon
 			j_crv_those_who_joke = {
 				name = "Those Who Joke",
