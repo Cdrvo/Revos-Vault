@@ -542,7 +542,6 @@ SMODS.Joker({
 	atlas = "revo_mega_printer",
 	rarity = 4,
 	cost = 25,
-
 	discovered = false,
 	blueprint_compat = false,
 	display_size = {w=128, h=95},
@@ -618,7 +617,7 @@ SMODS.Joker({
 					card,
 					{
 						set = "Joker",
-						area = G.consumeables,
+						area = G.jokers,
 						edition = "e_negative",
 						stickers = { "perishable" },
 						legendary = true,
