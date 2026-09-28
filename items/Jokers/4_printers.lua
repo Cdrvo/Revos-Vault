@@ -43,6 +43,12 @@ SMODS.Joker({
 		x = 5,
 		y = 5,
 	},
+	attributes = {
+		"printer",
+		"generation",
+		"joker",
+		"chance"
+	},
 	config = {
 		extra = {
 			odds = 4,
@@ -62,10 +68,6 @@ SMODS.Joker({
 			RVF.printer_create(card, { key = "j_blueprint" })
 		end
 	end,
-
-	in_pool = function(self, wawa, wawa2)
-		return true
-	end,
 })
 
 SMODS.Joker({
@@ -80,6 +82,7 @@ SMODS.Joker({
 		"printer",
 		"generation",
 		"joker",
+		"chance"
 	},
 	pos = {
 		x = 9,

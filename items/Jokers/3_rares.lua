@@ -395,9 +395,9 @@ SMODS.Joker({
 				if v.base.id ~= 13 then
 					RVF.cool_enhance(v, function()
 						if mcard.base.id > 13 then
-							SMODS.modify_rank(mcard, -1)
+							assert(SMODS.modify_rank(mcard, -1))
 						elseif mcard.base.id < 13 then
-							SMODS.modify_rank(mcard, 1)
+							assert(SMODS.modify_rank(mcard, 1))
 						end
 					end)
 				end
@@ -453,9 +453,6 @@ SMODS.Joker({
 				x_mult = card.ability.extra.xmult,
 			}
 		end
-	end,
-	in_pool = function(self, wawa, wawa2)
-		return true
 	end,
 })
 
@@ -973,7 +970,7 @@ SMODS.Joker({
 					v:set_edition(edition, true, true)
 					local enh = SMODS.poll_enhancement()
 					if enh then
-						v:set_ability(enh)
+						v:set_ability(G.P_CENTERS[enh])
 					end
 					local suit, rank =
 						pseudorandom_element(SMODS.Suits, pseudoseed("thed6_seed")).key,
@@ -984,7 +981,7 @@ SMODS.Joker({
 		end
 	end,
 	calculate = function(self, card, context)
-		if context.ending_shop and not context.blueprint then
+		if context.ending_shop and not context.blueprint and card.ability.extra.rerolls ~= card.ability.extra.max then
 			card.ability.extra.rerolls = card.ability.extra.max
 			RVF.msg(card, localize("k_reset"))
 		end
@@ -1330,7 +1327,7 @@ local function mega_printer_check()
 			--SMODS.find_joker("j_crv_printer_core")[1],
 			SMODS.find_card("j_crv_fluid_tank")[1],
 		}, { bypass_eternal = true })
-		SMODS.find_card("j_crv_printer_core")[1]:set_ability("j_crv_mega_printer")
+		SMODS.find_card("j_crv_printer_core")[1]:set_ability(G.P_CENTERS["j_crv_mega_printer"])
 	end
 end
 
