@@ -380,7 +380,7 @@ return {
 				name = "Tax Master",
 				text = {
 					"Refunds {C:attention}%#1#{} of",
-					"all purchased cards costs",
+					"all purchased cards' costs",
 				},
 			},
 			j_crv_nyancat = {
