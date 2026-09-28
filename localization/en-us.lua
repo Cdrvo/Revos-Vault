@@ -151,8 +151,8 @@ return {
 				name = "Do a Barrel Roll",
 				text = {
 					"Played cards spin around",
-					"before scoring"
-				}
+					"before scoring",
+				},
 			},
 			j_crv_yellow_card = {
 				name = "Yellow Card",
@@ -168,8 +168,8 @@ return {
 				name = "Emergency Button",
 				text = {
 					"Sell this {C:attention}Joker{} during",
-					"a blind to gain {C:blue}+#1#{} Hands"
-				}
+					"a blind to gain {C:blue}+#1#{} Hands",
+				},
 			},
 			j_crv_rainbow_octopus = {
 				name = "Rainbow Octopus",
@@ -177,7 +177,7 @@ return {
 					"Played {V:1}#2#{}",
 					"has a {C:green}#3# in #4#{} chance to",
 					"give {C:money}$#1#{} when scored",
-					"{s:0.8}Suit changes after every round"
+					"{s:0.8}Suit changes after every round",
 				},
 			},
 			j_crv_evil_joker = {
@@ -185,8 +185,8 @@ return {
 				text = {
 					"Gains {C:mult}+#2#{} Mult",
 					"when a joker is destroyed",
-					"{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult)"
-				}
+					"{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult)",
+				},
 			},
 			j_crv_rainbow = {
 				name = "Rainbow",
@@ -194,15 +194,15 @@ return {
 					"When {C:attention}first hand{} is drawn",
 					"all cards in hand",
 					"turns into a random suit",
-					"selected from those cards"
-				}
+					"selected from those cards",
+				},
 			},
 			j_crv_useless_joker = {
 				name = "Useless Joker",
 				text = {
 					"Always has a",
 					"random {C:dark_edition}Edition{}",
-				}
+				},
 			},
 			-- Uncommon
 			j_crv_those_who_joke = {
@@ -243,7 +243,7 @@ return {
 					"to gain {C:blue}+#1#{} Hands and",
 					"{C:red}+#2#{} Discard.",
 					"Resets at end of ante",
-					"{C:inactive}(Currently {V:1}#3#{C:inactive})"
+					"{C:inactive}(Currently {V:1}#3#{C:inactive})",
 				},
 			},
 			j_crv_paperwork = {
@@ -254,6 +254,45 @@ return {
 					"{C:mult}+#2#{} Mult",
 					"{C:inactive}(9 and 2 included){}",
 				},
+			},
+			j_crv_plantain = {
+				name = "Plantain",
+				text = {
+					"This {C:attention}Joker{} gives {X:mult,C:white}X#2#{} Mult and",
+					"has {C:green}#3# in #4#{} chance to go extinct",
+					"after #5# rounds have passed",
+					"{C:inactive}(#1#/#5# Rounds have passed)",
+				},
+			},
+			j_crv_red_banana = {
+				name = "Red Banana",
+				text = {
+					"{C:mult}+#1#{} Mult",
+					"{C:green}#2# in #3#{} chance",
+					"this card is destroyed",
+					"at end of round",
+				},
+			},
+			j_crv_latundan = {
+				name = "Latundan",
+				text = {
+					"Gains {C:chips}+#4#{} Chips{} for every round",
+					"without a {C:attention}Gros Michel",
+					"{C:green}#2# in #3#{} chance",
+					"this card is destroyed",
+					"at end of round",
+					"{C:inactive}(Currently {C:chips}+#1#{C:inactive} Chips)",
+				},
+			},
+			j_crv_ticking_banana = {
+				name = "Ticking Banana",
+				text = {
+					"Gives {X:mult,C:white}X#1#{} Mult",
+					"{C:attention}#3#{} rounds after",
+					"it has been bought",
+					"and {C:red}self-destructs{}",
+					"{C:inactive}({C:attention}#2#{C:inactive}/#3# Rounds passed)"
+				}
 			},
 			-- Rare
 			j_crv_bocchi = {
@@ -328,7 +367,7 @@ return {
 				text = {
 					"Turns scored {C:attention}Stone{} cards",
 					"normal and gains {X:mult,C:white}X#2#{} Mult",
-					"{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult)"
+					"{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult)",
 				},
 			},
 			j_crv_clicker = {
@@ -424,7 +463,7 @@ return {
 					"{C:inactive}(Currently {C:attention}#1#{C:inactive}/#2#)",
 				},
 			},
-		
+
 			j_crv_the_computer = {
 				name = "The Computer",
 				text = {
@@ -627,16 +666,16 @@ return {
 				text = {
 					"At end of round",
 					"{C:green}#1# in #2#{} chance to",
-					"print {C:attention}-#3#{} Ante."
-				}
+					"print {C:attention}-#3#{} Ante.",
+				},
 			},
 			-- Mega Printer
 			j_crv_mega_printer = {
 				name = "Mega Printer",
 				text = {
 					"When {C:attention}Blind{} is selected",
-					"prints a random {C:red}Printer{}"
-				}
+					"prints a random {C:red}Printer{}",
+				},
 			},
 			--
 			j_crv_energy_generator = {
@@ -646,8 +685,8 @@ return {
 					"for something that requires",
 					"efficent and much power",
 					"Used to create the {C:dark_edition,E:1}Mega Printer",
-					"{C:inactive}(1/3)"
-				}
+					"{C:inactive}(1/3)",
+				},
 			},
 			j_crv_printer_core = {
 				name = "Printer Core",
@@ -656,8 +695,8 @@ return {
 					"that requires a lot",
 					"of resources to function",
 					"Used to create the {C:dark_edition,E:1}Mega Printer",
-					"{C:inactive}(2/3)"
-				}
+					"{C:inactive}(2/3)",
+				},
 			},
 			j_crv_fluid_tank = {
 				name = "Fluid Tank",
@@ -666,8 +705,8 @@ return {
 					"suficent with any",
 					"kind of fluid",
 					"Used to create the {C:dark_edition,E:1}Mega Printer",
-					"{C:inactive}(3/3)"
-				}
+					"{C:inactive}(3/3)",
+				},
 			},
 			-- Legendary
 			j_crv_the_ace = {
@@ -718,8 +757,8 @@ return {
 				text = {
 					"When first hand is drawn",
 					"{C:attention}+#1#{} hand size for",
-					"every card below {C:attention}5"
-				}
+					"every card below {C:attention}5",
+				},
 			},
 			-- Mythical
 			-- Curse
@@ -741,7 +780,7 @@ return {
 					"This Card's {C:attention}listed",
 					"{C:green,E:1,S:1.1}probabilities {C:red}cannot{}",
 					"be changed via Jokers",
-					"like {C:attention}Oops! All 6s"
+					"like {C:attention}Oops! All 6s",
 				},
 			},
 		},
@@ -914,6 +953,7 @@ return {
 			k_crv_sticky = "Sticky!",
 			s_crv_ready = "READY",
 			s_crv_not_ready = "NOT READY",
+			k_crv_boom_ex = "Boom!",
 			-- Consumabels
 			k_crv_cartridge = "Cartridge",
 			b_crv_cartridge_cards = "Cartridges",
