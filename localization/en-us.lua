@@ -147,6 +147,23 @@ return {
 					"to a random adjacent card",
 				},
 			},
+			j_crv_do_a_barrel_roll = {
+				name = "Do a Barrel Roll",
+				text = {
+					"Played cards spin around",
+					"before scoring"
+				}
+			},
+			j_crv_yellow_card = {
+				name = "Yellow Card",
+				text = {
+					"This Joker gains",
+					"{C:chips}+#2#{} Chips for each",
+					"{C:attention}Booster Pack{} ended",
+					"without skipping",
+					"{C:inactive}(Currently {C:chips}+#1#{C:inactive} Chips)",
+				},
+			},
 			-- Uncommon
 			j_crv_those_who_joke = {
 				name = "Those Who Joke",
@@ -260,11 +277,9 @@ return {
 			j_crv_dr_jimbo = {
 				name = "Dr. Jimbo",
 				text = {
-					"Turns scored cards",
-					"without an enhancement to {C:attention}Stone.",
-					"If a {C:attention}Stone Card {}is scored, removes the",
-					"enhancement and gains {X:mult,C:white}X#2#{} Mult.",
-					"{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult)",
+					"Turns scored {C:attention}Stone{} cards",
+					"normal and gains {X:mult,C:white}X#2#{} Mult",
+					"{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult)"
 				},
 			},
 			j_crv_clicker = {

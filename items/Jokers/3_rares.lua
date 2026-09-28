@@ -1342,10 +1342,7 @@ SMODS.Joker({
 		y = 7,
 	},
 	config = {
-		extra = {
-			xmult = 2,
-			odds = 2,
-		},
+		extra_slots_used = -1,
 	},
 	loc_vars = function(self, info_queue, card)
 		info_queue[#info_queue + 1] = G.P_CENTERS.j_crv_mega_printer
@@ -1372,10 +1369,7 @@ SMODS.Joker({
 		y = 7,
 	},
 	config = {
-		extra = {
-			xmult = 2,
-			odds = 2,
-		},
+		extra_slots_used = -1,
 	},
 	loc_vars = function(self, info_queue, card)
 		info_queue[#info_queue + 1] = G.P_CENTERS.j_crv_mega_printer
@@ -1403,10 +1397,7 @@ SMODS.Joker({
 		y = 7,
 	},
 	config = {
-		extra = {
-			xmult = 2,
-			odds = 2,
-		},
+		extra_slots_used = -1,
 	},
 	loc_vars = function(self, info_queue, card)
 		info_queue[#info_queue + 1] = G.P_CENTERS.j_crv_mega_printer

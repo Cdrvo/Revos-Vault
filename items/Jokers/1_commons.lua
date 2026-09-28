@@ -67,7 +67,7 @@ SMODS.Joker({
 		"banana",
 		"food",
 		"economy",
-		"chance"
+		"chance",
 	},
 	pools = {
 		Food = true,
@@ -133,9 +133,9 @@ SMODS.Joker({
 	attributes = {},
 	loc_vars = function(self, info_queue, card)
 		local cae = card.ability.extra
-		local num,den = SMODS.get_probability_vars(card, 1, cae.odds, "news_seed")
+		local num, den = SMODS.get_probability_vars(card, 1, cae.odds, "news_seed")
 		return {
-			vars = { (num), den},
+			vars = { num, den },
 		}
 	end,
 
@@ -144,7 +144,7 @@ SMODS.Joker({
 		if
 			context.end_of_round
 			and context.main_eval
-			and SMODS.pseudorandom_probability(card, "news_seed", 1 ,cae.odds)
+			and SMODS.pseudorandom_probability(card, "news_seed", 1, cae.odds)
 			and not context.blueprint
 		then
 			RVF.add_tag("tag_coupon")
@@ -170,10 +170,10 @@ SMODS.Joker({
 		},
 	},
 	attributes = {
-		"mult"
+		"mult",
 	},
 	crv_credits = {
-		art = {"Astro"}
+		art = { "Astro" },
 	},
 	loc_vars = function(self, info_queue, card)
 		local cae = card.ability.extra
@@ -209,10 +209,10 @@ SMODS.Joker({
 		},
 	},
 	attributes = {
-		"chips"
+		"chips",
 	},
 	crv_credits = {
-		art = {"mr.cr33ps"}
+		art = { "mr.cr33ps" },
 	},
 	loc_vars = function(self, info_queue, card)
 		local crv = card.ability.extra
@@ -230,7 +230,7 @@ SMODS.Joker({
 	end,
 })
 
-SMODS.Joker({ 
+SMODS.Joker({
 	key = "collection",
 	atlas = "revo_jokers",
 	cost = 5,
@@ -250,7 +250,7 @@ SMODS.Joker({
 	},
 	attributes = {
 		"mult",
-		"scaling"
+		"scaling",
 	},
 	crv_credits = {
 		art = { "mr.cr33ps" },
@@ -268,7 +268,7 @@ SMODS.Joker({
 				ref_table = cae,
 				ref_value = "mult",
 				scalar_value = "mult_gain",
-				message_colour = G.C.MULT
+				message_colour = G.C.MULT,
 			})
 		end
 		if context.joker_main then
@@ -297,7 +297,7 @@ SMODS.Joker({
 		},
 	},
 	crv_credits = {
-		art = {"Nyxel"}
+		art = { "Nyxel" },
 	},
 	loc_vars = function(self, info_queue, card)
 		info_queue[#info_queue + 1] = G.P_CENTERS.m_crv_honey
@@ -311,16 +311,24 @@ SMODS.Joker({
 				if SMODS.has_enhancement(v, "m_crv_honey") then
 					local sides = {}
 					local pos, area = RVF.card_position(v, v.area).pos, v.area.cards
-					if area[pos+1] and not SMODS.has_enhancement(area[pos+1], "m_crv_honey") and not v.honey_marked then
-						sides[#sides+1] = 1
+					if
+						area[pos + 1]
+						and not SMODS.has_enhancement(area[pos + 1], "m_crv_honey")
+						and not v.honey_marked
+					then
+						sides[#sides + 1] = 1
 					end
-					if area[pos-1] and not SMODS.has_enhancement(area[pos-1], "m_crv_honey") and not v.honey_marked then
-						sides[#sides+1] = -1
+					if
+						area[pos - 1]
+						and not SMODS.has_enhancement(area[pos - 1], "m_crv_honey")
+						and not v.honey_marked
+					then
+						sides[#sides + 1] = -1
 					end
-					if #sides>0 then
-						local p = (pseudorandom_element(sides,pseudoseed("crv_bee_seed")))
-						RVF.cool_enhance(area[pos+p], "m_crv_honey")
-						area[pos+p].honey_marked = true
+					if #sides > 0 then
+						local p = (pseudorandom_element(sides, pseudoseed("crv_bee_seed")))
+						RVF.cool_enhance(area[pos + p], "m_crv_honey")
+						area[pos + p].honey_marked = true
 					end
 				end
 			end
@@ -335,5 +343,90 @@ SMODS.Joker({
 	end,
 	in_pool = function(self)
 		return RVF.find_enhancement("m_crv_honey")
+	end,
+})
+
+SMODS.Joker({
+	key = "do_a_barrel_roll",
+	atlas = "revo_jokers",
+	rarity = 1,
+	cost = 2,
+	unlocked = true,
+	discovered = false,
+	blueprint_compat = false,
+	pos = {
+		x = 3,
+		y = 7,
+	},
+	config = {
+		extra_slots_used = -1,
+	},
+	attributes = {
+		"passive",
+	},
+	crv_credits = {
+		art = { "WombatCountry" },
+	},
+	loc_vars = function(self, info_queue, card)
+		return {
+			vars = {},
+		}
+	end,
+	calculate = function(self, card, context)
+		if context.individual and (context.cardarea == G.play or context.cardarea == "unscored") then
+			if context.other_card then
+				context.other_card:flip()
+				context.other_card:flip()
+			end
+		end
+	end,
+})
+
+SMODS.Joker({
+	key = "yellow_card",
+	atlas = "revo_jokers",
+	rarity = 1,
+	cost = 5,
+	unlocked = true,
+	discovered = false,
+	blueprint_compat = true,
+	pos = {
+		x = 4,
+		y = 7,
+	},
+	config = {
+		extra = {
+			chips = 0,
+			chip_gain = 15,
+		},
+	},
+	loc_vars = function(self, info_queue, card)
+		local cae = card.ability.extra
+		return {
+			vars = { cae.chips, cae.chip_gain },
+		}
+	end,
+
+	calculate = function(self, card, context)
+		local cae = card.ability.extra
+		if context.skipping_booster and not context.blueprint then
+			card.ability.extra.skipped = true
+		end
+		if context.ending_booster and not context.blueprint then
+			if not card.ability.extra.skipped then
+				SMODS.scale_card(card, {
+					ref_table = card.ability.extra,
+					ref_value = "chips",
+					scalar_value = "chip_gain",
+					message_colour = G.C.CHIPS,
+				})
+			end
+			card.ability.extra.skipped = false
+		end
+		if context.joker_main then
+			return {
+				chips = cae.chips,
+			}
+		end
 	end,
 })
