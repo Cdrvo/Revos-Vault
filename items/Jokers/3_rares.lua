@@ -344,10 +344,12 @@ SMODS.Joker({
 			}
 		end
 		if context.selling_card and context.card ~= card and not context.blueprint then
-			cae.xmult = 1
-			return {
-				message = localize("k_reset"),
-			}
+			SMODS.reset_card(card, {
+				ref_table = card.ability.extra,
+				ref_value = "x_mult",
+				reset_value = 1,
+				message_colour = G.C.RED,
+			})
 		end
 		if context.end_of_round and not context.blueprint and context.main_eval then
 			SMODS.scale_card(card, {
@@ -982,8 +984,12 @@ SMODS.Joker({
 	end,
 	calculate = function(self, card, context)
 		if context.ending_shop and not context.blueprint and card.ability.extra.rerolls ~= card.ability.extra.max then
-			card.ability.extra.rerolls = card.ability.extra.max
-			RVF.msg(card, localize("k_reset"))
+			SMODS.reset_card(card, {
+				ref_table = card.ability.extra,
+				ref_value = "mult",
+				reset_value = card.ability.extra.max,
+				message_colour = G.C.RED,
+			})
 		end
 	end,
 })
@@ -1285,9 +1291,9 @@ SMODS.Joker({
 	},
 	loc_vars = function(self, info_queue, card)
 		info_queue[#info_queue + 1] = { set = "Other", key = "crv_immutable" }
-		local crv = card.ability.extra
+		local cae, val = card.ability.extra, (G.GAME.crv_jimfinity or 0)
 		return {
-			vars = { crv.xmult * (G.GAME.crv_jimfinity + 1), crv.odds, 1, G.GAME.crv_jimfinity + 1 },
+			vars = { cae.xmult * (val + 1), cae.odds, 1, val + 1 },
 		}
 	end,
 	calculate = function(self, card, context)
