@@ -6,7 +6,17 @@ SMODS.ConsumableType({
 	shop_rate = 0.05,
 })
 
-RevosVault.Rune = SMODS.Consumable:extend({
+local function calculate_rounds_left(card)
+	if 1 < card.ability.extra.rounds_left then
+		card.ability.extra.rounds_left = card.ability.extra.rounds_left - 1
+		RVF.msg(card, "-1 Rounds")
+	else
+		SMODS.destroy_cards(card, true)
+	end
+	G.E_MANAGER:add_event(Event({ func = function() save_run(); return true end})) --//idk why i was saving here when i first made this bit
+end
+
+RevosVault.MISC.Rune = SMODS.Consumable:extend({
 	set = "crv_Rune",
 	config = {
 		extra = {
@@ -15,8 +25,9 @@ RevosVault.Rune = SMODS.Consumable:extend({
 			rounds_left = 1,
 		},
 	},
-	set_ability = function(self, card, initial, delay_sprites)
-		card:set_edition("e_negative", true, true)
+    draw = function(self, card, layer)
+		card.children.center:draw_shader("negative", nil, card.ARGS.send_to_shader)
+		card.children.center:draw_shader("negative_shine", nil, card.ARGS.send_to_shader)
 	end,
 	loc_vars = function(self, info_queue, card)
 		local cae = card.ability.extra
@@ -43,7 +54,9 @@ RevosVault.Rune = SMODS.Consumable:extend({
 	},
 })
 
-RevosVault.Rune({
+local Rune = RevosVault.MISC.Rune
+
+Rune({
 	key = "fehu",
 	set = "crv_Rune",
 	atlas = "revo_runes",
@@ -75,13 +88,13 @@ RevosVault.Rune({
 				}
 			end
 			if context.end_of_round and context.main_eval then
-				RevosVault.calculate_rounds_left(card)
+				calculate_rounds_left(card)
 			end
 		end
 	end,
 })
 
-RevosVault.Rune({
+Rune({
 	key = "uruz",
 	set = "crv_Rune",
 	atlas = "revo_runes",
@@ -109,7 +122,7 @@ RevosVault.Rune({
 		if cae.active then
 			local cae = card.ability.extra
 			if context.end_of_round and context.main_eval then
-				RevosVault.calculate_rounds_left(card)
+				calculate_rounds_left(card)
 			end
 			if context.repetition and context.cardarea == G.play then
 				return {
@@ -123,7 +136,7 @@ RevosVault.Rune({
 	},
 })
 
-RevosVault.Rune({
+Rune({
 	key = "thurisaz",
 	set = "crv_Rune",
 	atlas = "revo_runes",
@@ -156,7 +169,7 @@ RevosVault.Rune({
 	calculate = function(self, card, context)
 		local cae = card.ability.extra
 		if context.ending_shop and cae.active then
-			RevosVault.calculate_rounds_left(card)
+			calculate_rounds_left(card)
 		end
 	end,
 	remove_from_deck = function(self, card, from_debuff)
@@ -167,7 +180,7 @@ RevosVault.Rune({
 	end,
 })
 
-RevosVault.Rune({
+Rune({
 	key = "ansuz",
 	set = "crv_Rune",
 	atlas = "revo_runes",
@@ -223,7 +236,7 @@ RevosVault.Rune({
 	end,
 })
 
-RevosVault.Rune({
+Rune({
 	key = "raidho",
 	set = "crv_Rune",
 	atlas = "revo_runes",
@@ -247,7 +260,7 @@ RevosVault.Rune({
 		local cae = card.ability.extra
 		if cae.active then
 			if context.end_of_round and context.main_eval then
-				RevosVault.calculate_rounds_left(card)
+				calculate_rounds_left(card)
 			end
 			if context.individual and not context.other_card.edition and context.cardarea == G.play then
 				local a = pseudorandom_element({ "Seal", "Edition", "Enhancement" }, pseudoseed("imtryingok"))
@@ -263,7 +276,7 @@ RevosVault.Rune({
 	end,
 })
 
-RevosVault.Rune({
+Rune({
 	key = "kenaz",
 	set = "crv_Rune",
 	atlas = "revo_runes",
@@ -283,7 +296,7 @@ RevosVault.Rune({
 		local cae = card.ability.extra
 		if cae.active then
 			if context.end_of_round and context.main_eval then
-				RevosVault.calculate_rounds_left(card)
+				calculate_rounds_left(card)
 			end
 			if context.destroy_card and context.cardarea == "unscored" then
 				return {
@@ -294,7 +307,7 @@ RevosVault.Rune({
 	end,
 })
 
-RevosVault.Rune({
+Rune({
 	key = "gebo",
 	set = "crv_Rune",
 	atlas = "revo_runes",
@@ -314,7 +327,7 @@ RevosVault.Rune({
 		local cae = card.ability.extra
 		if cae.active then
 			if context.end_of_round and context.main_eval then
-				RevosVault.calculate_rounds_left(card)
+				calculate_rounds_left(card)
 				for k, v in pairs(G.consumeables.cards) do
 					if not v.edition or (v.edition and not v.edition.negative) then
 						v:set_edition("e_negative")
@@ -325,7 +338,7 @@ RevosVault.Rune({
 	end,
 })
 
-RevosVault.Rune({
+Rune({
 	key = "wunjo",
 	set = "crv_Rune",
 	atlas = "revo_runes",
@@ -349,7 +362,7 @@ RevosVault.Rune({
 		local cae = card.ability.extra
 		if cae.active then
 			if context.end_of_round and context.main_eval then
-				RevosVault.calculate_rounds_left(card)
+				calculate_rounds_left(card)
 			end
 			if context.individual and context.cardarea == G.play then
 				RevosVault.perma_upgrade(context.other_card, "p_dollars", false, cae.dollars)
@@ -362,7 +375,7 @@ RevosVault.Rune({
 	end,
 })
 
-RevosVault.Rune({
+Rune({
 	key = "hagalaz",
 	set = "crv_Rune",
 	atlas = "revo_runes",
@@ -386,7 +399,7 @@ RevosVault.Rune({
 		local cae = card.ability.extra
 		if cae.active then
 			if context.end_of_round and context.main_eval then
-				RevosVault.calculate_rounds_left(card)
+				calculate_rounds_left(card)
 			end
 			if context.pre_discard then
 				cae.discarded = true
@@ -401,7 +414,7 @@ RevosVault.Rune({
 	end,
 })
 
-RevosVault.Rune({
+Rune({
 	key = "isa",
 	set = "crv_Rune",
 	atlas = "revo_runes",
@@ -425,7 +438,7 @@ RevosVault.Rune({
 		local cae = card.ability.extra
 		if cae.active then
 			if context.end_of_round and context.main_eval then
-				RevosVault.calculate_rounds_left(card)
+				calculate_rounds_left(card)
 			end
 			if context.crv_debuff then
 				SMODS.calculate_effect({ xmult = cae.xmult }, context.crv_card)
@@ -434,7 +447,7 @@ RevosVault.Rune({
 	end,
 })
 
-RevosVault.Rune({
+Rune({
 	key = "jera",
 	set = "crv_Rune",
 	atlas = "revo_runes",
@@ -453,7 +466,7 @@ RevosVault.Rune({
 		local cae = card.ability.extra
 		if cae.active then
 			if context.before and context.scoring_hand and #context.scoring_hand > 0 then
-				RevosVault.calculate_rounds_left(card)
+				calculate_rounds_left(card)
 				G.playing_card = (G.playing_card and G.playing_card + 1) or 1
 				local _card = copy_card(context.full_hand[1], nil, nil, G.playing_card)
 				_card:add_to_deck()
@@ -479,7 +492,7 @@ RevosVault.Rune({
 	end,
 })
 
-RevosVault.Rune({
+Rune({
 	key = "eihwaz",
 	set = "crv_Rune",
 	atlas = "revo_runes",
@@ -502,7 +515,7 @@ RevosVault.Rune({
 						end,
 					}))
 					card_eval_status_text(card, "extra", nil, nil, nil, { message = localize("ph_boss_disabled") })
-					RevosVault.calculate_rounds_left(card)
+					calculate_rounds_left(card)
 					return true
 				end,
 			}))
@@ -510,7 +523,7 @@ RevosVault.Rune({
 	end,
 })
 
-RevosVault.Rune({
+Rune({
 	key = "perthro",
 	set = "crv_Rune",
 	atlas = "revo_runes",
@@ -528,7 +541,7 @@ RevosVault.Rune({
 	calculate = function(self, card, context)
 		local cae = card.ability.extra
 		if context.end_of_round and context.main_eval and cae.active then
-			RevosVault.calculate_rounds_left(card)
+			calculate_rounds_left(card)
 			G.E_MANAGER:add_event(Event({
 				func = function()
 					add_tag(Tag(pseudorandom_element(G.P_CENTER_POOLS.Tag).key))
@@ -541,7 +554,7 @@ RevosVault.Rune({
 	end,
 })
 
-RevosVault.Rune({
+Rune({
 	key = "algiz",
 	set = "crv_Rune",
 	atlas = "revo_runes",
@@ -562,7 +575,7 @@ RevosVault.Rune({
 	calculate = function(self, card, context)
 		local cae = card.ability.extra
 		if context.first_hand_drawn and cae.active then
-			RevosVault.calculate_rounds_left(card)
+			calculate_rounds_left(card)
 			G.GAME.blind.chips = G.GAME.blind.chips * cae.blindreq
 			G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
 			card:juice_up(0.3, 0.4)
@@ -573,7 +586,7 @@ RevosVault.Rune({
 	end,
 })
 
-RevosVault.Rune({
+Rune({
 	key = "sowilo",
 	set = "crv_Rune",
 	atlas = "revo_runes",
@@ -592,7 +605,7 @@ RevosVault.Rune({
 		local cae = card.ability.extra
 		if cae.active then
 			if context.end_of_round and context.main_eval then
-				RevosVault.calculate_rounds_left(card)
+				calculate_rounds_left(card)
 			end
 			if context.individual and context.cardarea == "unscored" then
 				return {
@@ -603,7 +616,7 @@ RevosVault.Rune({
 	end,
 })
 
-RevosVault.Rune({
+Rune({
 	key = "towaz",
 	set = "crv_Rune",
 	atlas = "revo_runes",
@@ -629,7 +642,7 @@ RevosVault.Rune({
 		local cae = card.ability.extra
 		if cae.active then
 			if context.end_of_round and context.main_eval then
-				RevosVault.calculate_rounds_left(card)
+				calculate_rounds_left(card)
 			end
 		end
 	end,
@@ -652,7 +665,7 @@ RevosVault.Rune({
 	end,
 })
 
-RevosVault.Rune({
+Rune({
 	key = "mannaz",
 	set = "crv_Rune",
 	atlas = "revo_runes",
@@ -676,7 +689,7 @@ RevosVault.Rune({
 		local cae = card.ability.extra
 		if cae.active then
 			if context.end_of_round and context.main_eval then
-				RevosVault.calculate_rounds_left(card)
+				calculate_rounds_left(card)
 			end
 			if
 				context.individual
@@ -694,7 +707,7 @@ RevosVault.Rune({
 	end,
 })
 
-RevosVault.Rune({
+Rune({
 	key = "berkana",
 	set = "crv_Rune",
 	atlas = "revo_runes",
@@ -719,7 +732,7 @@ RevosVault.Rune({
 	calculate = function(self, card, context)
 		local cae = card.ability.extra
 		if context.end_of_round and context.main_eval and cae.active then
-			RevosVault.calculate_rounds_left(card)
+			calculate_rounds_left(card)
 		end
 	end,
 	use = function(self, card, area, copier)
@@ -739,7 +752,7 @@ RevosVault.Rune({
 	end,
 })
 
-RevosVault.Rune({
+Rune({
 	key = "othala",
 	set = "crv_Rune",
 	atlas = "revo_runes",
@@ -764,7 +777,7 @@ RevosVault.Rune({
 	calculate = function(self, card, context)
 		local cae = card.ability.extra
 		if context.end_of_round and context.main_eval and cae.active then
-			RevosVault.calculate_rounds_left(card)
+			calculate_rounds_left(card)
 		end
 	end,
 	use = function(self, card, area, copier)
@@ -786,7 +799,7 @@ RevosVault.Rune({
 	end,
 })
 
-RevosVault.Rune({
+Rune({
 	key = "inguz",
 	set = "crv_Rune",
 	atlas = "revo_runes",
@@ -811,7 +824,7 @@ RevosVault.Rune({
 	calculate = function(self, card, context)
 		local cae = card.ability.extra
 		if context.end_of_round and context.main_eval and cae.active then
-			RevosVault.calculate_rounds_left(card)
+			calculate_rounds_left(card)
 		end
 	end,
 	use = function(self, card, area, copier)
