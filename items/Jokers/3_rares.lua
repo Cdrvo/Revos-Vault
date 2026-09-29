@@ -346,7 +346,7 @@ SMODS.Joker({
 		if context.selling_card and context.card ~= card and not context.blueprint then
 			SMODS.reset_card(card, {
 				ref_table = card.ability.extra,
-				ref_value = "x_mult",
+				ref_value = "xmult",
 				reset_value = 1,
 				message_colour = G.C.RED,
 			})
@@ -986,7 +986,7 @@ SMODS.Joker({
 		if context.ending_shop and not context.blueprint and card.ability.extra.rerolls ~= card.ability.extra.max then
 			SMODS.reset_card(card, {
 				ref_table = card.ability.extra,
-				ref_value = "mult",
+				ref_value = "rerolls",
 				reset_value = card.ability.extra.max,
 				message_colour = G.C.RED,
 			})
