@@ -230,7 +230,7 @@ Rune({
 				end
 			end
 			if context.end_of_round and context.main_eval then
-				RevosVault.calculate_rounds_left(cad)
+				calculate_rounds_left(card)
 			end
 		end
 	end,
@@ -365,7 +365,8 @@ Rune({
 				calculate_rounds_left(card)
 			end
 			if context.individual and context.cardarea == G.play then
-				RevosVault.perma_upgrade(context.other_card, "p_dollars", false, cae.dollars)
+				context.other_card.ability.perma_p_dollars = context.other_card.ability.perma_p_dollars or 0
+				context.other_card.ability.perma_p_dollars = context.other_card.ability.perma_p_dollars + cae.dollars
 				return {
 					message = localize("k_upgrade_ex"),
 					colour = G.C.MONEY,
