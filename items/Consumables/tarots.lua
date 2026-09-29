@@ -40,9 +40,6 @@ SMODS.Consumable({
 	set = "Tarot",
 	config = { extra = {} },
 	loc_vars = function(self, info_queue, card)
-		info_queue[#info_queue+1] = G.P_CENTERS["j_crv_energy_generator"]
-		info_queue[#info_queue+1] = G.P_CENTERS["j_crv_printer_core"]
-		info_queue[#info_queue+1] = G.P_CENTERS["j_crv_fluid_tank"]
 		return { vars = {} }
 	end,
 	pos = { x = 1, y = 0 },
