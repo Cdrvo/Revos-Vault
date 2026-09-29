@@ -20,7 +20,7 @@ local function cart_blacklist(cart, card)
 	end
 	return false
 end
-RevosVault.Cartridge = SMODS.Consumable:extend({
+RevosVault.MISC.Cartridge = SMODS.Consumable:extend({
 	set = "crv_cartridge",
 	crv_priority = 1,
 	can_use = function(self, card)
@@ -32,6 +32,13 @@ RevosVault.Cartridge = SMODS.Consumable:extend({
 				and cards[1].config.center.attributes.printer
 				and not cart_blacklist(card.config.center.key, cards[1])
 				and not RVF.has_cartridge(cards[1], card.config.center.key)
+				and (
+					not cards[1].ability.crv_cartridges
+					or (
+						cards[1].ability.crv_cartridges and
+						fah(cards[1].ability.crv_cartridges)<3
+					)
+				)
 			then
 				return true
 			end
@@ -49,7 +56,7 @@ RevosVault.Cartridge = SMODS.Consumable:extend({
 	end,
 })
 
-RevosVault.Cartridge({
+RevosVault.MISC.Cartridge({
 	key = "glitchy",
 	cost = 6,
 	atlas = "revo_cartridges",
@@ -71,7 +78,7 @@ RevosVault.Cartridge({
 	end,
 })
 
-RevosVault.Cartridge({
+RevosVault.MISC.Cartridge({
 	key = "mixed",
 	cost = 6,
 	atlas = "revo_cartridges",
@@ -87,7 +94,7 @@ RevosVault.Cartridge({
 	end,
 })
 
-RevosVault.Cartridge({
+RevosVault.MISC.Cartridge({
 	key = "ghostly",
 	cost = 6,
 	atlas = "revo_cartridges",
@@ -103,7 +110,7 @@ RevosVault.Cartridge({
 	end,
 })
 
-RevosVault.Cartridge({
+RevosVault.MISC.Cartridge({
 	key = "golden",
 	cost = 7,
 	atlas = "revo_cartridges",
@@ -121,7 +128,7 @@ RevosVault.Cartridge({
 	end,
 })
 
-RevosVault.Cartridge({
+RevosVault.MISC.Cartridge({
 	key = "soul",
 	cost = 6,
 	atlas = "revo_cartridges",
@@ -152,7 +159,7 @@ RevosVault.Cartridge({
 	end,
 })
 
-RevosVault.Cartridge({
+RevosVault.MISC.Cartridge({
 	key = "spin",
 	cost = 6,
 	atlas = "revo_cartridges",
@@ -165,7 +172,7 @@ RevosVault.Cartridge({
 	},
 })
 
-RevosVault.Cartridge({
+RevosVault.MISC.Cartridge({
 	key = "anti",
 	cost = 8,
 	atlas = "revo_cartridges",
@@ -181,7 +188,7 @@ RevosVault.Cartridge({
 	
 })
 
-RevosVault.Cartridge({
+RevosVault.MISC.Cartridge({
 	key = "bonus",
 	cost = 8,
 	atlas = "revo_cartridges",
