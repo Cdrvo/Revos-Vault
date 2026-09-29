@@ -1362,6 +1362,9 @@ SMODS.Joker({
 			end
 		}))
 	end,
+	crv_credits = {
+		art = "mr.cr33ps"
+	}
 })
 
 SMODS.Joker({
@@ -1389,6 +1392,9 @@ SMODS.Joker({
 			end
 		}))
 	end,
+	crv_credits = {
+		art = "mr.cr33ps"
+	}
 })
 
 
@@ -1417,5 +1423,8 @@ SMODS.Joker({
 			end
 		}))
 	end,
+	crv_credits = {
+		art = "mr.cr33ps"
+	}
 })
 

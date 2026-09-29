@@ -573,6 +573,9 @@ SMODS.Joker({
 			RVF.printer_create(card, {set = "Joker", area = G.jokers, rarity = "crv_printer"})
 		end
 	end,
+	crv_credits = {
+		art = "mr.cr33ps"
+	}
 })
 
 
