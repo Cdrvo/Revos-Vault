@@ -820,7 +820,22 @@ return {
 				text = { "Creates a random", "{C:attention}Booster Pack" },
 			},
 		},
-		Tarot = {},
+		Tarot = {
+			c_crv_ink_intuition = {
+				name = "Ink & Intuition",
+				text = {
+					"{C:green}#1# in #2#{} chance to",
+					"create a random {C:red}Printer{}"
+				}
+			},
+			c_crv_dreams_desires = {
+				name = "Dreams & Desires",
+				text = {
+					"Creates a random unowned",
+					"part of the {C:dark_edition,E:1}Mega Printer{}"
+				}
+			}
+		},
 		Voucher = {},
 
 		-- mod

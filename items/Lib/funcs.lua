@@ -198,28 +198,104 @@ function RevosVault.FUNCS.has_cartridge(card, cartridge)
 	return false
 end
 
--- UI related functions
+function RVF.redeem(card, free)
+	local old_state = G.STATE
+	G.GAME.crv_old_state = G.GAME.crv_old_state or {}
+	if not G.GAME.crv_old_state.voucher_redeem then
+		G.GAME.crv_old_state.voucher_redeem = G.STATE
+	end
 
-RevosVault.FUNCS.UI = {}
+	if free then
+		card.cost = 0
+	end
+	card:redeem()
+	G.E_MANAGER:add_event(Event({
+		trigger = "after",
+		delay = 1,
+		func = function()
+			if #G.play.cards <= 1 then
+				G.STATE = G.GAME.crv_old_state.voucher_redeem or old_state
+				G.GAME.crv_old_state.voucher_redeem = nil
+			end
+			card:start_dissolve()
+			return true
+		end,
+	}))
+end
 
-RVF.UI.move_area = function(area, move_to, back, reset)
-	G.GAME.crv_old_area_locations = G.GAME.crv_old_area_locations or {}
-	local ez = G.GAME.crv_old_area_locations
 
-	if back then
-		G[area].T.x = ez[area].x
-		G[area].T.y = ez[area].y
-		ez[area] = nil
+function RVF.reset_suit_jokers(var)
+    local all_suits = {}
+    for k, v in pairs(SMODS.Suits) do
+        if k ~= G.GAME.current_round[var] then all_suits[#all_suits + 1] = k end
+    end
+    local select = pseudorandom_element(all_suits, pseudoseed('anc'..G.GAME.round_resets.ante))
+    G.GAME.current_round[var] = select
+end
+
+function RVF.nope(args)
+	if not args.text then
+		args.text = "k_nope_ex"
+	end
+	if args.instant then
+		attention_text({
+			text = localize(args.text),
+			scale = args.scale or 1.3,
+			hold = args.hold or 1.4,
+			major = args.card,
+			backdrop_colour = args.colour or G.C.SECONDARY_SET.Tarot,
+			align = (G.STATE == G.STATES.TAROT_PACK or G.STATE == G.STATES.SPECTRAL_PACK) and "tm" or "cm",
+			offset = {
+				x = 0,
+				y = (G.STATE == G.STATES.TAROT_PACK or G.STATE == G.STATES.SPECTRAL_PACK) and -0.2 or 0,
+			},
+			silent = true,
+		})
+		G.E_MANAGER:add_event(Event({
+			trigger = "after",
+			delay = 0.06 * G.SETTINGS.GAMESPEED,
+			blockable = false,
+			blocking = false,
+			func = function()
+				play_sound("tarot2", 0.76, 0.4)
+				return true
+			end,
+		}))
+		play_sound("tarot2", 1, 0.4)
+		args.card:juice_up(0.3, 0.5)
 	else
-		if not ez[area] or reset then
-			ez[area] = {
-				x = G[area].T.x,
-				y = G[area].T.y,
-			}
-		end
-
-		G[area].T.x = (move_to.x or G[area].T.x)
-		G[area].T.y = (move_to.y or G[area].T.y)
+		G.E_MANAGER:add_event(Event({
+			trigger = "after",
+			delay = 0.4,
+			func = function()
+				attention_text({
+					text = localize(args.text),
+					scale = args.scale or 1.3,
+					hold = args.hold or 1.4,
+					major = args.card,
+					backdrop_colour = args.colour or G.C.SECONDARY_SET.Tarot,
+					align = (G.STATE == G.STATES.TAROT_PACK or G.STATE == G.STATES.SPECTRAL_PACK) and "tm" or "cm",
+					offset = {
+						x = 0,
+						y = (G.STATE == G.STATES.TAROT_PACK or G.STATE == G.STATES.SPECTRAL_PACK) and -0.2 or 0,
+					},
+					silent = true,
+				})
+				G.E_MANAGER:add_event(Event({
+					trigger = "after",
+					delay = 0.06 * G.SETTINGS.GAMESPEED,
+					blockable = false,
+					blocking = false,
+					func = function()
+						play_sound("tarot2", 0.76, 0.4)
+						return true
+					end,
+				}))
+				play_sound("tarot2", 1, 0.4)
+				args.card:juice_up(0.3, 0.5)
+				return true
+			end,
+		}))
 	end
 end
 
@@ -301,37 +377,28 @@ RVF.printer_create = function(card, make)
 	return ccard
 end
 
-function RVF.redeem(card, free)
-	local old_state = G.STATE
-	G.GAME.crv_old_state = G.GAME.crv_old_state or {}
-	if not G.GAME.crv_old_state.voucher_redeem then
-		G.GAME.crv_old_state.voucher_redeem = G.STATE
-	end
+-- UI related functions
 
-	if free then
-		card.cost = 0
+RevosVault.FUNCS.UI = {}
+
+RVF.UI.move_area = function(area, move_to, back, reset)
+	G.GAME.crv_old_area_locations = G.GAME.crv_old_area_locations or {}
+	local ez = G.GAME.crv_old_area_locations
+
+	if back then
+		G[area].T.x = ez[area].x
+		G[area].T.y = ez[area].y
+		ez[area] = nil
+	else
+		if not ez[area] or reset then
+			ez[area] = {
+				x = G[area].T.x,
+				y = G[area].T.y,
+			}
+		end
+
+		G[area].T.x = (move_to.x or G[area].T.x)
+		G[area].T.y = (move_to.y or G[area].T.y)
 	end
-	card:redeem()
-	G.E_MANAGER:add_event(Event({
-		trigger = "after",
-		delay = 1,
-		func = function()
-			if #G.play.cards <= 1 then
-				G.STATE = G.GAME.crv_old_state.voucher_redeem or old_state
-				G.GAME.crv_old_state.voucher_redeem = nil
-			end
-			card:start_dissolve()
-			return true
-		end,
-	}))
 end
 
-
-function RVF.reset_suit_jokers(var)
-    local all_suits = {}
-    for k, v in pairs(SMODS.Suits) do
-        if k ~= G.GAME.current_round[var] then all_suits[#all_suits + 1] = k end
-    end
-    local select = pseudorandom_element(all_suits, pseudoseed('anc'..G.GAME.round_resets.ante))
-    G.GAME.current_round[var] = select
-end

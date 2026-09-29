@@ -85,6 +85,13 @@ SMODS.Atlas({
 	px = 65,
 	py = 95,
 })
+
+SMODS.Atlas({
+	key = "revo_tarots",
+	path = "tarots.png",
+	px = 71,
+	py = 95,
+})
 -- sounds
 
 SMODS.Sound({

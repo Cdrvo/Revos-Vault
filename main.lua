@@ -11,6 +11,7 @@ SMODS.current_mod.optional_features = function()
 		cardareas = {
 			unscored = true,
 		},
+		object_weights = true
 	}
 end
 
