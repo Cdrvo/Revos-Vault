@@ -294,6 +294,29 @@ return {
 					"{C:inactive}({C:attention}#2#{C:inactive}/#3# Rounds passed)"
 				}
 			},
+			j_crv_uncanny_banana = {
+				name = "Uncanny Banana",
+				text = {
+					"{X:mult,C:white}X#1#{} Mult",
+					"{C:inactive,S:0.8}Something is off.."
+				}
+			},
+			j_crv_banana_of_doom = {
+				name = "Banana of Doom",
+				text = {
+					"When {C:attention}Blind{} is selected",
+					"destroys a random {C:attention}Joker{}",
+					"until satisfied"
+				}
+			},
+			j_crv_banana_template = {
+				name = "Banana Template",
+				text = {
+					"Turns into a random {C:crv_banana}Banana{} Joker",
+					"after #2# rounds have passed",
+					"{C:inactive}(#1#/#2# Rounds have passed)",
+				},
+			},
 			-- Rare
 			j_crv_bocchi = {
 				name = "Bocchi the Joker",
@@ -802,6 +825,186 @@ return {
 
 		-- mod
 
+		crv_Rune  = {
+			c_crv_fehu = {
+				name = "Fehu",
+				text = {
+					"When active,",
+					"{C:attention}Unscored cards{} give {C:money}+$#1#{}",
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} round"
+				},
+			},
+			c_crv_uruz = {
+				name = "Uruz",
+				text = {
+					"When active,",
+					"retrigger {C:attention}Scored Cards{}",
+					"{C:attention}#3#{} time",
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} round"
+				},
+			},
+			c_crv_thurisaz = {
+				name = "Thurisaz",
+				text = {
+					"When active,",
+					"{C:red}Rare{} Jokers appear",
+					"as much as {C:green}Uncommon{} Jokers",
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} shop"
+				},
+			},
+			c_crv_ansuz = {
+				name = "Ansuz",
+				text = {
+					"When active,",
+					"{C:green}#1# in #2#{} chance to create",
+					"{C:legendary,E:1}The Soul{} after",
+					"selecting a {C:attention}Blind",
+					"Lasts for {C:attention}#3#{C:inactive} (#4#){} rounds"
+				},
+			},
+			c_crv_raidho = {
+				name = "Raidho",
+				text = {
+					"When active,",
+					"{C:attention}Scored Cards{} gain a",
+					"random {C:dark_edition}Enhancement{},",
+					"{C:attention}Seal{} or {C:dark_edition}Edition{}",
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} rounds"
+				},
+			},
+			c_crv_kenaz = {
+				name = "Kenaz",
+				text = {
+					"When active,",
+					"{C:attention}Unscored cards{} are {C:red}destroyed",
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} round"
+				},
+			},
+			c_crv_gebo = {
+				name = "Gebo",
+				text = {
+					"When active",
+					"At the {C:attention}end of a round{},",
+					"all owned Consumables",
+					"turn {C:dark_edition}Negative{}",
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} rounds"
+				},
+			},
+			c_crv_wunjo = {
+				name = "Wunjo",
+				text = {
+					"When active",
+					"{C:attention}Scored cards{} gain",
+					"{C:money}+$#3#{} Permanent Dollars",
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} round"
+				},
+			},
+			c_crv_hagalaz = {
+				name = "Hagalaz",
+				text = {
+					"When active,",
+					"draw {C:attention}#3#{} extra cards",
+					"after {C:red}discarding{}",
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} rounds"
+				},
+			},
+			c_crv_isa = {
+				name = "Isa",
+				text = {
+					"When active,",
+					"{C:red}debuffed{} cards",
+					"give {X:mult,C:white}X#3#{} Mult",
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} rounds"
+				},
+			},
+			c_crv_jera = {
+				name = "Jera",
+				text = {
+					"When active,",
+					"duplicate the {C:attention}rightmost{}",
+					"scoring card",
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} hands"
+				},
+			},
+			c_crv_eihwaz = {
+				name = "Eihwaz",
+				text = {
+					"When active,",
+					"disable the selected {C:attention}Blind{}",
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} blind"
+				},
+			},
+			c_crv_perthro = {
+				name = "Perthro",
+				text = {
+					"When active,",
+					"gain a random {C:attention}Tag{}",
+					"at the end of the round.",
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} rounds"
+				},
+			},
+			c_crv_algiz = {
+				name = "Algiz",
+				text = {
+					"When active,",
+					"multiply the selected {C:attention}Blinds{}",
+					"requirement by {X:attention,C:white}X#3#{}",
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} blinds"
+				},
+			},
+			c_crv_sowilo = {
+				name = "Sowilo",
+				text = {
+					"When active,",
+					"{C:attention}Unscored cards{} give",
+					"their rank as {C:chips}Chips",
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} rounds"
+				},
+			},
+			c_crv_towaz = {
+				name = "Towaz",
+				text = {
+					"When active,",
+					"{C:attention}+#3#{} card selection limit",
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} rounds"
+				},
+			},
+			c_crv_mannaz = {
+				name = "Mannaz",
+				text = {
+					"When active,",
+					"Played {C:attention}face cards{} give",
+					"{X:chips,C:white}X#3#{} Chips",
+					"{s:0.8}debuffed cards included",
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} rounds"
+				},
+			},
+			c_crv_berkana = {
+				name = "Berkana",
+				text = {
+					"When active,",
+					"{C:attention}+#3#{} hand size until",
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} rounds"
+				},
+			},
+			c_crv_othala = {
+				name = "Othala",
+				text = {
+					"When active",
+					"{C:blue}+#3#{} hands until",
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} rounds"
+				},
+			},
+			c_crv_inguz = {
+				name = "Inguz",
+				text = {
+					"When active,",
+					"{C:red}+#3#{} discards until",
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} rounds"
+				},
+			},
+		},
+
 		crv_Contracts = {
 			c_crv_glass_contract = {
 				name = "Glass Contract",
@@ -942,6 +1145,7 @@ return {
 			-- UI
 			crv_cartridges = "Cartridges",
 			crv_contracts = "Contracts",
+			crv_runes = "Runes",
 			-- Rariities
 			k_crv_holy = "Holy Banana",
 			k_crv_printer = "Printer",
@@ -960,6 +1164,9 @@ return {
 
 			k_crv_contracts = "Contract",
 			b_crv_contracts_cards = "Contracts",
+
+			k_crv_rune = "Rune",
+			b_crv_rune_cards = "Runes"
 		},
 		high_scores = {},
 		labels = {

@@ -1,37 +1,37 @@
-SMODS.Atlas{
-    key = "modicon",
-    path = "modicon.png",
-    px = 34,
-    py = 34
-}
+SMODS.Atlas({
+	key = "modicon",
+	path = "modicon.png",
+	px = 34,
+	py = 34,
+})
 
-SMODS.Atlas {
-    key = "revo_jokers",
-    path = "jokers.png",
-    px = 71,
-    py = 95
-}
+SMODS.Atlas({
+	key = "revo_jokers",
+	path = "jokers.png",
+	px = 71,
+	py = 95,
+})
 
-SMODS.Atlas {
-    key = "wip",
-    path = "wip.png",
-    px = 71,
-    py = 95
-}
+SMODS.Atlas({
+	key = "wip",
+	path = "wip.png",
+	px = 71,
+	py = 95,
+})
 
-SMODS.Atlas {
-    key = "eol",
-    path = "eol.png",
-    px = 122,
-    py = 95
-}
+SMODS.Atlas({
+	key = "eol",
+	path = "eol.png",
+	px = 122,
+	py = 95,
+})
 
-SMODS.Atlas {
-    key = "revo_enhancements",
-    path = "enhancements.png",
-    px = 71,
-    py = 95
-}
+SMODS.Atlas({
+	key = "revo_enhancements",
+	path = "enhancements.png",
+	px = 71,
+	py = 95,
+})
 
 SMODS.Atlas({
 	key = "revo_blinds",
@@ -52,31 +52,38 @@ SMODS.Atlas({
 })
 
 SMODS.Atlas({
-    key = "revo_tags",
-    path = "tags.png",
-    px = 34,
-    py = 34
+	key = "revo_tags",
+	path = "tags.png",
+	px = 34,
+	py = 34,
 })
 
 SMODS.Atlas({
-    key = "revo_contracts",
-    path = "contracts.png",
-    px = 71,
-    py = 95
+	key = "revo_contracts",
+	path = "contracts.png",
+	px = 71,
+	py = 95,
 })
 
 SMODS.Atlas({
-    key = "revo_cartridges",
-    path = "cartridges.png",
-    px = 71,
-    py = 95
+	key = "revo_cartridges",
+	path = "cartridges.png",
+	px = 71,
+	py = 95,
 })
 
 SMODS.Atlas({
-    key = "revo_mega_printer",
-    path = "mega_printer.png",
-    px = 128,
-    py = 95
+	key = "revo_mega_printer",
+	path = "mega_printer.png",
+	px = 128,
+	py = 95,
+})
+
+SMODS.Atlas({
+	key = "revo_runes",
+	path = "runes.png",
+	px = 65,
+	py = 95,
 })
 -- sounds
 
@@ -86,23 +93,19 @@ SMODS.Sound({
 	path = "crv_swoon.ogg",
 })
 
-
 -- attributes
 
-SMODS.Attribute{
-    key = "banana",
-    keys = {
-        "j_gros_michel",
-        "j_cavendish"
-    },
-    alias = {
-        "food"
-    }
-}
+SMODS.Attribute({
+	key = "banana",
+	keys = {
+		"j_gros_michel",
+		"j_cavendish",
+	},
+})
 
-SMODS.Attribute{
-    key = "printer",
-}
+SMODS.Attribute({
+	key = "printer",
+})
 -- object types
 
 SMODS.ObjectType({
@@ -113,7 +116,6 @@ SMODS.ObjectType({
 		self:inject_card(G.P_CENTERS.j_cavendish)
 	end,
 })
-
 
 -- taken from Cryptid
 SMODS.ObjectType({

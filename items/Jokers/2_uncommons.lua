@@ -573,3 +573,166 @@ SMODS.Joker({
 		art = "mr.cr33ps",
 	},
 })
+
+SMODS.Joker({
+	key = "uncanny_banana",
+	config = {
+		extra = {
+			xmult = 15,
+		},
+	},
+	pools = {
+		Food = true,
+	},
+	rarity = 2,
+	atlas = "revo_jokers",
+	blueprint_compat = false,
+	discovered = false,
+	pos = {
+		x = 5,
+		y = 8,
+	},
+	attributes = {
+		"banana",
+		"food",
+		"xmult"
+	},
+	cost = 4,
+	loc_vars = function(self, info_queue, card)
+		return {
+			vars = { card.ability.extra.xmult },
+		}
+	end,
+	calculate = function(self, card, context)
+		if context.joker_main then
+			return {
+				x_mult = card.ability.extra.xmult,
+			}
+		end
+		
+		if context.end_of_round and context.main_eval and not context.blueprint then
+			local a = math.random(1, 10)
+			if a == 10 then
+				RVF.cool_enhance(card, "j_crv_banana_of_doom")
+				if not card.ability.eternal then
+					card:add_sticker("eternal", true)
+				else
+					card.ability.crv_eternal_by_default = true
+				end
+			end
+		end
+	end,
+	crv_credits = {
+		art = "mr.cr33ps",
+	},
+})
+
+SMODS.Joker({
+	key = "banana_of_doom",
+	config = {
+		extra = {
+			xmult = 15,
+		},
+	},
+	pools = {
+		Food = true,
+	},
+	rarity = 2,
+	atlas = "revo_jokers",
+	blueprint_compat = false,
+	discovered = false,
+	no_collection = true,
+	pos = {
+		x = 6,
+		y = 8,
+	},
+	attributes = {
+		"destroy_card",
+		"banana",
+		"food"
+	},
+	cost = 4,
+	loc_vars = function(self, info_queue, card)
+		return {
+		}
+	end,
+	add_to_deck = function(self, card, from_debuff)
+		card.ability.extra.satisfaction = math.random(1,3)
+	end,
+	calculate = function(self, card, context)
+		if context.setting_blind and not context.blueprint then
+			card.ability.extra.satisfaction = card.ability.extra.satisfaction - 1
+			local jokers = {}
+			for k, v in pairs(G.jokers.cards) do
+				if v ~= card and not v.getting_sliced then
+					jokers[#jokers+1] = v
+				end
+			end
+			local card_to_destroy = pseudorandom_element(jokers, pseudoseed("banana_of_seeds"))
+			if card_to_destroy then
+				SMODS.destroy_cards(card_to_destroy)
+			end
+
+			if card.ability.extra.satisfaction <= 0 then
+				RVF.cool_enhance(card, "j_crv_uncanny_banana")
+				if not card.ability.crv_eternal_by_default  then
+					card:remove_sticker("eternal")
+				end
+			end
+		end
+	end,
+	in_pool = function(self)
+		return false
+	end
+})
+
+SMODS.Joker({
+	key = "banana_template",
+	atlas = "revo_jokers",
+	rarity = 2,
+	cost = 6,
+	unlocked = true,
+	discovered = false,
+	blueprint_compat = true,
+	perishable_compat = false,
+	pos = {
+		x = 7,
+		y = 8,
+	},
+	config = {
+		extra = {
+			timer = 0,
+			timer_max = 3,
+		},
+	},
+	pools = {
+		Food = true,
+	},
+	attributes = {
+		"banana",
+		"food"
+	},
+	loc_vars = function(self, info_queue, card)
+		return {
+			vars = { card.ability.extra.timer, card.ability.extra.timer_max },
+		}
+	end,
+	calculate = function(self, card, context)
+		if context.end_of_round and context.main_eval and not context.blueprint then
+			if card.ability.extra.timer < card.ability.extra.timer_max then
+				card.ability.extra.timer = card.ability.extra.timer + 1
+				RVF.msg(card, "+1")
+				if card.ability.extra.timer == card.ability.extra.timer_max then
+					local banana_list = SMODS.get_attribute_pool("banana")
+					if #banana_list > 0 then
+						local selected_banana = pseudorandom_element(banana_list, pseudoseed("random_banana_seed"))
+						RVF.cool_enhance(card, selected_banana)
+					end
+				end
+			end
+		end
+	end,
+	crv_credits = {
+		art = "mr.cr33ps",
+	},
+})
