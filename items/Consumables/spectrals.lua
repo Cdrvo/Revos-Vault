@@ -7,7 +7,7 @@ SMODS.Consumable({
 		return { vars = { card.ability.extra.cards } }
 	end,
 	pos = { x = 0, y = 0 },
-	atlas = "spec",
+	atlas = "revo_spectrals",
 	cost = 3,
 	unlocked = true,
 	discovered = true,

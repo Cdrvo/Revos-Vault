@@ -291,23 +291,23 @@ return {
 					"{C:attention}#3#{} rounds after",
 					"it has been bought",
 					"and {C:red}self-destructs{}",
-					"{C:inactive}({C:attention}#2#{C:inactive}/#3# Rounds passed)"
-				}
+					"{C:inactive}({C:attention}#2#{C:inactive}/#3# Rounds passed)",
+				},
 			},
 			j_crv_uncanny_banana = {
 				name = "Uncanny Banana",
 				text = {
 					"{X:mult,C:white}X#1#{} Mult",
-					"{C:inactive,S:0.8}Something is off.."
-				}
+					"{C:inactive,S:0.8}Something is off..",
+				},
 			},
 			j_crv_banana_of_doom = {
 				name = "Banana of Doom",
 				text = {
 					"When {C:attention}Blind{} is selected",
 					"destroys a random {C:attention}Joker{}",
-					"until satisfied"
-				}
+					"until satisfied",
+				},
 			},
 			j_crv_banana_template = {
 				name = "Banana Template",
@@ -346,24 +346,24 @@ return {
 					"{C:green}#2# in #3#{} Chance to go extinct",
 				},
 			},
-			j_crv_diamond_joker={
-                name="Diamond Joker",
-                text={
-                    "Gives {X:mult,C:white} X#2# {} Mult",
-                    "for each {C:attention}Diamond Card",
-                    "in your {C:attention}full deck",
-                    "{C:inactive}(Currently {X:mult,C:white} X#1# {C:inactive} Mult)",
-                },
-            },
-			j_crv_reinforced_glass_joker={
-                name="Reinforced Glass Joker",
-                text={
-                    "Gives {X:mult,C:white} X#2# {} Mult",
-                    "for each {C:attention}Reinforced Glass Card",
-                    "in your {C:attention}full deck",
-                    "{C:inactive}(Currently {X:mult,C:white} X#1# {C:inactive} Mult)",
-                },
-            },
+			j_crv_diamond_joker = {
+				name = "Diamond Joker",
+				text = {
+					"Gives {X:mult,C:white} X#2# {} Mult",
+					"for each {C:attention}Diamond Card",
+					"in your {C:attention}full deck",
+					"{C:inactive}(Currently {X:mult,C:white} X#1# {C:inactive} Mult)",
+				},
+			},
+			j_crv_reinforced_glass_joker = {
+				name = "Reinforced Glass Joker",
+				text = {
+					"Gives {X:mult,C:white} X#2# {} Mult",
+					"for each {C:attention}Reinforced Glass Card",
+					"in your {C:attention}full deck",
+					"{C:inactive}(Currently {X:mult,C:white} X#1# {C:inactive} Mult)",
+				},
+			},
 			-- Rare
 			j_crv_bocchi = {
 				name = "Bocchi the Joker",
@@ -866,7 +866,16 @@ return {
 			},
 		},
 		Planet = {},
-		Spectral = {},
+		Spectral = {
+			c_crv_brush = {
+				name = "Brush",
+				text = {
+					"Add a {C:purple}Printer's Seal",
+					"to {C:attention}1{} selected",
+					"card in your hand",
+				},
+			},
+		},
 		Stake = {},
 		Tag = {
 			tag_crv_jimfinity = {
@@ -883,28 +892,28 @@ return {
 				name = "Ink & Intuition",
 				text = {
 					"{C:green}#1# in #2#{} chance to",
-					"create a random {C:red}Printer{}"
-				}
+					"create a random {C:red}Printer{}",
+				},
 			},
 			c_crv_dreams_desires = {
 				name = "Dreams & Desires",
 				text = {
 					"Creates a random unowned",
-					"part of the {C:dark_edition,E:1}Mega Printer{}"
-				}
-			}
+					"part of the {C:dark_edition,E:1}Mega Printer{}",
+				},
+			},
 		},
 		Voucher = {},
 
 		-- mod
 
-		crv_Rune  = {
+		crv_Rune = {
 			c_crv_fehu = {
 				name = "Fehu",
 				text = {
 					"When active,",
 					"{C:attention}Unscored cards{} give {C:money}+$#1#{}",
-					"Lasts for {C:attention}#1#{C:inactive} (#2#){} round"
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} round",
 				},
 			},
 			c_crv_uruz = {
@@ -913,7 +922,7 @@ return {
 					"When active,",
 					"retrigger {C:attention}Scored Cards{}",
 					"{C:attention}#3#{} time",
-					"Lasts for {C:attention}#1#{C:inactive} (#2#){} round"
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} round",
 				},
 			},
 			c_crv_thurisaz = {
@@ -922,7 +931,7 @@ return {
 					"When active,",
 					"{C:red}Rare{} Jokers appear",
 					"as much as {C:green}Uncommon{} Jokers",
-					"Lasts for {C:attention}#1#{C:inactive} (#2#){} shop"
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} shop",
 				},
 			},
 			c_crv_ansuz = {
@@ -932,7 +941,7 @@ return {
 					"{C:green}#1# in #2#{} chance to create",
 					"{C:legendary,E:1}The Soul{} after",
 					"selecting a {C:attention}Blind",
-					"Lasts for {C:attention}#3#{C:inactive} (#4#){} rounds"
+					"Lasts for {C:attention}#3#{C:inactive} (#4#){} rounds",
 				},
 			},
 			c_crv_raidho = {
@@ -942,7 +951,7 @@ return {
 					"{C:attention}Scored Cards{} gain a",
 					"random {C:dark_edition}Enhancement{},",
 					"{C:attention}Seal{} or {C:dark_edition}Edition{}",
-					"Lasts for {C:attention}#1#{C:inactive} (#2#){} rounds"
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} rounds",
 				},
 			},
 			c_crv_kenaz = {
@@ -950,7 +959,7 @@ return {
 				text = {
 					"When active,",
 					"{C:attention}Unscored cards{} are {C:red}destroyed",
-					"Lasts for {C:attention}#1#{C:inactive} (#2#){} round"
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} round",
 				},
 			},
 			c_crv_gebo = {
@@ -960,7 +969,7 @@ return {
 					"At the {C:attention}end of a round{},",
 					"all owned Consumables",
 					"turn {C:dark_edition}Negative{}",
-					"Lasts for {C:attention}#1#{C:inactive} (#2#){} rounds"
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} rounds",
 				},
 			},
 			c_crv_wunjo = {
@@ -969,7 +978,7 @@ return {
 					"When active",
 					"{C:attention}Scored cards{} gain",
 					"{C:money}+$#3#{} Permanent Dollars",
-					"Lasts for {C:attention}#1#{C:inactive} (#2#){} round"
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} round",
 				},
 			},
 			c_crv_hagalaz = {
@@ -978,7 +987,7 @@ return {
 					"When active,",
 					"draw {C:attention}#3#{} extra cards",
 					"after {C:red}discarding{}",
-					"Lasts for {C:attention}#1#{C:inactive} (#2#){} rounds"
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} rounds",
 				},
 			},
 			c_crv_isa = {
@@ -987,7 +996,7 @@ return {
 					"When active,",
 					"{C:red}debuffed{} cards",
 					"give {X:mult,C:white}X#3#{} Mult",
-					"Lasts for {C:attention}#1#{C:inactive} (#2#){} rounds"
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} rounds",
 				},
 			},
 			c_crv_jera = {
@@ -996,7 +1005,7 @@ return {
 					"When active,",
 					"duplicate the {C:attention}rightmost{}",
 					"scoring card",
-					"Lasts for {C:attention}#1#{C:inactive} (#2#){} hands"
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} hands",
 				},
 			},
 			c_crv_eihwaz = {
@@ -1004,7 +1013,7 @@ return {
 				text = {
 					"When active,",
 					"disable the selected {C:attention}Blind{}",
-					"Lasts for {C:attention}#1#{C:inactive} (#2#){} blind"
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} blind",
 				},
 			},
 			c_crv_perthro = {
@@ -1013,7 +1022,7 @@ return {
 					"When active,",
 					"gain a random {C:attention}Tag{}",
 					"at the end of the round.",
-					"Lasts for {C:attention}#1#{C:inactive} (#2#){} rounds"
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} rounds",
 				},
 			},
 			c_crv_algiz = {
@@ -1022,7 +1031,7 @@ return {
 					"When active,",
 					"multiply the selected {C:attention}Blinds{}",
 					"requirement by {X:attention,C:white}X#3#{}",
-					"Lasts for {C:attention}#1#{C:inactive} (#2#){} blinds"
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} blinds",
 				},
 			},
 			c_crv_sowilo = {
@@ -1031,7 +1040,7 @@ return {
 					"When active,",
 					"{C:attention}Unscored cards{} give",
 					"their rank as {C:chips}Chips",
-					"Lasts for {C:attention}#1#{C:inactive} (#2#){} rounds"
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} rounds",
 				},
 			},
 			c_crv_towaz = {
@@ -1039,7 +1048,7 @@ return {
 				text = {
 					"When active,",
 					"{C:attention}+#3#{} card selection limit",
-					"Lasts for {C:attention}#1#{C:inactive} (#2#){} rounds"
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} rounds",
 				},
 			},
 			c_crv_mannaz = {
@@ -1049,7 +1058,7 @@ return {
 					"Played {C:attention}face cards{} give",
 					"{X:chips,C:white}X#3#{} Chips",
 					"{s:0.8}debuffed cards included",
-					"Lasts for {C:attention}#1#{C:inactive} (#2#){} rounds"
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} rounds",
 				},
 			},
 			c_crv_berkana = {
@@ -1057,7 +1066,7 @@ return {
 				text = {
 					"When active,",
 					"{C:attention}+#3#{} hand size until",
-					"Lasts for {C:attention}#1#{C:inactive} (#2#){} rounds"
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} rounds",
 				},
 			},
 			c_crv_othala = {
@@ -1065,7 +1074,7 @@ return {
 				text = {
 					"When active",
 					"{C:blue}+#3#{} hands until",
-					"Lasts for {C:attention}#1#{C:inactive} (#2#){} rounds"
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} rounds",
 				},
 			},
 			c_crv_inguz = {
@@ -1073,7 +1082,7 @@ return {
 				text = {
 					"When active,",
 					"{C:red}+#3#{} discards until",
-					"Lasts for {C:attention}#1#{C:inactive} (#2#){} rounds"
+					"Lasts for {C:attention}#1#{C:inactive} (#2#){} rounds",
 				},
 			},
 		},
@@ -1240,7 +1249,7 @@ return {
 			b_crv_contracts_cards = "Contracts",
 
 			k_crv_rune = "Rune",
-			b_crv_rune_cards = "Runes"
+			b_crv_rune_cards = "Runes",
 		},
 		high_scores = {},
 		labels = {
