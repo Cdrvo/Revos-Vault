@@ -317,6 +317,53 @@ return {
 					"{C:inactive}(#1#/#2# Rounds have passed)",
 				},
 			},
+			j_crv_jimbanana = {
+				name = "Jimbanana",
+				text = {
+					"{C:mult}+#1#{} Mult.",
+					"{C:green}#3# in #2#{} Chance to go extinct",
+				},
+			},
+			j_crv_flytrap = {
+				name = "Fly Trap",
+				text = {
+					"Each time a {C:clubs}Club{} card is",
+					"scored, gain {C:chips}+#1#{} Chips.",
+					"{C:inactive}(Currently {C:chips}+#2# {C:inactive}Chips)",
+				},
+			},
+			j_crv_grosdish = {
+				name = "Grosdish",
+				text = {
+					"{C:chips}+#1#{} Chips",
+					"{C:green}#2# in #3#{} Chance to go extinct",
+				},
+			},
+			j_crv_cavicheal = {
+				name = "Caveicheal",
+				text = {
+					"{X:chips,C:white}X#1#{} Chips",
+					"{C:green}#2# in #3#{} Chance to go extinct",
+				},
+			},
+			j_crv_diamond_joker={
+                name="Diamond Joker",
+                text={
+                    "Gives {X:mult,C:white} X#2# {} Mult",
+                    "for each {C:attention}Diamond Card",
+                    "in your {C:attention}full deck",
+                    "{C:inactive}(Currently {X:mult,C:white} X#1# {C:inactive} Mult)",
+                },
+            },
+			j_crv_reinforced_glass_joker={
+                name="Reinforced Glass Joker",
+                text={
+                    "Gives {X:mult,C:white} X#2# {} Mult",
+                    "for each {C:attention}Reinforced Glass Card",
+                    "in your {C:attention}full deck",
+                    "{C:inactive}(Currently {X:mult,C:white} X#1# {C:inactive} Mult)",
+                },
+            },
 			-- Rare
 			j_crv_bocchi = {
 				name = "Bocchi the Joker",
@@ -797,6 +844,17 @@ return {
 			},
 		},
 		Other = {
+			-- Seals
+			crv_printer_seal_seal = {
+				name = "Printer's Seal",
+				text = {
+					"When scored, adds a copy",
+					"of the card to hand",
+					"{C:inactive}(Removes the seal from",
+					"{C:inactive}the copied card)",
+				},
+			},
+			--
 			crv_immutable = {
 				name = "Immutable Chances",
 				text = {
@@ -1173,6 +1231,7 @@ return {
 			s_crv_ready = "READY",
 			s_crv_not_ready = "NOT READY",
 			k_crv_boom_ex = "Boom!",
+			k_printed_ex = "Printed!",
 			-- Consumabels
 			k_crv_cartridge = "Cartridge",
 			b_crv_cartridge_cards = "Cartridges",
@@ -1185,6 +1244,8 @@ return {
 		},
 		high_scores = {},
 		labels = {
+			-- Seals
+			crv_printer_seal_seal = "Printer's Seal", -- SEAL SEAL
 			-- Other
 			crv_spamton_buff = "Spamton Buff",
 		},

@@ -18,7 +18,7 @@ SMODS.Consumable({
     crv_credits = {
         art = {"mr.cr33ps"}
     },
-    pos = {x=9,y=9},
+    pos = {x=2,y=0},
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue+1] = G.P_CENTERS.m_crv_reinforced_glass
         local num, den = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, "glass_contract_seed")
@@ -55,7 +55,7 @@ SMODS.Consumable({
     crv_credits = {
         art = {"mr.cr33ps"}
     },
-    pos = {x=9,y=9},
+    pos = {x=3,y=0},
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue+1] = G.P_CENTERS.m_crv_diamond
         local num, den = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, "steel_contract_seed")
@@ -92,7 +92,7 @@ SMODS.Consumable({
     crv_credits = {
         art = {"mr.cr33ps"}
     },
-    pos = {x=9,y=9},
+    pos = {x=4,y=0},
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue+1] = G.P_CENTERS.m_crv_rhodium
         local num, den = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, "gold_contract_seed")
@@ -129,7 +129,7 @@ SMODS.Consumable({
     crv_credits = {
         art = {"mr.cr33ps"}
     },
-    pos = {x=9,y=9},
+    pos = {x=1,y=0},
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue+1] = G.P_CENTERS.m_crv_xmult
         local num, den = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, "mult_contract_seed")
@@ -166,7 +166,7 @@ SMODS.Consumable({
     crv_credits = {
         art = {"mr.cr33ps"}
     },
-    pos = {x=9,y=9},
+    pos = {x=5,y=0},
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue+1] = G.P_CENTERS.m_crv_blessed
         local num, den = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, "lucky_contract_seed")
@@ -203,7 +203,7 @@ SMODS.Consumable({
     crv_credits = {
         art = {"mr.cr33ps"}
     },
-    pos = {x=9,y=9},
+    pos = {x=0,y=0},
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue+1] = G.P_CENTERS.m_crv_boosted
         local num, den = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, "bonus_contract_seed")

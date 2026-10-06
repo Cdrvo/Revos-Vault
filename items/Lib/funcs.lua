@@ -299,6 +299,16 @@ function RVF.nope(args)
 	end
 end
 
+RevosVault.FUNCS.owned_enhancements = function(enhancement)
+	local a, check = 0, (G.playing_cards or {})
+	for k,v in pairs(check) do
+		if v and SMODS.has_enhancement(v, enhancement) then
+			a = a + 1
+		end
+	end
+	return a
+end
+
 -- the special function
 
 RVF.printer_create = function(card, make)

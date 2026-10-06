@@ -595,7 +595,7 @@ SMODS.Joker({
 	attributes = {
 		"banana",
 		"food",
-		"xmult"
+		"xmult",
 	},
 	cost = 4,
 	loc_vars = function(self, info_queue, card)
@@ -609,7 +609,7 @@ SMODS.Joker({
 				x_mult = card.ability.extra.xmult,
 			}
 		end
-		
+
 		if context.end_of_round and context.main_eval and not context.blueprint then
 			local a = math.random(1, 10)
 			if a == 10 then
@@ -649,15 +649,14 @@ SMODS.Joker({
 	attributes = {
 		"destroy_card",
 		"banana",
-		"food"
+		"food",
 	},
 	cost = 4,
 	loc_vars = function(self, info_queue, card)
-		return {
-		}
+		return {}
 	end,
 	add_to_deck = function(self, card, from_debuff)
-		card.ability.extra.satisfaction = math.random(1,3)
+		card.ability.extra.satisfaction = math.random(1, 3)
 	end,
 	calculate = function(self, card, context)
 		if context.setting_blind and not context.blueprint then
@@ -665,7 +664,7 @@ SMODS.Joker({
 			local jokers = {}
 			for k, v in pairs(G.jokers.cards) do
 				if v ~= card and not v.getting_sliced then
-					jokers[#jokers+1] = v
+					jokers[#jokers + 1] = v
 				end
 			end
 			local card_to_destroy = pseudorandom_element(jokers, pseudoseed("banana_of_seeds"))
@@ -675,7 +674,7 @@ SMODS.Joker({
 
 			if card.ability.extra.satisfaction <= 0 then
 				RVF.cool_enhance(card, "j_crv_uncanny_banana")
-				if not card.ability.crv_eternal_by_default  then
+				if not card.ability.crv_eternal_by_default then
 					card:remove_sticker("eternal")
 				end
 			end
@@ -683,7 +682,7 @@ SMODS.Joker({
 	end,
 	in_pool = function(self)
 		return false
-	end
+	end,
 })
 
 SMODS.Joker({
@@ -710,7 +709,7 @@ SMODS.Joker({
 	},
 	attributes = {
 		"banana",
-		"food"
+		"food",
 	},
 	loc_vars = function(self, info_queue, card)
 		return {
@@ -735,4 +734,344 @@ SMODS.Joker({
 	crv_credits = {
 		art = "mr.cr33ps",
 	},
+})
+
+SMODS.Joker({
+	key = "jimbanana",
+	atlas = "revo_jokers",
+	no_pool_flag = "jimbanana_nopool",
+	rarity = 2,
+	cost = 5,
+	unlocked = true,
+	discovered = false,
+	blueprint_compat = true,
+	perishable_compat = false,
+	eternal_compat = false,
+	pos = {
+		x = 8,
+		y = 8,
+	},
+	config = {
+		extra = {
+			mult = 8,
+			odds = 6,
+		},
+	},
+	pools = {
+		Food = true,
+	},
+	attributes = {
+		"banana",
+		"food",
+		"mult",
+		"chance",
+	},
+	loc_vars = function(self, info_queue, card)
+		local cae = card.ability.extra
+		local num, den = SMODS.get_probability_vars(card, 1, cae.odds, "jim_seed")
+		return {
+			vars = { card.ability.extra.mult, den, num },
+		}
+	end,
+	calculate = function(self, card, context)
+		local cae = card.ability.extra
+		if context.joker_main then
+			return {
+				mult = cae.mult,
+			}
+		end
+		if context.end_of_round and context.main_eval and not context.blueprint then
+			if SMODS.pseudorandom_probability(card, "jim_seed", 1, cae.odds) then
+				SMODS.destroy_cards(card, { pinch_anim = true })
+				G.GAME.pool_flags.jimbanana_nopool = true
+				return {
+					message = localize("k_extinct_ex"),
+					delay(0.6),
+				}
+			else
+				return {
+					message = localize("k_safe_ex"),
+					delay(0.6),
+				}
+			end
+		end
+	end,
+})
+
+SMODS.Joker({
+	key = "grosdish",
+	atlas = "revo_jokers",
+	no_pool_flag = "crv_grosdish_nopool",
+	rarity = 2,
+	cost = 3,
+	unlocked = true,
+	discovered = false,
+	blueprint_compat = true,
+	perishable_compat = false,
+	eternal_compat = false,
+	pos = {
+		x = 3,
+		y = 9,
+	},
+	config = {
+		extra = {
+			chips = 30,
+			odds = 6,
+		},
+	},
+	attributes = {
+		"banana",
+		"food",
+		"chips",
+		"chance",
+	},
+	pools = {
+		Food = true,
+	},
+	loc_vars = function(self, info_queue, card)
+		local cae = card.ability.extra
+		local num, den = SMODS.get_probability_vars(card, 1, cae.odds, "grosdish_seed")
+		return {
+			vars = { card.ability.extra.chips, num, den },
+		}
+	end,
+	calculate = function(self, card, context)
+		local cae = card.ability.extra
+		if context.joker_main then
+			return {
+				chips = cae.chips,
+			}
+		end
+		if context.end_of_round and context.main_eval and not context.blueprint then
+			if SMODS.pseudorandom_probability(card, "jim_seed", 1, cae.odds) then
+				SMODS.destroy_cards(card, { pinch_anim = true })
+				G.GAME.pool_flags.crv_grosdish_nopool = true
+				return {
+					message = localize("k_extinct_ex"),
+					delay(0.6),
+				}
+			else
+				return {
+					message = localize("k_safe_ex"),
+					delay(0.6),
+				}
+			end
+		end
+	end,
+})
+
+SMODS.Joker({
+	key = "cavicheal",
+	atlas = "revo_jokers",
+	no_pool_flag = "crv_cavicheal_nopool",
+	yes_pool_flag = "crv_grosdish_nopool",
+	rarity = 2,
+	cost = 4,
+	unlocked = true,
+	discovered = false,
+	blueprint_compat = true,
+	perishable_compat = false,
+	eternal_compat = false,
+	pos = {
+		x = 4,
+		y = 9,
+	},
+	config = {
+		extra = {
+			xchips = 3,
+			odds = 1000,
+		},
+	},
+	pools = {
+		Food = true,
+	},
+	attributes = {
+		"banana",
+		"food",
+		"xchips",
+		"chance",
+	},
+	loc_vars = function(self, info_queue, card)
+		local cae = card.ability.extra
+		local num, den = SMODS.get_probability_vars(card, 1, cae.odds, "cavicheal_seed")
+		return {
+			vars = { card.ability.extra.xchips, num, den },
+		}
+	end,
+	calculate = function(self, card, context)
+		local cae = card.ability.extra
+		if context.joker_main then
+			return {
+				xchips = cae.xchips,
+			}
+		end
+		if context.end_of_round and context.main_eval and not context.blueprint then
+			if SMODS.pseudorandom_probability(card, "cavicheal_seed", 1, cae.odds) then
+				SMODS.destroy_cards(card, { pinch_anim = true })
+				G.GAME.pool_flags.crv_cavicheal_nopool = true
+				return {
+					message = localize("k_extinct_ex"),
+					delay(0.6),
+				}
+			else
+				return {
+					message = localize("k_safe_ex"),
+					delay(0.6),
+				}
+			end
+		end
+	end,
+})
+
+SMODS.Joker({
+	key = "reinforced_glass_joker",
+	config = {
+		extra = {
+			xmult = 0.4,
+		},
+	},
+
+	rarity = 2,
+	atlas = "revo_jokers",
+	blueprint_compat = true,
+	discovered = false,
+	pos = {
+		x = 5,
+		y = 9,
+	},
+	attributes = {
+		"xmult",
+		"full_deck",
+		"enhancements",
+	},
+	cost = 6,
+	loc_vars = function(self, info_queue, card)
+		info_queue[#info_queue + 1] = G.P_CENTERS.m_crv_reinforced_glass
+		return {
+			vars = {
+				card.ability.extra.xmult * RVF.owned_enhancements("m_crv_reinforced_glass") + 1,
+				card.ability.extra.xmult,
+				RVF.owned_enhancements("m_crv_reinforced_glass"),
+			},
+		}
+	end,
+	calculate = function(self, card, context)
+		if context.joker_main then
+			if RVF.owned_enhancements("m_crv_reinforced_glass") > 0 then
+				return {
+					x_mult = RVF.owned_enhancements("m_crv_reinforced_glass") * card.ability.extra.xmult + 1,
+				}
+			end
+		end
+	end,
+	in_pool = function(self)
+		if RVF.owned_enhancements("m_crv_reinforced_glass") > 0 then
+			return true
+		end
+		return false
+	end,
+})
+
+SMODS.Joker({
+	key = "diamond_joker",
+	config = {
+		extra = {
+			xmult = 0.3,
+		},
+	},
+	attributes = {
+		"xmult",
+		"full_deck",
+		"enhancements",
+	},
+	rarity = 2,
+	atlas = "revo_jokers",
+	blueprint_compat = true,
+	discovered = false,
+	pos = {
+		x = 6,
+		y = 9,
+	},
+	cost = 6,
+	loc_vars = function(self, info_queue, card)
+		info_queue[#info_queue + 1] = G.P_CENTERS.m_crv_diamond
+		return {
+			vars = {
+				card.ability.extra.xmult * RVF.owned_enhancements("m_crv_diamond") + 1,
+				card.ability.extra.xmult,
+				RVF.owned_enhancements("m_crv_diamond"),
+			},
+		}
+	end,
+	calculate = function(self, card, context)
+		if context.joker_main then
+			if RVF.owned_enhancements("m_crv_diamond") > 0 then
+				return {
+					x_mult = RVF.owned_enhancements("m_crv_diamond") * card.ability.extra.xmult + 1,
+				}
+			end
+		end
+	end,
+	in_pool = function(self)
+		if RVF.owned_enhancements("m_crv_diamond") > 0 then
+			return true
+		end
+		return false
+	end,
+})
+
+SMODS.Joker({
+	key = "flytrap",
+	atlas = "revo_jokers",
+	rarity = 2,
+	cost = 5,
+	unlocked = true,
+	discovered = false,
+	blueprint_compat = true,
+	pos = {
+		x = 2,
+		y = 9,
+	},
+	config = {
+		extra = {
+			chip_gain = 10,
+			chips = 0,
+		},
+	},
+	attributes = {
+		"chips",
+		"clubs",
+		"scaling",
+		"suit"
+	},
+	loc_vars = function(self, info_queue, card)
+		return {
+			vars = { card.ability.extra.chip_gain, card.ability.extra.chips },
+		}
+	end,
+
+	calculate = function(self, card, context)
+		if context.before and not context.blueprint then
+			local clubs = 0
+			for k, v in pairs(context.scoring_hand) do
+				if v:is_suit("Clubs") then
+					clubs = clubs + 1
+				end
+			end
+			card.ability.extra.chip_gain_total = card.ability.extra.chip_gain*clubs
+			SMODS.scale_card(card, {
+				ref_table = card.ability.extra,
+				ref_value = "chips",
+				scalar_value = "chip_gain_total",
+				message_colour = G.C.CHIPS,
+			})
+			card.ability.extra.chip_gain_total = 0
+		end
+
+		if context.joker_main then
+			return {
+				chips = card.ability.extra.chips,
+			}
+		end
+	end,
 })

@@ -262,12 +262,12 @@ Rune({
 			if context.end_of_round and context.main_eval then
 				calculate_rounds_left(card)
 			end
-			if context.individual and not context.other_card.edition and context.cardarea == G.play then
+			if context.individual and not context.other_card.edition and context.cardarea == G.play then --TODO: recode
 				local a = pseudorandom_element({ "Seal", "Edition", "Enhancement" }, pseudoseed("imtryingok"))
 				if a == "Seal" then
 					context.other_card:set_seal(SMODS.poll_seal({ guaranteed = true }), nil, true)
 				elseif a == "Edition" then
-					context.other_card:set_edition(poll_edition(pseudorandom("raidho"), nil, true, true))
+					context.other_card:set_edition(poll_edition(tostring(pseudorandom("raidho")), nil, true, true))
 				else
 					context.other_card:set_ability(SMODS.poll_enhancement({ guaranteed = true }))
 				end
