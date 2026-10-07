@@ -1428,3 +1428,46 @@ SMODS.Joker({
 	}
 })
 
+
+
+SMODS.Joker({
+	key = "the_knight",
+	atlas = "revo_jokers",
+	rarity = 3,
+	cost = 5,
+	unlocked = true,
+	discovered = false,
+	blueprint_compat = false,
+	pos = {
+		x = 1,
+		y = 9,
+	},
+	config = {
+		extra = {
+			odds = 4,
+			reps = 1
+		},
+	},
+	attributes = {
+		"modify_card",
+		"discard",
+	},
+	loc_vars = function(self, info_queue, card)
+		local num, den = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, "the_knight_seed")
+		return {
+			vars = {num, den, card.ability.extra.reps},
+		}
+	end,
+	calculate = function(self, card, context)
+		if context.discard and not context.blueprint and SMODS.pseudorandom_probability(card, "the_knight_seed", 1, card.ability.extra.odds) then
+			context.other_card.ability.perma_repetitions = context.other_card.ability.perma_repetitions or 0
+			context.other_card.ability.perma_repetitions = context.other_card.ability.perma_repetitions + card.ability.extra.reps
+			return{
+				message = localize("k_upgrade_ex"),
+				message_colour = G.C.GREEN,
+				message_card = context.other_card
+			}
+
+		end
+	end,
+})

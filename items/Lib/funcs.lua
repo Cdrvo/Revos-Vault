@@ -86,8 +86,8 @@ function RVF.card_position(card, area)
 	return ret
 end
 
-function RVF.msg(card, message)
-	card_eval_status_text(card, "extra", nil, nil, nil, { message = message })
+function RVF.msg(card, message, type, other)
+	card_eval_status_text(card, type or "extra", other, nil, nil, { message = message })
 end
 
 G.FUNCS.crv_use_joker = function(e)

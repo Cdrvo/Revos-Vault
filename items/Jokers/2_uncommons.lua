@@ -1042,7 +1042,7 @@ SMODS.Joker({
 		"chips",
 		"clubs",
 		"scaling",
-		"suit"
+		"suit",
 	},
 	loc_vars = function(self, info_queue, card)
 		return {
@@ -1058,7 +1058,7 @@ SMODS.Joker({
 					clubs = clubs + 1
 				end
 			end
-			card.ability.extra.chip_gain_total = card.ability.extra.chip_gain*clubs
+			card.ability.extra.chip_gain_total = card.ability.extra.chip_gain * clubs
 			SMODS.scale_card(card, {
 				ref_table = card.ability.extra,
 				ref_value = "chips",
@@ -1103,7 +1103,7 @@ SMODS.Joker({
 		"two",
 		"three",
 		"four",
-		"xmult"
+		"xmult",
 	},
 	calculate = function(self, card, context)
 		if context.joker_main then
@@ -1145,16 +1145,22 @@ SMODS.Joker({
 	},
 	attributes = {
 		"xmult",
-		"suit"
+		"suit",
 	},
 	loc_vars = function(self, info_queue, card)
 		local cae = card.ability.extra
 		return {
-			vars = { cae.xmult, (G.GAME.current_round.crv_whiteboard_suit or "Spades"), colours = {G.C.SUITS[((G.GAME.current_round) and G.GAME.current_round.crv_whiteboard_suit) or "Spades"]} },
-		} 
+			vars = {
+				cae.xmult,
+				(G.GAME.current_round.crv_whiteboard_suit or "Spades"),
+				colours = {
+					G.C.SUITS[(G.GAME.current_round and G.GAME.current_round.crv_whiteboard_suit) or "Spades"],
+				},
+			},
+		}
 	end,
 	calculate = function(self, card, context)
-		local cae = card.ability.extra 
+		local cae = card.ability.extra
 		if context.joker_main then
 			local suits, all_cards = 0, 0
 			for k, v in ipairs(G.hand.cards) do
@@ -1186,7 +1192,7 @@ SMODS.Joker({
 	},
 	attributes = {
 		"hands",
-		"discards"
+		"discards",
 	},
 	config = {
 		extra = {},
@@ -1201,7 +1207,7 @@ SMODS.Joker({
 			G.GAME.current_round.hands_left = G.GAME.current_round.hands_left + G.GAME.current_round.hands_played
 			G.GAME.current_round.discards_left = G.GAME.current_round.discards_left + G.GAME.current_round.discards_used
 		end
-	end
+	end,
 })
 
 SMODS.Joker({
@@ -1218,12 +1224,12 @@ SMODS.Joker({
 	},
 	config = {
 		extra = {
-			reps = 2
+			reps = 2,
 		},
 	},
 	attributes = {
 		"retrigger",
-		"enhancements"
+		"enhancements",
 	},
 	crv_credits = {
 		art = { "Chainsawmert" },
@@ -1236,10 +1242,357 @@ SMODS.Joker({
 	calculate = function(self, card, context)
 		if context.repetition and context.cardarea == G.play then
 			if SMODS.has_enhancement(context.other_card, "m_gold") then
-				return{
-					repetitions = card.ability.extra.reps
+				return {
+					repetitions = card.ability.extra.reps,
 				}
 			end
+		end
+	end,
+})
+
+SMODS.Joker({
+	key = "jimbo_show",
+	atlas = "revo_jokers",
+	rarity = 2,
+	cost = 5,
+	unlocked = true,
+	discovered = false,
+	blueprint_compat = true,
+	pos = {
+		x = 0,
+		y = 10,
+	},
+	config = {
+		extra = {
+			xmult = 1,
+			xmultg = 0.05,
+		},
+	},
+	loc_vars = function(self, info_queue, card)
+		return {
+			vars = { card.ability.extra.xmult, card.ability.extra.xmultg },
+		}
+	end,
+
+	calculate = function(self, card, context)
+		local cae = card.ability.extra
+		if context.joker_main then
+			SMODS.scale_card(card, {
+				ref_table = cae,
+				ref_value = "xmult",
+				scalar_value = "xmultg",
+				message_colour = G.C.MULT,
+			})
+			return {
+				xmult = card.ability.extra.xmult,
+			}
+		end
+	end,
+})
+
+SMODS.Joker({
+	key = "jnx",
+	atlas = "revo_jokers",
+	cost = 5,
+	unlocked = true,
+	discovered = false,
+	blueprint_compat = true,
+	rarity = 2,
+	pos = {
+		x = 1,
+		y = 10,
+	},
+	config = {
+		extra = {
+			chips = 1,
+			chipsg = 0.05,
+		},
+	},
+	loc_vars = function(self, info_queue, card)
+		return {
+			vars = { card.ability.extra.chips, card.ability.extra.chipsg },
+		}
+	end,
+
+	calculate = function(self, card, context)
+		local cae = card.ability.extra
+		if context.joker_main then
+			SMODS.scale_card(card, {
+				ref_table = cae,
+				ref_value = "chips",
+				scalar_value = "chipsg",
+				message_colour = G.C.CHIPS,
+			})
+			return {
+				x_chips = card.ability.extra.chips,
+			}
+		end
+	end,
+})
+
+SMODS.Joker({
+	key = "the_hand",
+	atlas = "wip",
+	rarity = 2,
+	cost = 5,
+	unlocked = true,
+	discovered = false,
+	blueprint_compat = false,
+	pos = {
+		x = 0,
+		y = 0,
+	},
+	config = {
+		extra = {},
+	},
+	calculate = function(self, card, context)
+		if context.setting_blind and not context.blueprint and G.jokers.cards[RVF.card_position(card).pos + 1] then
+			local pos = RVF.card_position(card).pos
+			local _card = G.jokers.cards[pos + 1]
+			_card.ability.crv_the_hand_mark = true
+			SMODS.destroy_cards(_card, { bypass_eternal = true, immediate = true })
+			RVF.do_event(function()
+				SMODS.calculate_context({ crv_handcheck = true, crv_card = card })
+				return true
+			end)
+		end
+		if context.crv_handcheck and context.crv_card == card and G.jokers.cards[RVF.card_position(card).pos + 1] then -- havent checked if works
+			local pos = RVF.card_position(card).pos
+			local _card = G.jokers.cards[pos + 1]
+			if _card.ability.crv_the_hand_mark then
+				print("force removed")
+				_card.ability.crv_the_hand_mark:remove()
+				_card.ability.crv_the_hand_mark = nil
+			end
+		end
+	end,
+})
+
+SMODS.Joker({
+	key = "stock_market",
+	atlas = "revo_jokers",
+	cost = 6,
+	unlocked = true,
+	discovered = false,
+	blueprint_compat = false,
+	rarity = 2,
+	pos = {
+		x = 2,
+		y = 10,
+	},
+	config = {
+		extra = {
+			moneymult = 2,
+			money = 1,
+			odds = 4,
+		},
+	},
+	loc_vars = function(self, info_queue, card)
+		local cae = card.ability.extra
+		local num, den = SMODS.get_probability_vars(card, 1, cae.odds, "crv_stock_market_seed")
+		return {
+			vars = { cae.moneymult, cae.money, num, den },
+		}
+	end,
+	calculate = function(self, card, context)
+		local cae = card.ability.extra
+		if context.end_of_round and context.main_eval and not context.blueprint then
+			if SMODS.pseudorandom_probability(card, "crv_stock_market_seed", 1, cae.odds) then
+				SMODS.reset_card(card, {
+					ref_table = cae,
+					ref_value = "money",
+					reset_value = 1,
+					message_colour = G.C.RED,
+				})
+			else
+				SMODS.scale_card(card, {
+					ref_table = cae,
+					ref_value = "money",
+					scalar_value = "moneymult",
+					operation = "X",
+					message_colour = G.C.GOLD,
+				})
+			end
+		end
+	end,
+	calc_dollar_bonus = function(self, card)
+		local cae = card.ability.extra
+		return cae.money
+	end,
+})
+
+SMODS.Joker({
+	key = "love_letter",
+	atlas = "revo_jokers",
+	rarity = 2,
+	cost = 5,
+	unlocked = true,
+	discovered = false,
+	blueprint_compat = true,
+	pos = {
+		x = 3,
+		y = 10,
+	},
+	config = {
+		extra = {
+			multg = 1,
+			mult = 0,
+		},
+	},
+	loc_vars = function(self, info_queue, card)
+		return {
+			vars = { card.ability.extra.multg, card.ability.extra.mult },
+		}
+	end,
+
+	calculate = function(self, card, context)
+		if
+			context.individual
+			and context.cardarea == G.play
+			and context.other_card:is_suit("Hearts")
+			and not context.blueprint
+		then
+			SMODS.scale_card(card, {
+				ref_table = card.ability.extra,
+				ref_value = "mult",
+				scalar_value = "multg",
+				message_colour = G.C.RED,
+			})
+		end
+
+		if context.joker_main then
+			return {
+				mult = card.ability.extra.mult,
+			}
+		end
+	end,
+})
+
+SMODS.Joker({
+	key = "biker",
+	atlas = "revo_jokers",
+	rarity = 2,
+	cost = 6,
+	unlocked = true,
+	discovered = false,
+	blueprint_compat = true,
+	pos = {
+		x = 4,
+		y = 10,
+	},
+	config = {
+		extra = {
+			mult = 1,
+		},
+	},
+	crv_credits = {
+		art = { "rat" },
+	},
+	loc_vars = function(self, info_queue, card)
+		local cae = card.ability.extra
+		return {
+			vars = { cae.mult },
+		}
+	end,
+
+	calculate = function(self, card, context)
+		local cae = card.ability.extra
+		if context.individual and context.cardarea == G.play then
+				context.other_card.ability.perma_mult = context.other_card.ability.perma_mult or 0
+				context.other_card.ability.perma_mult = context.other_card.ability.perma_mult + cae.mult
+				return {
+					message = localize("k_upgrade_ex"),
+					colour = G.C.MULT,
+					message_card = context.other_card,
+				}
+		end
+	end
+})
+
+SMODS.Joker({
+	key = "banker",
+	atlas = "revo_jokers",
+	rarity = 2,
+	cost = 0,
+	unlocked = true,
+	discovered = false,
+	blueprint_compat = false,
+	pos = {
+		x = 5,
+		y = 10,
+	},
+	config = {
+		extra = {
+			owe = 5,
+			owe_limit = 100,
+			current_dept = 0,
+		},
+	},
+	crv_credits = {
+		art = { "kusanehexaku" },
+	},
+	loc_vars = function(self, info_queue, card)
+		local cae = card.ability.extra
+		return {
+			vars = { cae.owe_limit, cae.owe, cae.current_dept },
+		}
+	end,
+	add_to_deck = function(self, card, from_debuff)
+		local cae = card.ability.extra
+		card.ability.extra_value = -100 - card.sell_cost
+		card:set_cost()
+		ease_dollars(cae.owe_limit)
+	end,
+	calculate = function(self, card, context)
+		local cae = card.ability.extra
+		if context.end_of_round and context.main_eval and not context.blueprint then
+			card.ability.extra_value = card.ability.extra_value + cae.owe
+			cae.current_dept = cae.current_dept + cae.owe
+			card:set_cost()
+			ease_dollars(-cae.owe)
+			RVF.msg(card, nil, "dollars", -cae.owe)
+			if cae.current_dept >= cae.owe_limit then
+				SMODS.destroy_cards(card)
+			end
+		end
+	end,
+})
+
+SMODS.Joker({
+	key = "tab",
+	config = {
+		extra = {
+			stored = 0,
+		},
+	},
+	rarity = 2,
+	atlas = "wip",
+	blueprint_compat = false,
+	discovered = false,
+	pos = {
+		x = 0,
+		y = 0,
+	},
+	cost = 6,
+	loc_vars = function(self, info_queue, card)
+		local cae = card.ability.extra
+		return {
+			vars = { cae.stored },
+		}
+	end,
+	add_to_deck = function(self, card, from_debuff)
+		G.GAME.current_round.crv_perma_free_rerolls = true
+		calculate_reroll_cost(true)
+	end,
+	remove_from_deck = function(self, card, from_debuff)
+		G.GAME.current_round.crv_perma_free_rerolls = false
+		local cae = card.ability.extra
+		ease_dollars(-cae.stored)
+	end,
+	calculate = function(self, card, context)
+		local cae = card.ability.extra
+		if context.reroll_shop and not context.blueprint and not context.repetition then
+			cae.stored = cae.stored + 5
 		end
 	end,
 })

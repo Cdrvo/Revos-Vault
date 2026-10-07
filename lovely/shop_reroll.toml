@@ -14,3 +14,15 @@ payload = '''
 SMODS.calculate_context({crv_pre_reroll = true})
 '''
 match_indent = true
+
+# infinite free rerolls yippee
+
+[[patches]]
+[patches.pattern]
+target = 'functions/common_events.lua'
+pattern = '''if G.GAME.current_round.free_rerolls < 0 then G.GAME.current_round.free_rerolls = 0 end'''
+position = 'after'
+payload = '''
+if G.GAME.current_round.crv_perma_free_rerolls then G.GAME.current_round.reroll_cost = 0 return end
+'''
+match_indent = true

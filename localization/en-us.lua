@@ -393,9 +393,76 @@ return {
 				name = "Goldfish",
 				text = {
 					"Retrigger each scored",
-					"{C:gold}Gold{} card",
-					"{C:attention}#1#{} times"
+					"{C:gold}Gold{} card {C:attention}#1#{} times"
 				}
+			},
+			j_crv_jimbo_show = {
+				name = "Jimbo Show",
+				text = {
+					"Gains {X:mult,C:white}X#2#{} Mult",
+					"when triggered",
+					"{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult)"
+				}
+			},
+			j_crv_jnx = {
+				name = "JNX",
+				text = {
+					"Gains {X:chips,C:white}X#2#{} Chips",
+					"when triggered",
+					"{C:inactive}(Currently {X:chips,C:white}X#1#{C:inactive} Chips)"
+				}
+			},
+			j_crv_the_hand = {
+				name = "The Hand",
+				text = {
+					"When {C:attention}Blind{} is selected",
+					"destroys the {C:attention}Joker{}",
+					"on the right",
+					"no matter what"
+				}
+			},
+			j_crv_stock_market = {
+				name = "Stock Market",
+				text = {
+					"Gives {C:money}$#2#{} at end of the round.",
+					"After every bonus, Multiply by {X:money,C:white}X#1#{}",
+					"Has a {C:green}#3# in #4#{} chance to reset",
+				},
+			},
+			j_crv_love_letter = {
+				name = "Love Letter",
+				text = {
+					"Each time a {C:hearts}Heart{} card is",
+					"scored, gains {C:mult}+#1#{} Mult.",
+					"{C:inactive}(Currently {C:mult}+#2# {C:inactive}Mult)",
+				},
+			},
+			j_crv_biker ={
+                name="Biker",
+                text={
+                    "Every scored {C:attention}card{}",
+                    "permanently gains",
+                    "{C:mult}+#1#{} Mult when scored",
+                },
+            },
+			j_crv_banker = {
+				name = "Banker",
+				text = {
+					"Gain {C:money}+#1#{} when obtained",
+					"Lose {C:red}-$#2#{} after every round",
+					"Self-destructs when dept is fully paid",
+					"{C:inactive}(Dept Paid: $#3#)",
+					"{C:inactive}(Sell Value is Current Dept)",
+				},
+			},
+			j_crv_tab = {
+				name = "Tab Keeper",
+				text = {
+					"All rerolls are {C:green}free{}",
+					"If this card is {C:red}removed{},",
+					"pay {C:red}$5{} for each reroll used.",
+					"{C:inactive}(Currently paying {C:red}$#1#{C:inactive})"
+				},
 			},
 			-- Rare
 			j_crv_bocchi = {
@@ -631,6 +698,14 @@ return {
 					"when destroyed",
 					"{C:inactive}(Currently {X:mult,C:white}X#1{C:inactive} Mult)",
 				},
+			},
+			j_crv_the_knight = {
+				name = "The Knight",
+				text = {
+					"{C:red}Discarded{} cards has",
+					"a {C:green}#1# in #2#{} chance to",
+					"gain {C:attention}#3#{} perma repetition"
+				}
 			},
 			-- Printer
 			j_crv_blueprinter = {
