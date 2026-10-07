@@ -249,7 +249,7 @@ SMODS.Joker({
 			end
 			if a > 0 then
 				G.hand:change_size(a*cae.hand_size)
-				cae.remove = a
+				cae.remove = cae.remove + a
 				RVF.msg(card, "+" .. a)
 				card:juice_up()
 			end
