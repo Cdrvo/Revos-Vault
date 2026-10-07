@@ -455,13 +455,27 @@ return {
 					"{C:inactive}(Sell Value is Current Dept)",
 				},
 			},
-			j_crv_tab = {
+			j_crv_tab_keeper = {
 				name = "Tab Keeper",
 				text = {
 					"All rerolls are {C:green}free{}",
 					"If this card is {C:red}removed{},",
 					"pay {C:red}$5{} for each reroll used.",
 					"{C:inactive}(Currently paying {C:red}$#1#{C:inactive})"
+				},
+			},
+			j_crv_the_moon = {
+				name = "The Moon",
+				text = {
+					"Scored {C:hearts}Hearts{}", "turns into {C:spades}Spades{}",
+					"Scored {C:diamonds}Diamonds{}", "turns into {C:clubs}Clubs{}",
+				},
+			},
+			j_crv_the_night_rose = {
+				name = "The Night Rose",
+				text = {
+					"Scored {C:spades}Spades{}", "turns into {C:hearts}Hearts{}",
+					"Scored {C:clubs}Clubs{}", "turns into {C:diamonds}Diamonds{}",
 				},
 			},
 			-- Rare

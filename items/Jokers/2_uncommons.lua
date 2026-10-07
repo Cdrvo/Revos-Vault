@@ -1498,15 +1498,15 @@ SMODS.Joker({
 	calculate = function(self, card, context)
 		local cae = card.ability.extra
 		if context.individual and context.cardarea == G.play then
-				context.other_card.ability.perma_mult = context.other_card.ability.perma_mult or 0
-				context.other_card.ability.perma_mult = context.other_card.ability.perma_mult + cae.mult
-				return {
-					message = localize("k_upgrade_ex"),
-					colour = G.C.MULT,
-					message_card = context.other_card,
-				}
+			context.other_card.ability.perma_mult = context.other_card.ability.perma_mult or 0
+			context.other_card.ability.perma_mult = context.other_card.ability.perma_mult + cae.mult
+			return {
+				message = localize("k_upgrade_ex"),
+				colour = G.C.MULT,
+				message_card = context.other_card,
+			}
 		end
-	end
+	end,
 })
 
 SMODS.Joker({
@@ -1559,7 +1559,7 @@ SMODS.Joker({
 })
 
 SMODS.Joker({
-	key = "tab",
+	key = "tab_keeper",
 	config = {
 		extra = {
 			stored = 0,
@@ -1593,6 +1593,76 @@ SMODS.Joker({
 		local cae = card.ability.extra
 		if context.reroll_shop and not context.blueprint and not context.repetition then
 			cae.stored = cae.stored + 5
+		end
+	end,
+})
+
+SMODS.Joker({
+	key = "the_moon",
+	atlas = "wip",
+	rarity = 2,
+	cost = 5,
+	unlocked = true,
+	discovered = false,
+	blueprint_compat = false,
+	pos = {
+		x = 0,
+		y = 0,
+	},
+	config = {
+		extra = {},
+	},
+	loc_vars = function(self, info_queue, card)
+		return {
+			vars = {},
+		}
+	end,
+
+	calculate = function(self, card, context)
+		if context.final_scoring_step and not context.blueprint then
+			for k, v in ipairs(context.scoring_hand) do
+				if v:is_suit("Hearts", true) then
+					RVF.cool_enhance(v, function() assert(SMODS.change_base(v, "Spades", nil)) end)
+				end
+				if v:is_suit("Diamonds", true) then
+					RVF.cool_enhance(v, function() assert(SMODS.change_base(v, "Clubs", nil)) end)
+				end
+			end
+		end
+	end,
+})
+
+SMODS.Joker({
+	key = "the_night_rose",
+	atlas = "wip",
+	rarity = 2,
+	cost = 5,
+	unlocked = true,
+	discovered = false,
+	blueprint_compat = false,
+	pos = {
+		x = 0,
+		y = 0,
+	},
+	config = {
+		extra = {},
+	},
+	loc_vars = function(self, info_queue, card)
+		return {
+			vars = {},
+		}
+	end,
+
+	calculate = function(self, card, context)
+		if context.final_scoring_step and not context.blueprint then
+			for k, v in ipairs(context.scoring_hand) do
+				if v:is_suit("Spades", true) then
+					RVF.cool_enhance(v, function() assert(SMODS.change_base(v, "Hearts", nil)) end)
+				end
+				if v:is_suit("Clubs", true) then
+					RVF.cool_enhance(v, function() assert(SMODS.change_base(v, "Diamonds", nil)) end)
+				end
+			end
 		end
 	end,
 })
