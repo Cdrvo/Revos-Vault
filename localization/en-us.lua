@@ -364,6 +364,39 @@ return {
 					"{C:inactive}(Currently {X:mult,C:white} X#1# {C:inactive} Mult)",
 				},
 			},
+			j_crv_red_utopia = {
+				name = "Red Utopia",
+				text = {
+					"{X:red,C:white} X#1# {} Mult if all",
+					"cards held in hand are",
+					"equal to or lower than {C:attention}4",
+				},
+			},
+			j_crv_whiteboard = {
+				name = "Whiteboard",
+				text = {
+					"{X:red,C:white} X#1# {} Mult if all",
+					"cards held in hand are",
+					"{V:1}#2#{}",
+					"{s:0.8}suit changes at end of round",
+				},
+			},
+			j_crv_checkpoint = {
+				name = "Checkpoint",
+				text = {
+					"When sold, resets",
+					"all {C:blue}hands{} and {C:red}discards{}",
+					"but {C:red,E:1}halves{} your score"
+				}
+			},
+			j_crv_goldfish = {
+				name = "Goldfish",
+				text = {
+					"Retrigger each scored",
+					"{C:gold}Gold{} card",
+					"{C:attention}#1#{} times"
+				}
+			},
 			-- Rare
 			j_crv_bocchi = {
 				name = "Bocchi the Joker",

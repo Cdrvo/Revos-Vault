@@ -129,6 +129,7 @@ SMODS.current_mod.reset_game_globals = function(run_start)
 	end
 	
 	RVF.reset_suit_jokers("crv_rainbow_octopus_suit")
+	RVF.reset_suit_jokers("crv_whiteboard_suit")
 
 end
 

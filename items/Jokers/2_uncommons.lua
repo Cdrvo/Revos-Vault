@@ -1075,3 +1075,171 @@ SMODS.Joker({
 		end
 	end,
 })
+
+SMODS.Joker({
+	key = "red_utopia",
+	atlas = "wip",
+	rarity = 2,
+	cost = 5,
+	unlocked = true,
+	discovered = false,
+	blueprint_compat = true,
+	pos = {
+		x = 0,
+		y = 0,
+	},
+	config = {
+		extra = {
+			xmult = 3,
+		},
+	},
+	loc_vars = function(self, info_queue, card)
+		return {
+			vars = { card.ability.extra.xmult },
+		}
+	end,
+	attributes = {
+		"one",
+		"two",
+		"three",
+		"four",
+		"xmult"
+	},
+	calculate = function(self, card, context)
+		if context.joker_main then
+			local numbers, all_cards = 0, 0
+			for k, v in ipairs(G.hand.cards) do
+				all_cards = all_cards + 1
+				if v:get_id() >= 2 and v:get_id() <= 4 then
+					numbers = numbers + 1
+				end
+			end
+			if numbers == all_cards then
+				return {
+					x_mult = card.ability.extra.xmult,
+				}
+			end
+		end
+	end,
+})
+
+SMODS.Joker({
+	key = "whiteboard",
+	atlas = "revo_jokers",
+	rarity = 2,
+	cost = 5,
+	unlocked = true,
+	discovered = false,
+	blueprint_compat = true,
+	pos = {
+		x = 7,
+		y = 9,
+	},
+	config = {
+		extra = {
+			xmult = 3,
+		},
+	},
+	crv_credits = {
+		art = { "mr.cr33ps" },
+	},
+	attributes = {
+		"xmult",
+		"suit"
+	},
+	loc_vars = function(self, info_queue, card)
+		local cae = card.ability.extra
+		return {
+			vars = { cae.xmult, (G.GAME.current_round.crv_whiteboard_suit or "Spades"), colours = {G.C.SUITS[((G.GAME.current_round) and G.GAME.current_round.crv_whiteboard_suit) or "Spades"]} },
+		} 
+	end,
+	calculate = function(self, card, context)
+		local cae = card.ability.extra 
+		if context.joker_main then
+			local suits, all_cards = 0, 0
+			for k, v in ipairs(G.hand.cards) do
+				all_cards = all_cards + 1
+				if v:is_suit(G.GAME.current_round.crv_whiteboard_suit, true) then
+					suits = suits + 1
+				end
+			end
+			if suits == all_cards then
+				return {
+					x_mult = card.ability.extra.xmult,
+				}
+			end
+		end
+	end,
+})
+
+SMODS.Joker({
+	key = "checkpoint",
+	atlas = "revo_jokers",
+	rarity = 2,
+	cost = 5,
+	unlocked = true,
+	discovered = false,
+	blueprint_compat = false,
+	pos = {
+		x = 8,
+		y = 9,
+	},
+	attributes = {
+		"hands",
+		"discards"
+	},
+	config = {
+		extra = {},
+	},
+	crv_credits = {
+		art = { "Chainsawmert" },
+	},
+	loc_vars = function(self, info_queue, card) end,
+	calculate = function(self, card, context)
+		if context.selling_self and not context.blueprint and G.GAME.blind and G.GAME.blind.in_blind then
+			G.GAME.chips = G.GAME.chips / 2
+			G.GAME.current_round.hands_left = G.GAME.current_round.hands_left + G.GAME.current_round.hands_played
+			G.GAME.current_round.discards_left = G.GAME.current_round.discards_left + G.GAME.current_round.discards_used
+		end
+	end
+})
+
+SMODS.Joker({
+	key = "goldfish",
+	atlas = "revo_jokers",
+	rarity = 2,
+	cost = 6,
+	unlocked = true,
+	discovered = false,
+	blueprint_compat = false,
+	pos = {
+		x = 9,
+		y = 9,
+	},
+	config = {
+		extra = {
+			reps = 2
+		},
+	},
+	attributes = {
+		"retrigger",
+		"enhancements"
+	},
+	crv_credits = {
+		art = { "Chainsawmert" },
+	},
+	loc_vars = function(self, info_queue, card)
+		return {
+			vars = { card.ability.extra.reps },
+		}
+	end,
+	calculate = function(self, card, context)
+		if context.repetition and context.cardarea == G.play then
+			if SMODS.has_enhancement(context.other_card, "m_gold") then
+				return{
+					repetitions = card.ability.extra.reps
+				}
+			end
+		end
+	end,
+})
