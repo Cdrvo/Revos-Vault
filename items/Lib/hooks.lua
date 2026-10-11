@@ -16,9 +16,12 @@ function Card:click()
 	return ret
 end
 
+
+-- game objects
 local init_game_object_old = Game.init_game_object
 Game.init_game_object = function(self)
 	local igo = init_game_object_old(self)
+	igo.crv_cartridge_limit = 3
 	igo.crv_jimfinity = 0
 	igo.crv_old_area_locations = {}
 

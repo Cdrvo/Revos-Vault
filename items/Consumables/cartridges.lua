@@ -36,7 +36,7 @@ RevosVault.MISC.Cartridge = SMODS.Consumable:extend({
 					not cards[1].ability.crv_cartridges
 					or (
 						cards[1].ability.crv_cartridges and
-						fah(cards[1].ability.crv_cartridges)<3
+						fah(cards[1].ability.crv_cartridges)<G.GAME.crv_cartridge_limit
 					)
 				)
 			then

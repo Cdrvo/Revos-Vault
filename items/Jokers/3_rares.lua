@@ -1471,3 +1471,57 @@ SMODS.Joker({
 		end
 	end,
 })
+
+
+SMODS.Joker({
+	key = "high_stakes",
+	atlas = "revo_jokers",
+	rarity = 3,
+	cost = 6,
+	unlocked = true,
+	discovered = false,
+	blueprint_compat = false,
+	pos = {
+		x = 9,
+		y = 10,
+	},
+	config = {
+		extra = {
+			beaten = 0,
+			to_beat = 3,
+		},
+	},
+	loc_vars = function(self, info_queue, card)
+		return {
+			vars = { card.ability.extra.beaten, card.ability.extra.to_beat },
+		}
+	end,
+
+	calculate = function(self, card, context)
+		if context.setting_blind and not context.blueprint then
+			if card.ability.extra.beaten < card.ability.extra.to_beat then
+				card.ability.extra.beaten = card.ability.extra.beaten + 1
+				RVF.do_event(function()
+					G.GAME.blind.chips = G.GAME.blind.chips * 2
+					RVF.msg(card, localize("k_crv_double_ex"))
+					return true
+				end)
+				if card.ability.extra.beaten >= card.ability.extra.to_beat then
+					card.ability.extra.activate = true
+				end
+			end
+		end
+		if context.end_of_round and not context.blueprint and context.main_eval then
+			if card.ability.extra.activate then
+				SMODS.destroy_cards(card)
+				SMODS.add_card({
+					set = "Joker",
+					legendary = true,
+					edition = "e_negative",
+				})
+			else
+				RVF.msg(card, "+1")
+			end
+		end
+	end,
+})

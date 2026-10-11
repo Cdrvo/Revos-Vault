@@ -386,31 +386,31 @@ return {
 				text = {
 					"When sold, resets",
 					"all {C:blue}hands{} and {C:red}discards{}",
-					"but {C:red,E:1}halves{} your score"
-				}
+					"but {C:red,E:1}halves{} your score",
+				},
 			},
 			j_crv_goldfish = {
 				name = "Goldfish",
 				text = {
 					"Retrigger each scored",
-					"{C:gold}Gold{} card {C:attention}#1#{} times"
-				}
+					"{C:gold}Gold{} card {C:attention}#1#{} times",
+				},
 			},
 			j_crv_jimbo_show = {
 				name = "Jimbo Show",
 				text = {
 					"Gains {X:mult,C:white}X#2#{} Mult",
 					"when triggered",
-					"{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult)"
-				}
+					"{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult)",
+				},
 			},
 			j_crv_jnx = {
 				name = "JNX",
 				text = {
 					"Gains {X:chips,C:white}X#2#{} Chips",
 					"when triggered",
-					"{C:inactive}(Currently {X:chips,C:white}X#1#{C:inactive} Chips)"
-				}
+					"{C:inactive}(Currently {X:chips,C:white}X#1#{C:inactive} Chips)",
+				},
 			},
 			j_crv_the_hand = {
 				name = "The Hand",
@@ -418,8 +418,8 @@ return {
 					"When {C:attention}Blind{} is selected",
 					"destroys the {C:attention}Joker{}",
 					"on the right",
-					"no matter what"
-				}
+					"no matter what",
+				},
 			},
 			j_crv_stock_market = {
 				name = "Stock Market",
@@ -437,14 +437,14 @@ return {
 					"{C:inactive}(Currently {C:mult}+#2# {C:inactive}Mult)",
 				},
 			},
-			j_crv_biker ={
-                name="Biker",
-                text={
-                    "Every scored {C:attention}card{}",
-                    "permanently gains",
-                    "{C:mult}+#1#{} Mult when scored",
-                },
-            },
+			j_crv_biker = {
+				name = "Biker",
+				text = {
+					"Every scored {C:attention}card{}",
+					"permanently gains",
+					"{C:mult}+#1#{} Mult when scored",
+				},
+			},
 			j_crv_banker = {
 				name = "Banker",
 				text = {
@@ -461,21 +461,25 @@ return {
 					"All rerolls are {C:green}free{}",
 					"If this card is {C:red}removed{},",
 					"pay {C:red}$5{} for each reroll used.",
-					"{C:inactive}(Currently paying {C:red}$#1#{C:inactive})"
+					"{C:inactive}(Currently paying {C:red}$#1#{C:inactive})",
 				},
 			},
 			j_crv_the_moon = {
 				name = "The Moon",
 				text = {
-					"Scored {C:hearts}Hearts{}", "turns into {C:spades}Spades{}",
-					"Scored {C:diamonds}Diamonds{}", "turns into {C:clubs}Clubs{}",
+					"Scored {C:hearts}Hearts{}",
+					"turns into {C:spades}Spades{}",
+					"Scored {C:diamonds}Diamonds{}",
+					"turns into {C:clubs}Clubs{}",
 				},
 			},
 			j_crv_the_night_rose = {
 				name = "The Night Rose",
 				text = {
-					"Scored {C:spades}Spades{}", "turns into {C:hearts}Hearts{}",
-					"Scored {C:clubs}Clubs{}", "turns into {C:diamonds}Diamonds{}",
+					"Scored {C:spades}Spades{}",
+					"turns into {C:hearts}Hearts{}",
+					"Scored {C:clubs}Clubs{}",
+					"turns into {C:diamonds}Diamonds{}",
 				},
 			},
 			-- Rare
@@ -718,8 +722,8 @@ return {
 				text = {
 					"{C:red}Discarded{} cards has",
 					"a {C:green}#1# in #2#{} chance to",
-					"gain {C:attention}#3#{} perma repetition"
-				}
+					"gain {C:attention}#3#{} perma repetition",
+				},
 			},
 			-- Printer
 			j_crv_blueprinter = {
@@ -900,6 +904,17 @@ return {
 					"{C:inactive}(3/3)",
 				},
 			},
+			j_crv_high_stakes = {
+				name = "High Stakes",
+				text = {
+					"Double the required chips",
+					"when setting {C:attention}Blind{}",
+					"{C:red}Self-destruct{} and create a",
+					"{C:dark_edition}Negative{C:legendary,E:1} Legendary{} Joker",
+					"after {C:attention}#2#{} Blinds",
+					"{C:inactive}(Currently {C:attention}#1#/#2#{C:inactive} Blinds beaten)",
+				},
+			},
 			-- Legendary
 			j_crv_the_ace = {
 				name = "The Ace",
@@ -1025,7 +1040,22 @@ return {
 				},
 			},
 		},
-		Voucher = {},
+		Voucher = {
+			v_crv_cartridge_extension = {
+				name = "Cartridge Extension",
+				text = {
+					"Increases the {C:attention}Cartridge{}",
+					"limit on {C:red}Printers{} by {C:attention}#1#{}",
+				},
+			},
+			v_crv_quantum_cartridges = {
+				name = "Quantum Cartridges",
+				text = {
+					"Increases the {C:attention}Cartridge{}",
+					"limit on {C:red}Printers{} by {C:attention}#1#{}",
+				},
+			},
+		},
 
 		-- mod
 
@@ -1363,6 +1393,7 @@ return {
 			s_crv_not_ready = "NOT READY",
 			k_crv_boom_ex = "Boom!",
 			k_printed_ex = "Printed!",
+			k_crv_double_ex = "Double!",
 			-- Consumabels
 			k_crv_cartridge = "Cartridge",
 			b_crv_cartridge_cards = "Cartridges",

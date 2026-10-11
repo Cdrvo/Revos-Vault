@@ -1078,15 +1078,15 @@ SMODS.Joker({
 
 SMODS.Joker({
 	key = "red_utopia",
-	atlas = "wip",
+	atlas = "revo_jokers",
 	rarity = 2,
 	cost = 5,
 	unlocked = true,
 	discovered = false,
 	blueprint_compat = true,
 	pos = {
-		x = 0,
-		y = 0,
+		x = 6,
+		y = 10,
 	},
 	config = {
 		extra = {
@@ -1104,6 +1104,9 @@ SMODS.Joker({
 		"three",
 		"four",
 		"xmult",
+	},
+	crv_credits = {
+		art = { "mr.cr33ps" },
 	},
 	calculate = function(self, card, context)
 		if context.joker_main then
@@ -1566,12 +1569,12 @@ SMODS.Joker({
 		},
 	},
 	rarity = 2,
-	atlas = "wip",
+	atlas = "revo_jokers",
 	blueprint_compat = false,
 	discovered = false,
 	pos = {
-		x = 0,
-		y = 0,
+		x = 7,
+		y = 10,
 	},
 	cost = 6,
 	loc_vars = function(self, info_queue, card)
@@ -1580,6 +1583,9 @@ SMODS.Joker({
 			vars = { cae.stored },
 		}
 	end,
+	crv_credits = {
+		art = { "mr.cr33ps" },
+	},
 	add_to_deck = function(self, card, from_debuff)
 		G.GAME.current_round.crv_perma_free_rerolls = true
 		calculate_reroll_cost(true)
@@ -1599,15 +1605,15 @@ SMODS.Joker({
 
 SMODS.Joker({
 	key = "the_moon",
-	atlas = "wip",
+	atlas = "revo_jokers",
 	rarity = 2,
 	cost = 5,
 	unlocked = true,
 	discovered = false,
 	blueprint_compat = false,
 	pos = {
-		x = 0,
-		y = 0,
+		x = 8,
+		y = 10,
 	},
 	config = {
 		extra = {},
@@ -1617,15 +1623,21 @@ SMODS.Joker({
 			vars = {},
 		}
 	end,
-
+	crv_credits = {
+		art = { "mr.cr33ps" },
+	},
 	calculate = function(self, card, context)
 		if context.final_scoring_step and not context.blueprint then
 			for k, v in ipairs(context.scoring_hand) do
 				if v:is_suit("Hearts", true) then
-					RVF.cool_enhance(v, function() assert(SMODS.change_base(v, "Spades", nil)) end)
+					RVF.cool_enhance(v, function()
+						assert(SMODS.change_base(v, "Spades", nil))
+					end)
 				end
 				if v:is_suit("Diamonds", true) then
-					RVF.cool_enhance(v, function() assert(SMODS.change_base(v, "Clubs", nil)) end)
+					RVF.cool_enhance(v, function()
+						assert(SMODS.change_base(v, "Clubs", nil))
+					end)
 				end
 			end
 		end
@@ -1652,15 +1664,21 @@ SMODS.Joker({
 			vars = {},
 		}
 	end,
-
+	crv_credits = {
+		art = { "mr.cr33ps" },
+	},
 	calculate = function(self, card, context)
 		if context.final_scoring_step and not context.blueprint then
 			for k, v in ipairs(context.scoring_hand) do
 				if v:is_suit("Spades", true) then
-					RVF.cool_enhance(v, function() assert(SMODS.change_base(v, "Hearts", nil)) end)
+					RVF.cool_enhance(v, function()
+						assert(SMODS.change_base(v, "Hearts", nil))
+					end)
 				end
 				if v:is_suit("Clubs", true) then
-					RVF.cool_enhance(v, function() assert(SMODS.change_base(v, "Diamonds", nil)) end)
+					RVF.cool_enhance(v, function()
+						assert(SMODS.change_base(v, "Diamonds", nil))
+					end)
 				end
 			end
 		end
