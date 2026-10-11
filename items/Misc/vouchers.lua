@@ -16,6 +16,9 @@ SMODS.Voucher({
 			vars = { cae.limit },
 		}
 	end,
+	crv_credits = {
+		art = { "mr.cr33ps" },
+	},
 	cost = 10,
 	redeem = function(self, card)
 		local cae = card.ability.extra
@@ -42,6 +45,9 @@ SMODS.Voucher({
 			vars = { cae.limit },
 		}
 	end,
+	crv_credits = {
+		art = { "mr.cr33ps" },
+	},
 	requires = { "v_crv_cartridge_extension" },
 	redeem = function(self, card)
 		local cae = card.ability.extra
