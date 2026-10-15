@@ -482,6 +482,23 @@ return {
 					"turns into {C:diamonds}Diamonds{}",
 				},
 			},
+			j_crv_stamp = {
+				name = "Stamp",
+				text = {
+					"Scored cards gain",
+					"a random {C:dark_edition}Seal{}",
+					"after scoring"
+				}
+			},
+			j_crv_haunted_joker = {
+				name = "Haunted Joker",
+				text = {
+					"When {C:attention}Blind{} is selceted",
+					"creates a {C:red}Temporary{}",
+					"copy of a random {C:attention}Joker{}",
+					"{C:inactive,s:0.8}(Created Joker does not take space)"
+				}
+			},
 			-- Rare
 			j_crv_bocchi = {
 				name = "Bocchi the Joker",
@@ -725,6 +742,17 @@ return {
 					"gain {C:attention}#3#{} perma repetition",
 				},
 			},
+			j_crv_high_stakes = {
+				name = "High Stakes",
+				text = {
+					"Double the required chips",
+					"when setting {C:attention}Blind{}",
+					"{C:red}Self-destruct{} and create a",
+					"{C:dark_edition}Negative{C:legendary,E:1} Legendary{} Joker",
+					"after {C:attention}#2#{} Blinds",
+					"{C:inactive}(Currently {C:attention}#1#/#2#{C:inactive} Blinds beaten)",
+				},
+			},
 			-- Printer
 			j_crv_blueprinter = {
 				name = "Blueprinter",
@@ -904,17 +932,6 @@ return {
 					"{C:inactive}(3/3)",
 				},
 			},
-			j_crv_high_stakes = {
-				name = "High Stakes",
-				text = {
-					"Double the required chips",
-					"when setting {C:attention}Blind{}",
-					"{C:red}Self-destruct{} and create a",
-					"{C:dark_edition}Negative{C:legendary,E:1} Legendary{} Joker",
-					"after {C:attention}#2#{} Blinds",
-					"{C:inactive}(Currently {C:attention}#1#/#2#{C:inactive} Blinds beaten)",
-				},
-			},
 			-- Legendary
 			j_crv_the_ace = {
 				name = "The Ace",
@@ -991,7 +1008,7 @@ return {
 					"{C:inactive}the copied card)",
 				},
 			},
-			--
+			-- Info Qeueueueueueueueueueueueue
 			crv_immutable = {
 				name = "Immutable Chances",
 				text = {
@@ -1001,6 +1018,13 @@ return {
 					"like {C:attention}Oops! All 6s",
 				},
 			},
+			crv_temporary_card = {
+				name = "Temporary Card",
+				text = {
+					"Takes up no space",
+					"{C:red}Destroyed{} at end of round"
+				}
+			}
 		},
 		Planet = {},
 		Spectral = {
@@ -1058,6 +1082,39 @@ return {
 		},
 
 		-- mod
+
+		crv_StatusEffect = {
+			csf_crv_empowered = {
+				name = "Empowered",
+				text = {
+					"Retrigger this",
+					"card once"
+				}
+			},
+			csf_crv_temporary = {
+				name = "Temporary",
+				text = {
+					"{C:red}Destroyed{} at",
+					"end of round"
+				}
+			},
+			csf_crv_drained = {
+				name = "Drained",
+				text = {
+					"{C:red}1 in 4{} chance",
+					"to not trigger"
+				}
+			},
+			csf_crv_marked = {
+				name = "Marked",
+				text = {
+					"When a {C:attention}Joker{}",
+					"is getting destroyed,",
+					"destroy this card instead"
+				}
+			}
+		},
+		
 
 		crv_Rune = {
 			c_crv_fehu = {
@@ -1380,6 +1437,7 @@ return {
 			crv_cartridges = "Cartridges",
 			crv_contracts = "Contracts",
 			crv_runes = "Runes",
+			b_status_effects = "Status Effects",
 			-- Rariities
 			k_crv_holy = "Holy Banana",
 			k_crv_printer = "Printer",
@@ -1408,8 +1466,11 @@ return {
 		labels = {
 			-- Seals
 			crv_printer_seal_seal = "Printer's Seal", -- SEAL SEAL
-			-- Other
-			crv_spamton_buff = "Spamton Buff",
+			-- Status Effects
+			csf_crv_empowered = "Empowered",
+			csf_crv_temporary = "Temporary",
+			csf_crv_drained = "Drained",
+			csf_crv_marked = "Marked"
 		},
 		poker_hand_descriptions = {},
 		poker_hands = {},

@@ -1,0 +1,88 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+# Calculation 
+
+[[patches]]
+[patches.pattern]
+target = 'functions/common_events.lua'
+pattern = '''-- TARGET: evaluate your own general effects'''
+position = 'before'
+payload = '''
+ for _,k in ipairs(RevosVault.MISC.StatusEffect.obj_buffer) do
+        local v = RevosVault.MISC.StatusEffects[k]
+        local statuseffect = card:crv_calculate_statuseffect(context, k)
+        if statuseffect then
+            ret[v] = statuseffect
+        end
+    end
+'''
+match_indent = true
+[[patches]]
+[patches.pattern]
+target = 'functions/common_events.lua'
+pattern = '''-- TARGET: evaluate your own repetition effects'''
+position = 'before'
+payload = '''
+ for _,k in ipairs(RevosVault.MISC.StatusEffect.obj_buffer) do
+        local v = RevosVault.MISC.StatusEffects[k]
+        local statuseffect = card:crv_calculate_statuseffect(context, k)
+        if statuseffect then
+            ret[v] = statuseffect
+        end
+    end
+'''
+match_indent = true
+
+# generate_card_ui()
+
+[[patches]]
+[patches.pattern]
+target = "functions/common_events.lua"
+pattern = "local sticker = SMODS.Stickers[v]*"
+match_indent = true
+position = "before"
+payload = '''
+local crv_status = RevosVault.MISC.StatusEffects[v]
+if crv_status then
+    local t = { key = v, set = 'crv_StatusEffect' }
+    local res = {}
+    if crv_status.loc_vars and type(crv_status.loc_vars) == 'function' then
+        res = crv_status:loc_vars(info_queue, card) or {}
+        t.vars = res.vars or {}
+        t.key = res.key or t.key
+        t.set = res.set or t.set
+    end
+    info_queue[#info_queue+1] = t
+end'''
+
+
+# generate_UIBox_ability_table()
+
+[[patches]]
+[patches.pattern]
+target = "card.lua"
+pattern = "if self.sticker or ((self.sticker_run and self.sticker_run~='NONE') and G.SETTINGS.run_stake_stickers)  then loc_vars = loc_vars or {}; loc_vars.sticker=(self.sticker or self.sticker_run) end"
+position = "before"
+match_indent = true
+payload = '''
+for k, v in ipairs(RevosVault.MISC.StatusEffect.obj_buffer) do
+	if self.ability.crv_status_effects and self.ability.crv_status_effects[v] and not RevosVault.MISC.StatusEffects[v].hide_badge then
+        badges[#badges+1] = v
+    end
+end'''
+
+# get_badge_colour()
+
+[[patches]]
+[patches.pattern]
+target = 'functions/UI_definitions.lua'
+pattern = 'return G.BADGE_COL[key] or {1, 0, 0, 1}'
+position = 'before'
+match_indent = true
+payload = '''
+for k, v in pairs(RevosVault.MISC.StatusEffects) do
+    G.BADGE_COL[k] = v.badge_colour
+end'''

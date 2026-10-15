@@ -255,3 +255,15 @@ function CardArea:align_cards()
 		end
 	end
 end
+
+
+local calculate_joker_old = Card.calculate_joker -- preventing joker triggers
+function Card:calculate_joker(context)
+	local no_trig = false
+	if self.ability.crv_no_trigger then
+		no_trig = true
+	end
+	if not no_trig then
+        return calculate_joker_old(self, context)
+    end
+end

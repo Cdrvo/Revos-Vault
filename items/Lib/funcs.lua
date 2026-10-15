@@ -309,6 +309,26 @@ RevosVault.FUNCS.owned_enhancements = function(enhancement)
 	return a
 end
 
+function RevosVault.FUNCS.get_collection(pool)
+	local a = 0
+	for k, v in pairs(pool) do
+		if v.discovered and not v.no_collection then
+			a = a + 1
+		end
+	end
+	return a
+end
+
+function RevosVault.FUNCS.get_total(pool)
+	local a = 0
+	for k, v in pairs(pool) do
+		if not v.no_collection then
+			a = a + 1
+		end
+	end
+	return a
+end
+
 -- the special function
 
 RVF.printer_create = function(card, make)

@@ -1271,6 +1271,10 @@ SMODS.Joker({
 			xmultg = 0.05,
 		},
 	},
+	attributes = {
+		"scaling",
+		"xmult"
+	},
 	loc_vars = function(self, info_queue, card)
 		return {
 			vars = { card.ability.extra.xmult, card.ability.extra.xmultg },
@@ -1311,6 +1315,10 @@ SMODS.Joker({
 			chipsg = 0.05,
 		},
 	},
+	attributes = {
+		"scaling",
+		"xchips"
+	},
 	loc_vars = function(self, info_queue, card)
 		return {
 			vars = { card.ability.extra.chips, card.ability.extra.chipsg },
@@ -1347,6 +1355,9 @@ SMODS.Joker({
 	},
 	config = {
 		extra = {},
+	},
+	attributes = {
+		"destroy_card",
 	},
 	calculate = function(self, card, context)
 		if context.setting_blind and not context.blueprint and G.jokers.cards[RVF.card_position(card).pos + 1] then
@@ -1389,6 +1400,11 @@ SMODS.Joker({
 			money = 1,
 			odds = 4,
 		},
+	},
+	attributes = {
+		"scaling",
+		"economy",
+		"chance"
 	},
 	loc_vars = function(self, info_queue, card)
 		local cae = card.ability.extra
@@ -1442,6 +1458,12 @@ SMODS.Joker({
 			mult = 0,
 		},
 	},
+	attributes = {
+		"scaling",
+		"mult",
+		"suit",
+		"hearts"
+	},
 	loc_vars = function(self, info_queue, card)
 		return {
 			vars = { card.ability.extra.multg, card.ability.extra.mult },
@@ -1488,6 +1510,11 @@ SMODS.Joker({
 			mult = 1,
 		},
 	},
+	attributes = {
+		"perma_bonus",
+		"modify_card",
+		"mult"
+	},
 	crv_credits = {
 		art = { "rat" },
 	},
@@ -1530,6 +1557,9 @@ SMODS.Joker({
 			owe_limit = 100,
 			current_dept = 0,
 		},
+	},
+	attributes = {
+		"economy"
 	},
 	crv_credits = {
 		art = { "kusanehexaku" },
@@ -1575,6 +1605,11 @@ SMODS.Joker({
 	pos = {
 		x = 7,
 		y = 10,
+	},
+	attributes = {
+		"economy",
+		"reroll",
+		"passive"
 	},
 	cost = 6,
 	loc_vars = function(self, info_queue, card)
@@ -1623,6 +1658,14 @@ SMODS.Joker({
 			vars = {},
 		}
 	end,
+	attributes = {
+		"modify_card",
+		"suit",
+		"hearts",
+		"clubs",
+		"spades",
+		"diamonds"
+	},
 	crv_credits = {
 		art = { "mr.cr33ps" },
 	},
@@ -1659,6 +1702,14 @@ SMODS.Joker({
 	config = {
 		extra = {},
 	},
+	attributes = {
+		"modify_card",
+		"suit",
+		"hearts",
+		"clubs",
+		"spades",
+		"diamonds"
+	},
 	loc_vars = function(self, info_queue, card)
 		return {
 			vars = {},
@@ -1680,6 +1731,173 @@ SMODS.Joker({
 						assert(SMODS.change_base(v, "Diamonds", nil))
 					end)
 				end
+			end
+		end
+	end,
+})
+
+SMODS.Joker({
+	key = "stamp",
+	atlas = "revo_jokers",
+	rarity = 2,
+	cost = 4,
+	unlocked = true,
+	discovered = false,
+	blueprint_compat = false,
+	pos = {
+		x = 0,
+		y = 11,
+	},
+	attributes = {
+		"seals",
+		"modify_card"
+	},
+	calculate = function(self, card, context)
+		if context.final_scoring_step and not context.blueprint then
+			RVF.do_event(function()
+				for k, v in ipairs(context.scoring_hand) do
+					if not v.ability.seal then
+						v:set_seal(
+							SMODS.poll_seal({
+								guaranteed = true,
+							}),
+							false,
+							true
+						)
+					end
+				end
+				return true
+			end)
+		end
+	end,
+})
+
+SMODS.Joker({
+	key = "haunted_joker",
+	atlas = "revo_jokers",
+	rarity = 2,
+	cost = 5,
+	unlocked = true,
+	discovered = false,
+	blueprint_compat = false,
+	pos = {
+		x = 1,
+		y = 11,
+	},
+	attributes = {
+		"generation",
+		"joker"
+	},
+	calculate = function(self, card, context)
+		if context.setting_blind and not context.blueprint then
+			local jokers = {}
+			for i = 1, #G.jokers.cards do
+				if G.jokers.cards[i] ~= card then
+					jokers[#jokers + 1] = G.jokers.cards[i]
+				end
+			end
+			if #jokers > 0 then
+				local copy_joker = pseudorandom_element(jokers, pseudoseed("crv_haunted"))
+				local copied_joker = SMODS.copy_card(copy_joker)
+				copied_joker.ability.extra_slots_used = -1
+				copied_joker:apply_status_effect("crv_temporary")
+			end
+		end
+	end,
+})
+
+SMODS.Joker({
+	key = "ketchup",
+	atlas = "Jokers2",
+	rarity = 2,
+	cost = 6,
+	unlocked = true,
+	discovered = false,
+	blueprint_compat = true,
+	pos = {
+		x = 10,
+		y = 8,
+	},
+	config = {
+		extra = {
+			mult = 25,
+			xmult = 2,
+		},
+	},
+	pools = {
+		Food = true,
+	},
+	attributes = {
+		"food",
+		"mult",
+		"xmult"
+	},
+	crv_credits = {
+		art = { "Chainsawmert" },
+	},
+	loc_vars = function(self, info_queue, card)
+		return {
+			vars = { card.ability.extra.mult, card.ability.extra.xmult },
+		}
+	end,
+	calculate = function(self, card, context)
+		if context.joker_main then
+			if next(SMODS.find_card("j_crv_mayo")) then
+				return {
+					xmult = card.ability.extra.xmult,
+				}
+			else
+				return {
+					mult = card.ability.extra.mult,
+				}
+			end
+		end
+	end,
+})
+SMODS.Joker({
+	key = "mayo",
+	atlas = "Jokers2",
+	rarity = 2,
+	cost = 6,
+	unlocked = true,
+	discovered = false,
+	blueprint_compat = true,
+	pos = {
+		x = 10,
+		y = 7,
+	},
+	config = {
+		extra = {
+			chips = 25,
+			xchips = 2,
+		},
+	},
+	pools = {
+		Food = true,
+	},
+	attributes = {
+		"food",
+		"chips",
+		"xchips"
+	},
+	crv_credits = {
+		art = { "Chainsawmert" },
+	},
+	loc_vars = function(self, info_queue, card)
+		return {
+			vars = { card.ability.extra.chips, card.ability.extra.xchips },
+		}
+	end,
+	calculate = function(self, card, context)
+		if context.joker_main then
+			if next(SMODS.find_card("j_crv_ketchup")) then
+				return {
+					xmult = card.ability.extra.xchips,
+				}
+			else
+				return {
+					mult = card.ability.extra.chips,
+				}
 			end
 		end
 	end,
