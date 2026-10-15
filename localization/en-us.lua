@@ -1008,6 +1008,13 @@ return {
 					"{C:inactive}the copied card)",
 				},
 			},
+			crv_royal_seal = {
+				name = "Royal Seal",
+				text = {
+					"Card is considered",
+					"a {C:attention}face{} card"
+				},
+			},
 			-- Info Qeueueueueueueueueueueueue
 			crv_immutable = {
 				name = "Immutable Chances",
@@ -1032,10 +1039,18 @@ return {
 				name = "Brush",
 				text = {
 					"Add a {C:purple}Printer's Seal",
-					"to {C:attention}1{} selected",
+					"to {C:attention}#1#{} selected",
 					"card in your hand",
 				},
 			},
+			c_crv_crown = {
+				name = "Crown",
+				text={
+                    "Add a {C:attention}Royal Seal{}",
+                    "to {C:attention}#1#{} selected",
+                    "card in your hand",
+                },
+			}
 		},
 		Stake = {},
 		Tag = {
@@ -1466,6 +1481,7 @@ return {
 		labels = {
 			-- Seals
 			crv_printer_seal_seal = "Printer's Seal", -- SEAL SEAL
+			crv_royal_seal = "Royal Seal",
 			-- Status Effects
 			csf_crv_empowered = "Empowered",
 			csf_crv_temporary = "Temporary",

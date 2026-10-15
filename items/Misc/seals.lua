@@ -21,3 +21,13 @@ SMODS.Seal({
 		end
 	end,
 })
+
+SMODS.Seal({
+	key = "royal",
+	atlas = "revo_seals",
+	pos = {x=1,y=0},
+	discovered = true,
+	badge_colour = HEX("4f6367"),
+	rarity = 3,
+	sound = { sound = "gold_seal", per = 1.2, vol = 0.4 },
+})

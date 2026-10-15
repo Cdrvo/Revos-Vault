@@ -267,3 +267,14 @@ function Card:calculate_joker(context)
         return calculate_joker_old(self, context)
     end
 end
+
+local isfaceold = Card.is_face
+function Card:is_face(from_boss)
+	if self.debuff and not from_boss then
+		return
+	end
+	if self.seal == "crv_royal" then
+		return true
+	end
+	return isfaceold(self, from_boss)
+end
