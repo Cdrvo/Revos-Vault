@@ -11,6 +11,17 @@ RevosVault.custom_collection_tabs = function()
 			of = RVF.get_total(RevosVault.MISC.StatusEffects),
 		},]]
 	})
+	t[#t + 1] = UIBox_button({
+		button = "your_collection_crv_borders",
+		id = "your_collection_crv_borders",
+		label = { "Borders" },
+		minw = 5,
+		minh = 1,
+		--[[count = {
+			tally = RVF.get_collection(RevosVault.MISC.StatusEffects),
+			of = RVF.get_total(RevosVault.MISC.StatusEffects),
+		},]]
+	})
 
 	return t
 end
@@ -45,6 +56,13 @@ G.FUNCS.your_collection_crv_status_effects = function()
 	G.SETTINGS.paused = true
 	G.FUNCS.overlay_menu({
 		definition = create_ui_for_pool(RevosVault.MISC.StatusEffects, true),
+	})
+end
+
+G.FUNCS.your_collection_crv_borders = function()
+	G.SETTINGS.paused = true
+	G.FUNCS.overlay_menu({
+		definition = create_ui_for_pool(RevosVault.MISC.Borders, true),
 	})
 end
 

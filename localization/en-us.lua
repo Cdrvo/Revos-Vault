@@ -487,8 +487,8 @@ return {
 				text = {
 					"Scored cards gain",
 					"a random {C:dark_edition}Seal{}",
-					"after scoring"
-				}
+					"after scoring",
+				},
 			},
 			j_crv_haunted_joker = {
 				name = "Haunted Joker",
@@ -496,8 +496,110 @@ return {
 					"When {C:attention}Blind{} is selceted",
 					"creates a {C:red}Temporary{}",
 					"copy of a random {C:attention}Joker{}",
-					"{C:inactive,s:0.8}(Created Joker does not take space)"
-				}
+					"{C:inactive,s:0.8}(Created Joker does not take space)",
+				},
+			},
+			j_crv_shadow_joker = {
+				name = "Shadow Joker",
+				text = {
+					"{C:mult}+#1#{} Mult",
+					"Takes up no space",
+				},
+			},
+			j_crv_ascended_one = {
+				name = "Ascended One",
+				text = {
+					"Gains {C:mult}+#1#{} Mult",
+					"for each {C:attention}Spectral{} Card",
+					"used this run",
+					"{C:inactive}(Currently {C:mult}+#2#{C:inactive} Mult)",
+				},
+			},
+			j_crv_ketchup = {
+				name = "Ketchup",
+				text = {
+					"Gives {C:mult}+#1#{} Mult.",
+					"{X:mult,C:white}X#2#{} Mult if {C:attention}Mayonnaise{}",
+					"is present",
+				},
+			},
+			j_crv_mayo = {
+				name = "Mayonnaise",
+				text = {
+					"Gives {C:chips}+#1#{} Chips.",
+					"{X:chips,C:white}X#2#{} Chips if {C:attention}Ketchup{}",
+					"is present",
+				},
+			},
+			j_crv_addiction = {
+				name = "Addiction",
+				text = {
+					"Has {C:green}#3# in #2#{} Chance to",
+					"give {X:mult,C:white}X#1#{} Mult",
+					"Denominator increases by 1 when triggered",
+					"Resets at the end of {C:attention}Ante{}",
+				},
+			},
+			j_crv_shopmaster = {
+				name = "Shop Master",
+				text = {
+					"{C:attention}+#1#{} shop size",
+				},
+			},
+			j_crv_early_childhood = {
+				name = "Early Childhood",
+				text = {
+					"Each scored {C:attention}Non-Face{} card",
+					"gives {C:money}$#1#{}",
+				},
+			},
+			j_crv_everyone = {
+				name = "Everyone",
+				text = {
+					"Each scored {C:attention}Non-Face{} card",
+					"gives {C:chips}+#2#{} Chips",
+					"Each scored {C:attention}Face{} card",
+					"gives {C:mult}+#1#{} Mult",
+				},
+			},
+			j_crv_teen = {
+				name = "Teen",
+				text = {
+					"Retrigger each played",
+					"{C:attention}Jack{} {C:attention}#1#{} time",
+				},
+			},
+			j_crv_everyone_plus_ten = {
+				name = "Everyone +10",
+				text = {
+					"If first scored card is a {C:attention}10",
+					"each card gives {X:mult,C:white}X#1#{} Mult",
+				},
+			},
+			j_crv_adults_only = {
+				name = "Adults Only",
+				text = {
+					"Gives {C:chips}+#1#{} Chips",
+					"for each {C:attention}Face{} card",
+					"in the scoring hand",
+				},
+			},
+			j_crv_mature = {
+				name = "Mature",
+				text = {
+					"Gains {C:mult}+#2#{} Mult",
+					"for each {C:red}Destroyed{} playing card",
+					"Resets at the end of Ante",
+					"{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult)",
+				},
+			},
+			j_crv_cookie_cats = {
+				name = "Cookie Cats",
+				text = {
+					"If {C:attention}scored hand{} does not",
+					"contain any {C:heart}Heart cards",
+					"gives {X:chips,C:white}X#1#{} Chips",
+				},
 			},
 			-- Rare
 			j_crv_bocchi = {
@@ -1012,7 +1114,7 @@ return {
 				name = "Royal Seal",
 				text = {
 					"Card is considered",
-					"a {C:attention}face{} card"
+					"a {C:attention}face{} card",
 				},
 			},
 			-- Info Qeueueueueueueueueueueueue
@@ -1029,9 +1131,9 @@ return {
 				name = "Temporary Card",
 				text = {
 					"Takes up no space",
-					"{C:red}Destroyed{} at end of round"
-				}
-			}
+					"{C:red}Destroyed{} at end of round",
+				},
+			},
 		},
 		Planet = {},
 		Spectral = {
@@ -1045,12 +1147,12 @@ return {
 			},
 			c_crv_crown = {
 				name = "Crown",
-				text={
-                    "Add a {C:attention}Royal Seal{}",
-                    "to {C:attention}#1#{} selected",
-                    "card in your hand",
-                },
-			}
+				text = {
+					"Add a {C:attention}Royal Seal{}",
+					"to {C:attention}#1#{} selected",
+					"card in your hand",
+				},
+			},
 		},
 		Stake = {},
 		Tag = {
@@ -1098,38 +1200,108 @@ return {
 
 		-- mod
 
+		crv_Border = {
+			border_crv_bonus = {
+				name = "Bonus Border",
+				text = {
+					"{C:chips}+#1#{} Chips",
+					"if scored",
+				},
+			},
+			border_crv_mult = {
+				name = "Mult Border",
+				text = {
+					"{C:mult}+#1#{} Mult",
+					"if scored",
+				},
+			},
+			border_crv_stone = {
+				name = "Stone Border",
+				text = {
+					"{C:chips}+#1#{} Chips",
+					"Always scores",
+				},
+			},
+			border_crv_glass = {
+				name = "Glass Border",
+				text = {
+					"{X:mult,C:white}X#1#{} Mult",
+					"if scored",
+				},
+			},
+			border_crv_steel = {
+				name = "Steel Border",
+				text = {
+					"{X:mult,C:white}X#1#{} Mult",
+					"if held in hand",
+					"during scoring",
+				},
+			},
+			border_crv_gold = {
+				name = "Gold Border",
+				text = {
+					"{C:money}+$#1#{} if",
+					"held in hand",
+					"during scoring",
+				},
+			},
+			border_crv_smudged = {
+				name = "Smudged Border",
+				text = {
+					"Also counts as",
+					"{C:attention}#1#",
+				},
+			},
+			border_crv_smudged_alt = {
+				name = "Smudged Border",
+				text = {
+					"Also counts as {C:spades}Spades{} if {C:clubs}Clubs,",
+					"{C:hearts}Hearts{} if {C:diamonds}Diamonds{}, {C:diamonds}Diamonds{} if {C:hearts}Hearts{}",
+					"and {C:spades}Spades{} if {C:clubs}Clubs{}",
+				},
+			},
+			border_crv_lucky = {
+				name = "Lucky Border",
+				text = {
+					"{C:green}#1# in #2#{} chance",
+					"for {C:mult}+#4#{} Mult",
+					"{C:green}#1# in #3#{} chance",
+					"for {C:money}+$#5#{}",
+				},
+			},
+		},
+
 		crv_StatusEffect = {
 			csf_crv_empowered = {
 				name = "Empowered",
 				text = {
 					"Retrigger this",
-					"card once"
-				}
+					"card once",
+				},
 			},
 			csf_crv_temporary = {
 				name = "Temporary",
 				text = {
 					"{C:red}Destroyed{} at",
-					"end of round"
-				}
+					"end of round",
+				},
 			},
 			csf_crv_drained = {
 				name = "Drained",
 				text = {
 					"{C:red}1 in 4{} chance",
-					"to not trigger"
-				}
+					"to not trigger",
+				},
 			},
 			csf_crv_marked = {
 				name = "Marked",
 				text = {
 					"When a {C:attention}Joker{}",
 					"is getting destroyed,",
-					"destroy this card instead"
-				}
-			}
+					"destroy this card instead",
+				},
+			},
 		},
-		
 
 		crv_Rune = {
 			c_crv_fehu = {
@@ -1486,7 +1658,16 @@ return {
 			csf_crv_empowered = "Empowered",
 			csf_crv_temporary = "Temporary",
 			csf_crv_drained = "Drained",
-			csf_crv_marked = "Marked"
+			csf_crv_marked = "Marked",
+			-- Borders
+			border_crv_bonus = "Bonus Border",
+			border_crv_mult = "Mult Border",
+			border_crv_smudged = "Smudged Border",
+			border_crv_glass = "Glass Border",
+			border_crv_steel = "Steel Border",
+			border_crv_stone = "Stone Border",
+			border_crv_gold = "Gold Border",
+			border_crv_lucky = "Lucky Border",
 		},
 		poker_hand_descriptions = {},
 		poker_hands = {},
