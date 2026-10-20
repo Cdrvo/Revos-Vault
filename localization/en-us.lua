@@ -1308,7 +1308,7 @@ return {
 				text = {
 					"Also counts as {C:spades}Spades{} if {C:clubs}Clubs,",
 					"{C:hearts}Hearts{} if {C:diamonds}Diamonds{}, {C:diamonds}Diamonds{} if {C:hearts}Hearts{}",
-					"and {C:spades}Spades{} if {C:clubs}Clubs{}",
+					"and {C:clubs}Clubs{} if {C:spades}Spades{}",
 				},
 			},
 			border_crv_lucky = {
