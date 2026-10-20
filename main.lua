@@ -11,7 +11,7 @@ SMODS.current_mod.optional_features = function()
 		cardareas = {
 			unscored = true,
 		},
-		object_weights = true
+		object_weights = true,
 	}
 end
 
@@ -79,6 +79,16 @@ RevosVault.calculate = function(mod, context)
 	if context.ending_shop then
 		G.GAME.crv_stop_booster = false
 	end
+	if context.final_scoring_step then
+		for k, v in pairs(G.play.cards) do
+			if v.ability.crv_soul then
+				if not next(SMODS.find_card("j_crv_double_scythe")) then
+					v.ability.crv_soul = nil
+				end
+				RVF.cool_enhance(v, "m_crv_soul")
+			end
+		end
+	end
 	if context.printer_trigger and context.printer and context.printer.ability.crv_cartridges then
 		local p, card = context.printer, context.card_made.center
 		local extra = false
@@ -127,10 +137,9 @@ SMODS.current_mod.reset_game_globals = function(run_start)
 	if run_start then
 		--
 	end
-	
+
 	RVF.reset_suit_jokers("crv_rainbow_octopus_suit")
 	RVF.reset_suit_jokers("crv_whiteboard_suit")
-
 end
 
 -- Credits system from Hot Potato // fixed

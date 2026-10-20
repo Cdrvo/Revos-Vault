@@ -167,35 +167,34 @@ SMODS.Enhancement({
 	end,
 })
 
-
-SMODS.Enhancement {
-    key = 'blessed',
-    atlas = "revo_enhancements",
+SMODS.Enhancement({
+	key = "blessed",
+	atlas = "revo_enhancements",
 	pos = { x = 4, y = 2 },
 	attributes = {
 		"xmult",
 		"economy",
-		"chance"
+		"chance",
 	},
-    config = { extra = { odds = 4, odds2 = 10, xmult = 2, dollars = 30} },
-    loc_vars = function(self, info_queue, card)
-        local num, den = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, 'm_crv_blessed_seed_1')
-		local num2, den2 = SMODS.get_probability_vars(card, 1, card.ability.extra.odds2, 'm_crv_blessed_seed_2')
-        return { vars = { num, den, den2, card.ability.extra.xmult, card.ability.extra.dollars, num2 } }
-    end,
-    calculate = function(self, card, context)
-        if context.main_scoring and context.cardarea == G.play then
-            local ret = {}
-            if SMODS.pseudorandom_probability(card, 'm_crv_blessed_seed_1', 1, card.ability.extra.odds) then
-                ret.xmult = card.ability.extra.xmult
-            end
-            if SMODS.pseudorandom_probability(card, 'm_crv_blessed_seed_2', 1, card.ability.extra.odds2) then
-                ret.dollars = card.ability.extra.dollars
-            end
-            return ret
-        end
-    end,
-}
+	config = { extra = { odds = 4, odds2 = 10, xmult = 2, dollars = 30 } },
+	loc_vars = function(self, info_queue, card)
+		local num, den = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, "m_crv_blessed_seed_1")
+		local num2, den2 = SMODS.get_probability_vars(card, 1, card.ability.extra.odds2, "m_crv_blessed_seed_2")
+		return { vars = { num, den, den2, card.ability.extra.xmult, card.ability.extra.dollars, num2 } }
+	end,
+	calculate = function(self, card, context)
+		if context.main_scoring and context.cardarea == G.play then
+			local ret = {}
+			if SMODS.pseudorandom_probability(card, "m_crv_blessed_seed_1", 1, card.ability.extra.odds) then
+				ret.xmult = card.ability.extra.xmult
+			end
+			if SMODS.pseudorandom_probability(card, "m_crv_blessed_seed_2", 1, card.ability.extra.odds2) then
+				ret.dollars = card.ability.extra.dollars
+			end
+			return ret
+		end
+	end,
+})
 
 SMODS.Enhancement({
 	key = "boosted",
@@ -207,6 +206,78 @@ SMODS.Enhancement({
 	config = { bonus = 80 },
 	loc_vars = function(self, info_queue, card)
 		return { vars = { card.ability.bonus } }
+	end,
+	in_pool = function(self)
+		return false
+	end,
+})
+
+SMODS.Enhancement({
+	key = "soul",
+	atlas = "revo_enhancements",
+	pos = { x = 2, y = 0 },
+	replace_base_card = true,
+	no_rank = true,
+	no_suit = true,
+	overrides_base_rank = true,
+	any_suit = false,
+	always_scores = true,
+	attributes = {},
+	calculate = function(self, card, context)
+		if context.press_play then
+			RVF.do_event(function()
+				local pos, extra_pos = RVF.card_position(card, card.area).pos, nil
+				if card.area == G.play then
+					if pos then
+						for k, v in pairs(card.area.cards) do
+							print("current card pos is =" .. RVF.card_position(v, card.area).pos)
+							if
+								RVF.card_position(v, card.area).pos > pos
+								and not extra_pos
+								and not SMODS.has_enhancement(v, "m_crv_soul")
+							then
+								print(pos, v.ability.set)
+								extra_pos = RVF.card_position(v, card.area).pos
+							end
+						end
+						print(extra_pos)
+					end
+				end
+				local _card_to_copy = card.area.cards[extra_pos]
+				if _card_to_copy and card.area == G.play then
+					RVF.cool_enhance(card, function()
+						SMODS.copy_card(_card_to_copy, { new_card = card })
+					end)
+					card.ability.crv_soul = true
+				end
+				return true
+			end)
+		end
+	end,
+	in_pool = function(self)
+		return false
+	end,
+})
+
+
+SMODS.Enhancement({
+	key = "aflame",
+	atlas = "revo_enhancements",
+	pos = { x = 1, y = 1 },
+	weight = 0,
+	config = { extra = { one = 1, two = 2 } },
+	loc_vars = function(self, info_queue, card)
+		local cae = card.ability.extra
+		return { vars = { cae.one,cae.two} }
+	end,
+	calculate = function(self, card, context)
+		local cae = card.ability.extra
+		if context.repetition and context.cardarea == G.play then
+			local a = pseudorandom_element({cae.one,cae.two, pseudoseed("m_crv_aflame")})
+			return{
+				repetitions = a
+			}
+		end
 	end,
 	in_pool = function(self)
 		return false

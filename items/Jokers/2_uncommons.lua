@@ -2172,6 +2172,10 @@ SMODS.Joker({
 			rep = 1,
 		},
 	},
+	attributes = {
+		"jack",
+		"retrigger",
+	},
 	loc_vars = function(self, info_queue, card)
 		local cae = card.ability.extra
 		return {
@@ -2204,6 +2208,10 @@ SMODS.Joker({
 		extra = {
 			xmult = 2,
 		},
+	},
+	attributes = {
+		"ten",
+		"xmult",
 	},
 	loc_vars = function(self, info_queue, card)
 		local cae = card.ability.extra
@@ -2238,6 +2246,11 @@ SMODS.Joker({
 			mult = 0,
 			multg = 15,
 		},
+	},
+	attributes = {
+		"scaling",
+		"reset",
+		"mult",
 	},
 	loc_vars = function(self, info_queue, card)
 		local cae = card.ability.extra
@@ -2288,6 +2301,10 @@ SMODS.Joker({
 			chips = 50,
 		},
 	},
+	attributes = {
+		"face",
+		"chips",
+	},
 	loc_vars = function(self, info_queue, card)
 		local cae = card.ability.extra
 		return {
@@ -2331,6 +2348,10 @@ SMODS.Joker({
 	crv_credits = {
 		art = { "Heaven" },
 	},
+	attributes = {
+		"hearts",
+		"xchips",
+	},
 	loc_vars = function(self, info_queue, card)
 		local cae = card.ability.extra
 		return {
@@ -2350,6 +2371,173 @@ SMODS.Joker({
 				return {
 					xchips = cae.xchips,
 				}
+			end
+		end
+	end,
+})
+
+SMODS.Joker({
+	key = "sunrise",
+	atlas = "revo_jokers",
+	pos = { x = 8, y = 11 },
+	rarity = 2,
+	cost = 4,
+	config = {
+		extra = {
+			rep = 1,
+		},
+	},
+	attributes = {
+		"retrigger",
+		"hands",
+	},
+	loc_vars = function(self, info_queue, card)
+		return {
+			vars = { card.ability.extra.rep },
+		}
+	end,
+	calculate = function(self, card, context)
+		if context.repetition and context.cardarea == G.play and G.GAME.current_round.hands_played == 0 then
+			return {
+				repetitions = card.ability.extra.rep,
+			}
+		end
+	end,
+})
+
+SMODS.Joker({
+	key = "7_ball",
+	atlas = "revo_jokers",
+	pos = { x = 9, y = 11 },
+	rarity = 2,
+	cost = 4,
+	config = {
+		extra = {
+			odds = 6,
+		},
+	},
+	attributes = {
+		"spectral",
+		"generation",
+		"chance",
+		"seven",
+		"rank",
+		"consumable",
+	},
+	loc_vars = function(self, info_queue, card)
+		local num, den = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, "7ball_seed")
+		return {
+			vars = { num, den },
+		}
+	end,
+	calculate = function(self, card, context)
+		if context.individual and context.cardarea == G.play and context.other_card:get_id() == 7 then
+			if SMODS.pseudorandom_probability(card, "7ball_seed", 1, card.ability.extra.odds) then
+				if RVF.has_room(G.consumeables) then
+					SMODS.add_card({
+						set = "Spectral",
+					})
+				else
+					return {
+						message = localize("no_room_ex"),
+					}
+				end
+			end
+		end
+	end,
+})
+
+SMODS.Joker({
+	key = "double_scythe",
+	atlas = "revo_jokers",
+	pos = { x = 6, y = 12 },
+	rarity = 2,
+	cost = 5,
+	config = {
+		extra = {
+			dollars = 15,
+		},
+	},
+	attributes = {
+		"playing_card",
+		"destroy_card",
+		"economy",
+	},
+	blueprint_compat = false,
+	loc_vars = function(self, info_queue, card)
+		return { vars = { card.ability.extra.dollars } }
+	end,
+	calculate = function(self, card, context)
+		if
+			context.destroy_card
+			and (SMODS.get_enhancements(context.destroy_card)["m_crv_soul"] or context.destroy_card.ability.crv_soul)
+			and context.cardarea == G.play
+			and not context.blueprint
+			and not context.destroy_card.ability.crv_marked_via_double_scythe
+		then
+			context.destroy_card.ability.crv_marked_via_double_scythe = true
+			return {
+				remove = true,
+				dollars = card.ability.extra.dollars,
+			}
+		end
+	end,
+	in_pool = function(self)
+		return RVF.find_enhancement("m_crv_soul")
+	end,
+})
+
+SMODS.Joker({
+	key = "grim_reaper",
+	atlas = "revo_jokers",
+	pos = { x = 7, y = 12 },
+	blueprint_compat = false,
+	rarity = 2,
+	cost = 5,
+	loc_vars = function(self, info_queue, card)
+		return { vars = {} }
+	end,
+	attributes = {
+		"generation",
+		"playing_card",
+	},
+	calculate = function(self, card, context)
+		if context.remove_playing_cards and not context.blueprint then
+			local _card = SMODS.add_card({
+				set = "Enhanced",
+				area = G.deck,
+				key = "m_crv_soul",
+			})
+			return {
+				message = "!",
+			}
+		end
+	end,
+})
+
+SMODS.Joker({
+	key = "charcoal",
+	atlas = "revo_jokers",
+	pos = {
+		x = 8,
+		y = 12,
+	},
+	rarity = 2,
+	blueprint_compat = false,
+	cost = 4,
+	attributes = {
+		"enhancements",
+		"modify_card",
+	},
+	loc_vars = function(self, info_queue, card)
+		info_queue[#info_queue + 1] = G.P_CENTERS.m_crv_aflame
+	end,
+	calculate = function(self, card, context)
+		if context.final_scoring_step and not context.blueprint then
+			for k, v in pairs(context.scoring_hand) do
+				if v.ability.set == "Default" then
+					RVF.cool_enhance(v, "m_crv_aflame")
+				end
 			end
 		end
 	end,

@@ -97,6 +97,19 @@ return {
 					"{C:chips}+#1#{} Chips",
 				},
 			},
+			m_crv_soul = {
+				name = "Soul Card",
+				text = {
+					"{C:attention}Copies{} the card",
+					"on the right in play",
+					"Always scores",
+				},
+			},
+			m_crv_aflame = {
+				name = "Aflame",
+				text = { "When scored,", 
+				"Retrigger {C:attention}#1#{} or {C:attention}#2#{} times" },
+			},
 		},
 		Joker = {
 			-- Common
@@ -600,6 +613,44 @@ return {
 					"contain any {C:heart}Heart cards",
 					"gives {X:chips,C:white}X#1#{} Chips",
 				},
+			},
+			j_crv_sunrise = {
+				name = "Sunrise",
+				text = {
+					"{C:attention}Retrigger{} the first",
+					"played hand of this round",
+				},
+			},
+			j_crv_7_ball = {
+				name = "7 Ball",
+				text = {
+					"{C:green}#1# in #2#{} Chance to",
+					"create a {C:dark_edition}Spectral{}",
+					"card when a {C:attention}7{}",
+					"is scored.",
+				},
+			},
+			j_crv_double_scythe = {
+				name = "Double Scythe",
+				text = {
+					"{C:red}Destroys{} scored{C:blue} Soul{} cards",
+					"{C:money}+$#1#{} per card destroyed{}",
+				},
+			},
+			j_crv_grim_reaper = {
+				name = "Grim Reaper",
+				text = {
+					"Adds a {C:blue}Soul{} card",
+					"to deck when a playing card",
+					"is {C:red}destroyed{}",
+				},
+			},
+			j_crv_charcoal = {
+				name = "Charcoal Joker",
+				text = {
+					"Apply {C:attention}Aflame{} to",
+					"scored cards wirthout enhancements",
+				}
 			},
 			-- Rare
 			j_crv_bocchi = {
