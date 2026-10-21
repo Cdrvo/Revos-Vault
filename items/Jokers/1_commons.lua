@@ -625,3 +625,106 @@ SMODS.Joker({
 		idea = {"theOfficialFem"}
 	}
 })
+
+local numbers = { 2, 3, 4, 5, 6, 7, 8, 9 }
+SMODS.Joker({
+	key = "safe",
+	atlas = "revo_jokers",
+	rarity = 1,
+	cost = 3,
+	unlocked = true,
+	discovered = false,
+	blueprint_compat = false,
+	pos = {
+		x = 2,
+		y = 13,
+	},
+	config = {
+		extra = {
+			unlocked = false,
+			status = "N/A",
+			dollars = 30,
+			d1_display = "?",
+			d2_display = "?",
+			d3_display = "?",
+			d4_display = "?",
+		},
+	},
+	crv_credits = {
+		art = { "kusanehexaku, ice" },
+	},
+	loc_vars = function(self, info_queue, card)
+		if card.ability.extra.unlocked then
+			card.ability.extra.status = localize("k_crv_unlocked")
+		else
+            card.ability.extra.status = localize("k_crv_locked")
+		end
+		local crv = card.ability.extra
+		return {
+			vars = {
+				card.ability.extra.status,
+				card.ability.extra.d1,
+				card.ability.extra.d2,
+				card.ability.extra.d3,
+				card.ability.extra.d4,
+				card.ability.extra.unlocked,
+				card.ability.extra.d1_display,
+				card.ability.extra.d2_display,
+				card.ability.extra.d3_display,
+				card.ability.extra.d4_display,
+				card.ability.extra.dollars
+			},
+		}
+	end,
+	add_to_deck = function(self, card, from_debuff)
+		local digitone = pseudorandom_element(numbers, pseudoseed("safe"))
+		local digittwo = pseudorandom_element(numbers, pseudoseed("safe"))
+		local digitthree = pseudorandom_element(numbers, pseudoseed("safe"))
+		local digitfour = pseudorandom_element(numbers, pseudoseed("safe"))
+		card.ability.extra.d1 = digitone
+		card.ability.extra.d2 = digittwo
+		card.ability.extra.d3 = digitthree
+		card.ability.extra.d4 = digitfour
+	end,
+
+	calculate = function(self, card, context)
+		if
+			context.final_scoring_step
+			and not context.blueprint
+			and not card.ability.extra.unlocked
+		then
+			local unlocked = true
+			for k, v in pairs(context.scoring_hand) do
+				for i = 1, 4 do
+					--print(v.base.id, card.ability.extra["d" .. i], RVF.card_position(v, v.area).pos, i)
+					if RVF.card_position(v, v.area).pos == i and v.base.id == card.ability.extra["d" .. i] and type(card.ability.extra["d" .. i .. "_display"]) ~= "number" then
+						RVF.msg(card, "!")
+						card.ability.extra["d" .. i .. "_display"] = v.base.id
+					elseif RVF.card_position(v, v.area).pos ~= i and v.base.id == card.ability.extra["d" .. i] and type(card.ability.extra["d" .. i .. "_display"]) ~= "number" then
+			            if i > RVF.card_position(v, v.area).pos then
+							RVF.msg(v, "-->")
+						elseif i < RVF.card_position(v, v.area).pos then
+							RVF.msg(v, "<--")
+						end
+				    end
+				end
+			end
+
+			for i = 1, 4 do
+				if type(card.ability.extra["d" .. i .. "_display"]) ~= "number" then
+					unlocked = false
+				end
+			end
+
+			if unlocked then
+				card.ability.extra.unlocked = true
+				card.ability.extra.status = localize("k_crv_unlocked")
+			end
+		end
+	end,
+	calc_dollar_bonus = function(self, card)
+		if card.ability.extra.unlocked == true then
+			return card.ability.extra.dollars
+		end
+	end,
+})

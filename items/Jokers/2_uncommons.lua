@@ -2542,3 +2542,238 @@ SMODS.Joker({
 		end
 	end,
 })
+
+SMODS.Joker({
+	key = "birthday_cake",
+	atlas = "revo_jokers",
+	pos = {
+		x = 9,
+		y = 12,
+	},
+	rarity = 2,
+	cost = 4,
+	config = {
+		extra = {
+			mult = os.date("*t").day,
+		},
+	},
+	attributes = {
+		"mult",
+	},
+	crv_credits = {
+		art = { "snayn3" },
+	},
+	loc_vars = function(self, info_queue, card)
+		return { vars = { card.ability.extra.mult } }
+	end,
+	calculate = function(self, card, context)
+		if context.joker_main then
+			return {
+				mult = card.ability.extra.mult,
+			}
+		end
+	end,
+})
+
+SMODS.Joker({ -- RUNES CONFIG
+	key = "viking_joker",
+	atlas = "revo_jokers",
+	pos = {
+		x = 0,
+		y = 13,
+	},
+	config = {
+		extra = {
+			dollars = 3,
+		},
+	},
+	attributes = {
+		"consumable",
+		"rune",
+		"economy",
+	},
+	rarity = 2,
+	cost = 4,
+	blueprint_compat = true,
+	loc_vars = function(self, info_queue, card)
+		local cae = card.ability.extra
+		return { vars = { cae.dollars } }
+	end,
+	calculate = function(self, card, context)
+		local cae = card.ability.extra
+		if context.end_of_round and context.main_eval then
+			local a = 0
+			for k, v in pairs(G.consumeables.cards) do
+				if v and v.ability.set == "crv_Rune" then
+					a = a + 1
+				end
+			end
+			return {
+				dollars = a * cae.dollars,
+			}
+		end
+	end,
+	crv_credits = {
+		art = { "Breuhh" },
+	},
+})
+
+SMODS.Joker({
+	key = "snek",
+	atlas = "revo_jokers",
+	pos = {
+		x = 1,
+		y = 13,
+	},
+	config = {
+		card_limit = 2,
+		extra = {
+			dollars = 3,
+		},
+	},
+	attributes = {
+		"passive",
+	},
+	rarity = 2,
+	cost = 4,
+	blueprint_compat = false,
+	crv_credits = {
+		art = { "isa" },
+		idea = { "isa" },
+	},
+})
+
+SMODS.Joker({
+	key = "double_or_nothing",
+	atlas = "wip",
+	rarity = 2,
+	cost = 5,
+	unlocked = true,
+	discovered = false,
+	blueprint_compat = false,
+	pos = {
+		x = 0,
+		y = 0,
+	},
+	attributes = {
+		"chance",
+	},
+	config = {
+		extra = {
+			odds = 2,
+			can_use = true,
+		},
+	},
+	loc_vars = function(self, info_queue, card)
+		if card.ability.extra.can_use and G.GAME.current_round.hands_left == 1 then
+			card.ability.extra.display_status = localize("s_crv_ready")
+		else
+			card.ability.extra.display_status = localize("s_crv_not_ready")
+		end
+		info_queue[#info_queue + 1] = { set = "Other", key = "crv_immutable" }
+		local num, den =
+			SMODS.get_probability_vars(card, 1, card.ability.extra.odds, "crv_dobule_or_nothign", nil, true)
+		return {
+			vars = { num, den, card.ability.extra.display_status },
+		}
+	end,
+	crv_use = function(self, card)
+		card.ability.extra.can_use = false
+		if SMODS.pseudorandom_probability(card, "crv_dobule_or_nothign", 1, card.ability.extra.odds, nil, true) then
+			G.GAME.chips = G.GAME.chips * 2
+			RVF.msg(card, localize("k_crv_double_ex"))
+			if G.GAME.chips >= G.GAME.blind.chips then
+				RVF.end_round() -- yay
+			end
+		else
+			G.GAME.chips = 0
+			RVF.msg(card, localize("k_crv_nothing_ex"))
+		end
+	end,
+	crv_can_use = function(self, card)
+		if
+			G.GAME.blind
+			and G.GAME.blind.in_blind
+			and card.ability.extra.can_use
+			and G.GAME.current_round.hands_left == 1
+		then
+			return true
+		end
+		return false
+	end,
+})
+
+SMODS.Joker({
+	key = "the_gambler",
+	atlas = "wip",
+	rarity = 2,
+	cost = 4,
+	unlocked = true,
+	discovered = false,
+	blueprint_compat = true,
+	pos = {
+		x = 0,
+		y = 0,
+	},
+	config = {
+		extra = {
+			xmult = 1,
+			xmultlg = 0.5,
+			xmult_final = 3.5,
+			odds = 2,
+		},
+	},
+	attributes = {
+		"xmult",
+		"chance",
+		"scaling",
+	},
+	loc_vars = function(self, info_queue, card)
+		local cae = card.ability.extra
+		local num, den = SMODS.get_probability_vars(card, 1, cae.odds, "tgm_seed")
+		return {
+			vars = {
+				card.ability.extra.xmult,
+				card.ability.extra.xmultlg,
+				card.ability.extra.xmult_final,
+				num,
+				den,
+			},
+		}
+	end,
+
+	calculate = function(self, card, context)
+		if context.joker_main then
+			return {
+				x_mult = card.ability.extra.xmult,
+			}
+		end
+		if
+			context.setting_blind
+			and not context.blueprint
+			and card.ability.extra.xmult < card.ability.extra.xmult_final
+		then
+			if SMODS.pseudorandom_probability(card, "tgm_seed", 1, card.ability.extra.odds) then
+				SMODS.scale_card(card, {
+					ref_table = card.ability.extra,
+					ref_value = "xmult",
+					scalar_value = "xmultlg",
+				})
+			else
+				SMODS.scale_card(card, {
+					ref_table = card.ability.extra,
+					ref_value = "xmult",
+					scalar_value = "xmultlg",
+					operation = "-",
+					scaling_message = {
+						message = localize("k_crv_downgrade"),
+						colour = G.C.RED,
+					},
+				})
+				if card.ability.extra.xmult <= 0 then
+					SMODS.destroy_cards(card)
+				end
+			end
+		end
+	end,
+})

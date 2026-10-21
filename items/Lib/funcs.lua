@@ -223,14 +223,15 @@ function RVF.redeem(card, free)
 	}))
 end
 
-
 function RVF.reset_suit_jokers(var)
-    local all_suits = {}
-    for k, v in pairs(SMODS.Suits) do
-        if k ~= G.GAME.current_round[var] then all_suits[#all_suits + 1] = k end
-    end
-    local select = pseudorandom_element(all_suits, pseudoseed('anc'..G.GAME.round_resets.ante))
-    G.GAME.current_round[var] = select
+	local all_suits = {}
+	for k, v in pairs(SMODS.Suits) do
+		if k ~= G.GAME.current_round[var] then
+			all_suits[#all_suits + 1] = k
+		end
+	end
+	local select = pseudorandom_element(all_suits, pseudoseed("anc" .. G.GAME.round_resets.ante))
+	G.GAME.current_round[var] = select
 end
 
 function RVF.nope(args)
@@ -301,7 +302,7 @@ end
 
 RevosVault.FUNCS.owned_enhancements = function(enhancement)
 	local a, check = 0, (G.playing_cards or {})
-	for k,v in pairs(check) do
+	for k, v in pairs(check) do
 		if v and SMODS.has_enhancement(v, enhancement) then
 			a = a + 1
 		end
@@ -327,6 +328,20 @@ function RevosVault.FUNCS.get_total(pool)
 		end
 	end
 	return a
+end
+
+function RevosVault.FUNCS.end_round(win)
+	RVF.do_event(function()
+		if G.STATE == G.STATES.SELECTING_HAND then
+			if win then
+				G.GAME.chips = G.GAME.blind.chips
+			end
+			G.STATE = G.STATES.HAND_PLAYED
+			G.STATE_COMPLETE = true
+			end_round()
+			return true
+		end
+	end)
 end
 
 -- the special function
@@ -381,7 +396,7 @@ RVF.printer_create = function(card, make)
 					edition = make.edition,
 					no_edition = not make.edition,
 					force_stickers = make.stickers,
-					rarity = make.rarity
+					rarity = make.rarity,
 				})
 			else
 				make()
@@ -431,4 +446,3 @@ RVF.UI.move_area = function(area, move_to, back, reset)
 		G[area].T.y = (move_to.y or G[area].T.y)
 	end
 end
-

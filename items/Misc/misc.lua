@@ -149,6 +149,10 @@ SMODS.Attribute({
 SMODS.Attribute({
 	key = "printer",
 })
+
+SMODS.Attribute({
+	key = "rune",
+})
 -- object types
 
 SMODS.ObjectType({

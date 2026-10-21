@@ -652,6 +652,66 @@ return {
 					"scored cards wirthout enhancements",
 				}
 			},
+			j_crv_birthday_cake = {
+				name = "Birthday Cake",
+				text = {
+					"Gives {C:mult}mult{} depending",
+					"on the current day",
+					"of the month",
+					"{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult)"
+
+				}
+			},
+			j_crv_viking_joker = {
+				name = "Viking Joker",
+				text = {
+					"At end of round,",
+					"gives {C:money}+$#1#{} for",
+					"each {C:purple}Rune{} Card in possession",
+				}
+			},
+			j_crv_snek = {
+				name = "snake",
+				text = {
+					"{C:dark_edition}+2{} Joker slots"
+				}
+			},
+			j_crv_double_or_nothing = {
+				name = "Double or Nothing",
+				text = {
+					"When used, {C:green}#1# in #2#{} chance to",
+					"{C:attention}Double{} current score,",
+					"{C:red,E:1}reset{} it to 0 otherwise.",
+					"{s:0.7}Can only be used once per round and when on last hand",
+					"{C:inactive}(Currently: {C:attention}#3#{C:inactive})"
+				}
+			},
+			j_crv_the_gambler = {
+				name = "The Gambler",
+				text = {
+					"When {C:attention}Blind{} is selected,",
+					"loses or gains {X:mult,C:white}X#1#{} Mult",
+					"{C:red}self-destructs{} if xmult becomes 0",
+					"{C:red}stops{} scaling at {X:mult,C:white}X#2#{} Mult",
+					"{C:inactive}(Currently {X:mult,C:white}X#3#{C:inactive} Mult)"
+				}
+			},
+			j_crv_safe = {
+				name = "Safe",
+				text =  {
+					"Set a random passcode when {C:attention}added to deck",
+					"Guess the passcode by scoring",
+					"playing cards through {C:attention}1 to 9{}",
+					"{s:0.7}1 and 9 included{}",
+					"Scored card's position in scoring",
+					"{C:red,E:1}MUST{} match the number's position in passcode",
+					"If the card is in the wrong position but is in the passcode,",
+					"gives a small {C:green}hint{} on where it should be",
+					"{C:money}+$#11#{} Bonus{} when unlocked",
+					"{C:inactive}(Currently {C:attention}#1#{C:inactive})",
+					"{C:inactive,s:0.8}(Passcode: #7#-#8#-#9#-#10#{C:inactive})"
+				}
+			},
 			-- Rare
 			j_crv_bocchi = {
 				name = "Bocchi the Joker",
@@ -1690,6 +1750,10 @@ return {
 			k_crv_boom_ex = "Boom!",
 			k_printed_ex = "Printed!",
 			k_crv_double_ex = "Double!",
+			k_crv_nothing_ex = "Nothing!",
+			k_crv_downgrade = "Downgrade",
+			k_crv_locked = "Locked",
+			k_crv_unlocked = "Unlocked",
 			-- Consumabels
 			k_crv_cartridge = "Cartridge",
 			b_crv_cartridge_cards = "Cartridges",
