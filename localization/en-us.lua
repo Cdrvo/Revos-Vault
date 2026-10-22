@@ -110,6 +110,13 @@ return {
 				text = { "When scored,", 
 				"Retrigger {C:attention}#1#{} or {C:attention}#2#{} times" },
 			},
+			m_crv_shattered = {
+				name = "Shattered",
+				text = {
+					"{X:mult,C:white}X#1#{} Mult",
+					"{C:inactive}no rank or suit"
+				},
+			},
 		},
 		Joker = {
 			-- Common
@@ -711,6 +718,23 @@ return {
 					"{C:inactive}(Currently {C:attention}#1#{C:inactive})",
 					"{C:inactive,s:0.8}(Passcode: #7#-#8#-#9#-#10#{C:inactive})"
 				}
+			},
+			j_crv_glass_gun = {
+				name = "Glass Gun",
+				text = {
+					"{C:attention}Glass Cards{} are {X:green,C:white}X#1#{} harder",
+					"to shatter.",
+					"Shattered {C:attention}Glass Cards{} turn",
+					"into {C:attention}Shattered{} Cards"
+				}
+			},
+			j_crv_holographic_face = {
+				name = "Holographic Face",
+				text = {
+					"When used, swaps selected",
+					"{C:attention}Face{} cards to be",
+					"different face cards",
+				},
 			},
 			-- Rare
 			j_crv_bocchi = {

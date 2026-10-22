@@ -2777,3 +2777,134 @@ SMODS.Joker({
 		end
 	end,
 })
+
+SMODS.Joker({
+	key = "glass_gun",
+	rarity = 2,
+	cost = 4,
+	atlas = "revo_jokers",
+	pos = { x = 3, y = 13 },
+	soul_pos = { x = 4, y = 13 },
+	discovered = true,
+	blueprint_compat = false,
+	crv_credits = {
+		art = { "Heaven" },
+	},
+	loc_vars = function(self, info_queue, card)
+		info_queue[#info_queue + 1] = G.P_CENTERS.m_crv_shattered
+		return {
+			vars = { card.ability.extra.multiply },
+		}
+	end,
+	config = {
+		extra = {
+			multiply = 2,
+		},
+	},
+	attributes = {
+		"glass",
+		"enhancement",
+		"passive",
+	},
+	calculate = function(self, card, context)
+		if context.remove_playing_cards and not context.blueprint then
+			local _area, mat = G.deck, false
+			if (G.hand and #G.hand.cards > 0) or (G.GAME.blind and G.GAME.blind.in_blind) then
+				_area = G.hand
+				mat = true
+			end
+			for _, pcard in ipairs(context.removed) do
+				if SMODS.has_enhancement(pcard, "m_glass") then
+					local acard = SMODS.copy_card(pcard, { area = _area })
+					acard:set_ability(G.P_CENTERS.m_crv_shattered)
+					if mat then
+						acard.states.visible = nil
+						G.E_MANAGER:add_event(Event({
+							func = function()
+								acard:start_materialize()
+								return true
+							end,
+						}))
+					end
+				end
+			end
+		end
+		if context.mod_probability and context.identifier == "glass" and not context.blueprint then
+			return {
+				denominator = context.denominator * card.ability.extra.multiply,
+			}
+		end
+	end,
+})
+
+SMODS.Joker({
+	key = "holographic_face",
+	atlas = "revo_jokers",
+	rarity = 2,
+	cost = 1,
+	unlocked = true,
+	discovered = true,
+	pos = {
+		x = 5,
+		y = 13,
+	},
+	soul_pos = {
+		x = 6,
+		y = 13,
+	},
+	loc_vars = function(self, info_queue, card)
+		local crv = card.ability.extra
+		return {
+			vars = {},
+		}
+	end,
+	draw = function(self, card, layer)
+		card.children.center:draw_shader("hologram", nil, card.ARGS.send_to_shader)
+	end,
+	crv_use = function(self, card)
+		G.CONTROLLER.locks.crv_holo_face = true
+		for k, v in ipairs(G.hand.highlighted) do
+			local card_rank, go_rank, smallest_face_id, smallest_face = v.base.id, nil, 11, nil
+			for kk, vv in pairs(SMODS.Ranks) do
+				if vv.id > card_rank and vv.face then
+					go_rank = kk
+				end
+			end
+			if not go_rank then
+				for kk, vv in pairs(SMODS.Ranks) do
+					if vv.id <= smallest_face_id and vv.face then
+						smallest_face = kk
+					end
+				end
+			end
+			local final = nil
+			final = go_rank or smallest_face
+			if v:is_face() then
+				RVF.cool_enhance(v, function()
+					assert(SMODS.change_base(v, nil, final))
+				end, nil, nil, nil, nil, nil, true)
+			end
+
+			if G.hand.highlighted[#G.hand.highlighted] == v then
+				RVF.do_event(function() G.CONTROLLER.locks.crv_holo_face = nil return true end, nil, nil, 1)
+				
+			end
+		end
+	end,
+	crv_can_use = function(self, card)
+		local boolean = false
+		if RVF.highlight(G.hand) and not G.CONTROLLER.locks.crv_holo_face then
+			local _, area = RVF.highlight(G.hand)
+			for k, v in pairs(area) do
+				if v:is_face() then
+					boolean = true
+				end
+			end
+			return boolean
+		end
+		return false
+	end,
+})
+
+
+-- i don't want to do quest master or whatever it is yet i hate that fucker

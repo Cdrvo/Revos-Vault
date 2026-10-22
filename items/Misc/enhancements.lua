@@ -283,3 +283,33 @@ SMODS.Enhancement({
 		return false
 	end,
 })
+
+SMODS.Enhancement({
+	key = "shattered",
+	atlas = "revo_enhancements",
+	pos = { x = 1, y = 0 },
+	discovered = true,
+	unlocked = true,
+	replace_base_card = true,
+	no_rank = true,
+	no_suit = true,
+	always_scores = true,
+	weight = 0,
+	config = { extra = { x_mult = 2 } },
+	loc_vars = function(self, info_queue, card)
+		return { vars = { card.ability.extra.x_mult } }
+	end,
+	calculate = function(self, card, context)
+		if context.main_scoring and context.cardarea == G.play then
+			return {
+				x_mult = card.ability.extra.x_mult,
+			}
+		end
+	end,
+	in_pool = function(self)
+		return false
+	end,
+	crv_credits = {
+		art = {"Heaven"}
+	}
+})

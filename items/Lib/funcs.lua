@@ -8,8 +8,11 @@ RVF.do_event = function(func, queue, trigger, delay)
 	}, queue))
 end
 
-RVF.cool_enhance = function(card, stuff, no_flip, no_juice, no_sound, shatter, queue) -- I AM HARDCODING IT AAAAAAAAAAAAAAA
+RVF.cool_enhance = function(card, stuff, no_flip, no_juice, no_sound, shatter, queue, instant, lock) -- I AM HARDCODING IT AAAAAAAAAAAAAAA
 	RVF.do_event(function()
+		if lock then
+			G.CONTROLLER.locks[lock] = true
+		end
 		--[[if not no_juice then
                 card:juice_up()
             end]]
@@ -20,7 +23,7 @@ RVF.cool_enhance = function(card, stuff, no_flip, no_juice, no_sound, shatter, q
 			play_sound("card1")
 		end
 		return true
-	end, queue, nil, 0)
+	end, queue, nil, (instant and 0) or nil)
 
 	local func
 	if type(stuff) == "function" then
@@ -33,7 +36,7 @@ RVF.cool_enhance = function(card, stuff, no_flip, no_juice, no_sound, shatter, q
 	RVF.do_event(function()
 		func()
 		return true
-	end, queue, after, 1)
+	end, queue, after, (instant and 0.01) or 1)
 	RVF.do_event(function()
 		if not no_juice then
 			card:juice_up()
@@ -49,8 +52,11 @@ RVF.cool_enhance = function(card, stuff, no_flip, no_juice, no_sound, shatter, q
 				play_sound("card1")
 			end
 		end
+		if lock then
+			G.CONTROLLER.locks[lock] = false
+		end
 		return true
-	end, queue)
+	end, queue, nil, (instant and 0) or nil)
 end
 
 function RVF.card_position(card, area)
