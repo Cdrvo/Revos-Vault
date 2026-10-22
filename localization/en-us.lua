@@ -736,6 +736,17 @@ return {
 					"different face cards",
 				},
 			},
+			j_crv_save_file = {
+				name = "Save File",
+				text = {
+					"Saves half of the first",
+					"{C:attention}total score{} each round.",
+					"When used, {C:blue}stored chips{} are",
+					"added to scoring and cleared",
+					"{C:attention,s:0.8}#2#{}",
+					"{C:inactive}(Currently stored {C:blue}+#1#{C:inactive} Chips)"
+				}
+			},
 			-- Rare
 			j_crv_bocchi = {
 				name = "Bocchi the Joker",
@@ -1778,6 +1789,8 @@ return {
 			k_crv_downgrade = "Downgrade",
 			k_crv_locked = "Locked",
 			k_crv_unlocked = "Unlocked",
+			k_crv_inactive = "Inactive",
+			k_crv_cleared = "Cleared!",
 			-- Consumabels
 			k_crv_cartridge = "Cartridge",
 			b_crv_cartridge_cards = "Cartridges",

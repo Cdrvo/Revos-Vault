@@ -2858,6 +2858,10 @@ SMODS.Joker({
 			vars = {},
 		}
 	end,
+	attributes = {
+		"face",
+		"modify_card"
+	},
 	draw = function(self, card, layer)
 		card.children.center:draw_shader("hologram", nil, card.ARGS.send_to_shader)
 	end,
@@ -2905,6 +2909,73 @@ SMODS.Joker({
 		return false
 	end,
 })
+
+
+SMODS.Joker({
+	key = "save_file",
+	atlas = "revo_jokers",
+	pos = {
+		x = 7,
+		y = 13,
+	},
+	config = {
+		extra = {
+			saved_chips = 0,
+			status = nil
+		},
+	},
+	attributes = {
+		"chips",
+		"scaling"
+	},
+	rarity = 2,
+	cost = 4,
+	blueprint_compat = false,
+	loc_vars = function(self, info_queue, card)
+		local cae = card.ability.extra
+		if cae.status_i then
+			cae.status = localize("k_active_ex")
+		else
+			cae.status = localize("k_crv_inactive")
+		end
+		return { vars = { cae.saved_chips, cae.status } }
+	end,
+	calculate = function(self, card, context)
+		local cae = card.ability.extra
+		if context.after and not context.blueprint and not cae.activated then
+			RVF.do_event(function() cae.saved_chips = cae.saved_chips + G.GAME.chips/2 return true end)
+			cae.activated = true
+		end
+		if card.ability.extra.status_i and context.joker_main and not context.blueprint then
+			return{
+				chips = cae.saved_chips
+			}
+		end
+		if cae.status_i and cae.saved_chips and context.after then
+			cae.saved_chips = 0
+			cae.status_i = false
+			RVF.msg(card, localize("k_crv_cleared"))
+		end
+		if context.end_of_round and not context.blueprint then
+			cae.activated = false
+		end
+	end,
+	crv_use = function(self, card)
+		card.ability.extra.status_i = true
+		local eval = function()
+			return card.ability.extra.status_i
+		end
+		juice_card_until(card, eval, true)
+	end,
+	crv_can_use = function(self, card)
+		return not card.ability.extra.status_i
+	end,
+	crv_credits = {
+		art = { "Breuhh" },
+	},
+})
+
+
 
 
 -- i don't want to do quest master or whatever it is yet i hate that fucker
