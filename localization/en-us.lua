@@ -751,12 +751,12 @@ return {
 				name = "Investment",
 				text = {
 					"When used, invest"
-					,"{C:money,E:1}%#3#{} of your dollars.",
+					,"{C:money}%#3#{} of your money.",
 					"At end of round,",
 					"sell cost {C:green}increases{}",
-					"by {C:attention}%#2#{} of the dollars",
+					"by {C:attention}%#2#{} of the money",
 					"invested.",
-					"{C:inactive}(Invested: {C:money}#1#{C:inactive})"
+					"{C:inactive}(Invested: {C:money}$#1#{C:inactive})"
 					
 				}
 			},
