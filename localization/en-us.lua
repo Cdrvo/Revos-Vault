@@ -1276,7 +1276,7 @@ return {
 					"a {C:attention}face{} card",
 				},
 			},
-			-- Info Qeueueueueueueueueueueueue
+			-- Info Q
 			crv_immutable = {
 				name = "Immutable Chances",
 				text = {
@@ -1292,6 +1292,31 @@ return {
 					"Takes up no space",
 					"{C:red}Destroyed{} at end of round",
 				},
+			},
+			-- Boosters 
+			p_crv_skarot_pack ={
+                name="Skarot Pack",
+                text={
+                    "Choose {C:attention}#1#{} of up to",
+                    "{C:attention}#2# {X:black,C:white} Skarot{} cards to",
+                    "be used immediately",
+                },
+            },
+			p_crv_skarot_jumbo = {
+				name = "Skarot Jumbo",
+				text={
+                    "Choose {C:attention}#1#{} of up to",
+                    "{C:attention}#2# {X:black,C:white} Skarot{} cards to",
+                    "be used immediately",
+                },
+			},
+			p_crv_skarot_mega = {
+				name = "Skarot Mega",
+				text={
+                    "Choose {C:attention}#1#{} of up to",
+                    "{C:attention}#2# {X:black,C:white} Skarot{} cards to",
+                    "be used immediately",
+                },
 			},
 		},
 		Planet = {},
@@ -1380,6 +1405,35 @@ return {
 				text = {
 					"{C:attention}Levels up{} a random"
 					,"poker hand"
+				}
+			},
+			c_crv_sketch_empress = {
+				name = "Sketch Empress",
+				text = {
+					"Applies {C:attention}Mult Border{}",
+					"to {C:attention}#1#{} selected cards"
+				}
+			},
+			c_crv_sketch_emperor = {
+				name = "Sketch Emperor",
+				text = {
+					"Creates up to {C:attention}#1#{}",
+					"random {X:black,C:white}Skarot{} cards",
+					"{C:inactive}(Must have room)"
+				}
+			},
+			c_crv_sketch_hierophant = {
+				name = "Sketch Hierophant",
+				text = {
+					"Applies {C:attention}Bonus Border{}",
+					"to {C:attention}#1#{} selected cards"
+				}
+			},
+			c_crv_sketch_lovers = {
+				name = "Sketch Lovers",
+				text = {
+					"Applies {C:attention}Smudged Border{}",
+					"to {C:attention}#1#{} selected card"
 				}
 			}
 		},
@@ -1841,6 +1895,8 @@ return {
 
 			k_crv_rune = "Rune",
 			b_crv_rune_cards = "Runes",
+			-- Boosters
+			k_crv_skarot_pack = "Skarot Pack"
 		},
 		high_scores = {},
 		labels = {

@@ -16,7 +16,6 @@ function Card:click()
 	return ret
 end
 
-
 -- game objects
 local init_game_object_old = Game.init_game_object
 Game.init_game_object = function(self)
@@ -236,26 +235,18 @@ function CardArea:align_cards()
 	if self.config.type == "joker" or self.config.type == "title" then
 		local spin_value = 0.01
 		for k, card in ipairs(self.cards) do
-			if
-				card
-				and card.ability
-				and (
-					(RVF.has_cartridge(card, "c_crv_spin"))
-					or card.ability.crv_force_spin
-				)
-			then
+			if card and card.ability and ((RVF.has_cartridge(card, "c_crv_spin")) or card.ability.crv_force_spin) then
 				if card.states.hover.is then
 					spin_value = 0.05
 				end
 				if card.states.drag.is then
 					spin_value = 0.05
 				end
-				card.T.r = card.T.r + spin_value*(G.GAME and G.GAME.crv_spin_mult or 1)
+				card.T.r = card.T.r + spin_value * (G.GAME and G.GAME.crv_spin_mult or 1)
 			end
 		end
 	end
 end
-
 
 local calculate_joker_old = Card.calculate_joker -- preventing joker triggers
 function Card:calculate_joker(context)
@@ -264,8 +255,8 @@ function Card:calculate_joker(context)
 		no_trig = true
 	end
 	if not no_trig then
-        return calculate_joker_old(self, context)
-    end
+		return calculate_joker_old(self, context)
+	end
 end
 
 local isfaceold = Card.is_face
@@ -277,4 +268,27 @@ function Card:is_face(from_boss)
 		return true
 	end
 	return isfaceold(self, from_boss)
+end
+
+local is_suit_old = Card.is_suit
+function Card:is_suit(suit, bypass_debuff, flush_calc)
+	if flush_calc then
+		if
+			self:crv_has_border("border_crv_smudged")
+			and (self.base.suit == "Hearts" or self.base.suit == "Diamonds")
+				== (suit == "Hearts" or suit == "Diamonds")
+		then
+			return true
+		end
+	else
+		if
+			self:crv_has_border("border_crv_smudged")
+			and (self.base.suit == "Hearts" or self.base.suit == "Diamonds")
+				== (suit == "Hearts" or suit == "Diamonds")
+		then
+			return true
+		end
+		return true
+	end
+	return is_suit_old(self, suit, bypass_debuff, flush_calc)
 end
