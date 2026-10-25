@@ -2645,15 +2645,18 @@ SMODS.Joker({
 
 SMODS.Joker({
 	key = "double_or_nothing",
-	atlas = "wip",
+	atlas = "revo_jokers",
 	rarity = 2,
 	cost = 5,
 	unlocked = true,
 	discovered = false,
 	blueprint_compat = false,
 	pos = {
-		x = 0,
-		y = 0,
+		x = 9,
+		y = 13,
+	},
+	crv_credits = {
+		art = {"mr.cr33ps"}
 	},
 	attributes = {
 		"chance",
@@ -2705,7 +2708,7 @@ SMODS.Joker({
 
 SMODS.Joker({
 	key = "the_gambler",
-	atlas = "wip",
+	atlas = "revo_gambler",
 	rarity = 2,
 	cost = 4,
 	unlocked = true,
@@ -2722,6 +2725,9 @@ SMODS.Joker({
 			xmult_final = 3.5,
 			odds = 2,
 		},
+	},
+	crv_credits = {
+		art = {"mr.cr33ps"}
 	},
 	attributes = {
 		"xmult",
@@ -2973,6 +2979,52 @@ SMODS.Joker({
 	crv_credits = {
 		art = { "Breuhh" },
 	},
+})
+
+SMODS.Joker({ 
+	key = "investment",
+	atlas = "revo_jokers",
+	rarity = 2,
+	cost = 5,
+	unlocked = true,
+	discovered = false,
+	blueprint_compat = false,
+	pos = {
+		x = 8,
+		y = 13,
+	},
+	config = {
+		extra = {
+			invested = 0,
+			rate = 25,
+			lose_rate = 15,
+		},
+	},
+	crv_credits = {
+		art = { "WombatCountry" },
+	},
+	loc_vars = function(self, info_queue, card)
+		return {
+			vars = { card.ability.extra.invested, card.ability.extra.rate, card.ability.extra.lose_rate },
+		}
+	end,
+	crv_use = function(self, card)
+		local mone = RVF.percentage(G.GAME.dollars, card.ability.extra.lose_rate)
+		ease_dollars(-mone)
+		card.ability.extra.invested = mone
+
+	end,
+	crv_can_use = function(self, card)
+		return G.GAME.dollars>0 and card.ability.extra.invested==0 
+	end,
+	calculate = function(self, card, context)
+		if context.end_of_round and context.main_eval and not context.blueprint and card.ability.extra.invested>0 then
+			card.ability.extra_value = card.ability.extra_value + RVF.percentage(card.ability.extra.invested, card.ability.extra.rate)
+			card:set_cost()
+			RVF.msg(card, localize("k_val_up"))
+		end
+
+	end,
 })
 
 

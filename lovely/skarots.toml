@@ -1,0 +1,12 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+[[patches]]
+[patches.pattern]
+target = 'functions/misc_functions.lua'
+match_indent = true
+position = 'before'
+pattern = "G.GAME.last_tarot_planet = card.config.center_key"
+payload = '''G.GAME.crv_second_last_tarot_planet = G.GAME.last_tarot_planet'''

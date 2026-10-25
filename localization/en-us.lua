@@ -697,10 +697,10 @@ return {
 				name = "The Gambler",
 				text = {
 					"When {C:attention}Blind{} is selected,",
-					"loses or gains {X:mult,C:white}X#1#{} Mult",
+					"loses or gains {X:mult,C:white}X#2#{} Mult",
 					"{C:red}self-destructs{} if xmult becomes 0",
-					"{C:red}stops{} scaling at {X:mult,C:white}X#2#{} Mult",
-					"{C:inactive}(Currently {X:mult,C:white}X#3#{C:inactive} Mult)"
+					"{C:red}stops{} scaling at {X:mult,C:white}X#3#{} Mult",
+					"{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult)"
 				}
 			},
 			j_crv_safe = {
@@ -745,6 +745,19 @@ return {
 					"added to scoring and cleared",
 					"{C:attention,s:0.8}#2#{}",
 					"{C:inactive}(Currently stored {C:blue}+#1#{C:inactive} Chips)"
+				}
+			},
+			j_crv_investment = {
+				name = "Investment",
+				text = {
+					"When used, invest"
+					,"{C:money,E:1}%#3#{} of your dollars.",
+					"At end of round,",
+					"sell cost {C:green}increases{}",
+					"by {C:attention}%#2#{} of the dollars",
+					"invested.",
+					"{C:inactive}(Invested: {C:money}#1#{C:inactive})"
+					
 				}
 			},
 			-- Rare
@@ -1346,6 +1359,31 @@ return {
 
 		-- mod
 
+		crv_Skarot = {
+			c_crv_sketch_fool = {
+				name = "Sketch Fool",
+				text = {
+					"Creates the 2nd last",
+					"{C:tarot}Tarot{} or {C:planet}Planet{} card",
+					"used during this run",
+				}
+			},
+			c_crv_sketch_magician = {
+				name = "Sketch Magician",
+				text = {
+					"Applies {C:attention}Lucky Border{}",
+					"to {C:attention}#1#{} selected cards"
+				}
+			},
+			c_crv_sketch_priestess = {
+				name = "Sketch Priestess",
+				text = {
+					"{C:attention}Levels up{} a random"
+					,"poker hand"
+				}
+			}
+		},
+
 		crv_Border = {
 			border_crv_bonus = {
 				name = "Bonus Border",
@@ -1797,6 +1835,9 @@ return {
 
 			k_crv_contracts = "Contract",
 			b_crv_contracts_cards = "Contracts",
+
+			k_crv_skarot = "Skarot",
+			b_crv_skarot_cards = "Skarot Cards",
 
 			k_crv_rune = "Rune",
 			b_crv_rune_cards = "Runes",

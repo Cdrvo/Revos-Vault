@@ -350,6 +350,11 @@ function RevosVault.FUNCS.end_round(win)
 	end)
 end
 
+function RevosVault.FUNCS.percentage(mod, perc)
+	local per = (mod / 100) * perc
+	return per
+end
+
 -- the special function
 
 RVF.printer_create = function(card, make)

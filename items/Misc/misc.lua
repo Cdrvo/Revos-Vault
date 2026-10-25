@@ -128,6 +128,21 @@ SMODS.Atlas({
 	py = 95
 })
 
+SMODS.Atlas({
+	key = "revo_skarots",
+	path = "skarots.png",
+	px = 71,
+	py = 95
+})
+
+SMODS.Atlas({
+	key = "revo_gambler",
+	path = "the_gambler.png",
+	px = 71,
+	py = 95,
+	atlas_table = "ANIMATION_ATLAS",
+	frames = 12
+})
 -- sounds
 
 SMODS.Sound({
