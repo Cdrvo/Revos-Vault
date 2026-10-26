@@ -13,7 +13,12 @@ local function calculate_rounds_left(card)
 	else
 		SMODS.destroy_cards(card, true)
 	end
-	G.E_MANAGER:add_event(Event({ func = function() save_run(); return true end})) --//idk why i was saving here when i first made this bit
+	G.E_MANAGER:add_event(Event({
+		func = function()
+			save_run()
+			return true
+		end,
+	})) --//idk why i was saving here when i first made this bit
 end
 
 RevosVault.MISC.Rune = SMODS.Consumable:extend({
@@ -25,7 +30,7 @@ RevosVault.MISC.Rune = SMODS.Consumable:extend({
 			rounds_left = 1,
 		},
 	},
-    draw = function(self, card, layer)
+	draw = function(self, card, layer)
 		card.children.center:draw_shader("negative", nil, card.ARGS.send_to_shader)
 		card.children.center:draw_shader("negative_shine", nil, card.ARGS.send_to_shader)
 	end,
@@ -201,7 +206,7 @@ Rune({
 		local cae = card.ability.extra
 		local numerator, denominator = SMODS.get_probability_vars(
 			card,
-			(G.GAME.probabilities.normal or 1),
+			1,
 			card.ability.extra.odds,
 			"ansuz",
 			nil,
@@ -218,7 +223,7 @@ Rune({
 					SMODS.pseudorandom_probability(
 						card,
 						"ansuz",
-						G.GAME.probabilities.normal,
+						1,
 						card.ability.extra.odds,
 						nil,
 						true
@@ -228,8 +233,6 @@ Rune({
 						key = "c_soul",
 					})
 				end
-			end
-			if context.end_of_round and context.main_eval then
 				calculate_rounds_left(card)
 			end
 		end
@@ -404,8 +407,17 @@ Rune({
 			end
 			if context.pre_discard then
 				cae.discarded = true
+				RVF.do_event( --şidjk
+					function()
+						cae.discarded = false
+						return true
+					end,
+					"other",
+					"after",
+					5*G.SETTINGS.GAMESPEED
+				)
 			end
-			if context.crv_after_draw and cae.discarded then
+			if context.hand_drawn and cae.discarded then
 				for i = 1, cae.extra_cards do
 					draw_card(G.deck, G.hand)
 				end

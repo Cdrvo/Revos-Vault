@@ -5,8 +5,6 @@ return {
 			bl_crv_roaring_knight = {
 				name = "Roaring Knight",
 				text = {
-					"Total Chips and",
-					"Mult are halved",
 					"1 in 4 chance to",
 					"debuff all jokers",
 					"when beaten or disabled",
@@ -107,14 +105,13 @@ return {
 			},
 			m_crv_aflame = {
 				name = "Aflame",
-				text = { "When scored,", 
-				"Retrigger {C:attention}#1#{} or {C:attention}#2#{} times" },
+				text = { "When scored,", "Retrigger {C:attention}#1#{} or {C:attention}#2#{} times" },
 			},
 			m_crv_shattered = {
 				name = "Shattered",
 				text = {
 					"{X:mult,C:white}X#1#{} Mult",
-					"{C:inactive}no rank or suit"
+					"{C:inactive}no rank or suit",
 				},
 			},
 		},
@@ -657,7 +654,7 @@ return {
 				text = {
 					"Apply {C:attention}Aflame{} to",
 					"scored cards wirthout enhancements",
-				}
+				},
 			},
 			j_crv_birthday_cake = {
 				name = "Birthday Cake",
@@ -665,9 +662,8 @@ return {
 					"Gives {C:mult}mult{} depending",
 					"on the current day",
 					"of the month",
-					"{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult)"
-
-				}
+					"{C:inactive}(Currently {C:mult}+#1#{C:inactive} Mult)",
+				},
 			},
 			j_crv_viking_joker = {
 				name = "Viking Joker",
@@ -675,13 +671,13 @@ return {
 					"At end of round,",
 					"gives {C:money}+$#1#{} for",
 					"each {C:purple}Rune{} Card in possession",
-				}
+				},
 			},
 			j_crv_snek = {
 				name = "snake",
 				text = {
-					"{C:dark_edition}+2{} Joker slots"
-				}
+					"{C:dark_edition}+2{} Joker slots",
+				},
 			},
 			j_crv_double_or_nothing = {
 				name = "Double or Nothing",
@@ -690,8 +686,8 @@ return {
 					"{C:attention}Double{} current score,",
 					"{C:red,E:1}reset{} it to 0 otherwise.",
 					"{s:0.7}Can only be used once per round and when on last hand",
-					"{C:inactive}(Currently: {C:attention}#3#{C:inactive})"
-				}
+					"{C:inactive}(Currently: {C:attention}#3#{C:inactive})",
+				},
 			},
 			j_crv_the_gambler = {
 				name = "The Gambler",
@@ -700,12 +696,12 @@ return {
 					"loses or gains {X:mult,C:white}X#2#{} Mult",
 					"{C:red}self-destructs{} if xmult becomes 0",
 					"{C:red}stops{} scaling at {X:mult,C:white}X#3#{} Mult",
-					"{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult)"
-				}
+					"{C:inactive}(Currently {X:mult,C:white}X#1#{C:inactive} Mult)",
+				},
 			},
 			j_crv_safe = {
 				name = "Safe",
-				text =  {
+				text = {
 					"Set a random passcode when {C:attention}added to deck",
 					"Guess the passcode by scoring",
 					"playing cards through {C:attention}1 to 9{}",
@@ -716,8 +712,8 @@ return {
 					"gives a small {C:green}hint{} on where it should be",
 					"{C:money}+$#11#{} Bonus{} when unlocked",
 					"{C:inactive}(Currently {C:attention}#1#{C:inactive})",
-					"{C:inactive,s:0.8}(Passcode: #7#-#8#-#9#-#10#{C:inactive})"
-				}
+					"{C:inactive,s:0.8}(Passcode: #7#-#8#-#9#-#10#{C:inactive})",
+				},
 			},
 			j_crv_glass_gun = {
 				name = "Glass Gun",
@@ -725,8 +721,8 @@ return {
 					"{C:attention}Glass Cards{} are {X:green,C:white}X#1#{} harder",
 					"to shatter.",
 					"Shattered {C:attention}Glass Cards{} turn",
-					"into {C:attention}Shattered{} Cards"
-				}
+					"into {C:attention}Shattered{} Cards",
+				},
 			},
 			j_crv_holographic_face = {
 				name = "Holographic Face",
@@ -744,21 +740,20 @@ return {
 					"When used, {C:blue}stored chips{} are",
 					"added to scoring and cleared",
 					"{C:attention,s:0.8}#2#{}",
-					"{C:inactive}(Currently stored {C:blue}+#1#{C:inactive} Chips)"
-				}
+					"{C:inactive}(Currently stored {C:blue}+#1#{C:inactive} Chips)",
+				},
 			},
 			j_crv_investment = {
 				name = "Investment",
 				text = {
-					"When used, invest"
-					,"{C:money}%#3#{} of your money.",
+					"When used, invest",
+					"{C:money}%#3#{} of your money.",
 					"At end of round,",
 					"sell cost {C:green}increases{}",
 					"by {C:attention}%#2#{} of the money",
 					"invested.",
-					"{C:inactive}(Invested: {C:money}$#1#{C:inactive})"
-					
-				}
+					"{C:inactive}(Invested: {C:money}$#1#{C:inactive})",
+				},
 			},
 			-- Rare
 			j_crv_bocchi = {
@@ -1154,6 +1149,14 @@ return {
 					"print {C:attention}-#3#{} Ante.",
 				},
 			},
+			j_crv_rune_printer = {
+				name = "Rune Printer",
+				text = {
+					"When {C:attention}Blind{} is selected",
+					"print a random",
+					"{C:purple}Rune{}",
+				},
+			},
 			-- Mega Printer
 			j_crv_mega_printer = {
 				name = "Mega Printer",
@@ -1245,6 +1248,18 @@ return {
 					"every card below {C:attention}5",
 				},
 			},
+			j_crv_agoraphobia = {
+				name = "Agoraphobia",
+				text = {
+					"When {C:attention}Blind{} is selected,",
+					"creates a random {C:attention}Joker{}.",
+					"Almost all rarities has an {C:green}equal{} chance",
+					"of appearing.",
+					"{C:red}Self-destructs{} when a {C:purple,E:1}Legendary{}",
+					"Joker is created",
+					
+				}
+			},
 			-- Mythical
 			-- Curse
 			-- Other
@@ -1293,30 +1308,52 @@ return {
 					"{C:red}Destroyed{} at end of round",
 				},
 			},
-			-- Boosters 
-			p_crv_skarot_pack ={
-                name="Skarot Pack",
-                text={
-                    "Choose {C:attention}#1#{} of up to",
-                    "{C:attention}#2# {X:black,C:white} Skarot{} cards to",
-                    "be used immediately",
-                },
-            },
+			-- Boosters
+			p_crv_skarot_pack = {
+				name = "Skarot Pack",
+				text = {
+					"Choose {C:attention}#1#{} of up to",
+					"{C:attention}#2# {X:black,C:white} Skarot{} cards to",
+					"be used immediately",
+				},
+			},
 			p_crv_skarot_jumbo = {
 				name = "Skarot Jumbo",
-				text={
-                    "Choose {C:attention}#1#{} of up to",
-                    "{C:attention}#2# {X:black,C:white} Skarot{} cards to",
-                    "be used immediately",
-                },
+				text = {
+					"Choose {C:attention}#1#{} of up to",
+					"{C:attention}#2# {X:black,C:white} Skarot{} cards to",
+					"be used immediately",
+				},
 			},
 			p_crv_skarot_mega = {
 				name = "Skarot Mega",
-				text={
-                    "Choose {C:attention}#1#{} of up to",
-                    "{C:attention}#2# {X:black,C:white} Skarot{} cards to",
-                    "be used immediately",
-                },
+				text = {
+					"Choose {C:attention}#1#{} of up to",
+					"{C:attention}#2# {X:black,C:white} Skarot{} cards to",
+					"be used immediately",
+				},
+			},
+
+			p_crv_rune_pack = {
+				name = "Rune Pack",
+				text = {
+					"Choose {C:attention}#1#{} of up to",
+					"{C:attention}#2#{C:purple} Rune{} cards",
+				},
+			},
+			p_crv_rune_jumbo = {
+				name = "Rune Pack",
+				text = {
+					"Choose {C:attention}#1#{} of up to",
+					"{C:attention}#2#{C:purple} Rune{} cards",
+				},
+			},
+			p_crv_rune_mega = {
+				name = "Rune Pack",
+				text = {
+					"Choose {C:attention}#1#{} of up to",
+					"{C:attention}#2#{C:purple} Rune{} cards",
+				},
 			},
 		},
 		Planet = {},
@@ -1391,51 +1428,51 @@ return {
 					"Creates the 2nd last",
 					"{C:tarot}Tarot{} or {C:planet}Planet{} card",
 					"used during this run",
-				}
+				},
 			},
 			c_crv_sketch_magician = {
 				name = "Sketch Magician",
 				text = {
 					"Applies {C:attention}Lucky Border{}",
-					"to {C:attention}#1#{} selected cards"
-				}
+					"to {C:attention}#1#{} selected cards",
+				},
 			},
 			c_crv_sketch_priestess = {
 				name = "Sketch Priestess",
 				text = {
-					"{C:attention}Levels up{} a random"
-					,"poker hand"
-				}
+					"{C:attention}Levels up{} a random",
+					"poker hand",
+				},
 			},
 			c_crv_sketch_empress = {
 				name = "Sketch Empress",
 				text = {
 					"Applies {C:attention}Mult Border{}",
-					"to {C:attention}#1#{} selected cards"
-				}
+					"to {C:attention}#1#{} selected cards",
+				},
 			},
 			c_crv_sketch_emperor = {
 				name = "Sketch Emperor",
 				text = {
 					"Creates up to {C:attention}#1#{}",
 					"random {X:black,C:white}Skarot{} cards",
-					"{C:inactive}(Must have room)"
-				}
+					"{C:inactive}(Must have room)",
+				},
 			},
 			c_crv_sketch_hierophant = {
 				name = "Sketch Hierophant",
 				text = {
 					"Applies {C:attention}Bonus Border{}",
-					"to {C:attention}#1#{} selected cards"
-				}
+					"to {C:attention}#1#{} selected cards",
+				},
 			},
 			c_crv_sketch_lovers = {
 				name = "Sketch Lovers",
 				text = {
 					"Applies {C:attention}Smudged Border{}",
-					"to {C:attention}#1#{} selected card"
-				}
-			}
+					"to {C:attention}#1#{} selected card",
+				},
+			},
 		},
 
 		crv_Border = {
@@ -1896,7 +1933,8 @@ return {
 			k_crv_rune = "Rune",
 			b_crv_rune_cards = "Runes",
 			-- Boosters
-			k_crv_skarot_pack = "Skarot Pack"
+			k_crv_skarot_pack = "Skarot Pack",
+			k_crv_rune_pack = "Rune Pack",
 		},
 		high_scores = {},
 		labels = {

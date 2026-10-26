@@ -633,3 +633,33 @@ SMODS.Joker({
 		end
 	end,
 })
+
+-- RUNE CONFIG
+SMODS.Joker({
+	key = "rune_printer",
+	atlas = "revo_jokers",
+	rarity = "crv_printer",
+	cost = 10,
+	unlocked = true,
+	discovered = false,
+	blueprint_compat = true,
+	pos = { x = 0, y = 14 },
+	config = {
+		extra = {},
+	},
+	attributes = {
+		"printer",
+		"consumeable",
+		"generation",
+		"rune",
+	},
+	calculate = function(self, card, context)
+		if context.setting_blind then
+			RVF.printer_create(card, {set = "crv_Rune", area = G.consumeables})
+		end
+	end,
+	draw = function(self, card, layer)
+		card.children.center:draw_shader("negative", nil, card.ARGS.send_to_shader)
+		card.children.center:draw_shader("negative_shine", nil, card.ARGS.send_to_shader)
+	end,
+})

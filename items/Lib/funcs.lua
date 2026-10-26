@@ -5,7 +5,7 @@ RVF.do_event = function(func, queue, trigger, delay)
 		trigger = trigger or "after",
 		delay = delay or 0.1,
 		func = func,
-	}, queue))
+	}), queue)
 end
 
 RVF.cool_enhance = function(card, stuff, no_flip, no_juice, no_sound, shatter, queue, instant, lock) -- I AM HARDCODING IT AAAAAAAAAAAAAAA
@@ -353,6 +353,41 @@ end
 function RevosVault.FUNCS.percentage(mod, perc)
 	local per = (mod / 100) * perc
 	return per
+end
+
+function  RevosVault.FUNCS.move_card(card, _area, args)
+	args = args or {}
+	if not args.no_lock then
+		G.E_MANAGER:add_event(Event({
+			trigger = "before",
+			func = function()
+				RevosVault.MISC.remove_lock = true
+				return true
+			end,
+		}))
+	end
+	local area = card.area
+	if args then
+		if args.add_to_deck then
+			card:add_to_deck()
+		end
+		if args.remove_from_deck then
+			card:remove_from_deck()
+		end
+	end
+	if not card.getting_sliced then
+		area:remove_card(card)
+		_area:emplace(card)
+	end
+	if not args.no_lock then
+		G.E_MANAGER:add_event(Event({
+			trigger = "after",
+			func = function()
+				RevosVault.MISC.remove_lock = false
+				return true
+			end,
+		}))
+	end
 end
 
 -- the special function

@@ -162,53 +162,60 @@ SMODS.Joker({
 	pos = { x = 3, y = 3 },
 	soul_pos = { x = 0, y = 0 },
 	attributes = {
-		"passive"
+		"passive",
 	},
 	soul_atlas = "shop_sign",
 	calculate = function(self, card, context)
 		if context.crv_pre_reroll and not context.blueprint then
-				local a, b = {}, {}
-				for k, v in pairs(G.shop_vouchers.cards) do
-					if v.ability.set == "Voucher" then
-						a[#a + 1] = v
-					end
+			local a, b = {}, {}
+			for k, v in pairs(G.shop_vouchers.cards) do
+				if v.ability.set == "Voucher" then
+					a[#a + 1] = v
 				end
-				for k, v in pairs(G.shop_booster.cards) do
-					if v.ability.set == "Booster" then
-						b[#b + 1] = v
-					end
+			end
+			for k, v in pairs(G.shop_booster.cards) do
+				if v.ability.set == "Booster" then
+					b[#b + 1] = v
 				end
-				SMODS.destroy_cards(a, {
-					bypass_eternal = true,
-					destroy_func = function(card, args)
-						card:remove()
-						card = nil
-					end,
-					immediate = true
-				})
-				SMODS.destroy_cards(b, {
-					bypass_eternal = true,
-					destroy_func = function(card, args)
-						card:remove()
-						card = nil
-					end,
-					immediate = true
-				})
-				for i = 1, G.shop_vouchers.config.card_limit do
-					local v = pseudorandom_element(SMODS.get_clean_pool("Voucher"), pseudoseed("the_shop_sign_seed"))
-					--SMODS.add_voucher_to_shop(v) // imagine
-					local card = Card(G.shop_vouchers.T.x + G.shop_vouchers.T.w/2,
-						G.shop_vouchers.T.y, G.CARD_W, G.CARD_H, G.P_CARDS.empty, G.P_CENTERS[v],{bypass_discovery_center = true, bypass_discovery_ui = true})
-						card.shop_voucher = true
-						create_shop_card_ui(card, 'Voucher', G.shop_vouchers)
-						card:start_materialize()
-						G.shop_vouchers:emplace(card)
-				end
+			end
+			SMODS.destroy_cards(a, {
+				bypass_eternal = true,
+				destroy_func = function(card, args)
+					card:remove()
+					card = nil
+				end,
+				immediate = true,
+			})
+			SMODS.destroy_cards(b, {
+				bypass_eternal = true,
+				destroy_func = function(card, args)
+					card:remove()
+					card = nil
+				end,
+				immediate = true,
+			})
+			for i = 1, G.shop_vouchers.config.card_limit do
+				local v = pseudorandom_element(SMODS.get_clean_pool("Voucher"), pseudoseed("the_shop_sign_seed"))
+				--SMODS.add_voucher_to_shop(v) // imagine
+				local card = Card(
+					G.shop_vouchers.T.x + G.shop_vouchers.T.w / 2,
+					G.shop_vouchers.T.y,
+					G.CARD_W,
+					G.CARD_H,
+					G.P_CARDS.empty,
+					G.P_CENTERS[v],
+					{ bypass_discovery_center = true, bypass_discovery_ui = true }
+				)
+				card.shop_voucher = true
+				create_shop_card_ui(card, "Voucher", G.shop_vouchers)
+				card:start_materialize()
+				G.shop_vouchers:emplace(card)
+			end
 
-				for i = 1, G.shop_booster.config.card_limit do
-					local v = pseudorandom_element(SMODS.get_clean_pool("Booster"), pseudoseed("the_shop_sign_seed"))
-					SMODS.add_booster_to_shop(v)
-				end
+			for i = 1, G.shop_booster.config.card_limit do
+				local v = pseudorandom_element(SMODS.get_clean_pool("Booster"), pseudoseed("the_shop_sign_seed"))
+				SMODS.add_booster_to_shop(v)
+			end
 		end
 	end,
 })
@@ -222,13 +229,13 @@ SMODS.Joker({
 	config = {
 		extra = {
 			hand_size = 1,
-			remove = 0
+			remove = 0,
 		},
 	},
 	attributes = {
 		"passive",
 		"hand_size",
-		"five"
+		"five",
 	},
 	blueprint_compat = false,
 	cost = 20,
@@ -242,13 +249,13 @@ SMODS.Joker({
 		local cae = card.ability.extra
 		if context.first_hand_drawn and not context.blueprint then
 			local a = 0
-			for k,v in pairs(G.hand.cards) do
+			for k, v in pairs(G.hand.cards) do
 				if v.base.nominal < 5 then
 					a = a + 1
 				end
 			end
 			if a > 0 then
-				G.hand:change_size(a*cae.hand_size)
+				G.hand:change_size(a * cae.hand_size)
 				cae.remove = cae.remove + a
 				RVF.msg(card, "+" .. a)
 				card:juice_up()
@@ -261,6 +268,40 @@ SMODS.Joker({
 	end,
 	crv_credits = {
 		art = { "thingifithinker" },
-		idea = {"theOfficialFem, CapitalChirp"}
+		idea = { "theOfficialFem, CapitalChirp" },
+	},
+})
+
+SMODS.Joker({
+	key = "agoraphobia",
+	atlas = "revo_jokers",
+	rarity = 4,
+	blueprint_compat = false,
+	pos = { x = 8, y = 6 },
+	soul_pos = { x = 9, y = 6 },
+	cost = 20,
+	calculate = function(self, card, context)
+		local cae = card.ability.extra
+		if context.setting_blind and not context.blueprint then
+			local a, b = nil, {}
+			for k, v in pairs(SMODS.Rarities) do
+				if not v.crv_no_agoraphobia then
+					b[#b + 1] = k
+				end
+			end
+			a = pseudorandom_element(b, pseudoseed("aaa" .. G.GAME.round_resets.ante))
+			SMODS.add_card({
+				set = "Joker",
+				rarity = a,
+			})
+
+			if a == "Legendary" then
+				SMODS.destroy_cards(card)
+			end
+		end
+	end,
+	crv_credits = {
+		art = { "thingifithinker" },
+		idea = { "theOfficialFem" },
 	},
 })

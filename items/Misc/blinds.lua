@@ -2,15 +2,8 @@ SMODS.Blind({
 	key = "roaring_knight",
 	atlas = "revo_blinds",
 	pos = { x = 0, y = 0 },
-	boss = { boss = true, min = 4 },
+	boss = { boss = true, min = 3 },
 	boss_colour = HEX("520004"),
-	calculate = function(self, blind, context)
-		if not self.disabled then
-			if context.final_scoring_step and G.GAME.chips < G.GAME.blind.chips then
-				SMODS.calculate_effect({ xmult = 0.5, xchips = 0.5 }, blind)
-			end
-		end
-	end,
 	defeat = function()
 		if SMODS.pseudorandom_probability(blind, "roaring_seed", 1, 4, nil, true) then
 			RVF.swoon()

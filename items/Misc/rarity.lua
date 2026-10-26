@@ -1,6 +1,7 @@
 SMODS.Rarity({
 	key = "holy",
 	badge_colour = G.C.RARITY[2],
+	crv_no_agoraphobia = true,
 	pools = {},
 })
 
