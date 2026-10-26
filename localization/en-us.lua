@@ -30,6 +30,13 @@ return {
 					"all hand held cards",
 				},
 			},
+			bl_crv_the_hole = {
+				name = "The Hole",
+				text = {
+					"Playing cards",
+					"do not give chips"
+				},
+			},
 		},
 		Edition = {},
 		Enhanced = {
@@ -1887,6 +1894,19 @@ return {
 				},
 			},
 		},
+
+		crv_super_evil_consumables = {
+			c_crv_super_evil_cartridge = {
+				name = "Super Evil Cartridge",
+				text = {
+					"Removes the cartridge limit",
+					"from the applied {C:red}Printer{}",
+					"{C:red}#1# in #2#{} chance to",
+					"create a {C:red,E:1}Curse{}",
+					"when applied",
+				}
+			}
+		}
 	},
 	misc = {
 		achievement_descriptions = {},

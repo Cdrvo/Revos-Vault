@@ -66,3 +66,28 @@ SMODS.Blind({
 		end
 	end,
 })
+
+
+-- GEOMANCER
+
+SMODS.Blind({
+	key = "the_hole",
+	boss = {
+		min = 3,
+		max = 10,
+		showdown = false,
+	},
+	atlas = "revo_blinds",
+	pos = { x = 0, y = 5 },
+	boss_colour = HEX("3c4b4e"),
+	set_blind = function(self)
+		G.GAME.modifiers.crv_chips_noscore = true
+	end,
+	defeat = function(self, silent)
+		self.disabled = false
+		G.GAME.modifiers.crv_chips_noscore = false
+	end,
+	disable = function(self, silent)
+		G.GAME.modifiers.crv_chips_noscore = false
+	end,
+})

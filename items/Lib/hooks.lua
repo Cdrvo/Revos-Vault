@@ -292,3 +292,10 @@ function Card:is_suit(suit, bypass_debuff, flush_calc)
 	end
 	return is_suit_old(self, suit, bypass_debuff, flush_calc)
 end
+
+
+local get_chip_bonus_old = Card.get_chip_bonus
+function Card:get_chip_bonus()
+    if self.debuff or G.GAME.modifiers.crv_chips_noscore then return 0 end
+    return get_chip_bonus_old(self)
+end
