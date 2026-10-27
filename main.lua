@@ -4,6 +4,8 @@ RevosVault.FUNCS = {}
 RevosVault.PATHS = {}
 RevosVault.MISC = {}
 
+G.E_MANAGER.queues.explosive_timers = {}
+
 SMODS.current_mod.optional_features = function()
 	return {
 		post_trigger = true,

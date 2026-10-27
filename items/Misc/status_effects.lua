@@ -100,14 +100,18 @@ end
 
 function Card:apply_status_effect(effect)
 	if not effect then return end
-	local completed_effect = "csf_" .. effect
-	RevosVault.MISC.StatusEffects[completed_effect]:apply(self, true)
+	if not self:crv_has_statuseffect(effect) then
+		local completed_effect = "csf_" .. effect
+		RevosVault.MISC.StatusEffects[completed_effect]:apply(self, true)
+	end
 end
 
 function Card:remove_status_effect(effect)
 	if not effect then return end
-	local completed_effect = "csf_" .. effect
-	RevosVault.MISC.StatusEffects[completed_effect]:apply(self, false)
+	if self:crv_has_statuseffect(effect) then
+		local completed_effect = "csf_" .. effect
+		RevosVault.MISC.StatusEffects[completed_effect]:apply(self, false)
+	end
 end
 
 
@@ -172,4 +176,27 @@ StatusEffect{
 			SMODS.destroy_cards(card)
 		end
     end
+}
+
+StatusEffect{
+	key = "explosive",
+	pos = {x=0,y=1},
+	atlas = "revo_status_effects",
+	applied = function(self, card)
+		if card.area and not card.area.config.collection then
+			RVF.do_event(  -- currently only 1 explosive is usable (quite sad)
+				function()
+					if not card.ability.crv_diffused then
+						SMODS.destroy_cards(card)
+					else
+						card.ability.crv_diffused = nil
+					end
+					return true
+				end,
+				"explosive_timers",
+				"after",
+				1*G.SETTINGS.GAMESPEED
+			)
+		end
+	end
 }

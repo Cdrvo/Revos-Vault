@@ -5,7 +5,7 @@ return {
 			bl_crv_roaring_knight = {
 				name = "Roaring Knight",
 				text = {
-					"1 in 4 chance to",
+					"#1# in #2# chance to",
 					"debuff all jokers",
 					"when beaten or disabled",
 				},
@@ -35,6 +35,61 @@ return {
 				text = {
 					"Playing cards",
 					"do not give chips"
+				},
+			},
+			bl_crv_ancient_eye = {
+				name = "Ancient Eye",
+				text = {
+					"Any card with an",
+					"enhancement is debuffed"
+				},
+			},
+			bl_crv_geomancer = {
+				name = "Geomancer",
+				text = {
+					"When a hand is drawn, a random",
+					"Joker is marked as explosive",
+				}
+			},
+			bl_crv_the_balance = {
+				name = "Balance",
+				text = {
+					"If there are odd amount",
+					"of playing cards,",
+					"debuff them for",
+					"the current run"
+				}
+			},
+			bl_crv_the_swarm = {
+				name = "The Swarm",
+				text = {
+					"Upon entering blind,",
+					"blind requirement is multiplied",
+					"by the amount of your jokers",
+					"Cannot go below the default value"
+				},
+			},
+			bl_crv_stygian_spade = {
+				name = "Stygian Spade",
+				text = {
+					"One random suit is debuffed",
+					"after every hand",
+				},
+			},
+			bl_crv_the_hater = {
+				name = "The Hater",
+				text = {
+					"At the final scoring step,",
+					"has a #1# in #2# chance to",
+					"set the chips to 1",
+				},
+			},
+			bl_crv_the_rent = {
+				name = "The Rent",
+				text = {
+					"When a hand is played,",
+					"if you have more than $10",
+					"lose $3",
 				},
 			},
 		},
@@ -1583,6 +1638,14 @@ return {
 					"destroy this card instead",
 				},
 			},
+			csf_crv_explosive = {
+				name = "Explosive",
+				text = {
+					"{C:red}Destroys{} the applied {C:attention}Joker",
+					"in a short amount of time.",
+					"Click to defuse"
+				}
+			}
 		},
 
 		crv_Rune = {
@@ -1966,6 +2029,7 @@ return {
 			csf_crv_temporary = "Temporary",
 			csf_crv_drained = "Drained",
 			csf_crv_marked = "Marked",
+			csf_crv_explosive = "Explosive",
 			-- Borders
 			border_crv_bonus = "Bonus Border",
 			border_crv_mult = "Mult Border",

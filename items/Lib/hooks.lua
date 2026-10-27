@@ -13,6 +13,16 @@ function Card:click()
 	if self.config.center.crv_clicked then
 		self.config.center:crv_clicked(self)
 	end
+	if self:crv_has_statuseffect("crv_explosive") and self.area and not self.area.config.collection and not self.getting_sliced then
+		RVF.do_event(function()
+			self.ability.crv_diffused = true
+			self:remove_status_effect("crv_explosive")
+			RVF.msg(self, localize("k_saved_ex"))
+			self:juice_up()
+			play_sound("tarot1")
+			return true
+		end)
+	end
 	return ret
 end
 
@@ -288,14 +298,14 @@ function Card:is_suit(suit, bypass_debuff, flush_calc)
 		then
 			return true
 		end
-		return true
 	end
 	return is_suit_old(self, suit, bypass_debuff, flush_calc)
 end
 
-
 local get_chip_bonus_old = Card.get_chip_bonus
 function Card:get_chip_bonus()
-    if self.debuff or G.GAME.modifiers.crv_chips_noscore then return 0 end
-    return get_chip_bonus_old(self)
+	if self.debuff or G.GAME.modifiers.crv_chips_noscore then
+		return 0
+	end
+	return get_chip_bonus_old(self)
 end

@@ -1,11 +1,14 @@
 RVF = RevosVault.FUNCS
 
 RVF.do_event = function(func, queue, trigger, delay)
-	G.E_MANAGER:add_event(Event({
-		trigger = trigger or "after",
-		delay = delay or 0.1,
-		func = func,
-	}), queue)
+	G.E_MANAGER:add_event(
+		Event({
+			trigger = trigger or "after",
+			delay = delay or 0.1,
+			func = func,
+		}),
+		queue
+	)
 end
 
 RVF.cool_enhance = function(card, stuff, no_flip, no_juice, no_sound, shatter, queue, instant, lock) -- I AM HARDCODING IT AAAAAAAAAAAAAAA
@@ -94,6 +97,17 @@ end
 
 function RVF.msg(card, message, type, other)
 	card_eval_status_text(card, type or "extra", other, nil, nil, { message = message })
+end
+
+function RVF.attention_msg(_text, _hold, _major, _scale, _offset, _align)
+	attention_text({
+		scale = (_scale or 1.4),
+		text = _text,
+		hold = (_hold or 2),
+		align = (_align or "cm"),
+		offset = (_offset or { x = 0, y = -2.7 }),
+		major = (_major or G.play),
+	})
 end
 
 G.FUNCS.crv_use_joker = function(e)
@@ -355,7 +369,7 @@ function RevosVault.FUNCS.percentage(mod, perc)
 	return per
 end
 
-function  RevosVault.FUNCS.move_card(card, _area, args)
+function RevosVault.FUNCS.move_card(card, _area, args)
 	args = args or {}
 	if not args.no_lock then
 		G.E_MANAGER:add_event(Event({
