@@ -283,6 +283,22 @@ return {
 					"random {C:dark_edition}Edition{}",
 				},
 			},
+			j_crv_fortuitous = {
+				name = "Fortuitous Joker",
+				text = {
+					"{C:mult}+#1#{} Mult if played",
+					"hand contains",
+					"a {C:attention}Blackjack"
+				}
+			},
+			j_crv_dubious = {
+				name = "Dubious  Joker",
+				text = {
+					"{C:chips}+#1#{} Chips if played",
+					"hand contains",
+					"a {C:attention}Blackjack"
+				}
+			},
 			-- Uncommon
 			j_crv_those_who_joke = {
 				name = "Those Who Joke",
@@ -1418,7 +1434,17 @@ return {
 				},
 			},
 		},
-		Planet = {},
+		Planet = {
+			c_crv_smertrios = {
+				name = "Smertrios",
+				text = {
+					"[lvl.#2#] Level up",
+					"{C:attention}Blackjack",
+					"{C:mult}+#2#{} Mult and",
+					"{C:chips}+#3#{} chips",
+				},
+			},
+		},
 		Spectral = {
 			c_crv_brush = {
 				name = "Brush",
@@ -2040,8 +2066,14 @@ return {
 			border_crv_gold = "Gold Border",
 			border_crv_lucky = "Lucky Border",
 		},
-		poker_hand_descriptions = {},
-		poker_hands = {},
+		poker_hands = {
+			crv_blackjack = "Blackjack"
+		},
+		poker_hand_descriptions = {
+			crv_blackjack = {
+				"Cards that add up to 21"
+			}
+		},
 		quips = {},
 		ranks = {},
 		suits_plural = {},

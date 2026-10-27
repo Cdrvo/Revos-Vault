@@ -157,6 +157,13 @@ SMODS.Atlas({
 	px = 71,
 	py = 95
 })
+
+SMODS.Atlas({
+	key = "revo_planets",
+	path = "planets.png",
+	px = 71,
+	py = 95
+})
 -- sounds
 
 SMODS.Sound({

@@ -403,7 +403,7 @@ SMODS.Joker({
 	attributes = {
 		"chips",
 		"scaling",
-		"booster"
+		"booster",
 	},
 	loc_vars = function(self, info_queue, card)
 		local cae = card.ability.extra
@@ -446,7 +446,7 @@ SMODS.Joker({
 	discovered = false,
 	blueprint_compat = false,
 	attributes = {
-		"hands"
+		"hands",
 	},
 	pos = {
 		x = 5,
@@ -471,7 +471,6 @@ SMODS.Joker({
 	end,
 })
 
-
 SMODS.Joker({
 	key = "rainbow_octopus",
 	atlas = "revo_jokers",
@@ -481,27 +480,39 @@ SMODS.Joker({
 	config = {
 		extra = {
 			dollars = 2,
-			odds = 2
+			odds = 2,
 		},
 	},
 	attributes = {
 		"chance",
 		"economy",
-		"suit"
+		"suit",
 	},
 	crv_credits = {
-		art = {"Chainsawmert"}
+		art = { "Chainsawmert" },
 	},
 	loc_vars = function(self, info_queue, card)
 		local cae = card.ability.extra
-		local num, den = SMODS.get_probability_vars(card, 1, cae.odds, "rainbow_octopus_seed" )
+		local num, den = SMODS.get_probability_vars(card, 1, cae.odds, "rainbow_octopus_seed")
 		return {
-			vars = { cae.dollars, (G.GAME.current_round.crv_rainbow_octopus_suit or "Spades"), num, den, colours = {G.C.SUITS[((G.GAME.current_round) and G.GAME.current_round.crv_rainbow_octopus_suit) or "Spades"]} },
-		} 
+			vars = {
+				cae.dollars,
+				(G.GAME.current_round.crv_rainbow_octopus_suit or "Spades"),
+				num,
+				den,
+				colours = {
+					G.C.SUITS[(G.GAME.current_round and G.GAME.current_round.crv_rainbow_octopus_suit) or "Spades"],
+				},
+			},
+		}
 	end,
 	calculate = function(self, card, context)
-		local cae = card.ability.extra 
-		if context.individual and context.cardarea == G.play and SMODS.pseudorandom_probability(card, "rainbow_octopus_seed", 1, cae.odds) then
+		local cae = card.ability.extra
+		if
+			context.individual
+			and context.cardarea == G.play
+			and SMODS.pseudorandom_probability(card, "rainbow_octopus_seed", 1, cae.odds)
+		then
 			if context.other_card:is_suit(G.GAME.current_round.crv_rainbow_octopus_suit) then
 				return {
 					dollars = cae.dollars,
@@ -510,7 +521,6 @@ SMODS.Joker({
 		end
 	end,
 })
-
 
 SMODS.Joker({
 	key = "evil_joker",
@@ -527,34 +537,39 @@ SMODS.Joker({
 	config = {
 		extra = {
 			mult = 0,
-			mult_gain = 3
+			mult_gain = 3,
 		},
 	},
 	attributes = {
 		"mult",
 		"scaling",
-		"joker"
+		"joker",
 	},
 	loc_vars = function(self, info_queue, card)
 		local cae = card.ability.extra
 		return {
-			vars = { cae.mult, cae.mult_gain},
+			vars = { cae.mult, cae.mult_gain },
 		}
 	end,
 
 	calculate = function(self, card, context)
 		local cae = card.ability.extra
-		if context.joker_main and cae.mult>0 then
-			return{
-				mult = cae.mult
+		if context.joker_main and cae.mult > 0 then
+			return {
+				mult = cae.mult,
 			}
 		end
-		if context.joker_type_destroyed and context.card ~= card and context.card.ability.set == "Joker" and not context.blueprint then
-			SMODS.scale_card(card,{
+		if
+			context.joker_type_destroyed
+			and context.card ~= card
+			and context.card.ability.set == "Joker"
+			and not context.blueprint
+		then
+			SMODS.scale_card(card, {
 				ref_table = cae,
 				ref_value = "mult",
 				scalar_value = "mult_gain",
-				message_colour = G.C.MULT
+				message_colour = G.C.MULT,
 			})
 		end
 	end,
@@ -574,10 +589,10 @@ SMODS.Joker({
 	},
 	attributes = {
 		"passive",
-		"suit"
+		"suit",
 	},
 	crv_credits = {
-		art = {"Chainsawmert"}
+		art = { "Chainsawmert" },
 	},
 	loc_vars = function(self, info_queue, card)
 		local cae = card.ability.extra
@@ -587,15 +602,17 @@ SMODS.Joker({
 		local cae = card.ability.extra
 		if context.first_hand_drawn and not context.blueprint then
 			local suits, list = {}, {}
-			for k,v in pairs(G.hand.cards) do
+			for k, v in pairs(G.hand.cards) do
 				if not list[v.base.suit] then
 					list[v.base.suit] = true
-					suits[#suits+1] = v.base.suit
+					suits[#suits + 1] = v.base.suit
 				end
 			end
 			local suit = pseudorandom_element(suits, pseudoseed("rianbow_suit_seed"))
 			for k, v in pairs(G.hand.cards) do
-				RVF.cool_enhance(v, function() assert(SMODS.change_base(v, suit, nil)) end, nil)
+				RVF.cool_enhance(v, function()
+					assert(SMODS.change_base(v, suit, nil))
+				end, nil)
 			end
 		end
 	end,
@@ -614,16 +631,15 @@ SMODS.Joker({
 		y = 7,
 	},
 	config = {
-		extra = {
-		},
+		extra = {},
 	},
 	set_ability = function(self, card, initial, delay_sprites)
 		card:set_edition(poll_edition(nil, nil, nil, true), true, true)
 	end,
 	crv_credits = {
-		art = {"lfmoth"},
-		idea = {"theOfficialFem"}
-	}
+		art = { "lfmoth" },
+		idea = { "theOfficialFem" },
+	},
 })
 
 local numbers = { 2, 3, 4, 5, 6, 7, 8, 9 }
@@ -657,7 +673,7 @@ SMODS.Joker({
 		if card.ability.extra.unlocked then
 			card.ability.extra.status = localize("k_crv_unlocked")
 		else
-            card.ability.extra.status = localize("k_crv_locked")
+			card.ability.extra.status = localize("k_crv_locked")
 		end
 		local crv = card.ability.extra
 		return {
@@ -672,7 +688,7 @@ SMODS.Joker({
 				card.ability.extra.d2_display,
 				card.ability.extra.d3_display,
 				card.ability.extra.d4_display,
-				card.ability.extra.dollars
+				card.ability.extra.dollars,
 			},
 		}
 	end,
@@ -688,25 +704,29 @@ SMODS.Joker({
 	end,
 
 	calculate = function(self, card, context)
-		if
-			context.final_scoring_step
-			and not context.blueprint
-			and not card.ability.extra.unlocked
-		then
+		if context.final_scoring_step and not context.blueprint and not card.ability.extra.unlocked then
 			local unlocked = true
 			for k, v in pairs(context.scoring_hand) do
 				for i = 1, 4 do
 					--print(v.base.id, card.ability.extra["d" .. i], RVF.card_position(v, v.area).pos, i)
-					if RVF.card_position(v, v.area).pos == i and v.base.id == card.ability.extra["d" .. i] and type(card.ability.extra["d" .. i .. "_display"]) ~= "number" then
+					if
+						RVF.card_position(v, v.area).pos == i
+						and v.base.id == card.ability.extra["d" .. i]
+						and type(card.ability.extra["d" .. i .. "_display"]) ~= "number"
+					then
 						RVF.msg(card, "!")
 						card.ability.extra["d" .. i .. "_display"] = v.base.id
-					elseif RVF.card_position(v, v.area).pos ~= i and v.base.id == card.ability.extra["d" .. i] and type(card.ability.extra["d" .. i .. "_display"]) ~= "number" then
-			            if i > RVF.card_position(v, v.area).pos then
+					elseif
+						RVF.card_position(v, v.area).pos ~= i
+						and v.base.id == card.ability.extra["d" .. i]
+						and type(card.ability.extra["d" .. i .. "_display"]) ~= "number"
+					then
+						if i > RVF.card_position(v, v.area).pos then
 							RVF.msg(v, "-->")
 						elseif i < RVF.card_position(v, v.area).pos then
 							RVF.msg(v, "<--")
 						end
-				    end
+					end
 				end
 			end
 
@@ -725,6 +745,46 @@ SMODS.Joker({
 	calc_dollar_bonus = function(self, card)
 		if card.ability.extra.unlocked == true then
 			return card.ability.extra.dollars
+		end
+	end,
+})
+
+SMODS.Joker({
+	key = "fortuitous",
+	blueprint_compat = true,
+	atlas = "revo_jokers",
+	rarity = 1,
+	cost = 4,
+	pos = { x = 1, y = 14 },
+	config = { extra = { mult = 21 } },
+	loc_vars = function(self, info_queue, card)
+		return { vars = { card.ability.extra.mult } }
+	end,
+	calculate = function(self, card, context)
+		if context.joker_main and next(context.poker_hands["crv_blackjack"]) then
+			return {
+				mult = card.ability.extra.mult,
+			}
+		end
+	end,
+})
+
+SMODS.Joker({
+	key = "dubious",
+	atlas = "revo_jokers",
+	blueprint_compat = true,
+	rarity = 1,
+	cost = 4,
+	pos = { x = 2, y = 14 },
+	config = { extra = { chips = 121, type = "crv_blackjack" } },
+	loc_vars = function(self, info_queue, card)
+		return { vars = { card.ability.extra.chips } }
+	end,
+	calculate = function(self, card, context)
+		if context.joker_main and next(context.poker_hands["crv_blackjack"]) then
+			return {
+				chips = card.ability.extra.chips,
+			}
 		end
 	end,
 })
