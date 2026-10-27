@@ -292,7 +292,7 @@ return {
 				}
 			},
 			j_crv_dubious = {
-				name = "Dubious  Joker",
+				name = "Dubious Joker",
 				text = {
 					"{C:chips}+#1#{} Chips if played",
 					"hand contains",
