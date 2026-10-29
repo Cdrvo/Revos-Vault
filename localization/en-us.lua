@@ -1,6 +1,23 @@
 return {
 	descriptions = {
-		Back = {},
+		Back = {
+			b_crv_golden_deck = {
+				name = "Golden Deck",
+				text = {
+					"{C:mult}Mult{} is added to",
+					"{C:chips}Chips{} instead of muliplying.",
+					"Multiply score with {C:money}dollars{}",
+					"{C:inactive}[(Chips+Mult)xDollars]",
+				},
+			},
+			b_crv_printer_deck = {
+				name = "Printer Deck",
+				text = {
+					"Start with an {C:dark_edition}Eternal{}",
+					"{C:red}Printer{} of your choice"
+				}
+			}
+		},
 		Blind = {
 			bl_crv_roaring_knight = {
 				name = "Roaring Knight",
@@ -34,14 +51,14 @@ return {
 				name = "The Hole",
 				text = {
 					"Playing cards",
-					"do not give chips"
+					"do not give chips",
 				},
 			},
 			bl_crv_ancient_eye = {
 				name = "Ancient Eye",
 				text = {
 					"Any card with an",
-					"enhancement is debuffed"
+					"enhancement is debuffed",
 				},
 			},
 			bl_crv_geomancer = {
@@ -49,7 +66,7 @@ return {
 				text = {
 					"When a hand is drawn, a random",
 					"Joker is marked as explosive",
-				}
+				},
 			},
 			bl_crv_the_balance = {
 				name = "Balance",
@@ -57,8 +74,8 @@ return {
 					"If there are odd amount",
 					"of playing cards,",
 					"debuff them for",
-					"the current run"
-				}
+					"the current run",
+				},
 			},
 			bl_crv_the_swarm = {
 				name = "The Swarm",
@@ -66,7 +83,7 @@ return {
 					"Upon entering blind,",
 					"blind requirement is multiplied",
 					"by the amount of your jokers",
-					"Cannot go below the default value"
+					"Cannot go below the default value",
 				},
 			},
 			bl_crv_stygian_spade = {
@@ -288,16 +305,16 @@ return {
 				text = {
 					"{C:mult}+#1#{} Mult if played",
 					"hand contains",
-					"a {C:attention}Blackjack"
-				}
+					"a {C:attention}Blackjack",
+				},
 			},
 			j_crv_dubious = {
 				name = "Dubious Joker",
 				text = {
 					"{C:chips}+#1#{} Chips if played",
 					"hand contains",
-					"a {C:attention}Blackjack"
-				}
+					"a {C:attention}Blackjack",
+				},
 			},
 			-- Uncommon
 			j_crv_those_who_joke = {
@@ -1235,6 +1252,14 @@ return {
 					"{C:purple}Rune{}",
 				},
 			},
+			j_crv_lethal_press_machine = {
+				name = "Lethal Press Machine",
+				text = {
+					"When rerolling the shop,",
+					"{C:green}#1# in #2#{} chance to",
+					"spawn {C:attention}Scrap",
+				},
+			},
 			-- Mega Printer
 			j_crv_mega_printer = {
 				name = "Mega Printer",
@@ -1335,10 +1360,32 @@ return {
 					"of appearing.",
 					"{C:red}Self-destructs{} when a {C:purple,E:1}Legendary{}",
 					"Joker is created",
-					
-				}
+				},
 			},
 			-- Mythical
+			j_crv_master_of_jokers = {
+				name = "Master of Jokers",
+				text = {
+					"{C:attention}X#1#{} Joker slots"
+				}
+			},
+			j_crv_mythtical_printer = {
+				name = "Mythical Printer",
+				text={
+                    "When {C:attention}Blind{} is selected",
+					"print a random {C:purple,E:2}Legendary",
+					"has a {C:green}#1# in #2#{} Chance",
+					"to print a {C:crv_mythical,E:1}Mythical{} Joker",
+					"{C:inactive}(Always prints {C:dark_edition}Negative{C:inactive})"
+                },
+			},
+			j_crv_ascended_chicot = {
+				name = "Ascended Chicot",
+				text = {
+					"All blinds are",
+					"{C:blue}Small{} blinds"
+				}
+			},
 			-- Curse
 			-- Other
 			j_crv_holybanana = {
@@ -1505,9 +1552,48 @@ return {
 					"limit on {C:red}Printers{} by {C:attention}#1#{}",
 				},
 			},
+			v_crv_shredder = {
+				name = "Shredder",
+				text = {
+					"When a {C:attention}Joker{} is sold",
+					"{C:green}#1# in #2#{} chance to",
+					"create a {C:dark_edition}Negative{} {C:attention}Scrap"
+				}
+			},
+			v_crv_burner = {
+				name = "Burner",
+				text = {
+					"When a {C:attention}Consumable{} is sold",
+					"{C:green}#1# in #2#{} chance to",
+					"create a {C:dark_edition}Negative{} {C:attention}Scrap"
+				}
+			},
 		},
 
 		-- mod
+
+		crv_Scrap = {
+			c_crv_horn = {
+				name = "Horn",
+				text = { "Gives{C:money} #1#$" },
+			},
+			c_crv_pickles = {
+				name = "Pickles",
+				text = { "Gives{C:money} #1#$" },
+			},
+			c_crv_metal_piece = {
+				name = "Metal Piece",
+				text = { "Gives{C:money} #1#$" },
+			},
+			c_crv_apparatus = {
+				name = "Apparatus",
+				text = { "Gives{C:money} #1#$" },
+			},
+			c_crv_duck = {
+				name = "Duck",
+				text = { "Gives{C:money} #1#$" },
+			},
+		},
 
 		crv_Skarot = {
 			c_crv_sketch_fool = {
@@ -1669,9 +1755,9 @@ return {
 				text = {
 					"{C:red}Destroys{} the applied {C:attention}Joker",
 					"in a short amount of time.",
-					"Click to defuse"
-				}
-			}
+					"Click to defuse",
+				},
+			},
 		},
 
 		crv_Rune = {
@@ -1993,9 +2079,9 @@ return {
 					"{C:red}#1# in #2#{} chance to",
 					"create a {C:red,E:1}Curse{}",
 					"when applied",
-				}
-			}
-		}
+				},
+			},
+		},
 	},
 	misc = {
 		achievement_descriptions = {},
@@ -2009,9 +2095,19 @@ return {
 			crv_contracts = "Contracts",
 			crv_runes = "Runes",
 			b_status_effects = "Status Effects",
+			b_printer_list = "Printer List",
+			b_random_printer = "Random Printer",
+			b_enter = "Enter",
+
+			run_select_crv_printer_choice = 'Select Printer',
+            run_select_crv_printer_choice_random = 'Random Printer',
+
 			-- Rariities
 			k_crv_holy = "Holy Banana",
 			k_crv_printer = "Printer",
+			k_crv_mythical = "Mythical",
+			-- DynaText
+			d_select_printer = "Select a Printer",
 			-- Text
 			k_crv_split = "Split!",
 			k_crv_half = "Halved!",
@@ -2041,6 +2137,9 @@ return {
 
 			k_crv_rune = "Rune",
 			b_crv_rune_cards = "Runes",
+
+			k_crv_scrap = "Scrap",
+			b_crv_scrap_cards = "Scraps",
 			-- Boosters
 			k_crv_skarot_pack = "Skarot Pack",
 			k_crv_rune_pack = "Rune Pack",
@@ -2067,12 +2166,12 @@ return {
 			border_crv_lucky = "Lucky Border",
 		},
 		poker_hands = {
-			crv_blackjack = "Blackjack"
+			crv_blackjack = "Blackjack",
 		},
 		poker_hand_descriptions = {
 			crv_blackjack = {
-				"Cards that add up to 21"
-			}
+				"Cards that add up to 21",
+			},
 		},
 		quips = {},
 		ranks = {},

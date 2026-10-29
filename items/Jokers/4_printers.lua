@@ -663,3 +663,46 @@ SMODS.Joker({
 		card.children.center:draw_shader("negative_shine", nil, card.ARGS.send_to_shader)
 	end,
 })
+
+
+SMODS.Joker({ -- later
+	key = "lethal_press_machine",
+	atlas = "revo_jokers",
+	rarity = "crv_printer",
+	cost = 10,
+	unlocked = true,
+	discovered = false,
+	blueprint_compat = true,
+	pos = {
+		x = 3,
+		y = 14,
+	},
+	attributes = {
+		"printer",
+		"scrap",
+		"reroll",
+		"generation",
+		"consumable"
+	},
+	config = {
+		extra = {
+			mult = 0,
+			mult_gain = 5,
+			odds = 4,
+		},
+	},
+	loc_vars = function(self, info_queue, card)
+		info_queue[#info_queue + 1] = { set = "Other", key = "crv_immutable" }
+		local numerator, denominator =
+			SMODS.get_probability_vars(card, 1, card.ability.extra.odds, "crv_lpm", nil, true)
+		return {
+			vars = { numerator, denominator, card.ability.extra.mult, card.ability.extra.mult_gain },
+		}
+	end,
+	calculate = function(self, card, context)
+		local cae = card.ability.extra
+		if context.reroll_shop and not context.blueprint and SMODS.get_probability_vars(card, 1, card.ability.extra.odds, "crv_lpm") then
+			RVF.printer_create(card, {set = "crv_Scrap", area = G.consumeables})
+		end
+	end,
+})

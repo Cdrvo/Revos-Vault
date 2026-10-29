@@ -13,7 +13,16 @@ function Card:click()
 	if self.config.center.crv_clicked then
 		self.config.center:crv_clicked(self)
 	end
-	if self:crv_has_statuseffect("crv_explosive") and self.area and not self.area.config.collection and not self.getting_sliced then
+	if G.GAME.crv_printer_list then
+		G.GAME.crv_selected_printer = self.config.center.key
+		G.FUNCS.crv_open_printer_selection()
+	end
+	if
+		self:crv_has_statuseffect("crv_explosive")
+		and self.area
+		and not self.area.config.collection
+		and not self.getting_sliced
+	then
 		RVF.do_event(function()
 			self.ability.crv_diffused = true
 			self:remove_status_effect("crv_explosive")
@@ -225,6 +234,15 @@ function Game:update(dt)
 			SMODS.calculate_context({ crv_swoon_shake = true })
 		end
 	end
+	if
+		G.GAME
+		and G.GAME.current_round
+		and SMODS.get_scoring_parameter("crv_dollar_parameter")
+		and G.STATE ~= G.STATES.HAND_PLAYED
+	then
+		SMODS.Scoring_Parameters.crv_dollar_parameter:crv_set(G.GAME.dollars or 0)
+		SMODS.Scoring_Parameters.crv_dollar_parameter:modify()
+	end
 end
 
 local sort_hand_value_old = G.FUNCS.sort_hand_value
@@ -308,4 +326,27 @@ function Card:get_chip_bonus()
 		return 0
 	end
 	return get_chip_bonus_old(self)
+end
+
+local old_exit_menu = G.FUNCS.exit_overlay_menu
+G.FUNCS.exit_overlay_menu = function()
+	if G.current_printer and G.current_printer.cards and #G.current_printer.cards > 0 then
+		SMODS.copy_card(G.current_printer.cards[1], { area = G.jokers })
+		SMODS.destroy_cards(
+			G.current_printer.cards,
+			{ bypass_eternal = true, immediate = true, silent = true, dissolve_time_fac = 0 }
+		)
+	end
+	G.GAME.crv_printer_list = false
+	G.GAME.crv_selected_printer = nil
+	old_exit_menu()
+end
+
+
+local old_SMODS_get_new_blind = SMODS.get_new_blind
+SMODS.get_new_blind = function(blind_type)
+	if G.GAME.crv_all_small or next(SMODS.find_card("j_crv_ascended_chicot")) then
+		return "bl_small"
+	end
+	return old_SMODS_get_new_blind(blind_type)
 end

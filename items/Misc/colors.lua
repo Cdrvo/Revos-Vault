@@ -14,6 +14,7 @@ SMODS.Gradient({
 
 local loc_old = loc_colour
 function loc_colour(_c, _default)
+	G.C.REVO = HEX("7E7AFF")
 	if not G.ARGS.LOC_COLOURS then
 		loc_old()
 	end
@@ -41,4 +42,13 @@ SMODS.Gradient({
 		HEX("ffed81"),
 	},
 	cycle = 5,
+})
+
+SMODS.Gradient({
+	key = "crv_mythical",
+	colours = {
+		HEX("c80000"),
+		HEX("bb008e"),
+	},
+	cycle = 3,
 })

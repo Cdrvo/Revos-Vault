@@ -404,6 +404,34 @@ function RevosVault.FUNCS.move_card(card, _area, args)
 	end
 end
 
+RevosVault.FUNCS.scoring_operator = function(scale, args)
+	args.text = args.text or "X"
+	args.colour = args.colour or G.C.UI_MULT
+	return {
+		n = G.UIT.C,
+		config = { align = "cm", id = "hand_operator_container" },
+		nodes = {
+			{
+				n = G.UIT.T,
+				config = {
+					text = args.text,
+					lang = G.LANGUAGES["en-us"],
+					scale = scale * 2,
+					colour = args.colour,
+					shadow = true,
+				},
+			},
+		},
+	}
+end
+
+function RVF.easy_overlay(pause, definition)
+	G.SETTINGS.paused = pause
+	G.FUNCS.overlay_menu({
+		definition = definition,
+	})
+end
+
 -- the special function
 
 RVF.printer_create = function(card, make)
@@ -480,6 +508,83 @@ RVF.printer_create = function(card, make)
 	end
 
 	return ccard
+end
+
+local function up_up_and_fly(str)
+    return (str:gsub("^%l", string.upper))
+end
+
+
+RevosVault.FUNCS.reset_all_blinds = function(e)
+	stop_use()
+	G.from_boss_tag = nil
+	G.CONTROLLER.locks.boss_reroll = true
+	G.E_MANAGER:add_event(Event({
+		trigger = "immediate",
+		func = function()
+			play_sound("other1")
+			for k, v in pairs(G.blind_select_opts) do
+				G.blind_select_opts[k]:set_role({ xy_bond = "Weak" })
+				G.blind_select_opts[k].alignment.offset.y = 20
+			end
+
+			return true
+		end,
+	}))
+	G.E_MANAGER:add_event(Event({
+		trigger = "after",
+		delay = 0.3,
+		func = function()
+			for k, v in pairs(G.blind_select_opts) do
+				local par = G.blind_select_opts[k].parent
+				G.GAME.round_resets.blind_choices[up_up_and_fly(k)] = SMODS.get_new_blind(k)
+				G.blind_select_opts[k]:remove()
+				G.blind_select_opts[k] = UIBox({
+					T = { par.T.x, 0, 0, 0 },
+					definition = {
+						n = G.UIT.ROOT,
+						config = { align = "cm", colour = G.C.CLEAR },
+						nodes = {
+							UIBox_dyn_container(
+								{ create_UIBox_blind_choice(up_up_and_fly(k)) },
+								false,
+								get_blind_main_colour(up_up_and_fly(k)),
+								mix_colours(G.C.BLACK, get_blind_main_colour(up_up_and_fly(k)), 0.8)
+							),
+						},
+					},
+					config = {
+						align = "bmi",
+						offset = { x = 0, y = G.ROOM.T.y + 9 },
+						major = par,
+						xy_bond = "Weak",
+					},
+				})
+				par.config.object = G.blind_select_opts[k]
+				par.config.object:recalculate()
+				G.blind_select_opts[k].parent = par
+				G.blind_select_opts[k].alignment.offset.y = 0
+			end
+
+			G.E_MANAGER:add_event(Event({
+				blocking = false,
+				trigger = "after",
+				delay = 0.5,
+				func = function()
+					G.CONTROLLER.locks.boss_reroll = nil
+					return true
+				end,
+			}))
+
+			save_run()
+			for i = 1, #G.GAME.tags do
+				if G.GAME.tags[i]:apply_to_run({ type = "new_blind_choice" }) then
+					break
+				end
+			end
+			return true
+		end,
+	}))
 end
 
 -- UI related functions
