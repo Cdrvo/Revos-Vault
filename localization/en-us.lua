@@ -1646,7 +1646,124 @@ return {
 					"Applies {C:attention}Smudged Border{}",
 					"to {C:attention}#1#{} selected card",
 				},
-			},
+            },
+            c_crv_sketch_chariot = {
+                name = "Sketch Chariot",
+                text = {
+					"Applies {C:attention}Steel Border{}",
+					"to {C:attention}#1#{} selected card",
+				},
+            },
+            c_crv_sketch_justice = {
+                name = "Sketch Justice",
+                text = {
+					"Applies {C:attention}Glass Border{}",
+					"to {C:attention}#1#{} selected card",
+				},
+            },
+            c_crv_sketch_hermit = {
+                name = "Sketch Hermit",
+                text = {
+                    "{C:money}+$#1#{} when used"
+                }
+            },
+            c_crv_sketch_wheel_of_fortune = {
+                name = "Sketch Wheel of Fortune",
+                text = {
+                    "{C:green}#1# in #2#{} chance to add",
+                    "{C:dark_edition}any edition{} to",
+                    "a random {C:attention}Joker"
+                }
+            },
+            c_crv_sketch_strength = {
+                name = "Skecth Strength",
+                text = {
+                    "Decreases the rank of",
+                    "up to {C:attention}#1#{} selected",
+                    "cards by {C:red}#2#{}"
+                }
+            },
+			c_crv_sketch_hanged_man = {
+			    name = "Sketch Hanged Man",
+                text = {
+                    "Destroys a random",
+                    "card in hand"
+				}
+            },
+            c_crv_sketch_death = {
+                name = "Sketch Death",
+                text = {
+                    "Select {C:attention}#1#{} cards",
+                    "convert the {C:attention}left{} card's suit and rank",
+                    "into the {C:attention}right{} card's suit and rank",
+                    "{C:inactive}(Enahncements etc remain unchaged)"
+                }
+            },
+            c_crv_sketch_temperance = {
+                name = "Sketch Temperance",
+                text = {
+                    "Gives the total sell",
+                    "value of all current",
+                    "Consumables {C:inactive}(Max of {C:money}$#1#{C:inactive})",
+                    "{C:inactive}(Currently {C:money}$#2#{C:inactive})"
+                }
+            },
+			c_crv_sketch_devil = {
+                name = "Sketch Devil",
+                text = {
+					"Applies {C:attention}Gold Border{}",
+					"to {C:attention}#1#{} selected card",
+				},
+            },
+            c_crv_sketch_tower = {
+                name = "Sketch Tower",
+                text = {
+					"Applies {C:attention}Stone Border{}",
+					"to {C:attention}#1#{} selected card",
+				},
+            },
+            c_crv_sketch_star = {
+                name = "Sketch Star",
+                text = {
+                    "Converts {C:attention}#1#{}",
+                    "selected card",
+                    "to {C:diamonds}Diamonds{}"
+                }
+            },
+            c_crv_sketch_moon = {
+                name = "Sketch Moon",
+                text = {
+                    "Converts {C:attention}#1#{}",
+                    "selected card",
+                    "to {C:clubs}Clubs{}"
+                }
+            },
+            c_crv_sketch_sun = {
+                name = "Sketch Sun",
+                text = {
+                    "Converts {C:attention}#1#{}",
+                    "selected card",
+                    "to {C:hearts}Hearts{}"
+                }
+            },
+            c_crv_sketch_judgement = {
+                name = "Sketch Judgement",
+                text = {
+                    "Creates a random",
+                    "{C:blue}Common{} Joker.",
+                    --"Small chance {X:black,C:black}to create{}",
+                    --a {X:black,C:black}Mythical{} {X:black,C:black}Joker{}",
+                    "{C:inactive}(Must have room)"
+                }
+            },
+            c_crv_sketch_world = {
+                name = "Sketch World",
+                text = {
+                    "Converts {C:attention}#1#{}",
+                    "selected card",
+                    "to {C:spades}Spades{}"
+                }
+            },
 		},
 
 		crv_Border = {
