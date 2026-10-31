@@ -178,6 +178,13 @@ SMODS.Atlas({
 	px = 71,
 	py = 95
 })
+
+SMODS.Atlas({
+    key = "revo_gems",
+    path = "gems.png",
+    px = 50,
+    py = 50
+})
 -- sounds
 
 SMODS.Sound({

@@ -1,0 +1,33 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = '''G.SPLASH_BACK = Sprite(-30, -6, G.ROOM.T.w+60, G.ROOM.T.h+12, G.ASSET_ATLAS["ui_1"], {x = 2, y = 0})'''
+position = "before"
+payload = '''
+-- Gems area
+    self.crv_gems = CardArea(
+        G.discard.T.x,
+        G.discard.T.y,
+        G.discard.T.w,
+        G.discard.T.h,
+        { type = "discard", card_limit = 1e308 }
+    )
+    '''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = '=[SMODS _ "src/utils.lua"]'
+pattern = '-- TARGET: add your own CardAreas for joker evaluation'
+position = "after"
+payload = '''
+if G.crv_gems then
+    table.insert(t, 1, G.crv_gems)
+end
+'''
+match_indent = true

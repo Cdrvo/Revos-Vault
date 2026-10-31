@@ -1,0 +1,48 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+## unused, don't know why im keeping it
+
+[[patches]]
+[patches.pattern]
+target = '=[SMODS _ "src/utils.lua"]'
+pattern = 'card.ability.debuff_sources[source] = debuff'
+position = "after"
+payload = '''
+if not delay then
+    SMODS.calculate_context({crv_card_debuffed = true, crv_card = card, crv_debuff = debuff})
+end
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = '=[SMODS _ "src/utils.lua"]'
+pattern = 'card.delay_debuff = nil'
+position = "after"
+payload = '''
+    SMODS.calculate_context({crv_card_debuffed = true, crv_card = card, crv_debuff = debuff})
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = 'if not self.debuff then'
+position = "after"
+payload = '''
+    SMODS.calculate_context({crv_card_debuffed = true, crv_card = self, crv_debuff = true})
+'''
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = 'card.lua'
+pattern = 'self.debuff = should_debuff'
+position = "after"
+payload = '''
+    SMODS.calculate_context({crv_card_debuffed = true, crv_card = self, crv_debuff = should_debuff})
+'''
+match_indent = true

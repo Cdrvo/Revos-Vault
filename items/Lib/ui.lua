@@ -9,7 +9,7 @@ RevosVault.custom_ui = function(modNodes)
 		{ card_limit = 5, type = "title", highlight_limit = 0, collection = true }
 	)
 	local random_random = { "crv_printer" }
-	--[[if RevoConfig["7_chaos_enabled"] then -- until i get 5 mythicals	
+	--[[if RevoConfig["7_chaos_enabled"] then -- until i get 5 mythicals
 		random_random[#random_random+1] = "crv_chaos"
 	end]]
 	local random_rarity = pseudorandom_element(random_random)
@@ -169,6 +169,17 @@ RevosVault.custom_collection_tabs = function()
 			tally = RVF.get_collection(RevosVault.MISC.StatusEffects),
 			of = RVF.get_total(RevosVault.MISC.StatusEffects),
 		},]]
+    })
+	t[#t + 1] = UIBox_button({
+		button = "your_collection_crv_gems",
+		id = "your_collection_crv_gems",
+		label = { "Gems" },
+		minw = 5,
+		minh = 1,
+		count = {
+			tally = RVF.get_collection(G.P_CENTER_POOLS.crv_Gem),
+			of = RVF.get_total(G.P_CENTER_POOLS.crv_Gem),
+		},
 	})
 
 	return t
@@ -206,9 +217,16 @@ G.FUNCS.your_collection_crv_status_effects = function()
 end
 
 G.FUNCS.your_collection_crv_borders = function()
+    G.SETTINGS.paused = true
+    G.FUNCS.overlay_menu({
+        definition = create_ui_for_pool(RevosVault.MISC.Borders, true),
+    })
+end
+
+G.FUNCS.your_collection_crv_gems = function()
 	G.SETTINGS.paused = true
 	G.FUNCS.overlay_menu({
-		definition = create_ui_for_pool(RevosVault.MISC.Borders, true),
+		definition = create_ui_for_pool(G.P_CENTER_POOLS.crv_Gem),
 	})
 end
 

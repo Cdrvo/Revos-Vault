@@ -1,0 +1,53 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+# something i forgot what it is it might be related to shop buttnos but i wont cehck
+
+[[patches]]
+[patches.pattern]
+target = 'functions/UI_definitions.lua'
+pattern = '''
+          card.children.buy_button = UIBox{
+            definition = t2,
+            config = {
+              align="bm",
+              offset = {x=0,y=-0.3},
+              major = card,
+              bond = 'Weak',
+              parent = card
+            }
+          }
+'''
+position = "at"
+payload = '''
+if card.ability.set ~= "crv_Gem" then
+	card.children.buy_button = UIBox{
+            definition = t2,
+            config = {
+              align="bm",
+              offset = {x=0,y=-0.3},
+              major = card,
+              bond = 'Weak',
+              parent = card
+            }
+          }
+		end
+'''
+match_indent = true
+
+
+## Run Info page
+[[patches]]
+[patches.pattern]
+target = 'functions/UI_definitions.lua'
+pattern = "G.GAME.stake > 1 and {"
+position = "before"
+payload = '''
+{
+    label = localize('b_gems'),
+    tab_definition_function = G.UIDEF.used_gems,
+},
+'''
+match_indent = true

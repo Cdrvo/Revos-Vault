@@ -426,10 +426,34 @@ RevosVault.FUNCS.scoring_operator = function(scale, args)
 end
 
 function RVF.easy_overlay(pause, definition)
-	G.SETTINGS.paused = pause
-	G.FUNCS.overlay_menu({
-		definition = definition,
-	})
+    G.SETTINGS.paused = pause
+    G.FUNCS.overlay_menu({
+        definition = definition,
+    })
+end
+
+-- hotpot be like
+function RVF.show_shop()
+	if G.shop and G.shop.alignment.offset.py then
+		G.shop.alignment.offset.y = G.shop.alignment.offset.py
+		G.shop.alignment.offset.py = nil
+	end
+end
+
+function RVF.hide_shop()
+	if G.shop and not G.shop.alignment.offset.py then
+		G.shop.alignment.offset.py = G.shop.alignment.offset.y
+		G.shop.alignment.offset.y = G.ROOM.T.y + 29
+	end
+end
+
+function RevosVault.FUNCS.redeem_gem(gem)
+local e = { config = { ref_table = nil }} -- trust
+    e.config.ref_table = SMODS.add_card{
+        key = gem,
+        area = G.play
+    }
+    G.FUNCS.redeem_gem(e)
 end
 
 -- the special function

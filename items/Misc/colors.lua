@@ -52,3 +52,17 @@ SMODS.Gradient({
 	},
 	cycle = 3,
 })
+
+SMODS.Gradient({
+	key = "crv_gem",
+	colours = {
+		HEX("60ff68"),
+		HEX("60fff3"),
+		HEX("60a2ff"),
+		HEX("aa60ff"),
+		HEX("ff60e0"),
+		HEX("e4fa63"),
+		HEX("b0ff8c"),
+	},
+	cycle = 5,
+})
