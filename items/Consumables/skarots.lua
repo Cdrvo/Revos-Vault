@@ -574,7 +574,7 @@ SMODS.Consumable {
     config = { extra = { max = 30 } },
     loc_vars = function(self, info_queue, card)
         local ease = 0
-        if G.consumeables.cards then
+        if G.consumeables and G.consumeables.cards then
             for k, v in pairs(G.consumeables.cards) do
                 ease = ease + v.sell_cost
             end
