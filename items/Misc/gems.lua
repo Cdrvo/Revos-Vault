@@ -166,7 +166,7 @@ G.FUNCS.redeem_gem = function(e)
                 card.children.top_disp = nil
                 card.children.bot_disp:remove()
                 card.children.bot_disp = nil
-                SMODS.destroy_cards(card, true)
+                SMODS.destroy_cards(card, {bypass_eternal = true})
                 RVF.show_shop()
                 return true
             end

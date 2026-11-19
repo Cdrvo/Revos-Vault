@@ -313,3 +313,31 @@ SMODS.Enhancement({
 		art = {"Heaven"}
 	}
 })
+
+SMODS.Enhancement({
+	key = "celestial",
+	atlas = "revo_enhancements",
+	pos = { x = 4, y = 1 },
+	discovered = true,
+	unlocked = true,
+	config = { extra = { } },
+	loc_vars = function(self, info_queue, card)
+		return { vars =  {
+			G.localization.misc.poker_hands[RVF.most_played_hand()] or RVF.most_played_hand(),
+			(RVF.most_played_hand() and G.GAME.hands[RVF.most_played_hand()].chips) or 0,
+			(RVF.most_played_hand() and G.GAME.hands[RVF.most_played_hand()].mult) or 0
+		}}
+	end,
+	crv_credits = {
+		art = {"WombatCountry"},
+		idea = {"theOfficialFem"}
+	},
+	calculate = function(self, card, context, effect)
+		if context.main_scoring and (context.cardarea == G.play) then
+			return {
+				chips = (RVF.most_played_hand() and G.GAME.hands[RVF.most_played_hand()].chips) or 0,
+				mult = (RVF.most_played_hand() and G.GAME.hands[RVF.most_played_hand()].mult) or 0
+			}
+		end
+	end,
+})

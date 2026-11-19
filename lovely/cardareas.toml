@@ -17,6 +17,18 @@ payload = '''
         G.discard.T.h,
         { type = "discard", card_limit = 1e308 }
     )
+
+-- Curse area
+    self.crv_curses_W = G.CARD_W*1.1
+    self.crv_curses_H = 0.95*G.CARD_H
+
+    self.crv_curses = CardArea(
+        G.jokers.T.x,
+        -5,
+        G.jokers.T.w,
+        G.jokers.T.h,
+        {card_limit = 1e308, type = 'joker', highlight_limit = 1, no_card_count = true}
+    )
     '''
 match_indent = true
 
@@ -28,6 +40,26 @@ position = "after"
 payload = '''
 if G.crv_gems then
     table.insert(t, 1, G.crv_gems)
+end
+if G.crv_curses then
+    table.insert(t, 1, G.crv_curses)
+end
+'''
+match_indent = true
+
+
+# Curse Area / Blind select compat
+
+[[patches]]
+[patches.pattern]
+target = 'game.lua'
+pattern = 'G.blind_select.alignment.offset.y = 0.8-(G.hand.T.y - G.jokers.T.y) + G.blind_select.T.h'
+position = "at"
+payload = '''
+if G.crv_curses and G.crv_curses.T.y > -5 then
+    G.blind_select.alignment.offset.y = 0.8-(G.hand.T.y - G.crv_curses.T.y) + G.blind_select.T.h
+else
+    G.blind_select.alignment.offset.y = 0.8-(G.hand.T.y - G.jokers.T.y) + G.blind_select.T.h
 end
 '''
 match_indent = true

@@ -71,10 +71,10 @@ return {
             bl_crv_the_balance = {
                 name = "Balance",
                 text = {
-                    "If there are odd amount",
-                    "of playing cards,",
-                    "debuff them for",
-                    "the current run",
+                    "debuff all cards",
+                    "in any card area",
+                    "with odd amount",
+                    "of cards"
                 },
             },
             bl_crv_the_swarm = {
@@ -193,6 +193,14 @@ return {
                     "{C:inactive}no rank or suit",
                 },
             },
+            m_crv_celestial = {
+				name = "Celestial",
+				text = {
+					"Gives the {C:attention}most played hand's{}",
+					"{C:chips}Chips{} and {C:mult}Mult{}",
+					"{C:inactive}(#1#, {C:chips}+#2#{C:inactive} Chips, {C:mult}+#3#{C:inactive} Mult)"
+				}
+			},
         },
         Joker = {
             -- Common
@@ -1387,6 +1395,115 @@ return {
                 }
             },
             -- Curse
+            j_crv_black_clover = {
+                name = "Black Clover",
+                text = {
+                    "Playing cards {C:red}cannot",
+                    "have enhancements"
+                }
+            },
+            j_crv_limited_stock = {
+                name = "Limited Stock",
+                text = {
+                    "{C:red}-1{} Shop size"
+                }
+            },
+            j_crv_inflation = {
+                name = "Inflation",
+                text = {
+                    "Everything in shop",
+                    "costs double"
+                }
+            },
+            j_crv_greed = {
+                name = "Greed",
+                text = {
+                    "Cashout is halved"
+                }
+            },
+            j_crv_demotion = {
+                name = "Demotion",
+                text = {
+                    "{C:red}Rare Jokers{} cannot",
+                    "appear naturally"
+                }
+            },
+            j_crv_clumsy = {
+                name = "Clumsy",
+                text = {
+                    "{C:red}#1# in #2#{} chance to",
+                    "{C:red}destroy{} bought",
+                    "{C:attention}Jokers{} and {C:attention}Consumables"
+                }
+            },
+            j_crv_hardcore = {
+                name = "Hardcore",
+                text = {
+                    "{C:attention}X3{} blind scaling",
+                }
+            },
+            j_crv_sneak_attack = {
+                name = "Sneak Attack",
+                text = {
+                    "{C:red}#1# in #2#{} chance to",
+                    "multiply blind requirement",
+                    "by {C:attention}10"
+                }
+            },
+            j_crv_small_hands = {
+                name = "Small Hands",
+                text = {
+                    "{C:red}-1{} play and",
+                    "discard limit"
+                }
+            },
+            j_crv_unknown_assassin = {
+                name = "Unknown Assassin",
+                text = {
+                    "Scored {C:attention}face{} cards",
+                    "are destroyed"
+                }
+            },
+            j_crv_rush = {
+                name = "Rush",
+                text = {
+                    "The shop after {C:blue}Small Blind{}",
+                    "is skipped"
+                }
+            },
+            j_crv_fan = {
+                name = "Fan",
+                text = {
+                    "Everything is shuffled",
+                    "before scoring"
+                }
+            },
+            j_crv_cursed_banana = {
+                name = "Cursed Banana",
+                text = {
+                    "When {C:attention}Blind{} is selected",
+                    "apply {C:dark_edition}perishible{} to an",
+                    "eligible Joker"
+                }
+            },
+            j_crv_the_nameless_creature_that_shouldnotbe_spoken_of = {
+                name = '"              "',
+                text = {
+                    "{X:black}the cat is very cat{} {X:black}so true",
+                    "{X:black}oh{} {X:black}hello there{}",
+                    "{X:black}rate the mod ?/10{}"
+                }
+            },
+            j_crv_sdms_nightmare = {
+                name = "SDM_0's Nightmare",
+                text = {
+                    "Every {C:attention}Blind{}",
+                    "is {C:purple}The Balance"
+                }
+            },
+
+
+
             -- Other
             j_crv_holybanana = {
                 name = "Holy Banana",
@@ -1509,6 +1626,14 @@ return {
                     "card in your hand",
                 },
             },
+            c_crv_shattered_soul = {
+                name = "Shattered Soul",
+                text = {
+                    "I forgot the ability",
+                    "its either spawna a curse",
+                    "or a mythical joker"
+                }
+            }
         },
         Stake = {},
         Tag = {
@@ -1536,6 +1661,14 @@ return {
                     "part of the {C:dark_edition,E:1}Mega Printer{}",
                 },
             },
+            c_crv_bottleflip = {
+				name = "Bottleflip",
+				text = {
+					"{C:green}#1# in #2#{} Chance to",
+					"make all jokers",
+					"{C:crv_polychrome}Polychrome{}"
+				}
+			},
         },
         Voucher = {
             v_crv_cartridge_extension = {
@@ -2306,6 +2439,8 @@ return {
             ui_active_gems = "Active gems",
             ui_no_gems = "No gems active",
             b_gems = "Gems",
+            crv_curses = "Curses",
+            crv_jokers = "Jokers",
             -- Badges
             b_gem = "Gem",
 
@@ -2313,10 +2448,11 @@ return {
             run_select_crv_printer_choice = 'Select Printer',
             run_select_crv_printer_choice_random = 'Random Printer',
 
-            -- Rariities
+            -- Rarities
             k_crv_holy = "Holy Banana",
             k_crv_printer = "Printer",
             k_crv_mythical = "Mythical",
+            k_crv_curse = "Curse",
             -- DynaText
             d_select_printer = "Select a Printer",
             -- Text
@@ -2337,6 +2473,7 @@ return {
             k_crv_inactive = "Inactive",
             k_crv_cleared = "Cleared!",
             k_crv_activated = "Activated",
+            crv_not_allowed = "Not Allowed!",
             -- Consumabels
             k_crv_cartridge = "Cartridge",
             b_crv_cartridge_cards = "Cartridges",

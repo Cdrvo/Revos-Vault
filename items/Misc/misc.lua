@@ -185,6 +185,13 @@ SMODS.Atlas({
     px = 50,
     py = 50
 })
+
+SMODS.Atlas({
+    key = "revo_curses",
+    path = "curses.png",
+    px = 71,
+    py = 95
+})
 -- sounds
 
 SMODS.Sound({
@@ -214,6 +221,7 @@ SMODS.Attribute({
 SMODS.Attribute({
 	key = "scrap",
 })
+
 -- object types
 
 SMODS.ObjectType({

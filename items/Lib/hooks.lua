@@ -45,6 +45,8 @@ Game.init_game_object = function(self)
 
     igo.crv_fun = math.random(1, 500)
 
+    igo.curse_cashout = 1
+
     local gem_index = {}
     for k, v in pairs(G.P_CENTER_POOLS.crv_Gem) do
         gem_index[v.key] = 0
@@ -362,6 +364,9 @@ end
 
 local old_SMODS_get_new_blind = SMODS.get_new_blind
 SMODS.get_new_blind = function(blind_type)
+    if next(SMODS.find_card("j_crv_sdms_nightmare")) then
+        return "bl_crv_the_balance"
+    end
     if G.GAME.crv_all_small or next(SMODS.find_card("j_crv_ascended_chicot")) then
         return "bl_small"
     end
@@ -371,9 +376,131 @@ end
 local ease_dollars_old = ease_dollars
 function ease_dollars(mod, instant)
     SMODS.calculate_context({ crv_pre_money_altered = true, amount = mod })
-    if G.GAME.crv_double_earnings and G.GAME.crv_double_earnings>0 then
-        ease_dollars_old(mod*2, instant)
+    if G.GAME.crv_double_earnings and G.GAME.crv_double_earnings > 0 then
+        ease_dollars_old(mod * 2, instant)
     else
         ease_dollars_old(mod, instant)
     end
+end
+
+local set_ability_old = Card.set_ability
+function Card:set_ability(center, initial, delay_sprites)
+    set_ability_old(self, center, initial, delay_sprites)
+
+    G.E_MANAGER:add_event(Event({
+        trigger = "immediate",
+        delay = 0,
+        func = function()
+            if ((type(center) == "string" and G.P_CENTERS[center] and G.P_CENTERS[center].set == "Enhanced") or center.set and center.set == "Enhanced") then
+                SMODS.calculate_context({ card_enhanced = true, card = self, enhancement = center, area = self.area })
+            end
+            return true
+        end
+    }))
+end
+
+local start_run_old = Game.start_run
+function Game:start_run(args)
+    RevosVault.MISC.curse_text = localize("crv_curses")
+
+    start_run_old(self, args)
+
+    -- taken from JoyousSpring (N' my goat)
+    self.curse_button = UIBox {
+        definition = {
+            n = G.UIT.ROOT,
+            config = {
+                align = "cm",
+                minw = 1,
+                minh = 0.3,
+                padding = 0.15,
+                r = 0.1,
+                colour = G.C.CLEAR,
+            },
+            nodes = {
+                {
+                    n = G.UIT.C,
+                    config = {
+                        align = "tm",
+                        minw = 2,
+                        padding = 0.1,
+                        r = 0.1,
+                        hover = true,
+                        colour = G.C.L_BLACK,
+                        shadow = true,
+                        button = "crv_cj_switch",
+                        func = "crv_cj_available"
+                    },
+                    nodes = {
+                        {
+                            n = G.UIT.R,
+                            config = { align = "bcm", padding = 0 },
+                            nodes = {
+                                {
+                                    n = G.UIT.T,
+                                    config = {
+                                        ref_table = RevosVault.MISC,
+                                        ref_value = "curse_text",
+                                        scale = 0.35,
+                                        colour = G.C.UI.TEXT_LIGHT
+                                    }
+                                }
+                            }
+                        },
+                    }
+                },
+
+            }
+        },
+        config = {
+            align = "tr",
+            offset = { x = -7.5, y = 0.1 },
+            major = G.ROOM_ATTACH,
+            bond = 'Weak'
+        }
+    }
+    if not G.crv_curses or (G.crv_curses and #G.crv_curses.cards == 0) then G.curse_button.states.visible = false end
+    self.HUD:recalculate()
+end
+
+local emplace_old = CardArea.emplace
+function CardArea:emplace(card, location, stay_flipped)
+    emplace_old(self, card, location, stay_flipped)
+    if self.config.type == "shop" then
+        if next(SMODS.find_card("j_crv_inflation")) then
+            if card and card.base_cost then
+                card.base_cost = card.base_cost * 2
+                card:set_cost()
+            end
+        end
+    end
+    if self == G.jokers and card.config.center.rarity == "crv_curse" then
+        RVF.move_card(card, G.crv_curses)
+        if G.crv_curses.T.y < G.jokers.T.y then
+            G.FUNCS.crv_cj_switch()
+            G.curse_button.states.visible = true
+        end
+    elseif self == G.jokers and G.crv_curses.T.y > G.jokers.T.y then
+        G.FUNCS.crv_cj_switch()
+    end
+end
+
+local card_highlight_old = Card.highlight
+function Card:highlight(is_highlighted)
+    self.highlighted = is_highlighted
+    if self.highlighted and self.ability.crv_no_buttons or self.config.center.rarity == "crv_curse" then
+        if self.children.use_button then
+            self.children.use_button:remove()
+            self.children.use_button = nil
+        end
+    else
+        card_highlight_old(self, is_highlighted)
+    end
+end
+
+
+local arer_ref = add_round_eval_row --thank's to haya for this bit :D
+function add_round_eval_row(config)
+	config.dollars = (((config.dollars or 0) * 1) / G.GAME.curse_cashout) -- 1 will change later
+	return arer_ref(config)
 end

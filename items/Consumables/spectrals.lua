@@ -79,3 +79,36 @@ SMODS.Consumable({
 		}))
 	end,
 })
+
+
+SMODS.Consumable {
+    key = 'shattered_soul',
+    weight = 0.1,
+    set = 'Spectral',
+    pos = { x = 1, y = 0 },
+    hidden = true,
+    soul_set = 'Spectral',
+    atlas = "revo_spectrals",
+    config = {
+        extra = {
+            odds = 4
+        }
+    },
+    use = function(self, card, area, copier)
+        if SMODS.pseudorandom_probability(card, "shattered_soul_crv", 1, card.ability.extra.odds) then
+            SMODS.add_card {
+                set = "Joker",
+                rarity = "crv_mythical"
+            }
+        else
+            SMODS.add_card {
+                set = "Joker",
+                rarity = "crv_curse"
+            }
+        end
+        delay(0.6)
+    end,
+    can_use = function(self, card)
+        return RVF.has_room(G.jokers)
+    end,
+}

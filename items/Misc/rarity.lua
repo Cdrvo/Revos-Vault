@@ -21,3 +21,8 @@ SMODS.Rarity({
 	badge_colour = SMODS.Gradients["crv_mythical"],
 	pools = {},
 })
+
+SMODS.Rarity({
+    key = "curse",
+    badge_colour = HEX("374244"),
+})
